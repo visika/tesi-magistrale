@@ -1,0 +1,66 @@
+#!/usr/bin/bash
+#
+# ---------------------------------------------------------------
+#   batch file to run over several diplaced atoms
+# ---------------------------------------------------------------
+
+if test -f POSCAR.phon; then
+  echo "POSCAR.phon exist remove before starting batchfile"
+  exit 1
+fi
+cp POSCAR POSCAR.phon
+#
+#  loop over all exited ions
+#
+j=0
+for i in \
+  "   1  0.00250000 -0.00250000  0.00250000 "; do
+  j=$((j + 1))
+  echo "[I] runphon: run number $j"
+
+  #
+  # use awk to displace atoms (somewhat tricky)
+  #
+  awk '
+/SUBSIT/  { npos = $2 ;
+            x=$3; y=$4 ; z=$5; }
+!/SUBSIT/ { line=line+1 
+  if (line-7 == npos) {
+    printf "%12.9f %12.9f %12.9f\n", $1+x, $2+y, $3+z
+  } 
+  else if (line > 7) {
+    printf "%12.9f %12.9f %12.9f\n", $1, $2, $3
+  } 
+  else 
+    print 
+} ' >POSCAR <<!
+SUBSIT $i
+$(cat POSCAR.phon)
+!
+
+  # cat POSCAR
+  if test ! -f OUTCAR."$j"; then
+    $MPI -np 4 "$VASP" >out.vasp
+    mv OUTCAR OUTCAR."$j"
+  fi
+  #
+  # use awk to extract forces
+  #
+  echo "$i" >DYNMAT."$j"
+  awk '
+/total drift:/ { start=0}
+!/----------/  { if ( start ==1) { printf "%14.8f  %14.8f  %14.8f\n",$4,$5,$6  }}
+/TOTAL-FORCE/  { start = 1}
+' <OUTCAR."$j" >>DYNMAT."$j"
+
+done
+
+# restore POSCAR file
+mv POSCAR.phon POSCAR
+
+echo "$j" >FORCES
+i=1
+while test "$i" -le "$j"; do
+  cat DYNMAT."$i" >>FORCES
+  i=$((i + 1))
+done
