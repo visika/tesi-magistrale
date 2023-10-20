@@ -1,0 +1,35 @@
+# number of ions types and masses
+NTYPES = 1
+MASS =26.98
+LCENTRAL=.FALSE.
+#LSYMM=.F.
+
+# generate superlattice
+LSUPER = .TRUE.
+NDIM = 4 4 4
+DXSTART = 1 -1 1
+LFORCEOUT=.FALSE.
+
+# free energy calculation
+LFREE = .FALSE.
+TEMPERATURE = 29
+#PTEMP = 10 81
+
+# q points section
+LRECIP = .FALSE.
+ND = 3
+NPOINTS = 51
+QI = 0.0        0.0        0.0      1.0        1.0        0.0      0.0        0.0        0.0
+
+QF = 1.0        0.0        0.0      0.0        0.0        0.0      0.5        0.5        0.5
+
+# density of states
+LGAMMA = .FALSE.
+QA = 8; QB = 8; QC = 8
+DOSIN = 0
+DOSEND = 10
+DOSSTEP = 0.05
+DOSSMEAR = 0.05
+
+# verbosity
+IPRINT = 0
