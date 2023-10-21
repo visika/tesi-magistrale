@@ -45,6 +45,7 @@ NPAR=4
 EOF
 
 for t in 10 20 30 50 100 150 200 250 300 400 500 600; do
+   echo "    Start loop t = $t"
    FOLDER="$SLURM_SUBMIT_DIR/t$t"
    if [ ! -d "$FOLDER" ]; then
       mkdir "$FOLDER"
