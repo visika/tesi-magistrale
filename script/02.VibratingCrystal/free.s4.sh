@@ -27,7 +27,7 @@ k=2
 s=4
 
 FILE_FIT=temp+equilibrium_volume
-cat $FILE_FIT <<EOF
+cat >$FILE_FIT <<EOF
 # Temperature Equilibrium_volume
 EOF
 
