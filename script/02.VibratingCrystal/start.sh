@@ -39,4 +39,7 @@ cd "$SLURM_SUBMIT_DIR" || exit
 ALERT=000-THIS_IS_RUNNING
 touch $ALERT
 ./free.s4.sh
+./thermal_expansion_coefficient.sh
+
+echo "    FINISHED!!!"
 rm $ALERT
