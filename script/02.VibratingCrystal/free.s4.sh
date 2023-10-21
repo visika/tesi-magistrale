@@ -61,7 +61,9 @@ for t in 10 20 30 50 100 150 200 250 300 400 500 600; do
    unset FILE
 
    FILE_HARMONIC=fh.s$s.k$k.t$t
-   rm "$FILE_HARMONIC"
+   if [ -f $FILE_HARMONIC ]; then
+      rm "$FILE_HARMONIC"
+   fi
    # Varia la temperatura in INPHON
    cat >INPHON <<EOF
 # number of ions types and masses
