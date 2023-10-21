@@ -27,9 +27,9 @@ k=2
 s=4
 
 FILE_FIT=temp+equilibrium_volume
-if [ -f $FILE_FIT ]; then
-   rm $FILE_FIT
-fi
+cat $FILE_FIT <<EOF
+# Temperature Equilibrium_volume
+EOF
 
 cat >KPOINTS <<EOF
 auto
