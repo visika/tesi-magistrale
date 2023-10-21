@@ -26,6 +26,11 @@ echo "Inizia free.s4.sh, questo è SLURM_SUBMIT_DIR: $SLURM_SUBMIT_DIR"
 k=2
 s=4
 
+FILE_FIT=temp+equilibrium_volume
+if [ -f $FILE_FIT ]; then
+   rm $FILE_FIT
+fi
+
 cat >KPOINTS <<EOF
 auto
  0
@@ -212,7 +217,7 @@ EOF
 
    # Fit to find the equilibrium volume
    cp "$FILE_HELMHOLTZ" tmp
-   ./fit <in | grep "v0 =" | awk -v t=$t '{print t,$3}' >"temp+equilibrium_volume"
+   ./fit <in | grep "v0 =" | awk -v t=$t '{print t,$3}' >>"../$FILE_FIT"
    rm tmp
    cd ..
 done #t
