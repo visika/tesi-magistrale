@@ -197,15 +197,18 @@ super cell
 EOF
 
       # DONE Se il file con le forze non esiste, bisogna generarlo con runphon
-
+      # Tutti i file con le forze risiedono nella radice del lavoro
       FILE=FORCES.s$s.k$k.v$v
-      if [ -f "$FILE" ]; then
+      if [ -f FORCES ]; then
+         rm FORCES
+      fi
+      if [ -f "$SLURM_SUBMIT_DIR/$FILE" ]; then
          echo "File $FILE found"
-         cp "$FILE" FORCES
+         ln -Ts "$SLURM_SUBMIT_DIR/$FILE" FORCES
       else
          echo "Running runphon to generate $FILE"
          $RUNPHON
-         cp FORCES "$FILE"
+         cp FORCES "$SLURM_SUBMIT_DIR/$FILE"
       fi
       unset FILE
 
