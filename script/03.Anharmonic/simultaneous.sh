@@ -1,13 +1,16 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # TODO Adatta lo script al sistema ibisco
 # Procedura dalla lezione del 2023-05-12
-cp /data/studenti/Esercitazioni22/POTCAR .
+if [ ! -f POTCAR ]; then
+   cp ../00.PerfectCrystal/POTCAR .
+fi
 # Vogliamo una super-cella con 64 atomi, cioè 4x4x4
 # Scegliamo un volume di 16.6 * 64 = 1062.4
 v=16.6
 vsuper=1062.4
 t=600
-cat > POSCAR <<EOF
+
+cat >POSCAR <<EOF
 super cell
         -$vsuper
    2.000000000000000   0.000000000000000   2.000000000000000
@@ -81,7 +84,7 @@ super cell
    0.750000000000000   0.750000000000000   0.750000000000000
 EOF
 
-cat > SPOSCAR <<EOF
+cat >SPOSCAR <<EOF
 super cell
         4.0000000000
    2.000000000000000   0.000000000000000   2.000000000000000
@@ -155,25 +158,24 @@ super cell
    0.750000000000000   0.750000000000000   0.750000000000000
 EOF
 
-for folder in 00 01 02 03 04 05
-do
-mkdir $folder
-cp POSCAR $folder
+for folder in 00 01 02 03 04 05; do
+   mkdir $folder
+   cp POSCAR $folder
 done
 
-cat > 01/INCAR <<EOF
+cat >01/INCAR <<EOF
 XLAMBDA=0.0
 EOF
 
-cat > 02/INCAR <<EOF
+cat >02/INCAR <<EOF
 XLAMBDA=0.333333333
 EOF
 
-cat > 03/INCAR <<EOF
+cat >03/INCAR <<EOF
 XLAMBDA=0.666666666
 EOF
 
-cat > 04/INCAR <<EOF
+cat >04/INCAR <<EOF
 XLAMBDA=1.0
 EOF
 
@@ -198,7 +200,8 @@ EOF
 # TIPO=inteharm indica che vogliamo effettuare l'integrazione
 # termodinamica con una combinazione di potenziale armonico e
 # potenziale completo.
-cat > INCAR <<EOF
+
+cat >INCAR <<EOF
 EDIFF=1d-4
 SIGMA=0.544
 LWAVE=.FALSE.
@@ -233,16 +236,67 @@ NCELL=64
 XLAMBDA=0.0
 #LADIABATIC=.T.
 EOF
+
 # Dato che ci interessano solo le differenze rispetto al valore di
 # riferimento dell'energia, effettuiamo i calcoli solo in un punto.
-cat > KPOINTS <<EOF
-auto 
+
+cat >KPOINTS <<EOF
+auto
  0
 Gamma
 1 1 1
 0 0 0
 EOF
-# Remember to use the correct HARMONIC file force constant matrix and set the correct radius
-cp "/data/studenti/mollo/harmonicpotential/HARMONIC.v$v" HARMONIC
+
+# Remember to use the correct HARMONIC file force constant matrix and set the
+# correct radius TODO Creare il file HARMONIC adatto al volume, se non esiste
+# già Per far scrivere a PHON nel file HARMONIC la matrice delle costanti di
+# forza, impostare nel file INPHON le seguenti variabili:
+# LSUPER = .F., LFORCEOUT = .T.
+
+if [ ! -f HARMONIC.v$v ]; then
+   echo "    HARMONIC.v$v not found; generating it with PHON"
+   cat >INPHON <<EOF
+# number of ions types and masses
+NTYPES = 1
+MASS =26.98
+LCENTRAL=.FALSE.
+#LSYMM=.F.
+
+# generate superlattice
+LSUPER = .FALSE.
+NDIM = 4 4 4
+DXSTART = 1 -1 1
+LFORCEOUT=.TRUE.
+
+# free energy calculation
+LFREE = .FALSE.
+TEMPERATURE = 29
+#PTEMP = 10 81
+
+# q points section
+LRECIP = .FALSE.
+ND = 3
+NPOINTS = 51
+QI = 0.0        0.0        0.0      1.0        1.0        0.0      0.0        0.0        0.0
+
+QF = 1.0        0.0        0.0      0.0        0.0        0.0      0.5        0.5        0.5
+
+# density of states
+LGAMMA = .FALSE.
+QA = 8; QB = 8; QC = 8
+DOSIN = 0
+DOSEND = 10
+DOSSTEP = 0.05
+DOSSMEAR = 0.05
+
+# verbosity
+IPRINT = 0
+EOF
+   $PHON
+fi
+
+cp HARMONIC.v$v HARMONIC
+
 # Run VASP
-/opt/openmpi/1.6/ifort-12.1.4/bin/mpirun -np 16 /home/nm_settings/software/CODES/VASP/bin/vasp-4.6.alfe-gamma
+$MPI -np 4 "$VASPGAMMA"
