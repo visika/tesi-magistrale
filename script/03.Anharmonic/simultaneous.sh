@@ -6,6 +6,8 @@ if [ ! -f POTCAR ]; then
 fi
 # Vogliamo una super-cella con 64 atomi, cioè 4x4x4
 # Scegliamo un volume di 16.6 * 64 = 1062.4
+s=4
+k=1
 v=16.6
 vsuper=1062.4
 t=600
@@ -201,7 +203,7 @@ EOF
 # termodinamica con una combinazione di potenziale armonico e
 # potenziale completo.
 
-cat >INCAR <<EOF
+cat >INCAR.molecular-dynamics <<EOF
 EDIFF=1d-4
 SIGMA=0.544
 LWAVE=.FALSE.
@@ -247,6 +249,33 @@ Gamma
 1 1 1
 0 0 0
 EOF
+
+# We need the FORCES file to generate the HARMONIC file
+# TODO Crea flusso di creazione del file con runphon
+
+cat >INCAR.harmonic <<EOF
+EDIFF=1d-6
+SIGMA=0.544
+LWAVE=.FALSE.
+LCHARG=.FALSE.
+#ENCUT=400
+NPAR=1
+EOF
+
+FILE_FORCES=FORCES.s$s.k$k.v$v
+if [ -f FORCES ]; then
+  rm FORCES
+fi
+if [ -f "$SLURM_SUBMIT_DIR/$FILE_FORCES" ]; then
+  echo "File $FILE_FORCES found"
+  ln -Ts "$SLURM_SUBMIT_DIR/$FILE_FORCES" FORCES
+else
+   echo "Running runphon to generate $FILE_FORCES"
+   cp INCAR.harmonic INCAR
+   $RUNPHON
+   cp FORCES "$SLURM_SUBMIT_DIR/$FILE_FORCES"
+fi
+unset FILE_FORCES
 
 # Remember to use the correct HARMONIC file force constant matrix and set the
 # correct radius TODO Creare il file HARMONIC adatto al volume, se non esiste
@@ -299,4 +328,5 @@ fi
 cp HARMONIC.v$v HARMONIC
 
 # Run VASP
+cp INCAR.molecular-dynamics INCAR
 $MPI -np 4 "$VASPGAMMA"
