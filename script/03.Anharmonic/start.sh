@@ -8,6 +8,19 @@
 ##SBATCH --mem=1400000
 #SBATCH --partition=parallel
 
+# Script da eseguire nella cartella 03.Anharmonic.
+# Questo crea una cartella di lavoro dedicata per ciascuna configurazione
+# di temperatura e volume.
+#
+# Struttura delle cartelle:
+# 03.Anharmonic
+# |-t$t.v$v
+# ||-01
+# ||-02
+# ||-03
+# ||-04
+# |||-OSZICAR
+
 ### Parte iniziale dello script, con configurazioni iniziali. ###
 
 ulimit -s unlimited
