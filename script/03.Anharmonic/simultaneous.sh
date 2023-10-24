@@ -175,10 +175,12 @@ super cell
    0.750000000000000   0.750000000000000   0.750000000000000
 EOF
 
-for folder in 00 01 02 03 04 05; do
-   mkdir $folder
-   cp POSCAR $folder
-done
+   for folder in 00 01 02 03 04 05; do
+      if [ ! -d $folder ]; then
+         mkdir $folder
+      fi
+      cp POSCAR $folder
+   done
 
 cat >01/INCAR <<EOF
 XLAMBDA=0.0
