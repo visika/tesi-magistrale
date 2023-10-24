@@ -14,12 +14,13 @@
 #
 # Struttura delle cartelle:
 # 03.Anharmonic
-# |-t$t.v$v
-# ||-01
-# ||-02
-# ||-03
-# ||-04
-# |||-OSZICAR
+# |-t$t
+# ||-v$v
+# |||-01
+# |||-02
+# |||-03
+# |||-04
+# ||||-OSZICAR
 
 ### Parte iniziale dello script, con configurazioni iniziali. ###
 
