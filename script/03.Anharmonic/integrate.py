@@ -2,14 +2,14 @@
 Questo script integra con la regola dei trapezoidi i valori della media
 dell'energia di Helmholtz sui valori di lambda.
 
-Si aspetta un file di input, averages, con due colonne:
+Si aspetta un file di input, df, con due colonne:
 - lambda
 - valore della media
 """
 
 import numpy as np
 
-data = np.loadtxt("averages")
+data = np.loadtxt("df")
 
 lambdas = data[:, 0]
 averages = data[:, 1]
@@ -17,7 +17,10 @@ averages = data[:, 1]
 
 dx = 1 / len(lambdas)
 
-integral = dx * (0.5 * averages[0] + averages[1] + averages[2] + 0.5 * averages[3])
+integral = 0
+integral += dx * 0.5 * (averages[0] + averages[-1])
+for average in averages[1:-1]:
+    integral += dx * average
 
 print(integral)
 
