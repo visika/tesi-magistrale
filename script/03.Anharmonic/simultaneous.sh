@@ -25,6 +25,7 @@ for v in 17.0; do
    vsuper=$(python3 -c "print($v*64)")
    echo "[I] Il volume della supercella è $vsuper"
 
+   ln -s "$SLURM_SUBMIT_DIR/POTCAR" .
 
 cat >POSCAR <<EOF
 super cell
