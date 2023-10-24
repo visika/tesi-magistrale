@@ -75,10 +75,10 @@ EOF
     for folder in 01 02 03 04; do
         xlambda=$(grep xlambda $folder/OUTCAR | head -n 1 | awk '{print $3}')
         grep T= $folder/OSZICAR >"analysis/t.$xlambda"
-        echo "[I] Ci sono $(awk 'END{print NR}' "analysis/t.$xlambda") record di dinamica molecolare"
         awk -v u="$U0" -v x="$xlambda" '{a+=$7+u}END{print x, a/NR/64}' "analysis/t.$xlambda" >>"analysis/df"
-        rm "analysis/t.$xlambda"
     done
+    echo "[I] Ci sono $(awk 'END{print NR}' "analysis/t.$xlambda") record di dinamica molecolare"
+    rm "analysis/t.$xlambda"
     # TODO Integra per ottenere il volume corretto
     cd analysis || exit
     if [ -L integrate.py ] || [ -e integrate.py ]; then
