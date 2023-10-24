@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# TODO Adatta lo script al sistema ibisco
+# DONE Adatta lo script al sistema ibisco
 # Procedura dalla lezione del 2023-05-12
 if [ ! -f POTCAR ]; then
    cp ../00.PerfectCrystal/POTCAR .
