@@ -5,12 +5,26 @@ if [ ! -f POTCAR ]; then
    cp ../00.PerfectCrystal/POTCAR .
 fi
 # Vogliamo una super-cella con 64 atomi, cioè 4x4x4
-# Scegliamo un volume di 16.6 * 64 = 1062.4
 s=4
 k=1
-v=16.6
-vsuper=1062.4
+
 t=600
+if [ ! -d t$t ]; then
+   mkdir t$t
+fi
+cd t$t || exit
+
+for v in 17.0; do
+   echo "[I] Inizia il loop v=$v"
+
+   if [ ! -d v$v ]; then
+      mkdir v$v
+   fi
+   cd v$v || exit
+
+   vsuper=$(python3 -c "print($v*64)")
+   echo "[I] Il volume della supercella è $vsuper"
+
 
 cat >POSCAR <<EOF
 super cell
