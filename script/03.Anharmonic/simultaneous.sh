@@ -199,62 +199,6 @@ EOF
 XLAMBDA=1.0
 EOF
 
-   # Allo stato dei fatti, abbiamo una struttura con tutti gli atomi nelle
-   # proprie posizioni di equilibrio. Avviando VASP con questa configurazione,
-   # otterremmo un valore dell'energia corrispondente a U_0. Dobbiamo
-   # configurare INCAR per abilitare la dinamica molecolare. Il parametro per
-   # attivare la dinamica molecolare è IBRION=0.
-
-   # TODO NSW dovrebbe essere 2000 per avere buoni risultati, ma ora sto facendo
-   # un test, quindi lo imposto a un valore minore.
-
-   # POTIM=3.0 è il passo temporale in femto secondi. TEBEG=600 è la temperatura
-   # iniziale della simulazione.
-
-   # Usiamo EDIFF=1d-4 perché la convergenza sia meno stringente e più rapida.
-   # IALGO=48 impiega un algoritmo di diagonalizzazione più rapido ma anche più
-   # instabile. MAXMIX=40 utilizza più densità dai passi precedenti, per
-   # velocizzare la convergenza.
-
-   # TIPO=inteharm indica che vogliamo effettuare l'integrazione termodinamica
-   # con una combinazione di potenziale armonico e potenziale completo.
-
-   cat >INCAR.molecular-dynamics <<EOF
-EDIFF=1d-4
-SIGMA=0.544
-LWAVE=.FALSE.
-LCHARG=.FALSE.
-IMAGES=4
-SPRING=-1000
-
-#ENCUT=400
-
-NPAR=1
-
-IALGO=48
-IBRION=0
-NSW=500
-#ISYM=0
-POTIM=3.0
-TEBEG=$t
-LANDERSON=.T.
-NANDERSON=50
-#POMASS=26.98
-#NBLOCK=5
-#NWRITE=0
-MAXMIX=40
-
-TIPO=inteharm
-#TIPO=harmonic
-XMIXHARM=1.0
-XMIXREF=0.0
-R1=8.05
-NCELL=64
-
-XLAMBDA=0.0
-#LADIABATIC=.T.
-EOF
-
    # Dato che ci interessano solo le differenze rispetto al valore di
    # riferimento dell'energia, effettuiamo i calcoli solo in un punto.
 
@@ -347,6 +291,68 @@ EOF
    else
       cp HARMONIC.v$v HARMONIC
    fi
+
+   # Allo stato dei fatti, abbiamo una struttura con tutti gli atomi nelle
+   # proprie posizioni di equilibrio. Avviando VASP con questa configurazione,
+   # otterremmo un valore dell'energia corrispondente a U_0. Dobbiamo
+   # configurare INCAR per abilitare la dinamica molecolare. Il parametro per
+   # attivare la dinamica molecolare è IBRION=0.
+
+   # TODO NSW dovrebbe essere 2000 per avere buoni risultati, ma ora sto facendo
+   # un test, quindi lo imposto a un valore minore.
+
+   # POTIM=3.0 è il passo temporale in femto secondi. TEBEG=600 è la temperatura
+   # iniziale della simulazione.
+
+   # Usiamo EDIFF=1d-4 perché la convergenza sia meno stringente e più rapida.
+   # IALGO=48 impiega un algoritmo di diagonalizzazione più rapido ma anche più
+   # instabile. MAXMIX=40 utilizza più densità dai passi precedenti, per
+   # velocizzare la convergenza.
+
+   # TIPO=inteharm indica che vogliamo effettuare l'integrazione termodinamica
+   # con una combinazione di potenziale armonico e potenziale completo.
+
+   # È necessario usare il valore per il cutoff radius appropriato, ottenibile
+   # dal file HARMONIC nella prima riga.
+
+   R=$(head -n 1 HARMONIC | awk '{print $1}')
+   echo "[I] Raggio di cutoff: $R"
+
+   cat >INCAR.molecular-dynamics <<EOF
+EDIFF=1d-4
+SIGMA=0.544
+LWAVE=.FALSE.
+LCHARG=.FALSE.
+IMAGES=4
+SPRING=-1000
+
+#ENCUT=400
+
+NPAR=1
+
+IALGO=48
+IBRION=0
+NSW=500
+#ISYM=0
+POTIM=3.0
+TEBEG=$t
+LANDERSON=.T.
+NANDERSON=50
+#POMASS=26.98
+#NBLOCK=5
+#NWRITE=0
+MAXMIX=40
+
+TIPO=inteharm
+#TIPO=harmonic
+XMIXHARM=1.0
+XMIXREF=0.0
+R1=$R
+NCELL=64
+
+XLAMBDA=0.0
+#LADIABATIC=.T.
+EOF
 
    # Run VASP for molecular dynamics
    cp INCAR.molecular-dynamics INCAR
