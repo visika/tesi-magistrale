@@ -352,4 +352,5 @@ EOF
    cp INCAR.molecular-dynamics INCAR
    $MPI -np 4 "$VASPGAMMA"
 
+   cd ..
 done # v
