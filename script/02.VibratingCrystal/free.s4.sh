@@ -218,7 +218,13 @@ EOF
 
    FILE_HELMHOLTZ=free.s$s.k$k.t$t
    # Get the Helmholtz free energy as point zero + harmonic component
-   # TODO Controlla che le righe nei due file siano in numero identico
+   # DONE Controlla che le righe nei due file siano in numero identico
+   lines_u=$(wc -l ../u20 | awk '{print $1}')
+   lines_fh=$(wc -l $FILE_HARMONIC | awk '{print $1}')
+   if [ ! "$lines_u" -eq "$lines_fh" ]; then
+     echo "[E] Lines numbers of u20 and $FILE_HARMONIC do not match! Exiting."
+     exit 1
+   fi
    paste ../u20 "$FILE_HARMONIC" | awk '{print $1,$2+$4}' >"$FILE_HELMHOLTZ"
 
    # Fit to find the equilibrium volume
