@@ -1,0 +1,12 @@
+numpy
+ase
+
+# gpaw requires libxc
+# yay -S libxc
+# https://wiki.fysik.dtu.dk/gpaw/install.html
+gpaw
+# after installing gpaw, run gpaw install-data <dir>
+# to install the required datasets in <dir>
+# and say yes at the end to add it to the path variables
+
+jupyterlab
