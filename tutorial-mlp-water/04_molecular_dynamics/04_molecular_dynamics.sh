@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=Mollo
 #SBATCH --nodes=1               # Number of nodes
-#SBATCH --tasks-per-node=1     # Number of MPI ranks per node
+#SBATCH --tasks-per-node=4     # Number of MPI ranks per node
 ##SBATCH --exclusive
 ##SBATCH --exclude=ibiscohpc-wn04,ibiscohpc-wn06,ibiscohpc-wn07
 #SBATCH --cpus-per-task=1
 ##SBATCH --mem=1400000
-#SBATCH --partition=sequential
+#SBATCH --partition=parallel
 
 ### Parte iniziale dello script, con configurazioni iniziali. ###
 
 ulimit -s unlimited
 
-export OMP_NUM_THREADS=4
+export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 
 # source /nfsexports/SOFTWARE/intel/oneapi/setvars.sh
