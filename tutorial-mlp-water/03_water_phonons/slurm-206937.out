@@ -1,0 +1,1775 @@
+Il mio programma sta iniziando...
+Using Python 3.11.7
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+findfont: Font family 'arial' not found.
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.45,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.35,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.25,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.15,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = (-0.05,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.05,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.15,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.25,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.35,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.45,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45, -0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.05,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.15,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.25,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.35,  0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45, -0.45) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45, -0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45, -0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45, -0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45, -0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45,  0.05) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45,  0.15) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45,  0.25) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45,  0.35) ; (omega_q = 4.480e-04*i)
+WARNING, 3 imaginary frequencies at q = ( 0.45,  0.45,  0.45) ; (omega_q = 4.480e-04*i)
+Internal energy components at T = 10.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0002 eV
+-------------------------------
+U                 -5626.5500 eV
+===============================
+
+Entropy components at T = 10.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0000462 eV/K       0.0005 eV
+=================================================
+
+Helmholtz free energy components at T = 10.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5500 eV
+ -T*S        -0.0005 eV
+-----------------------
+    F     -5626.5505 eV
+=======================
+Internal energy components at T = 20.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0010 eV
+-------------------------------
+U                 -5626.5493 eV
+===============================
+
+Entropy components at T = 20.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0000952 eV/K       0.0019 eV
+=================================================
+
+Helmholtz free energy components at T = 20.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5493 eV
+ -T*S        -0.0019 eV
+-----------------------
+    F     -5626.5512 eV
+=======================
+Internal energy components at T = 30.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0028 eV
+-------------------------------
+U                 -5626.5474 eV
+===============================
+
+Entropy components at T = 30.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0001679 eV/K       0.0050 eV
+=================================================
+
+Helmholtz free energy components at T = 30.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5474 eV
+ -T*S        -0.0050 eV
+-----------------------
+    F     -5626.5525 eV
+=======================
+Internal energy components at T = 40.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0062 eV
+-------------------------------
+U                 -5626.5440 eV
+===============================
+
+Entropy components at T = 40.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0002649 eV/K       0.0106 eV
+=================================================
+
+Helmholtz free energy components at T = 40.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5440 eV
+ -T*S        -0.0106 eV
+-----------------------
+    F     -5626.5546 eV
+=======================
+Internal energy components at T = 50.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0114 eV
+-------------------------------
+U                 -5626.5388 eV
+===============================
+
+Entropy components at T = 50.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0003802 eV/K       0.0190 eV
+=================================================
+
+Helmholtz free energy components at T = 50.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5388 eV
+ -T*S        -0.0190 eV
+-----------------------
+    F     -5626.5578 eV
+=======================
+Internal energy components at T = 60.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0185 eV
+-------------------------------
+U                 -5626.5318 eV
+===============================
+
+Entropy components at T = 60.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0005081 eV/K       0.0305 eV
+=================================================
+
+Helmholtz free energy components at T = 60.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5318 eV
+ -T*S        -0.0305 eV
+-----------------------
+    F     -5626.5623 eV
+=======================
+Internal energy components at T = 70.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0274 eV
+-------------------------------
+U                 -5626.5229 eV
+===============================
+
+Entropy components at T = 70.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0006447 eV/K       0.0451 eV
+=================================================
+
+Helmholtz free energy components at T = 70.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5229 eV
+ -T*S        -0.0451 eV
+-----------------------
+    F     -5626.5680 eV
+=======================
+Internal energy components at T = 80.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0380 eV
+-------------------------------
+U                 -5626.5122 eV
+===============================
+
+Entropy components at T = 80.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0007869 eV/K       0.0630 eV
+=================================================
+
+Helmholtz free energy components at T = 80.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.5122 eV
+ -T*S        -0.0630 eV
+-----------------------
+    F     -5626.5752 eV
+=======================
+Internal energy components at T = 90.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0504 eV
+-------------------------------
+U                 -5626.4998 eV
+===============================
+
+Entropy components at T = 90.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0009326 eV/K       0.0839 eV
+=================================================
+
+Helmholtz free energy components at T = 90.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.4998 eV
+ -T*S        -0.0839 eV
+-----------------------
+    F     -5626.5838 eV
+=======================
+Internal energy components at T = 100.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0644 eV
+-------------------------------
+U                 -5626.4858 eV
+===============================
+
+Entropy components at T = 100.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0010798 eV/K       0.1080 eV
+=================================================
+
+Helmholtz free energy components at T = 100.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.4858 eV
+ -T*S        -0.1080 eV
+-----------------------
+    F     -5626.5938 eV
+=======================
+Internal energy components at T = 110.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0799 eV
+-------------------------------
+U                 -5626.4704 eV
+===============================
+
+Entropy components at T = 110.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0012272 eV/K       0.1350 eV
+=================================================
+
+Helmholtz free energy components at T = 110.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.4704 eV
+ -T*S        -0.1350 eV
+-----------------------
+    F     -5626.6054 eV
+=======================
+Internal energy components at T = 120.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.0968 eV
+-------------------------------
+U                 -5626.4535 eV
+===============================
+
+Entropy components at T = 120.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0013739 eV/K       0.1649 eV
+=================================================
+
+Helmholtz free energy components at T = 120.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.4535 eV
+ -T*S        -0.1649 eV
+-----------------------
+    F     -5626.6184 eV
+=======================
+Internal energy components at T = 130.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.1149 eV
+-------------------------------
+U                 -5626.4353 eV
+===============================
+
+Entropy components at T = 130.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0015193 eV/K       0.1975 eV
+=================================================
+
+Helmholtz free energy components at T = 130.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.4353 eV
+ -T*S        -0.1975 eV
+-----------------------
+    F     -5626.6328 eV
+=======================
+Internal energy components at T = 140.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.1343 eV
+-------------------------------
+U                 -5626.4159 eV
+===============================
+
+Entropy components at T = 140.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0016630 eV/K       0.2328 eV
+=================================================
+
+Helmholtz free energy components at T = 140.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.4159 eV
+ -T*S        -0.2328 eV
+-----------------------
+    F     -5626.6488 eV
+=======================
+Internal energy components at T = 150.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.1549 eV
+-------------------------------
+U                 -5626.3954 eV
+===============================
+
+Entropy components at T = 150.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0018048 eV/K       0.2707 eV
+=================================================
+
+Helmholtz free energy components at T = 150.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.3954 eV
+ -T*S        -0.2707 eV
+-----------------------
+    F     -5626.6661 eV
+=======================
+Internal energy components at T = 160.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.1766 eV
+-------------------------------
+U                 -5626.3737 eV
+===============================
+
+Entropy components at T = 160.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0019447 eV/K       0.3111 eV
+=================================================
+
+Helmholtz free energy components at T = 160.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.3737 eV
+ -T*S        -0.3111 eV
+-----------------------
+    F     -5626.6848 eV
+=======================
+Internal energy components at T = 170.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.1993 eV
+-------------------------------
+U                 -5626.3509 eV
+===============================
+
+Entropy components at T = 170.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0020826 eV/K       0.3540 eV
+=================================================
+
+Helmholtz free energy components at T = 170.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.3509 eV
+ -T*S        -0.3540 eV
+-----------------------
+    F     -5626.7050 eV
+=======================
+Internal energy components at T = 180.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.2231 eV
+-------------------------------
+U                 -5626.3271 eV
+===============================
+
+Entropy components at T = 180.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0022187 eV/K       0.3994 eV
+=================================================
+
+Helmholtz free energy components at T = 180.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.3271 eV
+ -T*S        -0.3994 eV
+-----------------------
+    F     -5626.7265 eV
+=======================
+Internal energy components at T = 190.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.2480 eV
+-------------------------------
+U                 -5626.3023 eV
+===============================
+
+Entropy components at T = 190.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0023531 eV/K       0.4471 eV
+=================================================
+
+Helmholtz free energy components at T = 190.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.3023 eV
+ -T*S        -0.4471 eV
+-----------------------
+    F     -5626.7493 eV
+=======================
+Internal energy components at T = 200.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.2739 eV
+-------------------------------
+U                 -5626.2764 eV
+===============================
+
+Entropy components at T = 200.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0024857 eV/K       0.4971 eV
+=================================================
+
+Helmholtz free energy components at T = 200.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.2764 eV
+ -T*S        -0.4971 eV
+-----------------------
+    F     -5626.7735 eV
+=======================
+Internal energy components at T = 210.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.3007 eV
+-------------------------------
+U                 -5626.2495 eV
+===============================
+
+Entropy components at T = 210.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0026168 eV/K       0.5495 eV
+=================================================
+
+Helmholtz free energy components at T = 210.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.2495 eV
+ -T*S        -0.5495 eV
+-----------------------
+    F     -5626.7991 eV
+=======================
+Internal energy components at T = 220.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.3286 eV
+-------------------------------
+U                 -5626.2217 eV
+===============================
+
+Entropy components at T = 220.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0027464 eV/K       0.6042 eV
+=================================================
+
+Helmholtz free energy components at T = 220.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.2217 eV
+ -T*S        -0.6042 eV
+-----------------------
+    F     -5626.8259 eV
+=======================
+Internal energy components at T = 230.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.3574 eV
+-------------------------------
+U                 -5626.1928 eV
+===============================
+
+Entropy components at T = 230.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0028745 eV/K       0.6611 eV
+=================================================
+
+Helmholtz free energy components at T = 230.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.1928 eV
+ -T*S        -0.6611 eV
+-----------------------
+    F     -5626.8540 eV
+=======================
+Internal energy components at T = 240.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.3872 eV
+-------------------------------
+U                 -5626.1630 eV
+===============================
+
+Entropy components at T = 240.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0030013 eV/K       0.7203 eV
+=================================================
+
+Helmholtz free energy components at T = 240.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.1630 eV
+ -T*S        -0.7203 eV
+-----------------------
+    F     -5626.8834 eV
+=======================
+Internal energy components at T = 250.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.4180 eV
+-------------------------------
+U                 -5626.1323 eV
+===============================
+
+Entropy components at T = 250.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0031268 eV/K       0.7817 eV
+=================================================
+
+Helmholtz free energy components at T = 250.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.1323 eV
+ -T*S        -0.7817 eV
+-----------------------
+    F     -5626.9140 eV
+=======================
+Internal energy components at T = 260.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.4496 eV
+-------------------------------
+U                 -5626.1006 eV
+===============================
+
+Entropy components at T = 260.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0032510 eV/K       0.8453 eV
+=================================================
+
+Helmholtz free energy components at T = 260.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.1006 eV
+ -T*S        -0.8453 eV
+-----------------------
+    F     -5626.9459 eV
+=======================
+Internal energy components at T = 270.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.4822 eV
+-------------------------------
+U                 -5626.0680 eV
+===============================
+
+Entropy components at T = 270.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0033740 eV/K       0.9110 eV
+=================================================
+
+Helmholtz free energy components at T = 270.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.0680 eV
+ -T*S        -0.9110 eV
+-----------------------
+    F     -5626.9790 eV
+=======================
+Internal energy components at T = 280.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.5157 eV
+-------------------------------
+U                 -5626.0346 eV
+===============================
+
+Entropy components at T = 280.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0034958 eV/K       0.9788 eV
+=================================================
+
+Helmholtz free energy components at T = 280.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.0346 eV
+ -T*S        -0.9788 eV
+-----------------------
+    F     -5627.0134 eV
+=======================
+Internal energy components at T = 290.00 K,
+on a per-formula-unit basis:
+===============================
+E_pot             -5635.2583 eV
+E_ZPE                 8.7080 eV
+E_phonon              0.5501 eV
+-------------------------------
+U                 -5626.0002 eV
+===============================
+
+Entropy components at T = 290.00 K,
+on a per-formula-unit basis:
+=================================================
+                           S               T*S
+-------------------------------------------------
+S                  0.0036164 eV/K       1.0487 eV
+=================================================
+
+Helmholtz free energy components at T = 290.00 K,
+on a per-formula-unit basis:
+=======================
+    U     -5626.0002 eV
+ -T*S        -1.0487 eV
+-----------------------
+    F     -5627.0489 eV
+=======================
+    FINISHED!!!
