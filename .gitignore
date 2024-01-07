@@ -10,3 +10,6 @@ htmlcov
 
 .ipynb_checkpoints
 .venv
+
+# Dati di sistema di gpaw
+gpaw-datasets
