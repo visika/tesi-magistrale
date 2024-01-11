@@ -1,0 +1,2 @@
+#+title: Run 4
+Imposta il timestep a 0.5 fs.
