@@ -5,14 +5,8 @@
 # I/O
 from ase.io import read, write
 
-# Optimizer
-from ase.optimize import BFGS
-
 # I/O to save dynamics trajectory
 from ase.io.trajectory import Trajectory
-
-# To write a good POSCAR file
-from ase.build import sort
 
 from ase.calculators.lammpslib import LAMMPSlib
 
