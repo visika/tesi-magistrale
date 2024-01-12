@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "tesi-magistrale"
+version = "0.1.0"
+description = "Tesi magistrale di Mariano Mollo"
+authors = ["Mariano Mollo <marian.mollo@studenti.unina.it>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ase = "^3.22.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
