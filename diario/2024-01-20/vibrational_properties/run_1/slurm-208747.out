@@ -1,0 +1,12 @@
+Using Python 3.11.7
+                Step[ FC]     Time          Energy          fmax
+*Force-consistent energies used in optimization.
+BFGSLineSearch:    0[  0] 13:51:42     -464.115523*       7.3646
+BFGSLineSearch:    1[  3] 13:51:42     -467.718461*       4.7230
+BFGSLineSearch:    2[  5] 13:51:42     -468.092543*       4.0012
+BFGSLineSearch:    3[  7] 13:51:42     -468.448608*       1.2162
+BFGSLineSearch:    4[  9] 13:51:43     -468.466412*       0.0126
+BFGSLineSearch:    5[ 10] 13:51:43     -468.466414*       0.0030
+BFGSLineSearch:    6[ 11] 13:51:43     -468.466414*       0.0003
+BFGSLineSearch:    7[ 13] 13:51:43     -468.466414*       0.0000
+FINISHED!!!
