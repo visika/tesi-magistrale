@@ -1,0 +1,13 @@
+Using Python 3.11.7
+-5635.113732815746
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/diario/2024-01-21/espansione_termica/script.py", line 47, in <module>
+    energie_potenziali = [a.get_potential_energy() for a in atomi_scalati]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ibiscostorage/mmollo/diario/2024-01-21/espansione_termica/script.py", line 47, in <listcomp>
+    energie_potenziali = [a.get_potential_energy() for a in atomi_scalati]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/atoms.py", line 726, in get_potential_energy
+    raise RuntimeError('Atoms object has no calculator.')
+RuntimeError: Atoms object has no calculator.
+FINISHED!!!
