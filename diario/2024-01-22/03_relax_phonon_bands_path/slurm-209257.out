@@ -1,0 +1,12 @@
+Using Python 3.11.7
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/diario/2024-01-22/03_relax_phonon_bands_path/02_phonons.py", line 23, in <module>
+    atoms = read("relax-positions/final.pbd")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/io/formats.py", line 731, in read
+    io = get_ioformat(format)
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/io/formats.py", line 294, in get_ioformat
+    raise UnknownFileTypeError(name)
+ase.io.formats.UnknownFileTypeError: pbd
+FINISHED!!!
