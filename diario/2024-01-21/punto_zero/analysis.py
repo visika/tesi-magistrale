@@ -13,7 +13,9 @@ def __():
 @app.cell
 def __(pd):
     # Plot data in the csv file
-    pd.read_csv("V_vs_U0.csv").plot(x="V", y="U0", marker="o")
+    pd.read_csv("V_vs_U0.csv").plot(
+        x="V", y="U0", marker="o", title="Potential energy (eV)"
+    )
     return
 
 

@@ -27,7 +27,7 @@ atoms = read("POSCAR")
 atoms.calc = LAMMPScalc
 
 opt = BFGS(atoms, logfile="optimization.log", trajectory="optimization.traj")
-opt.run(fmax=0.001)
+opt.run(fmax=0.01)
 write(images=atoms, filename="optimized.pdb", format="proteindatabank")
 
 scales = np.arange(0.8, 1.5, 0.1)
@@ -40,12 +40,12 @@ for s in scales:
     atoms_scaled.set_cell(atoms.cell * s, scale_atoms=True)
     v = atoms_scaled.cell.volume
 
-    opt = BFGS(
-        atoms_scaled,
-        logfile=f"optimization_v={v}.log",
-        trajectory=f"optimization_v={v}.traj",
-    )
-    opt.run(fmax=0.001)
+    # opt = BFGS(
+    #     atoms_scaled,
+    #     logfile=f"optimization_v={v}.log",
+    #     trajectory=f"optimization_v={v}.traj",
+    # )
+    # opt.run(fmax=0.01)
     write(
         images=atoms_scaled, filename=f"optimized_v={v}.pdb", format="proteindatabank"
     )

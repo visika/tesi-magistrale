@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=vibrations
-#SBATCH --nodes=1             # Number of nodes
-#SBATCH --tasks-per-node=4    # Number of MPI ranks per node
-#SBATCH --cpus-per-task=1
-#SBATCH --partition=parallel
+#SBATCH --job-name=MACE
+#SBATCH --output=01_cuda.out
+#SBATCH --partition=gpus
+#SBATCH --ntasks=1
+#SBATCH --mem=4G
+#SBATCH --gpus=1
+##SBATCH --tasks-per-node=1    # Number of MPI ranks per node
+##SBATCH --cpus-per-task=1
+##SBATCH --nodes=1             # Number of nodes
 
 ulimit -s unlimited
 
@@ -44,7 +48,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-conda activate mmollo_mace_env
+conda activate mace_env
 
 echo Using "$(python -V)"
 python 01_cuda.py

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=MACE
-#SBATCH --output=02_cuda.out
+#SBATCH --output=05_modi_vibrazione_monomero.out
 #SBATCH --partition=gpus
 #SBATCH --ntasks=1
 #SBATCH --mem=4G
@@ -51,7 +51,7 @@ unset __conda_setup
 conda activate mace_env
 
 echo Using "$(python -V)"
-python 02_potential_energy.py
+python 05_modi_vibrazione_monomero.py
 
 echo "FINISHED!!!"
 rm $ALERT

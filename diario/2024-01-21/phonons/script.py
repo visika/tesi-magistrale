@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from ase.io import read
 from ase.phonons import Phonons
 from ase.calculators.lammpslib import LAMMPSlib

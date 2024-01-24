@@ -22,7 +22,7 @@ def __(read):
 
 @app.cell
 def __(Phonons, relaxed):
-    N = 2
+    N = 1
     ph = Phonons(relaxed, supercell=(N, N, N), delta=0.05)
     ph.read(acoustic=True)
     return N, ph
@@ -49,12 +49,12 @@ def __(bs):
 
 
 @app.cell
-def __(N, bs, dos, plt):
-    fig = plt.figure(1, figsize=(7, 15))
+def __(bs, dos, plt):
+    fig = plt.figure(1, figsize=(7, 4))
     ax = fig.add_axes([0.12, 0.07, 0.67, 0.85])
-    plt.title(f"${N} \\times {N} \\times {N}$ supercell, $\\delta = 0.01$, fmax=0.001")
-    emin = -0.02
-    emax = 0.2
+    plt.title("$1 \\times 1 \\times 1$ supercell, $\\delta = 0.01$, fmax=0.001")
+    emin = -0.05
+    emax = 0.45
     bs.plot(ax=ax, emin=emin, emax=emax)
     dosax = fig.add_axes([0.8, 0.07, 0.17, 0.85])
     dosax.fill_between(
@@ -69,9 +69,14 @@ def __(N, bs, dos, plt):
     dosax.set_yticks([])
     dosax.set_xticks([])
     dosax.set_xlabel("DOS", fontsize=16)
-    plt.savefig("bandstructure.png")
+    # plt.savefig("bandstructure.png", dpi=300)
     plt.show()
     return ax, dosax, emax, emin, fig
+
+
+@app.cell
+def __():
+    return
 
 
 @app.cell
