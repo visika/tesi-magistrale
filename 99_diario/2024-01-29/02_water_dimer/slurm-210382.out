@@ -1,0 +1,4 @@
+Using Python 3.11.7
+/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/optimize/bfgs.py:54: UserWarning: You are using a *very* large value for the maximum step size: 1000.0 Å
+  warnings.warn('You are using a *very* large value for '
+FINISHED!!!
