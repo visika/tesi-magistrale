@@ -67,7 +67,7 @@ def __(df):
     plt.grid()
     plt.ylim(bottom=-1e4, top=1e4)
     # Title
-    plt.title("Water dimer: frequencies vs displacement")
+    plt.title("LAMMPS, water dimer: frequencies vs displacement")
     # Labels
     # delta in angstrom with latex
     plt.xlabel("$\delta$ ($\AA$)")
