@@ -1,0 +1,6 @@
+Using Python 3.11.7
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  ERROR: LAMMPS cutoff via pair_coeff keyword is smaller than maximum symmetry function cutoff.
+
+/var/spool/slurm/job213109/slurm_script: line 36: 205061 Aborted                 python script.py
+FINISHED!!!

@@ -1,0 +1,15 @@
+#+title: Tweaking cutoff for LAMMPS
+* Prova con diversi cutoff
+Per prima cosa provo in [[file:script.py]] se la variazione del cutoff modfica la stabilità delle geometrie finali.
+Trovo che grossomodo il risultato non cambia per il dimero;
+immagino che il motivo sia nel fatto che l'estensione della geometria è sempre al di sotto del cutoff.
+Da notare che non si può impostare un cutoff minore di 7.0, altrimenti il programma dà errore.
+* Prova con il cutoff di default
+Il risultato di [[file:script_default_cutoff.py]] è lo stesso dei precedenti.
+* Noto differenze rispetto ai risultati dei giorni scorsi
+Trovo che esiste una differenza tra l'usare le geometrie in memoria e il leggere
+delle geometrie scritte in un file precedentemente. Leggendo da un file potrebbe
+aversi una perdita di precisione, quindi è sempre buona norma rilassare le
+geometrie che si importano.
+
+Ho studiato questo fenomeno in [[file:vib_standard_parallel=2_reread/]].
