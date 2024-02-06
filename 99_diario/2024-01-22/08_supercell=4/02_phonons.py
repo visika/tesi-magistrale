@@ -20,7 +20,7 @@ LAMMPScalc = LAMMPSlib(
     keep_alive=True,
 )
 
-atoms = read("relax-positions/final.pdb", format="proteindatabank")
+atoms = read("relax-positions/final.pdb")
 atoms.calc = LAMMPScalc
 
 # Supercell number
