@@ -21,7 +21,7 @@ LAMMPScalc = LAMMPSlib(
     keep_alive=True,
 )
 
-atoms = read("not_optimized.xyz")
+atoms = read("init.xyz")
 atoms.center(vacuum=3.0)
 atoms.calc = LAMMPScalc
 
