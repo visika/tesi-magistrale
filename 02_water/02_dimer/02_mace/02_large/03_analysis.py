@@ -69,7 +69,7 @@ def __(df):
     plt.grid()
     plt.ylim(bottom=-1e4, top=1e4)
     # Title
-    plt.title("MACE-MP-0 medium, water dimer: frequencies vs displacement")
+    plt.title("MACE-MP-0 large, water dimer: frequencies vs displacement")
     # Labels
     # delta in angstrom with latex
     plt.xlabel("$\delta$ ($\AA$)")

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=MACE
-#SBATCH --output=01_optimize.out
+#SBATCH --output=02_vib.out
 #SBATCH --partition=gpus
 #SBATCH --ntasks=1
 #SBATCH --mem=4G
@@ -48,7 +48,7 @@ unset __conda_setup
 conda activate mace_env
 
 echo Using "$(python -V)"
-python 01_optimize.py
+python 02_vib.py
 
 echo "FINISHED!!!"
 rm $ALERT

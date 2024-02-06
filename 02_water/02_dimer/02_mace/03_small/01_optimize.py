@@ -8,7 +8,7 @@ from ase.optimize import BFGS
 # desideriamo.
 atoms = read("init.xyz")
 atoms.center(vacuum=3.0)
-calc = mace_mp(model="medium", dispersion=False, default_dtype="float64", device="cuda")
+calc = mace_mp(model="small", dispersion=False, default_dtype="float64", device="cuda")
 atoms.calc = calc
 
 # Percorso dove conservare le informazioni sul rilassamento.
