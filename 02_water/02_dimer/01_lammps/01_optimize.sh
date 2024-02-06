@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=vib
-#SBATCH --nodes=1             # Number of nodes
-#SBATCH --tasks-per-node=1    # Number of MPI ranks per node
-#SBATCH --cpus-per-task=1
-#SBATCH --partition=sequential
+#SBATCH --job-name=dimer
+#SBATCH --nodes=1            # Number of nodes
+#SBATCH --ntasks-per-node=1  # Number of MPI ranks per node
+#SBATCH --cpus-per-task=2    # = 1 in sequential partition
+#SBATCH --partition=parallel
 
 ulimit -s unlimited
 
-export OMP_NUM_THREADS=2
-export MKL_NUM_THREADS=1
+# export OMP_NUM_THREADS=1 # Corrisponde a --cpus-per-task sopra
+# export MKL_NUM_THREADS=1
 
 # source /nfsexports/SOFTWARE/intel/oneapi/setvars.sh
 # export MPI="mpirun"
