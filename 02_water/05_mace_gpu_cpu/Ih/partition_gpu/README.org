@@ -1,0 +1,2 @@
+#+title: CPU o GPU?
+Ho l'impressione che le energie potenziali ottenute tramite MACE siano diverse a seconda che si usi la CPU o la GPU. In questa cartella indago questa ipotesi.
