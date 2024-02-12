@@ -1,0 +1,4 @@
+#+title: Strutture cristalline
+In questa sezione devo esplorare le proprietà delle diverse strutture
+cristalline, in particolare l'energia del reticolo, definita come la differenza
+tra l'energia per molecola nel reticolo e l'energia della molecola isolata.
