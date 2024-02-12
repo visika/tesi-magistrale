@@ -30,3 +30,9 @@ traj = Trajectory("optimization.traj", "w", atoms)
 opt.attach(traj)
 opt.run(fmax=0.0001)
 write("final.pdb", atoms)
+
+potentialenergy = atoms.get_potential_energy()
+
+f = open("e_gas.txt", "w")
+f.write(str(potentialenergy))
+f.close()
