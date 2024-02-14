@@ -1,0 +1,28 @@
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.7
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/02_water/03_crystal_structures_n2p2/XI/crystal_energy.py", line 34, in <module>
+    geo.calc = calc
+               ^^^^
+NameError: name 'calc' is not defined
+FINISHED!!!
