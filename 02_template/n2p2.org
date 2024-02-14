@@ -1,0 +1,68 @@
+#+title: n2p2
+* n2p2
+#+begin_src python
+from ase.calculators.lammpslib import LAMMPSlib
+
+# Inizializza LAMMPS
+atom_types = {"O": 2, "H": 1}
+cmd_nn = [
+    "#!/bin/bash",
+    'variable runnerDir       string "/ibiscostorage/VirtualMatterLab/train_008"',
+    "variable runnerCutoff    equal  8.466835984",
+    "pair_style hdnnp ${runnerCutoff} dir ${runnerDir} showew no showewsum 1 resetew yes maxew 200000 cflength 1.889726 cfenergy 0.036749",
+    "pair_coeff * * H O",
+]
+LAMMPScalc = LAMMPSlib(
+    atom_types=atom_types,
+    lmpcmds=cmd_nn,
+    tmp_dir="./",
+    log_file="log.lammps",
+    keep_alive=True,
+)
+
+atoms = Atoms("HOH", positions=[(0, 0, 0), (0, 1, 0), (0, 0, 1)])
+atoms.center(vacuum=3.0)
+atoms.calc = LAMMPScalc
+#+end_src
+
+#+begin_src shell
+#!/usr/bin/env bash
+#SBATCH --job-name=dimer
+#SBATCH --nodes=1            # Number of nodes
+#SBATCH --ntasks-per-node=1  # Number of MPI ranks per node
+#SBATCH --cpus-per-task=4    # = 1 in sequential partition
+#SBATCH --partition=parallel
+
+ulimit -s unlimited
+
+# export OMP_NUM_THREADS=1 # Corrisponde a --cpus-per-task sopra
+# export MKL_NUM_THREADS=1
+
+# source /nfsexports/SOFTWARE/intel/oneapi/setvars.sh
+# export MPI="mpirun"
+# echo "     using $(which $MPI)"
+
+# Prendi il percorso di VASP
+# export passa l'assegnazione anche ai processi figli
+export VASP="/lustre/home/tccourse/vasp46-da/vasp"
+export VASPGAMMA="/lustre/home/tccourse/vasp46-da.gamma/vasp"
+# Prendi il percorso di PHON
+export PHON="/lustre/home/tccourse/Phon/src/phon"
+export RUNPHON="$SLURM_SUBMIT_DIR/runphon"
+
+# Passa alla cartella di esecuzione dello script
+cd "$SLURM_SUBMIT_DIR" || exit
+
+### Da qui inizia lo script con i comandi specifici. ###
+ALERT=000-THIS_IS_RUNNING
+touch $ALERT
+
+source /lustre/home/mmollo/setupconda.sh
+conda activate mmollo-lammps-env
+
+echo Using "$(python -V)"
+python script.py
+
+echo "FINISHED!!!"
+rm $ALERT
+#+end_src
