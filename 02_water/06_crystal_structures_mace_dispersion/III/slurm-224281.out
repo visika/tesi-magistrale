@@ -1,0 +1,47 @@
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.7
+/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/overrides.py:110: UserWarning: 'has_cuda' is deprecated, please use 'torch.backends.cuda.is_built()'
+  torch.has_cuda,
+/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/overrides.py:111: UserWarning: 'has_cudnn' is deprecated, please use 'torch.backends.cudnn.is_available()'
+  torch.has_cudnn,
+/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/overrides.py:117: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  torch.has_mps,
+/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/overrides.py:118: UserWarning: 'has_mkldnn' is deprecated, please use 'torch.backends.mkldnn.is_available()'
+  torch.has_mkldnn,
+Using Materials Project MACE for MACECalculator with /lustre/home/mmollo/.cache/mace/5yyxdm76
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+Traceback (most recent call last):
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/mace/calculators/foundations_models.py", line 111, in mace_mp
+    from torch_dftd.torch_dftd3_calculator import TorchDFTD3Calculator
+ModuleNotFoundError: No module named 'torch_dftd'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/02_water/06_crystal_structures_mace_dispersion/III/crystal_energy.py", line 10, in <module>
+    calc = mace_mp(model="medium", dispersion=True, default_dtype="float64", device="cpu")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/mace/calculators/foundations_models.py", line 113, in mace_mp
+    raise RuntimeError(
+RuntimeError: Please install torch-dftd to use dispersion corrections (see https://github.com/pfnet-research/torch-dftd)
+FINISHED!!!
