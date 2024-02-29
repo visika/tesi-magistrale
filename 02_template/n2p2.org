@@ -32,6 +32,7 @@ atoms.calc = LAMMPScalc
 #SBATCH --ntasks-per-node=1  # Number of MPI ranks per node
 #SBATCH --cpus-per-task=4    # = 1 in sequential partition
 #SBATCH --partition=parallel
+#SBATCH --propagate=NONE
 
 ulimit -s unlimited
 

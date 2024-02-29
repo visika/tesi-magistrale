@@ -12,6 +12,7 @@ calc = mace_mp(model=model, dispersion=False, default_dtype="float64", device="c
 #SBATCH --ntasks=1
 #SBATCH --mem=4G
 #SBATCH --gpus=1
+#SBATCH --propagate=NONE
 
 ulimit -s unlimited
 
