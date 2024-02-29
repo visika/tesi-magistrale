@@ -1,0 +1,35 @@
+Using Python 3.11.7
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/02_water/02_dimer/11.1_binding_energy_n2p2/binding_energy.py", line 49, in <module>
+    opt.run(steps=100)
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/optimize/optimize.py", line 269, in run
+    return Dynamics.run(self)
+           ^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/optimize/optimize.py", line 156, in run
+    for converged in Dynamics.irun(self):
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/optimize/optimize.py", line 143, in irun
+    self.log()
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/optimize/optimize.py", line 283, in log
+    forces = self.atoms.get_forces()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/atoms.py", line 788, in get_forces
+    forces = self._calc.get_forces(self)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/calculators/abc.py", line 23, in get_forces
+    return self.get_property('forces', atoms)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/calculators/calculator.py", line 737, in get_property
+    self.calculate(atoms, [name], system_changes)
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/calculators/lammpslib.py", line 356, in calculate
+    self.propagate(atoms, properties, system_changes, 0)
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/calculators/lammpslib.py", line 404, in propagate
+    self.set_cell(atoms, change=True)
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/ase/calculators/lammpslib.py", line 328, in set_cell
+    self.lmp.command(cell_cmd)
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/lammps/core.py", line 617, in command
+    with ExceptionCheck(self):
+  File "/lustre/home/mmollo/.conda/envs/mmollo-lammps-env/lib/python3.11/site-packages/lammps/core.py", line 49, in __exit__
+    raise self.lmp._lammps_exception
+Exception: ERROR on proc 0: Box bounds are invalid or missing (src/domain.cpp:209)
+Last command: change_box al
+FINISHED!!!
