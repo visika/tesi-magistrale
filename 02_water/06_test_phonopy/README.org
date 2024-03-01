@@ -1,0 +1,8 @@
+#+title: README
+* Fononi
+Installare =phonopy= e =seekpath=.
+
+Esempio di esecuzione:
+#+begin_src shell
+python3 ./phonons.py --model medium --system structs/Si.cif  --device cpu --grid 20 20 20
+#+end_src
