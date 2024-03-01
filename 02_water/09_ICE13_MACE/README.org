@@ -1,0 +1,2 @@
+#+title: README
+A differenza delle run precedenti, qui si studia il sistema senza ottimizzarlo, cioè usando esattamente i file POSCAR forniti dall'articolo per il calcolo delle energie.
