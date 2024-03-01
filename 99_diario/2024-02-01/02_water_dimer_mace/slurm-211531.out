@@ -1,0 +1,6 @@
+Using Python 3.11.7
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/99_diario/2024-02-01/02_water_dimer_mace/01_optimize.py", line 4, in <module>
+    from mace.calculators import mace_mp
+ModuleNotFoundError: No module named 'mace'
+FINISHED!!!

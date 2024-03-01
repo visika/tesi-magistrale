@@ -1,0 +1,6 @@
+#+title: Ottimizzazione del dimero
+
+L'obiettivo del presente lavoro è ottimizzare il dimero,
+verificando se i valori finali corrispondono con quelli descritti in letteratura.
+
+[[file:01_optimize.py]]
