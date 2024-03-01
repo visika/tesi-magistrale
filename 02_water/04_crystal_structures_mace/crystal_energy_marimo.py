@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.1.88"
+__generated_with = "0.2.5"
 app = marimo.App()
 
 
@@ -9,7 +9,9 @@ def __():
     # Import listdir
     from os import listdir
     from os.path import isfile, join, isdir
-    return isdir, isfile, join, listdir
+
+    import matplotlib.pyplot as plt
+    return isdir, isfile, join, listdir, plt
 
 
 @app.cell
@@ -28,7 +30,6 @@ def __(isdir, join, listdir):
     folders = [f for f in listdir(data_path) if isdir(join(data_path, f))]
     # List folders with roman numerals
     folders_roman = [f for f in folders if f[0].isupper()]
-    folders_roman
     return data_path, folders, folders_roman
 
 
@@ -47,8 +48,6 @@ def __(data_path, folders_roman, join):
             value = float(file.read())
             # Append the value to the table
             table.append([folder, value])
-    # Print the table
-    table
     return file, file_path, folder, table, value
 
 
@@ -57,7 +56,6 @@ def __(table):
     # Render the table as a pandas dataframe
     import pandas as pd
     df = pd.DataFrame(table, columns=['folder', 'e_crys'])
-    df
     return df, pd
 
 
@@ -84,7 +82,6 @@ def __(e_gas_large, isdir, join, listdir, pd):
             table_large.append([folder_large, value_large])
     df_large = pd.DataFrame(table_large, columns=['folder', 'e_crys'])
     df_large["e_lattice_large"] = df_large["e_crys"] - e_gas_large
-    df_large
     return (
         data_path_large,
         df_large,
@@ -120,7 +117,6 @@ def __(e_gas_n2p2, isdir, join, listdir, pd):
             table_n2p2.append([folder_n2p2, value_n2p2])
     df_n2p2 = pd.DataFrame(table_n2p2, columns=['folder', 'e_crys'])
     df_n2p2["e_lattice_n2p2"] = df_n2p2["e_crys"] - e_gas_n2p2
-    df_n2p2
     return (
         data_path_n2p2,
         df_n2p2,
@@ -136,58 +132,19 @@ def __(e_gas_n2p2, isdir, join, listdir, pd):
 
 @app.cell
 def __(df):
-    # Plot the values
-    import matplotlib.pyplot as plt
-    plt.plot(df['e_crys'])
-    # Use the folder name
-    plt.xticks(range(len(df['folder'])), df['folder'], rotation=45)
-    plt.show()
-    return plt,
-
-
-@app.cell
-def __(df):
     # Calculate the difference of the values in the column e_crys with respect to the value associated to the folder Ih
     # Define the reference value
     ref_value = df[df['folder'] == 'Ih']['e_crys'].values[0]
     # Calculate the difference
     df['diff'] = df['e_crys'] - ref_value
-    df
     return ref_value,
-
-
-@app.cell
-def __(df, plt):
-    # Plot the differences
-    plt.plot(df['diff'])
-    # Use the folder name
-    plt.xticks(range(len(df['folder'])), df['folder'], rotation=45)
-    plt.show()
-    return
 
 
 @app.cell
 def __(df, e_gas):
     # Calculate the lattice energy as the difference between e_crys and e_gas
     df['e_lattice'] = df['e_crys'] - e_gas
-    df
     return
-
-
-@app.cell
-def __(df):
-    import marimo as mo
-    import altair as alt
-
-    mo.vstack(
-        [
-            mo.ui.table(df),
-            mo.ui.altair_chart(
-                alt.Chart(df).mark_point().encode(x="folder", y="e_lattice")
-            ),
-        ],
-    )
-    return alt, mo
 
 
 @app.cell
@@ -210,7 +167,6 @@ def __(pd):
         ["XVII", -598],
     ]
     df_dmc = pd.DataFrame(dmc_table, columns=["folder", "e_lattice"])
-    df_dmc
     return df_dmc, dmc_table
 
 
@@ -259,7 +215,27 @@ def __(pd):
 
 
 @app.cell
-def __(df, df_b3lypd4, df_dmc, df_large, df_lda, df_n2p2, pd):
+def __():
+    # Calcola il fattore di conversione tra kJ/mol ed eV
+    # DMC in tabella II per il lattice energy di Ih: -59.45(7) kJ/mol
+    # Expected: 1 meV/particle = 0.0965 kJ/mol
+    dmc_kj = -59.45
+    dmc_ev = -616
+    conversion_factor = dmc_kj / dmc_ev
+    return conversion_factor, dmc_ev, dmc_kj
+
+
+@app.cell
+def __(
+    conversion_factor,
+    df,
+    df_b3lypd4,
+    df_dmc,
+    df_large,
+    df_lda,
+    df_n2p2,
+    pd,
+):
     merged = pd.merge(df, df_dmc, on="folder", suffixes=("_medium", "_dmc"))
     merged = pd.merge(merged, df_b3lypd4, on="folder")
     merged = pd.merge(
@@ -270,96 +246,18 @@ def __(df, df_b3lypd4, df_dmc, df_large, df_lda, df_n2p2, pd):
     merged["e_lattice_medium"] = merged["e_lattice_medium"] * 1e3
     merged["e_lattice_large"] = merged["e_lattice_large"] * 1e3
     merged["e_lattice_n2p2"] = merged["e_lattice_n2p2"] * 1e3
-    merged
-    return merged,
 
-
-@app.cell
-def __(plt, sorted):
-    plt.plot(
-        sorted["e_lattice_medium"], label="MACE medium", marker="s", linestyle="-"
-    )
-    plt.plot(
-        sorted["e_lattice_large"], label="MACE large", marker="^", linestyle="-"
-    )
-    plt.plot(sorted["e_lattice_dmc"], label="DMC", marker="*", linestyle="-")
-    plt.plot(
-        sorted["e_lattice_b3lypd4"], label="B3LYP-D4", marker="o", linestyle="-"
-    )
-    plt.plot(sorted["e_lattice_n2p2"], label="n2p2", marker="x", linestyle="-")
-    plt.plot(sorted["e_lattice_lda"], label="LDA", marker="v", linestyle="-")
-    plt.xlabel("Crystal structure")
-    plt.ylabel("Absolute lattice energy (meV/molecule)")
-    plt.xticks(range(len(sorted["folder"])), sorted["folder"])
-    plt.legend()
-    plt.grid()
-    # Make all linewidths smaller
-    for line in plt.gca().lines:
-        line.set_linewidth(0.5)
-    # Make all symbols smaller
-    for line in plt.gca().lines:
-        line.set_markersize(5)
-    plt.title("Absolute lattice energy")
-    plt.show()
-    return line,
-
-
-@app.cell
-def __(merged):
-    # Compute the mean absolute error
-    mae_medium = (
-        (merged["e_lattice_medium"] - merged["e_lattice_dmc"]).abs().mean()
-    )
-    mae_large = (merged["e_lattice_large"] - merged["e_lattice_dmc"]).abs().mean()
-    mae_b3lypd4 = (
-        (merged["e_lattice_b3lypd4"] - merged["e_lattice_dmc"]).abs().mean()
-    )
-    mae_n2p2 = (merged["e_lattice_n2p2"] - merged["e_lattice_dmc"]).abs().mean()
-    mae_medium, mae_large, mae_b3lypd4, mae_n2p2
-    return mae_b3lypd4, mae_large, mae_medium, mae_n2p2
-
-
-@app.cell
-def __(mae_b3lypd4, mae_large, mae_medium, mae_n2p2):
-    def get_variable_name(variable):
-        variable_name = [
-            name for name, value in globals().items() if value is variable
-        ][0]
-        return variable_name
-
-
-    for e in [mae_medium, mae_large, mae_b3lypd4, mae_n2p2]:
-        print(f"{get_variable_name(e)}: {e}")
-    return e, get_variable_name
-
-
-@app.cell
-def __():
-    # Calcola il fattore di conversione tra kJ/mol ed eV
-    # DMC in tabella II per il lattice energy di Ih: -59.45(7) kJ/mol
-    dmc_kj = -59.45
-    dmc_ev = -616
-    conversion_factor = dmc_kj / dmc_ev
-    conversion_factor
-    return conversion_factor, dmc_ev, dmc_kj
-
-
-@app.cell
-def __(conversion_factor, merged):
     # Calcola il lattice energy in kJ/mol
     merged["e_lattice_dmc_kj"] = merged["e_lattice_dmc"] * conversion_factor
-    merged
-    return
 
-
-@app.cell
-def __(merged):
     # Select the row with Ih
     dmc_Ih = merged[merged["folder"] == "Ih"]["e_lattice_dmc_kj"].values[0]
     # Compute the relative lattice energy
     merged["e_lattice_dmc_kj_rel"] = merged["e_lattice_dmc_kj"] - dmc_Ih
-    merged
-    return dmc_Ih,
+
+    # Calcola la lattice energy di B3LYP-D4 in kJ/mol
+    merged["e_lattice_b3lypd4_kj"] = merged["e_lattice_b3lypd4"] * conversion_factor
+    return dmc_Ih, merged
 
 
 @app.cell
@@ -403,30 +301,200 @@ def __(conversion_factor, merged):
     n2p2_Ih = sorted[sorted["folder"] == "Ih"]["e_lattice_n2p2_kj"].values[0]
     # Compute the relative lattice energy for n2p2
     sorted["e_lattice_n2p2_kj_rel"] = sorted["e_lattice_n2p2_kj"] - n2p2_Ih
-    return large_Ih, medium_Ih, n2p2_Ih, sorted, sorting_order
+
+    # Compute e_lattice_b3lypd4_kj_rel
+    b3lypd4_Ih = sorted[sorted["folder"] == "Ih"]["e_lattice_b3lypd4_kj"].values[0]
+    sorted["e_lattice_b3lypd4_kj_rel"] = sorted["e_lattice_b3lypd4_kj"] - b3lypd4_Ih
+
+    # Convert LDAs to kJ/mol
+    sorted["e_lattice_lda_kj"] = sorted["e_lattice_lda"] * conversion_factor
+    # Select the row with Ih
+    lda_Ih = sorted[sorted["folder"] == "Ih"]["e_lattice_lda_kj"].values[0]
+    # Compute the relative lattice energy for LDA
+    sorted["e_lattice_lda_kj_rel"] = sorted["e_lattice_lda_kj"] - lda_Ih
+    return (
+        b3lypd4_Ih,
+        large_Ih,
+        lda_Ih,
+        medium_Ih,
+        n2p2_Ih,
+        sorted,
+        sorting_order,
+    )
 
 
-@app.cell
+@app.cell(hide_code=True)
+def __(plt, sorted):
+    plt.plot(
+        sorted["e_lattice_dmc"],
+        label="DMC",
+        marker="*",
+        linestyle="-",
+        markersize=10,
+        linewidth=0.7,
+        color="#FFDE00",
+    )
+    markersize = 5
+    linewidth = 0.5
+    plt.plot(
+        sorted["e_lattice_b3lypd4"],
+        label="B3LYP-D4",
+        marker="o",
+        linestyle="-",
+        markersize=markersize,
+        linewidth=linewidth,
+    )
+    plt.plot(
+        sorted["e_lattice_medium"],
+        label="MACE medium",
+        marker="s",
+        linestyle="-",
+        markersize=markersize,
+        linewidth=linewidth,
+    )
+    plt.plot(
+        sorted["e_lattice_large"],
+        label="MACE large",
+        marker="^",
+        linestyle="-",
+        markersize=markersize,
+        linewidth=linewidth,
+    )
+    plt.plot(
+        sorted["e_lattice_n2p2"],
+        label="n2p2",
+        marker="x",
+        linestyle="-",
+        markersize=markersize,
+        linewidth=linewidth,
+    )
+    plt.plot(
+        sorted["e_lattice_lda"],
+        label="LDA",
+        marker="v",
+        linestyle="-",
+        markersize=markersize,
+        linewidth=linewidth,
+    )
+    plt.xlabel("Crystal structure")
+    plt.ylabel("Absolute lattice energy (meV/molecule)")
+    plt.xticks(range(len(sorted["folder"])), sorted["folder"])
+    plt.legend()
+    plt.grid()
+    plt.title("Absolute lattice energy")
+    return linewidth, markersize
+
+
+@app.cell(hide_code=True)
+def __(sorted):
+    # Compute the mean absolute error in kJ/mol
+    mae_medium_kj = (
+        (sorted["e_lattice_medium_kj"] - sorted["e_lattice_dmc_kj"]).abs().mean()
+    )
+    mae_large_kj = (
+        (sorted["e_lattice_large_kj"] - sorted["e_lattice_dmc_kj"]).abs().mean()
+    )
+    mae_n2p2_kj = (
+        (sorted["e_lattice_n2p2_kj"] - sorted["e_lattice_dmc_kj"]).abs().mean()
+    )
+    mae_b3lypd4_kj = (
+        (sorted["e_lattice_b3lypd4_kj"] - sorted["e_lattice_dmc_kj"]).abs().mean()
+    )
+
+    import marimo as mo
+
+    mo.md(
+        f"""
+        ## MAE for the absolute lattice energy
+        MACE medium: {mae_medium_kj.round(2)} kJ/mol  
+        MACE large: {mae_large_kj.round(2)} kJ/mol  
+        n2p2: {mae_n2p2_kj.round(2)} kJ/mol  
+        B3LYP-D4: {mae_b3lypd4_kj.round(2)} kJ/mol
+    """
+    )
+    return mae_b3lypd4_kj, mae_large_kj, mae_medium_kj, mae_n2p2_kj, mo
+
+
+@app.cell(hide_code=True)
+def __(merged):
+    # Compute the mean absolute error in eV/molecule
+    mae_medium = (
+        (merged["e_lattice_medium"] - merged["e_lattice_dmc"]).abs().mean()
+    )
+    mae_large = (merged["e_lattice_large"] - merged["e_lattice_dmc"]).abs().mean()
+    mae_b3lypd4 = (
+        (merged["e_lattice_b3lypd4"] - merged["e_lattice_dmc"]).abs().mean()
+    )
+    mae_n2p2 = (merged["e_lattice_n2p2"] - merged["e_lattice_dmc"]).abs().mean()
+    # mae_medium, mae_large, mae_b3lypd4, mae_n2p2
+    return mae_b3lypd4, mae_large, mae_medium, mae_n2p2
+
+
+@app.cell(hide_code=True)
+def __(mae_b3lypd4, mae_large, mae_medium, mae_n2p2):
+    def get_variable_name(variable):
+        variable_name = [
+            name for name, value in globals().items() if value is variable
+        ][0]
+        return variable_name
+
+
+    for e in [mae_medium, mae_large, mae_b3lypd4, mae_n2p2]:
+        print(f"{get_variable_name(e)}: {e}")
+    return e, get_variable_name
+
+
+@app.cell(hide_code=True)
 def __(plt, sorted):
     # Plot the relative lattice energy
-    plt.plot(sorted["e_lattice_dmc_kj_rel"], label="DMC", marker="o", linestyle="")
+    plt.plot(
+        sorted["e_lattice_dmc_kj_rel"],
+        label="DMC",
+        marker="*",
+        linestyle="-",
+        markersize=10,
+        linewidth=0.7,
+        color="#FFDE00",
+    )
+    plt.plot(
+        sorted["e_lattice_b3lypd4_kj_rel"],
+        label="B3LYP-D4",
+        marker="o",
+        linestyle="-",
+        markersize=5,
+        linewidth=0.5,
+    )
     plt.plot(
         sorted["e_lattice_medium_kj_rel"],
         label="MACE medium",
         marker="s",
-        linestyle="",
+        linestyle="-",
+        markersize=5,
+        linewidth=0.5,
     )
     plt.plot(
         sorted["e_lattice_large_kj_rel"],
         label="MACE large",
         marker="^",
-        linestyle="",
+        linestyle="-",
+        markersize=5,
+        linewidth=0.5,
     )
     plt.plot(
         sorted["e_lattice_n2p2_kj_rel"],
         label="n2p2",
         marker="x",
-        linestyle="",
+        linestyle="-",
+        markersize=5,
+        linewidth=0.5,
+    )
+    plt.plot(
+        sorted["e_lattice_lda_kj_rel"],
+        label="LDA",
+        marker="v",
+        linestyle="-",
+        markersize=5,
+        linewidth=0.5,
     )
     plt.xlabel("Crystal structure")
     plt.ylabel("Relative lattice energy (kJ/mol)")
@@ -434,8 +502,47 @@ def __(plt, sorted):
     plt.legend()
     plt.grid()
     plt.title("Relative lattice energy")
-    plt.show()
     return
+
+
+@app.cell(hide_code=True)
+def __(mo, sorted):
+    # Compute the MAE for the relative lattice energy
+    mae_medium_kj_rel = (
+        (sorted["e_lattice_medium_kj_rel"] - sorted["e_lattice_dmc_kj_rel"])
+        .abs()
+        .mean()
+    )
+    mae_large_kj_rel = (
+        (sorted["e_lattice_large_kj_rel"] - sorted["e_lattice_dmc_kj_rel"])
+        .abs()
+        .mean()
+    )
+    mae_n2p2_kj_rel = (
+        (sorted["e_lattice_n2p2_kj_rel"] - sorted["e_lattice_dmc_kj_rel"])
+        .abs()
+        .mean()
+    )
+    mae_b3lypd4_kj_rel = (
+        (sorted["e_lattice_b3lypd4_kj_rel"] - sorted["e_lattice_dmc_kj_rel"])
+        .abs()
+        .mean()
+    )
+    mo.md(
+        f"""
+        ## MAE for the relative lattice energy
+        MACE medium: {mae_medium_kj_rel.round(2)} kJ/mol  
+        MACE large: {mae_large_kj_rel.round(2)} kJ/mol  
+        n2p2: {mae_n2p2_kj_rel.round(2)} kJ/mol  
+        B3LYP-D4: {mae_b3lypd4_kj_rel.round(2)} kJ/mol
+    """
+    )
+    return (
+        mae_b3lypd4_kj_rel,
+        mae_large_kj_rel,
+        mae_medium_kj_rel,
+        mae_n2p2_kj_rel,
+    )
 
 
 if __name__ == "__main__":

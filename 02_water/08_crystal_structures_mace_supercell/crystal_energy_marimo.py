@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.2.8"
-app = marimo.App()
+__generated_with = "0.2.13"
+app = marimo.App(width="full")
 
 
 @app.cell
@@ -27,7 +27,7 @@ def __(merged):
     return sorted, sorting_order
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(plt, sorted):
     plt.figure(figsize=(10, 10))
     plt.plot(sorted["e_lattice_dmc_kj"], label="DMC", marker="*", linestyle="-")
@@ -376,7 +376,7 @@ def __(pd):
     return df_lda, lda_table
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(pd):
     pbe_d3_kj_table = [
         ["Ih", -70.80],
