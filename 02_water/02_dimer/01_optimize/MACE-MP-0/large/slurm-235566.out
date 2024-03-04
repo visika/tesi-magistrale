@@ -1,0 +1,38 @@
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.7
+model: large
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/02_water/02_dimer/01_optimize/MACE-MP-0/large/optimize.py", line 15, in <module>
+    atoms = read("../init.xyz")
+            ^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/ase/io/formats.py", line 729, in read
+    format = format or filetype(filename, read=isinstance(filename, str))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/ase/io/formats.py", line 920, in filetype
+    fd = open_with_compression(filename, 'rb')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/ase/io/formats.py", line 551, in open_with_compression
+    return open(filename, mode)
+           ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../init.xyz'
+FINISHED!!!
