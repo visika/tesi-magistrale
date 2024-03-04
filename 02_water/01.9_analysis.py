@@ -13,15 +13,13 @@ def __():
     return glob, mo, pd, plt
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(mo):
     mo.md(
         """
-        # Analisi dei risultati
+        # Analisi dei risultati sulla molecola d'acqua
 
-        Ho avviato run con e senza dispersione, per i tre modelli small, medium e large, e per valori diversi della fmax di convergenza. Dopodiché ho studiato le vibrazioni con diversi displacement per ciascun caso.
-
-        Iniziamo analizzando un caso campione rispetto al displacement per il calcolo delle vibrazioni.
+        Ho avviato run di ottimizzazione della molecola di \(\mathrm{H_2O}\) con e senza dispersione, per i tre modelli small, medium e large di MACE-MP-0, e per valori diversi della `fmax` di convergenza dell'ottimizzatore. Dopodiché ho studiato le vibrazioni con diversi displacement per ciascun caso.
         """
     )
     return
@@ -89,7 +87,7 @@ def __(mo):
     return dispersion, fmax, fmaxs, model, models
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(dispersion, fmax, get_summaries, model, pd, read_frequencies):
     filenames = get_summaries(model.value, fmax.value, dispersion.value)
 
@@ -102,13 +100,21 @@ def __(dispersion, fmax, get_summaries, model, pd, read_frequencies):
 
 
 @app.cell
-def __(df, plt):
+def __(df, dispersion, fmax, model, plt):
     groups = df.groupby("#")
     for _name, _group in groups:
         plt.plot(_group["delta"], _group["cm^-1"], marker="x", label=_name)
     plt.xscale("log")
     plt.yscale("symlog", linthresh=1e-1)
+    plt.ylim(-1e4, 1e4)
     plt.legend(ncol=2)
+    plt.title(
+        f"MACE-MP-0 {model.value}"
+        f"{' D' if dispersion.value else ''}"
+        f", fmax={fmax.value}"
+    )
+    plt.xlabel("Displacement (Å)")
+    plt.ylabel("Frequency (cm^-1)")
     return groups,
 
 
