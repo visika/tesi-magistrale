@@ -1,0 +1,5 @@
+#+title: README
+Per il dimero sono necessarie le seguenti cose:
+* Ottimizzazione della geometria e studio della stabilità tramite studio delle proprietà vibrazionali
+Si trova nella cartella [[file:01_optimize/]]. Al suo interno inizio a provare con i potenziali MACE-MP-0.
+* Studio della binding energy
