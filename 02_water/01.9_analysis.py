@@ -107,7 +107,7 @@ def __(df, plt):
     for _name, _group in groups:
         plt.plot(_group["delta"], _group["cm^-1"], marker="x", label=_name)
     plt.xscale("log")
-    plt.yscale("symlog")
+    plt.yscale("symlog", linthresh=1e-1)
     plt.legend(ncol=2)
     return groups,
 
