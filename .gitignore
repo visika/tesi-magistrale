@@ -13,3 +13,5 @@ htmlcov
 
 # Dati di sistema di gpaw
 gpaw-datasets
+
+.directory
