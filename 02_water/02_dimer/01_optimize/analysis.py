@@ -21,7 +21,7 @@ def __(mo):
 
 @app.cell
 def __(mo):
-    models = ["small", "medium", "large"]
+    models = ["small", "medium", "large", "n2p2"]
     model = mo.ui.dropdown(options=models, value="small", label="Modello")
     model
     return model, models
@@ -44,11 +44,18 @@ def __():
 @app.cell
 def __(glob):
     def get_filenames(model):
-        root = "MACE-MP-0"
-        filenames = glob.glob(f"{root}/{model}/*_summary.txt")
-        return sorted(
-            filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
-        )
+        if model in ["small", "medium", "large"]:
+            root = "MACE-MP-0"
+            filenames = glob.glob(f"{root}/{model}/*_summary.txt")
+            return sorted(
+                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
+            )
+        elif model in ["n2p2"]:
+            root = "n2p2"
+            filenames = glob.glob(f"{root}/*_summary.txt")
+            return sorted(
+                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
+            )
     return get_filenames,
 
 
@@ -104,7 +111,10 @@ def __(df, model, plt):
     plt.yscale("symlog", linthresh=1e-1)
     plt.legend(ncol=2)
     plt.ylim(-1e4, 1e4)
-    plt.title(f"MACE-MP-0 {model.value} D")
+    if model.value in ["small", "medium", "large"]:
+        plt.title(f"MACE-MP-0 {model.value} D")
+    elif model.value == "n2p2":
+        plt.title(f"n2p2")
     plt.xlabel("Displacement (Å)")
     plt.ylabel("Frequency (cm^-1)")
     return groups,
