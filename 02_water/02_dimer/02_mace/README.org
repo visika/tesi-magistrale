@@ -1,8 +1,0 @@
-#+title: Ottimizzazione del dimero con MACE
-
-L'obiettivo del presente lavoro è ottimizzare il dimero,
-verificando se i valori finali corrispondono con quelli descritti in letteratura.
-Si esegue la simulazione precedente, con la differenza che si usa MACE al posto di LAMMPS.
-Si confrontano i risultati tra loro e con la letteratura.
-
-Nel file [[file:01_optimize.py]] si ottimizza la geometria, partendo da una vicina a quella desiderata.
