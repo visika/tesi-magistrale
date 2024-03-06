@@ -34,13 +34,13 @@ def __():
 def __():
     # Leggi il valore dell'energia della molecola nello stato gassoso
     _f = open(
-        "../01.8_molecule_converge_fmax_parallel_dispersion/medium/1e-8/e_gas.txt",
+        "../01_molecule/01.8_molecule_converge_fmax_parallel_dispersion/medium/1e-8/e_gas.txt",
         "r",
     )
     e_gas_medium_dispersion_ev = float(_f.readlines()[0])
 
     _f = open(
-        "../01.8_molecule_converge_fmax_parallel_dispersion/large/1e-8/e_gas.txt",
+        "../01_molecule/01.8_molecule_converge_fmax_parallel_dispersion/large/1e-8/e_gas.txt",
         "r",
     )
     e_gas_large_dispersion_ev = float(_f.readlines()[0])
@@ -56,16 +56,12 @@ def __():
 
 @app.cell
 def __(e_gas_medium_dispersion_ev, evp_to_kjmol, pl):
-    df_medium_d = pl.read_csv("crystal_energies.csv")
+    df_medium_d = pl.read_csv("ICE13_MACE_medium/crystal_energies.csv")
     df_medium_d = df_medium_d.with_columns(
-        (pl.col("e_crys") - e_gas_medium_dispersion_ev).alias(
-            "e_lattice_evp"
-        )
+        (pl.col("e_crys") - e_gas_medium_dispersion_ev).alias("e_lattice_evp")
     )
     df_medium_d = df_medium_d.with_columns(
-        (pl.col("e_lattice_evp") * evp_to_kjmol).alias(
-            "e_lattice_kjmol"
-        )
+        (pl.col("e_lattice_evp") * evp_to_kjmol).alias("e_lattice_kjmol")
     )
     df_medium_d = df_medium_d.with_columns(
         (pl.col("e_lattice_evp") * 1e3).alias("e_lattice_mevp")
@@ -76,7 +72,7 @@ def __(e_gas_medium_dispersion_ev, evp_to_kjmol, pl):
 
 @app.cell
 def __(e_gas_large_dispersion_ev, evp_to_kjmol, pl):
-    df_large_d = pl.read_csv("../09.1_ICE13_MACE_large/crystal_energies.csv")
+    df_large_d = pl.read_csv("ICE13_MACE_large/crystal_energies.csv")
     df_large_d = df_large_d.with_columns(
         (pl.col("e_crys") - e_gas_large_dispersion_ev).alias("e_lattice_ev")
     )
@@ -148,7 +144,7 @@ def __(
     plt.plot(
         df_medium_d["structure"],
         df_medium_d["e_lattice_evp"] * evp_to_kjmol,
-        marker="o",
+        marker="s",
         label="MACE medium-D no opt",
     )
 
@@ -157,6 +153,7 @@ def __(
         df_dmc["e_lattice_mevp"] * evp_to_kjmol / 1000,
         marker="*",
         label="DMC",
+        markersize=10,
     )
 
     plt.plot(
@@ -184,6 +181,7 @@ def __(
     plt.ylabel("Lattice energy (kJ/mol)")
     plt.grid()
     plt.legend()
+    plt.title("Absolute lattice energy")
     return
 
 
@@ -263,12 +261,14 @@ def __(df_large_d, df_mace_d_opt, df_medium_d, df_pbe_d3, plt):
         label="medium no opt",
         zorder=2,
         s=15,
+        marker="s",
     )
     plt.scatter(
         df_mace_d_opt["e_lattice_kjmol"],
         df_pbe_d3["e_lattice_kjmol"],
         label="medium opt",
         s=15,
+        marker="^",
     )
 
     plt.scatter(
@@ -276,6 +276,7 @@ def __(df_large_d, df_mace_d_opt, df_medium_d, df_pbe_d3, plt):
         df_pbe_d3["e_lattice_kjmol"],
         label="large",
         s=15,
+        marker="o",
     )
 
     plt.xlabel("MACE-MP-0-D (kJ/mol)")
