@@ -2,4 +2,6 @@
 Per il dimero sono necessarie le seguenti cose:
 * Ottimizzazione della geometria e studio della stabilità tramite studio delle proprietà vibrazionali
 Si trova nella cartella [[file:01_optimize/]]. Al suo interno inizio a provare con i potenziali MACE-MP-0.
+Bisogna confrontare i valori ottenuti per distanze di legame e angoli con quelli disponibili in letteratura.
+** TODO I risultati con n2p2 vanno ricalcolati con la nuova fmax
 * Studio della binding energy
