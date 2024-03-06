@@ -1,0 +1,51 @@
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.7
+fmax: 1e-08
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/02_water/01_molecule/MACE-ICE13/dispersion=False/1e-8/converge_fmax.py", line 17, in <module>
+    atoms.calc = mace_mp(
+                 ^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/mace/calculators/foundations_models.py", line 105, in mace_mp
+    mace_calc = MACECalculator(
+                ^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/mace/calculators/mace.py", line 112, in __init__
+    self.models = [
+                  ^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/mace/calculators/mace.py", line 113, in <listcomp>
+    torch.load(f=model_path, map_location=device) for model_path in model_paths
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/serialization.py", line 1014, in load
+    return _load(opened_zipfile,
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/serialization.py", line 1422, in _load
+    result = unpickler.load()
+             ^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/e3nn/util/codegen/_mixin.py", line 109, in __setstate__
+    smod = torch.jit.load(buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/mace_env/lib/python3.11/site-packages/torch/jit/_serialization.py", line 164, in load
+    cpp_module = torch._C.import_ir_module_from_buffer(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No CUDA GPUs are available
+FINISHED!!!
