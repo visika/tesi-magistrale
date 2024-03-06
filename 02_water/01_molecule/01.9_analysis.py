@@ -61,21 +61,30 @@ def __(immaginari_a_negativi, pd):
 @app.cell
 def __(glob):
     def get_summaries(model, fmax, dispersion):
-        if dispersion:
-            root = "01.8_molecule_converge_fmax_parallel_dispersion"
-        else:
-            root = "01.7_molecule_converge_fmax_parallel"
-        filenames = glob.glob(f"{root}/" f"{model}/{fmax}/" "*_summary.txt")
-        filenames = sorted(
-            filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
-        )
+        if model in ["small", "medium", "large"]:
+            if dispersion:
+                root = "01.8_molecule_converge_fmax_parallel_dispersion"
+            else:
+                root = "01.7_molecule_converge_fmax_parallel"
+            filenames = glob.glob(f"{root}/" f"{model}/{fmax}/" "*_summary.txt")
+            filenames = sorted(
+                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
+            )
+        elif model == "MACE-ICE13":
+            root = "MACE-ICE13"
+            filenames = glob.glob(
+                f"{root}/" f"dispersion={dispersion}/" f"{fmax}/*_summary.txt"
+            )
+            filenames = sorted(
+                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
+            )
         return filenames
     return get_summaries,
 
 
 @app.cell
 def __(mo):
-    models = ["small", "medium", "large"]
+    models = ["small", "medium", "large", "MACE-ICE13"]
     model = mo.ui.dropdown(options=models, value="small", label="Modello")
 
     fmaxs = ["1e-1", "1e-2", "1e-3", "1e-4", "1e-5", "1e-6", "1e-7", "1e-8"]
@@ -109,7 +118,7 @@ def __(df, dispersion, fmax, model, plt):
     plt.ylim(-1e4, 1e4)
     plt.legend(ncol=2)
     plt.title(
-        f"MACE-MP-0 {model.value}"
+        f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
         f"{' D' if dispersion.value else ''}"
         f", fmax={fmax.value}"
     )

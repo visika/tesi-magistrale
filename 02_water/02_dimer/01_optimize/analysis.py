@@ -1,7 +1,7 @@
 import marimo
 
 __generated_with = "0.2.13"
-app = marimo.App()
+app = marimo.App(layout_file="layouts/analysis.grid.json")
 
 
 @app.cell
@@ -21,7 +21,7 @@ def __(mo):
 
 @app.cell
 def __(mo):
-    models = ["small", "medium", "large", "n2p2"]
+    models = ["small", "medium", "large", "MACE-ICE13", "n2p2"]
     model = mo.ui.dropdown(options=models, value="small", label="Modello")
     model
     return model, models
@@ -47,15 +47,15 @@ def __(glob):
         if model in ["small", "medium", "large"]:
             root = "MACE-MP-0"
             filenames = glob.glob(f"{root}/{model}/*_summary.txt")
-            return sorted(
-                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
-            )
-        elif model in ["n2p2"]:
+        elif model == "MACE-ICE13":
+            root = "MACE-ICE13"
+            filenames = glob.glob(f"{root}/*_summary.txt")
+        elif model == "n2p2":
             root = "n2p2"
             filenames = glob.glob(f"{root}/*_summary.txt")
-            return sorted(
-                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
-            )
+        return sorted(
+            filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
+        )
     return get_filenames,
 
 
@@ -113,6 +113,8 @@ def __(df, model, plt):
     plt.ylim(-1e4, 1e4)
     if model.value in ["small", "medium", "large"]:
         plt.title(f"MACE-MP-0 {model.value} D")
+    elif model.value == "MACE-ICE13":
+        plt.title("MACE-ICE13 D")
     elif model.value == "n2p2":
         plt.title(f"n2p2")
     plt.xlabel("Displacement (Å)")
@@ -151,8 +153,10 @@ def __():
 def __(model, read):
     if model.value in ["small", "medium", "large"]:
         atoms = read(f"MACE-MP-0/{model.value}/final.xyz")
+    elif model.value == "MACE-ICE13":
+        atoms = read("MACE-ICE13/final.xyz")
     elif model.value == "n2p2":
-        atoms = read(f"n2p2/01_relax-positions/final.pdb")
+        atoms = read("n2p2/01_relax-positions/final.pdb")
     return atoms,
 
 
