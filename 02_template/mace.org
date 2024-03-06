@@ -61,6 +61,7 @@ calc = mace_mp(model="medium", dispersion=False, default_dtype="float64", device
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
+#SBATCH --propagate=NONE
 
 ulimit -s unlimited
 
