@@ -120,5 +120,63 @@ def __(df, model, plt):
     return groups,
 
 
+@app.cell(hide_code=True)
+def __(mo):
+    mo.md(
+        """
+        ## Studio della geometria
+
+        Ottieni gli indici selezionando la voce di menu:
+        `View > Show Labels > Atom Index`
+
+        - 0 ossigeno accettore
+        - 1 idrogeno accettore
+        - 2 idrogeno accettore
+        - 3 ossigeno donore
+        - 4 idrogeno donore esterno (f)
+        - 5 idrogeno donore che punta (d)
+        """
+    )
+    return
+
+
+@app.cell
+def __():
+    from ase.io import read
+    from ase.visualize import view
+    return read, view
+
+
+@app.cell
+def __(model, read):
+    if model.value in ["small", "medium", "large"]:
+        atoms = read(f"MACE-MP-0/{model.value}/final.xyz")
+    elif model.value == "n2p2":
+        atoms = read(f"n2p2/01_relax-positions/final.pdb")
+    return atoms,
+
+
+@app.cell
+def __():
+    # view(atoms)
+    return
+
+
+@app.cell
+def __(atoms, mo):
+    mo.md(
+        f"""
+        |valore|letteratura|simulato|
+        |------|-----------|--------|
+        |Angolo alpha|5.5°|{atoms.get_angle(0, 3, 5).round(1)}°|
+        |Angolo interno della molecola accettore| 104.87° | {atoms.get_angle(1, 0, 2).round(2)}°|
+        |Angolo interno della molecola donore| 104.83° | {atoms.get_angle(4, 3, 5).round(2)}°|
+        |Distanza O-O|291.2 pm = 2.912 Å|{atoms.get_distance(0, 3).round(2)} Å|
+        |Angolo beta|124.4°|{atoms.get_angle(1, 0, 3).round(1)}°|
+        """
+    )
+    return
+
+
 if __name__ == "__main__":
     app.run()
