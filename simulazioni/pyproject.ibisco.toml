@@ -1,0 +1,23 @@
+[tool.poetry]
+package-mode = false
+name = "tesi-magistrale"
+#version = "0.1.0"
+description = "Ambiente per le simulazioni con MACE su GPU"
+authors = ["Mariano Mollo <marian.mollo@studenti.unina.it>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "^2.2.1"
+torchvision = "^0.17.1"
+torchaudio = "^2.2.1"
+mace-torch = "^0.3.4"
+torch-dftd = "^0.4.0"
+phonopy = "^2.21.2"
+seekpath = "^2.1.0"
+ase = {git = "https://gitlab.com/ase/ase.git"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
