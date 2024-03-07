@@ -6,6 +6,9 @@ from ase.optimize import BFGS
 from ase.phonons import Phonons
 from mace.calculators import mace_mp
 import matplotlib.pyplot as plt
+import datetime as clock
+
+
 def optimize(a, fmax: float, output_path: str) -> None:
     opt = BFGS(
         atoms, logfile=path + "optimization.log", trajectory=path + "optimization.traj"
@@ -57,10 +60,13 @@ N = 6
 K = 10
 delta = 1e-5
 
+t = clock.datetime.now()
 ph = Phonons(atoms, calc, supercell=(N, N, N), delta=delta)
 ph.run()
 ph.read(acoustic=True)
 ph.clean()
+dt = clock.datetime.now() - t
+print(f"phonons calculated after {dt}")
 
 bandpath = atoms.cell.bandpath(npoints=100)
 bandstructure = ph.get_band_structure(bandpath)
