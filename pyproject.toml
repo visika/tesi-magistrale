@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 ase = {git = "https://gitlab.com/ase/ase.git"}
-marimo = "^0.2.8"
+marimo = "^0.3.1"
 pandas = "^2.2.0"
 polars = "^0.20.13"
 hvplot = "^0.9.2"
