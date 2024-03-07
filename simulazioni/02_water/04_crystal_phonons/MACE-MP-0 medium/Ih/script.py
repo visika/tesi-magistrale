@@ -53,7 +53,6 @@ os.makedirs(path, exist_ok=True)
 
 # optimize(a=atoms, fmax=fmax, output_path=path)
 
-write(images=atoms, filename=path + "final.xyz")
 
 # Supercell number
 N = 6
