@@ -6,6 +6,12 @@ from ase.optimize import BFGS
 from ase.phonons import Phonons
 from mace.calculators import mace_mp
 import matplotlib.pyplot as plt
+def optimize(a, fmax: float, output_path: str) -> None:
+    opt = BFGS(
+        atoms, logfile=path + "optimization.log", trajectory=path + "optimization.traj"
+    )
+    opt.run(fmax=fmax, steps=1000)
+    write(images=atoms, filename=output_path + "/final.xyz")
 
 fmax = 1e-8
 
@@ -16,10 +22,7 @@ atoms.calc = calc
 path = "relax-positions/"
 os.makedirs(path, exist_ok=True)
 
-opt = BFGS(
-    atoms, logfile=path + "optimization.log", trajectory=path + "optimization.traj"
-)
-opt.run(fmax=fmax, steps=1000)
+# optimize(a=atoms, fmax=fmax, output_path=path)
 
 write(images=atoms, filename=path + "final.xyz")
 
