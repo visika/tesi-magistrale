@@ -1,10 +1,9 @@
 #!/usr/bin/env sh
-#SBATCH --job-name=Ih
-#SBATCH --partition=parallel
+#SBATCH --job-name=phonIh
+#SBATCH --partition=gpus
 #SBATCH --ntasks=1
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
+#SBATCH --mem=4G
+#SBATCH --gpus=1
 #SBATCH --propagate=NONE
 
 date

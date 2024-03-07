@@ -45,7 +45,7 @@ def plot_the_figure() -> None:
 fmax = 1e-8
 
 atoms = read("POSCAR")
-calc = mace_mp(model="medium", dispersion=True, default_dtype="float64", device="cpu")
+calc = mace_mp(model="medium", dispersion=True, default_dtype="float64", device="cuda")
 atoms.calc = calc
 
 path = "relax-positions/"
