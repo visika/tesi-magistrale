@@ -1,7 +1,7 @@
 [tool.poetry]
 package-mode = false
-name = "tesi-magistrale"
-#version = "0.1.0"
+name = "tesi-magistrale-ibisco"
+version = "0.1.0-ibisco"
 description = "Ambiente per le simulazioni con MACE su GPU"
 authors = ["Mariano Mollo <marian.mollo@studenti.unina.it>"]
 readme = "README.md"
