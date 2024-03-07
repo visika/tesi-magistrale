@@ -72,3 +72,5 @@ bandstructure = ph.get_band_structure(bandpath)
 dos = ph.get_dos(kpts=(K, K, K)).sample_grid(npts=100, width=1e-3)
 
 plot_the_figure()
+
+print("This is it from python.")
