@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# Author; alin m elena, alin@elena.re
+# Contribs;
+# Date: 31-01-2024
+# ©alin m elena, GPL v3 https://www.gnu.org/licenses/gpl-3.0.en.html
+
+from mlip_calculators import choose_calculator
+
+from ase import build
+
+benzene = build.molecule('C6H6')
+benzene.set_cell([100]*3)
+benzene.set_pbc([True]*3)
+benzene.calc = choose_calculator(architecture="chgnet")
+print(f"E_config= {benzene.get_potential_energy()} eV")
