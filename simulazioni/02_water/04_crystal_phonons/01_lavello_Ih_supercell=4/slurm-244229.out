@@ -1,0 +1,127 @@
+Starging at Sun Mar 10 22:39:45 CET 2024
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.5
+Python path: /lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/bin/python
+/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch_dftd/torch_dftd3_calculator.py:98: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:275.)
+  cell: Optional[Tensor] = torch.tensor(
+spglib: Attempt 0 tolerance = 1.000000e-05 failed(line 800, /project/src/spacegroup.c).
+spglib: No point group was found (line 405, /project/src/pointgroup.c).
+spglib: Attempt 1 tolerance = 9.500000e-06 failed(line 800, /project/src/spacegroup.c).
+spglib: Attempt 0 tolerance = 1.000000e-05 failed(line 800, /project/src/spacegroup.c).
+spglib: No point group was found (line 405, /project/src/pointgroup.c).
+spglib: Attempt 1 tolerance = 9.500000e-06 failed(line 800, /project/src/spacegroup.c).
+Using Materials Project MACE for MACECalculator with /lustre/home/mmollo/.cache/mace/5yyxdm76
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+Using TorchDFTD3Calculator for D3 dispersion corrections (see https://github.com/pfnet-research/torch-dftd)
+optimisation started at 2024-03-10 22:39:52.217512
+phonons optimization finished after 0:00:44.153520
+phonons displacements started at 2024-03-10 22:40:36.371207
+phonons displacements finished after 0:00:00.789176
+phonons forces started at 2024-03-10 22:40:37.160399
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/01_lavello_Ih_supercell=4/./phonons.py", line 255, in <module>
+    phonon.forces = [
+                    ^
+  File "/ibiscostorage/mmollo/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/01_lavello_Ih_supercell=4/./phonons.py", line 256, in <listcomp>
+    calc_forces(calculator, supercell)
+  File "/ibiscostorage/mmollo/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/01_lavello_Ih_supercell=4/./phonons.py", line 208, in calc_forces
+    return atoms.get_forces()
+           ^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/atoms.py", line 812, in get_forces
+    forces = self._calc.get_forces(self)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/abc.py", line 30, in get_forces
+    return self.get_property('forces', atoms)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/calculator.py", line 538, in get_property
+    self.calculate(atoms, [name], system_changes)
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/mixing.py", line 103, in calculate
+    self.results = self.mixer.get_properties(properties, atoms)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/mixing.py", line 58, in get_properties
+    get_property(prop)
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/mixing.py", line 39, in get_property
+    contribs = [calc.get_property(prop, atoms) for calc in self.calcs]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/mixing.py", line 39, in <listcomp>
+    contribs = [calc.get_property(prop, atoms) for calc in self.calcs]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/ase/calculators/calculator.py", line 538, in get_property
+    self.calculate(atoms, [name], system_changes)
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/mace/calculators/mace.py", line 217, in calculate
+    out = model(batch.to_dict(), compute_stress=compute_stress)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/mace/modules/models.py", line 337, in forward
+    node_feats, sc = interaction(
+                     ^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/mace/modules/blocks.py", line 613, in forward
+    mji = self.conv_tp(
+          ^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/e3nn/o3/_tensor_product/_tensor_product.py", line 529, in forward
+    return self._compiled_main_left_right(x, y, real_weight)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript, serialized code (most recent call last):
+  File "code/__torch__/torch/fx/graph_module/___torch_mangle_11.py", line 141, in forward
+    reshape_34 = torch.reshape(einsum_23, [getitem_4, 896])
+    _17 = [reshape_12, reshape_14, reshape_17, reshape_20, reshape_22, reshape_25, reshape_27, reshape_29, reshape_32, reshape_34]
+    cat = torch.cat(_17, 1)
+          ~~~~~~~~~ <--- HERE
+    return torch.reshape(cat, add_3)
+
+Traceback of TorchScript, original code (most recent call last):
+  File "<eval_with_key>.127", line 115, in forward
+    einsum_23 = torch.functional.einsum('dbca,dbc->dba', tensordot_3, reshape_33);  tensordot_3 = reshape_33 = None
+    reshape_34 = einsum_23.reshape(getitem_4, 896);  einsum_23 = getitem_4 = None
+    cat = torch.cat([reshape_12, reshape_14, reshape_17, reshape_20, reshape_22, reshape_25, reshape_27, reshape_29, reshape_32, reshape_34], dim = 1);  reshape_12 = reshape_14 = reshape_17 = reshape_20 = reshape_22 = reshape_25 = reshape_27 = reshape_29 = reshape_32 = reshape_34 = None
+          ~~~~~~~~~ <--- HERE
+    reshape_35 = cat.reshape(add_3);  cat = add_3 = None
+    return reshape_35
+RuntimeError: CUDA out of memory. Tried to allocate 8.50 GiB. GPU 0 has a total capacity of 31.74 GiB of which 6.10 GiB is free. Including non-PyTorch memory, this process has 25.64 GiB memory in use. Of the allocated memory 21.62 GiB is allocated by PyTorch, and 3.62 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Sun Mar 10 22:40:38 CET 2024
+FINISHED!!!
