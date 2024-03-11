@@ -1,0 +1,101 @@
+Starging at Mon Mar 11 02:55:59 CET 2024
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.8
+Python path: /lustre/home/mmollo/miniconda3/envs/tesi_magistrale/bin/python
+/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/torch_dftd/torch_dftd3_calculator.py:98: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:275.)
+  cell: Optional[Tensor] = torch.tensor(
+Using Materials Project MACE for MACECalculator with /lustre/home/mmollo/.cache/mace/5yyxdm76
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+Using TorchDFTD3Calculator for D3 dispersion corrections (see https://github.com/pfnet-research/torch-dftd)
+      Step     Time          Energy          fmax
+BFGS:    0 02:56:07     -179.564069        0.902387
+BFGS:    1 02:56:07     -179.580637        0.173130
+BFGS:    2 02:56:09     -179.582299        0.115399
+BFGS:    3 02:56:11     -179.583839        0.120408
+BFGS:    4 02:56:14     -179.585848        0.123513
+BFGS:    5 02:56:14     -179.587269        0.084089
+BFGS:    6 02:56:14     -179.588474        0.078823
+BFGS:    7 02:56:14     -179.590019        0.094362
+BFGS:    8 02:56:14     -179.592912        0.185359
+BFGS:    9 02:56:14     -179.597457        0.269074
+BFGS:   10 02:56:14     -179.602884        0.311472
+BFGS:   11 02:56:14     -179.608797        0.311027
+BFGS:   12 02:56:15     -179.616795        0.277410
+BFGS:   13 02:56:15     -179.627748        0.266410
+BFGS:   14 02:56:15     -179.640074        0.332953
+BFGS:   15 02:56:15     -179.651146        0.306789
+BFGS:   16 02:56:15     -179.657683        0.132004
+BFGS:   17 02:56:15     -179.660656        0.104838
+BFGS:   18 02:56:15     -179.665008        0.182033
+BFGS:   19 02:56:15     -179.672136        0.241210
+BFGS:   20 02:56:15     -179.678890        0.204010
+BFGS:   21 02:56:16     -179.682777        0.103047
+BFGS:   22 02:56:16     -179.685119        0.080806
+BFGS:   23 02:56:16     -179.686981        0.103193
+BFGS:   24 02:56:16     -179.689118        0.113925
+BFGS:   25 02:56:16     -179.690765        0.060080
+BFGS:   26 02:56:16     -179.691675        0.043464
+BFGS:   27 02:56:16     -179.692266        0.063116
+BFGS:   28 02:56:16     -179.692946        0.086823
+BFGS:   29 02:56:16     -179.693611        0.075770
+BFGS:   30 02:56:16     -179.694073        0.038636
+BFGS:   31 02:56:17     -179.694415        0.029660
+BFGS:   32 02:56:17     -179.694794        0.040769
+BFGS:   33 02:56:17     -179.695200        0.045471
+BFGS:   34 02:56:17     -179.695490        0.037728
+BFGS:   35 02:56:17     -179.695648        0.024658
+BFGS:   36 02:56:17     -179.695786        0.024655
+BFGS:   37 02:56:17     -179.696010        0.041325
+BFGS:   38 02:56:17     -179.696300        0.047834
+BFGS:   39 02:56:17     -179.696528        0.030136
+BFGS:   40 02:56:17     -179.696631        0.018351
+BFGS:   41 02:56:18     -179.696685        0.014082
+BFGS:   42 02:56:18     -179.696743        0.017765
+BFGS:   43 02:56:18     -179.696802        0.017017
+BFGS:   44 02:56:18     -179.696835        0.008854
+Traceback (most recent call last):
+  File "/ibiscostorage/mmollo/tesi-magistrale/simulazioni/02_water/99_tests/2024-03-10_eos/./eos.py", line 128, in <module>
+    configs = read(f"{sysname}.traj")
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/ase/io/formats.py", line 801, in read
+    return next(_iread(filename, slice(index, None), format, io,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/ase/parallel.py", line 302, in new_generator
+    for result in generator(*args, **kwargs):
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/ase/io/formats.py", line 867, in _iread
+    for dct in io.read(fd, *args, **kwargs):
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/ase/io/formats.py", line 623, in wrap_read_function
+    yield read(filename, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/ase/utils/__init__.py", line 577, in iofunc
+    obj = func(fd, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/site-packages/ase/io/vasp.py", line 140, in read_vasp
+    line1 = fd.readline()
+            ^^^^^^^^^^^^^
+  File "/lustre/home/mmollo/miniconda3/envs/tesi_magistrale/lib/python3.11/encodings/ascii.py", line 26, in decode
+    return codecs.ascii_decode(input, self.errors)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xb8 in position 48: ordinal not in range(128)
+Mon Mar 11 02:56:19 CET 2024
+FINISHED!!!

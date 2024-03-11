@@ -1,0 +1,54 @@
+Starging at Sun Mar 10 23:39:49 CET 2024
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Could not find platform independent libraries <prefix>
+Could not find platform dependent libraries <exec_prefix>
+Python path configuration:
+  PYTHONHOME = (not set)
+  PYTHONPATH = (not set)
+  program name = '/lustre/home/mmollo/.local/share/pypoetry/venv/bin/python'
+  isolated = 0
+  environment = 1
+  user site = 1
+  safe_path = 0
+  import site = 1
+  is in build tree = 0
+  stdlib dir = '/lustre/home/mmollo/miniconda3/lib/python3.11'
+  sys._base_executable = '/lustre/home/mmollo/miniconda3/bin/python'
+  sys.base_prefix = '/lustre/home/mmollo/miniconda3'
+  sys.base_exec_prefix = '/lustre/home/mmollo/miniconda3'
+  sys.platlibdir = 'lib'
+  sys.executable = '/lustre/home/mmollo/.local/share/pypoetry/venv/bin/python'
+  sys.prefix = '/lustre/home/mmollo/miniconda3'
+  sys.exec_prefix = '/lustre/home/mmollo/miniconda3'
+  sys.path = [
+    '/lustre/home/mmollo/miniconda3/lib/python311.zip',
+    '/lustre/home/mmollo/miniconda3/lib/python3.11',
+    '/lustre/home/mmollo/miniconda3/lib/python3.11/lib-dynload',
+  ]
+Fatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding
+Python runtime state: core initialized
+ModuleNotFoundError: No module named 'encodings'
+
+Current thread 0x00002afcb3adc8c0 (most recent call first):
+  <no Python frame>
+/var/spool/slurm/job244240/slurm_script: line 22: /bin/activate: No such file or directory
