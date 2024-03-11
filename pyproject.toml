@@ -6,7 +6,7 @@ authors = ["Mariano Mollo <marian.mollo@studenti.unina.it>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "3.11.8"
 ase = {git = "https://gitlab.com/ase/ase.git"}
 mace-torch = "^0.3.4"
 torch-dftd = "^0.4.0"
