@@ -1,0 +1,6 @@
+In this directory you need the 
+1. script to train: train.sh
+!!! important: in train.sh you need to specify the right paths to the mace directory and source the correct python virtual environment
+2. the training dataset in extxyz format called "training_dataset.xyz"
+3. run the training script
+4. when the model is ready you can compute the test set error with the test.sh script (you need the test set file test.extxyz in the directory)

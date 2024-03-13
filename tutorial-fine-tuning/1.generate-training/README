@@ -1,0 +1,6 @@
+1. run the molecular dynamic with macemp0 to produce an initial dataset 
+> python run-ase.py (currently run-ase.py execute an NVT molecular dynamics, but you should change it to NPT at ambient pressure)
+
+2. it will produce the trajectory md.traj
+3. extract random configurations from the trajectory with  (you can change how many structures in the script)
+> python select-random-structure.py

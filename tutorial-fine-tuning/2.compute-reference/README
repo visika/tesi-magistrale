@@ -1,0 +1,15 @@
+first run the script run-dft.sh to:
+1. create a folder for each configuration containing POSCAR, INCAR, POTCAR, KPOINTS
+then:
+2. run vasp in each subdirectory printing energy, forces, and stresses (ISIF=2)
+3. convert the VASP output to the extxyz format (which contains the geometry, the forces, the energy and the stress). You can do it with the command "ase convert OUTCAR out.extxyz" (you can change the name of the file but the format has to be extxyz)
+4. concatenate all out.extxyz in one "trajectory" data.extxyz, for instance with something like:
+
+>for i in {1..NUMBER_OF_DIRECTORIES}
+>do
+>cat $i/out.extxyz >> dataset.extxyz
+>done
+
+4. run the python script  split_training_test_set.py as 
+> python split_training_test_set.py  dataset.extxyz
+to split the data in training and test set (you can change the percentage in the script)

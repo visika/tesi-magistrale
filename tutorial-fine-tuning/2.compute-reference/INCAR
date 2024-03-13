@@ -1,0 +1,20 @@
+NPAR = 4
+ISMEAR=0
+SIGMA=0.01
+   
+PREC   = Accurate
+EDIFF  = 1E-7
+ENCUT=1000
+
+Ionic Relaxation
+   ISIF   =   2
+   GGA=RE
+ 
+#vdW
+IVDW=11 #DFT-D3 
+
+ALGO=Conjugate
+
+
+LWAVE=.FALSE.
+LCHARG=.FALSE.
