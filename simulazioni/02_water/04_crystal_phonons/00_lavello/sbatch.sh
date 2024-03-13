@@ -24,7 +24,7 @@ source $(poetry env info --path)/bin/activate
 echo Using "$(python -V)"
 echo Python path: "$(which python)"
 
-python3 ./phonons.py --model medium --d3 --system structs/final.xyz --device cuda --grid 4 4 4
+python3 ./phonons.py --model medium --d3 --system structs/ICE13/Ih/POSCAR --supercell 1 --device cuda
 
 date
 echo "FINISHED!!!"

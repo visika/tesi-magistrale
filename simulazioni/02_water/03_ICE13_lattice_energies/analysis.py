@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.2.13"
+__generated_with = "0.3.1"
 app = marimo.App()
 
 
@@ -8,7 +8,7 @@ app = marimo.App()
 def __(mo):
     mo.md(
         """
-        # Scatter plot per il confronto di MACE-MP-0 con lo pseudopotenziale di riferimento
+        # Scatter plot per il confronto di MACE-MP-0 e MACE-ICE13-0 con i rispettivi pseudopotenziali di riferimento
 
         I dati per i 13 cristalli di ghiaccio analizzati con MACE-MP-0 medium con dispersione sono presenti nella cartella `09_ICE13_MACE`.
 
@@ -84,6 +84,27 @@ def __(e_gas_large_dispersion_ev, evp_to_kjmol, pl):
 
 @app.cell
 def __(evp_to_kjmol, pl):
+    with open(
+        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/01_molecule/MACE-ICE13/dispersion=True/1e-8/e_gas.txt",
+        "r",
+    ) as _f:
+        e_gas_mace_ice13_0 = float(_f.readlines()[0])
+
+    df_mace_ice13_0 = (
+        pl.read_csv("MACE-ICE13-0/crystal_energies.csv")
+        .with_columns(
+            (pl.col("e_crys") - e_gas_mace_ice13_0).alias("e_lattice_ev")
+        )
+        .with_columns(
+            (pl.col("e_lattice_ev") * evp_to_kjmol).alias("e_lattice_kjmol")
+        )
+    )
+    df_mace_ice13_0
+    return df_mace_ice13_0, e_gas_mace_ice13_0
+
+
+@app.cell
+def __(evp_to_kjmol, pl):
     dmc_mev_table = [
         ["Ih", -616],
         ["II", -613],
@@ -136,6 +157,7 @@ def __(
     df_dmc,
     df_large_d,
     df_mace_d_opt,
+    df_mace_ice13_0,
     df_medium_d,
     df_pbe_d3,
     evp_to_kjmol,
@@ -175,6 +197,13 @@ def __(
         df_large_d["e_lattice_kjmol"],
         marker="o",
         label="MACE large-D",
+    )
+
+    plt.plot(
+        df_mace_ice13_0["structure"],
+        df_mace_ice13_0["e_lattice_kjmol"],
+        marker=".",
+        label="MACE-ICE13-0",
     )
 
     plt.xlabel("Structure")
@@ -234,7 +263,7 @@ def __(e_gas_medium_dispersion_ev, evp_to_kjmol, get_the_dataframe, pl):
 def __(mo):
     mo.md(
         """
-        # Scatter plot tra MACE e PBE-D3
+        # Scatter plot tra MACE-MP-0 e PBE-D3
 
         Lo scatter plot mostra che effettivamente la geometria non ottimizzata fornisce risultati più vicini al modello di riferimento.
 

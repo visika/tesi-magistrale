@@ -1,12 +1,10 @@
 #!/usr/bin/env sh
 #SBATCH --job-name=phonIh
-#SBATCH --partition=gpus
-#SBATCH --ntasks=1
-#SBATCH --mem=4G
-#SBATCH --gpus=1
+#SBATCH --partition=parallel
+#SBATCH --cpus-per-task=8
 #SBATCH --propagate=NONE
 
-date
+echo Starging at $(date)
 
 ulimit -s unlimited
 

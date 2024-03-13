@@ -16,6 +16,15 @@ def optimize(a, fmax: float, output_path: str) -> None:
     opt.run(fmax=fmax, steps=1000)
     write(images=atoms, filename=output_path + "/final.xyz")
 
+
+def get_the_phonons(atoms, calc, supercell, delta: float) -> Phonons:
+    ph = Phonons(atoms, calc, supercell, delta)
+    ph.run()
+    ph.read(acoustic=True)
+    ph.clean()
+    return ph
+
+
 def plot_the_figure() -> None:
     fig = plt.figure(1, figsize=(7, 5))
     ax = fig.add_axes([0.12, 0.07, 0.67, 0.85])
@@ -45,7 +54,7 @@ def plot_the_figure() -> None:
 fmax = 1e-8
 
 atoms = read("POSCAR")
-calc = mace_mp(model="medium", dispersion=True, default_dtype="float64", device="cuda")
+calc = mace_mp(model="medium", dispersion=True, default_dtype="float64", device="cpu")
 atoms.calc = calc
 
 path = "relax-positions/"
@@ -53,9 +62,11 @@ os.makedirs(path, exist_ok=True)
 
 # optimize(a=atoms, fmax=fmax, output_path=path)
 
+atoms = read("relax-positions/final.xyz")
+atoms.calc = calc
 
 # Supercell number
-N = 6
+N = 4
 K = 10
 delta = 1e-5
 
