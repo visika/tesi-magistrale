@@ -182,7 +182,6 @@ def optimize(a: Atoms, fmax: Float, optimize_cell: Bool, output: Str) -> None:
 
 # no magnetic moments considered
 def Phonopy2ASEAtoms(s: PhonopyAtoms) -> Atoms:
-
     return Atoms(
         symbols=s.symbols,
         scaled_positions=s.scaled_positions,
@@ -193,7 +192,6 @@ def Phonopy2ASEAtoms(s: PhonopyAtoms) -> Atoms:
 
 
 def ASE2PhonopyAtoms(s: Atoms) -> PhonopyAtoms:
-
     return PhonopyAtoms(
         symbols=s.get_chemical_symbols(),
         cell=s.cell.array,

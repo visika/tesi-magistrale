@@ -1,0 +1,56 @@
+Starging at Mon Mar 11 03:37:59 CET 2024
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.8
+Python path: /lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/bin/python
+/lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/lib/python3.11/site-packages/torch_dftd/torch_dftd3_calculator.py:98: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:275.)
+  cell: Optional[Tensor] = torch.tensor(
+spglib: Attempt 0 tolerance = 1.000000e-05 failed(line 800, /project/src/spacegroup.c).
+spglib: No point group was found (line 405, /project/src/pointgroup.c).
+spglib: Attempt 1 tolerance = 9.500000e-06 failed(line 800, /project/src/spacegroup.c).
+spglib: Attempt 0 tolerance = 1.000000e-05 failed(line 800, /project/src/spacegroup.c).
+spglib: No point group was found (line 405, /project/src/pointgroup.c).
+spglib: Attempt 1 tolerance = 9.500000e-06 failed(line 800, /project/src/spacegroup.c).
+spglib: Attempt 0 tolerance = 1.000000e-05 failed(line 800, /project/src/spacegroup.c).
+spglib: No point group was found (line 405, /project/src/pointgroup.c).
+spglib: Attempt 1 tolerance = 9.500000e-06 failed(line 800, /project/src/spacegroup.c).
+Using Materials Project MACE for MACECalculator with /lustre/home/mmollo/.cache/mace/5yyxdm76
+Using float64 for MACECalculator, which is slower but more accurate. Recommended for geometry optimization.
+Using TorchDFTD3Calculator for D3 dispersion corrections (see https://github.com/pfnet-research/torch-dftd)
+optimisation started at 2024-03-11 03:38:35.787761
+phonons optimization finished after 0:05:23.921781
+phonons displacements started at 2024-03-11 03:43:59.709839
+phonons displacements finished after 0:00:01.055560
+phonons forces started at 2024-03-11 03:44:00.765424
+phonons forces finished after 1:47:07.332243
+phonons force constants started at 2024-03-11 05:31:08.099820
+phonons force constants finished after 0:00:03.572720
+phonons thermal started at 2024-03-11 05:31:11.672571
+phonons thermal finished after 0:00:15.911682
+phonons save started at 2024-03-11 05:31:27.584281
+phonons save finished after 0:00:58.084255
+phonons band auto started at 2024-03-11 05:32:25.668565
+phonons band auto finished after 0:00:13.955685
+phonons save cv started at 2024-03-11 05:32:39.624292
+phonons save cv&co finished after 0:00:00.005111
+Mon Mar 11 05:32:42 CET 2024
+FINISHED!!!
