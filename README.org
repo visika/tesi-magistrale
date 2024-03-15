@@ -3,3 +3,6 @@
 Nella cartella [[file:simulazioni/02_water/03_ICE13_lattice_energies/]] sono
 presenti simulazioni con MACE-MP-0 che si confrontano con i risultati
 dell'articolo dellapiaDMCICE13AmbientHigh2022.
+
+Le simulazioni vanno eseguite senza ottimizzare la geometria. Le strutture di
+riferimento impiegate dall'articolo sono nella cartella [[file:strutture/ICE13/]].
