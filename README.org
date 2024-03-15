@@ -1,0 +1,5 @@
+#+title: Tesi magistrale
+* Studio delle energie assoluta e relativa di reticolo per 13 polimorfi del ghiaccio
+Nella cartella [[file:simulazioni/02_water/03_ICE13_lattice_energies/]] sono
+presenti simulazioni con MACE-MP-0 che si confrontano con i risultati
+dell'articolo dellapiaDMCICE13AmbientHigh2022.
