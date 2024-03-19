@@ -1,0 +1,3 @@
+#+title: Molecola con geometria fissata
+Fornita da Flaviano. È la geometria da usare per confrontare le absolute lattice
+energy dell'articolo ICE13.

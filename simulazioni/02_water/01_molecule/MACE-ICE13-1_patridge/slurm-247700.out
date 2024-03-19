@@ -1,0 +1,109 @@
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.8
+Python path: /lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/bin/python
+Default dtype float64 does not match model dtype float32, converting models to float64.
+---------------------
+  #    meV     cm^-1
+---------------------
+  0   55.2i    444.8i
+  1   53.0i    427.7i
+  2   51.9i    418.2i
+  3    0.0i      0.0i
+  4    0.0i      0.0i
+  5    0.0       0.0
+  6  194.6    1569.2
+  7  478.9    3862.4
+  8  493.6    3981.5
+---------------------
+Zero-point energy: 0.584 eV
+---------------------
+  #    meV     cm^-1
+---------------------
+  0   55.2i    444.8i
+  1   53.0i    427.7i
+  2   51.9i    418.2i
+  3    0.0i      0.0i
+  4    0.0       0.0
+  5    0.0       0.0
+  6  194.6    1569.2
+  7  478.9    3862.4
+  8  493.6    3981.5
+---------------------
+Zero-point energy: 0.584 eV
+---------------------
+  #    meV     cm^-1
+---------------------
+  0   55.2i    444.8i
+  1   53.0i    427.7i
+  2   51.9i    418.2i
+  3    0.0       0.0
+  4    0.0       0.0
+  5    0.0       0.0
+  6  194.6    1569.2
+  7  478.9    3862.4
+  8  493.6    3981.5
+---------------------
+Zero-point energy: 0.584 eV
+---------------------
+  #    meV     cm^-1
+---------------------
+  0   55.2i    444.8i
+  1   53.0i    427.7i
+  2   51.9i    418.2i
+  3    0.0       0.0
+  4    0.0       0.0
+  5    0.0       0.0
+  6  194.6    1569.2
+  7  478.9    3862.4
+  8  493.6    3981.5
+---------------------
+Zero-point energy: 0.584 eV
+---------------------
+  #    meV     cm^-1
+---------------------
+  0   55.2i    444.8i
+  1   53.0i    427.7i
+  2   51.9i    418.2i
+  3    0.0i      0.0i
+  4    0.0i      0.0i
+  5    0.0       0.0
+  6  194.6    1569.2
+  7  478.9    3862.5
+  8  493.7    3981.6
+---------------------
+Zero-point energy: 0.584 eV
+---------------------
+  #    meV     cm^-1
+---------------------
+  0   53.9i    434.8i
+  1   50.7i    408.9i
+  2   50.5i    407.5i
+  3    0.5i      3.8i
+  4    0.0       0.2
+  5    0.1       0.6
+  6  192.7    1554.1
+  7  398.8    3216.2
+  8  419.4    3382.3
+---------------------
+Zero-point energy: 0.505 eV
+FINISHED!!!
