@@ -336,7 +336,7 @@ def __(mo):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(
     df_dmc,
     df_mace_ice13_1,
@@ -346,7 +346,7 @@ def __(
     pl,
     plt,
 ):
-    def get_relative_lattice_energy(dataframe):
+    def get_relative_lattice_energy(dataframe: pl.DataFrame) -> pl.DataFrame:
         # Select lattice energy in the row with structure Ih
         baseline = dataframe.filter(pl.col("structure") == "Ih")[
             "e_lattice_kjmol"
@@ -390,7 +390,7 @@ def __(
         _mace_ice13_1["structure"],
         _mace_ice13_1["e_lattice_relative_kjmol"],
         marker="o",
-        label="MACE-ICE13-1-D3",
+        label="MACE-ICE13-1",
         linewidth=1,
         markersize=4,
     )
@@ -417,6 +417,12 @@ def __(
 
     plt.legend()
     return get_relative_lattice_energy,
+
+
+@app.cell
+def __(mo):
+    mo.md("**Commento**: qui non ci troviamo con i valori di MACE-MP-0+D3 rispetto ai valori di PBE-D3. Nell'articolo di Batatia introduttivo a MACE, la figura rappresenta valori ben più aderenti al riferimento.")
+    return
 
 
 @app.cell(hide_code=True)
