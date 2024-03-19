@@ -239,7 +239,7 @@ def __(
         df_mace_ice13_1["structure"],
         df_mace_ice13_1["e_lattice_kjmol"],
         marker="o",
-        label="MACE-ICE13-1-D3",
+        label="MACE-ICE13-1",
     )
 
     # PBE-D3
@@ -287,6 +287,12 @@ def __(
     plt.grid()
     plt.legend(loc="lower right")
     plt.title("Absolute lattice energy")
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md("**Commento**: la discrepanza visibile tra i valori di MACE-ICE13-1 e revPBE-D3 può essere imputabile a una diversa configurazione scelta per la geometria della molecola d'acqua, rispetto alle condizioni impiegate per il training del modello.")
     return
 
 
