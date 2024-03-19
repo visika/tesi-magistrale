@@ -209,6 +209,9 @@ def __(
     evp_to_kjmol,
     plt,
 ):
+    fig = plt.figure(layout="constrained")
+    ax = plt.subplot(111)
+
     # Diffusion Monte Carlo
     plt.plot(
         df_dmc["structure"],
@@ -253,7 +256,7 @@ def __(
         df_medium_d["structure"],
         df_medium_d["e_lattice_evp"] * evp_to_kjmol,
         marker="o",
-        label="MACE-MP-0 medium D3",
+        label="MACE-MP-0 medium+D3",
     )
 
     # MACE-MP-0 large
@@ -261,30 +264,16 @@ def __(
         df_large_d["structure"],
         df_large_d["e_lattice_kjmol"],
         marker="o",
-        label="MACE-MP-0 large D3",
+        label="MACE-MP-0 large+D3",
     )
-
-    # plt.plot(
-    #     df_mace_d_opt["structure"],
-    #     df_mace_d_opt["e_lattice_kjmol"],
-    #     marker="o",
-    #     label="MACE medium-D opt",
-    # )
-
-    # MACE-ICE13-0
-    # plt.plot(
-    #     df_mace_ice13_0["structure"],
-    #     df_mace_ice13_0["e_lattice_kjmol"],
-    #     marker="o",
-    #     label="MACE-ICE13-0 D3",
-    # )
 
     plt.xlabel("Structure")
     plt.ylabel("Lattice energy (kJ/mol)")
     plt.grid()
-    plt.legend(loc="lower right")
+    plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=3, loc="upper center")
     plt.title("Absolute lattice energy")
-    return
+    ax
+    return ax, fig
 
 
 @app.cell
@@ -504,14 +493,13 @@ def __(mo):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(df_mace_ice13_1, df_rev_pbe_d3, plt):
     plt.figure(figsize=(6, 6))
 
     plt.scatter(
         df_mace_ice13_1["e_lattice_kjmol"],
         df_rev_pbe_d3["e_lattice_kjmol"],
-        label="MACE-ICE13-1 D3",
     )
 
     plt.xlabel("MACE-ICE13-1 D3 (kJ/mol)")
@@ -523,7 +511,7 @@ def __(df_mace_ice13_1, df_rev_pbe_d3, plt):
     plt.ylim(-60, -54)
 
     plt.grid()
-    plt.legend()
+    plt.gca()
     return
 
 
