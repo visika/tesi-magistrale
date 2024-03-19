@@ -226,7 +226,13 @@ def __(mo):
 @app.cell
 def __(mo):
     t_min = mo.ui.slider(
-        start=0, stop=999, debounce=False, label="t_min", value=0, show_value=True
+        start=0,
+        stop=999,
+        debounce=False,
+        label="t_min",
+        value=0,
+        show_value=True,
+        orientation="vertical",
     ).form()
     t_max = mo.ui.slider(
         start=1,
@@ -235,6 +241,7 @@ def __(mo):
         label="t_max",
         value=100,
         show_value=True,
+        orientation="vertical",
     ).form()
     t_step = mo.ui.slider(
         start=1,
@@ -243,6 +250,7 @@ def __(mo):
         label="t_step",
         value=10,
         show_value=True,
+        orientation="vertical",
     ).form()
     return t_max, t_min, t_step
 
@@ -254,24 +262,191 @@ def __(mo, t_max, t_min, t_step):
 
 
 @app.cell
-def __(ph, plt, t_max, t_min, t_step):
-    ph.run_mesh()
+def __(numero_molecole, ph, plt, t_max, t_min, t_step):
+    ph.run_mesh(mesh=100.0)
+    # ph.run_mesh(mesh=[_m] * 3)
     ph.run_thermal_properties(
         t_step=t_step.value, t_min=t_min.value, t_max=t_max.value
     )
     thermal_properties = ph.get_thermal_properties_dict()
+    thermal_properties["heat_capacity"] = (
+        thermal_properties["heat_capacity"] / numero_molecole
+    )
+
+    R_KJmol = 8.31446261815
 
     plt.plot(
         thermal_properties["temperatures"],
-        thermal_properties["heat_capacity"],
+        thermal_properties["heat_capacity"] / R_KJmol,
         marker="o",
     )
 
     plt.xlabel("Temperature (K)")
     # Unità di misura definite in
     # https://phonopy.github.io/phonopy/setting-tags.html#thermal-properties-related-tags
+    # you have to divide the value by number of formula unit in your unit cell by yourself
     plt.ylabel("Heat capacity (J/K/mol)")
-    return thermal_properties,
+    return R_KJmol, thermal_properties
+
+
+@app.cell
+def __(atoms):
+    numero_molecole = len(atoms) / 3
+    numero_molecole
+    return numero_molecole,
+
+
+@app.cell
+def __(mo):
+    mo.md(
+        """
+        ## Lettura dei dati sperimentali da Flubacher 1960
+
+        Non è corretto confrontare direttamente i dati di Flubacher, perché sono capacità termiche a pressione costante. Io cerco invece quelle a volume costante. Queste sono disponibili nell'articolo di Holzapfel e Klotz del 2021.
+        """
+    )
+    return
+
+
+@app.cell
+def __():
+    import numpy as np
+
+    flubacher = np.loadtxt("../flubacher.txt")
+    return flubacher, np
+
+
+@app.cell
+def __(flubacher):
+    flubacher_temps = flubacher[:, 0]
+    flubacher_heat_capacities_cal = flubacher[:, 1]
+    cal2J = 4.184
+    flubacher_heat_capacities_J = flubacher_heat_capacities_cal * cal2J
+    return (
+        cal2J,
+        flubacher_heat_capacities_J,
+        flubacher_heat_capacities_cal,
+        flubacher_temps,
+    )
+
+
+@app.cell
+def __(
+    flubacher_heat_capacities_J,
+    flubacher_temps,
+    plt,
+    thermal_properties,
+):
+    plt.scatter(
+        x=flubacher_temps, y=flubacher_heat_capacities_J, label="Flubacher 1960"
+    )
+    plt.scatter(
+        x=thermal_properties["temperatures"],
+        y=thermal_properties["heat_capacity"],
+        label="MACE-MP-0",
+    )
+    plt.xlabel("Temperature (K)")
+    plt.ylabel("Heat capacity (J/K/mol)")
+
+    plt.xlim(0, 50)
+
+    plt.legend()
+    return
+
+
+@app.cell
+def __(df, flubacher_heat_capacities_J, flubacher_temps, plt):
+    x = flubacher_temps**2
+    y = flubacher_heat_capacities_J / flubacher_temps**3 * 1e5
+
+    plt.scatter(x, y)
+
+    plt.scatter(
+        df["temperatures"] ** 2,
+        df["heat_capacity"] / df["temperatures"] ** 3 * 1e5,
+    )
+
+    plt.xlabel("$T^2$")
+    plt.ylabel("$10^5 C/T^3$")
+
+    plt.xlim(-100,2000)
+    plt.gca()
+    return x, y
+
+
+@app.cell
+def __(thermal_properties):
+    thermal_properties
+    return
+
+
+@app.cell
+def __(thermal_properties):
+    import pandas as pd
+    df = pd.DataFrame(thermal_properties).dropna()
+    df
+    return df, pd
+
+
+@app.cell
+def __(holzapfel, mo):
+    mo.hstack(
+        [
+            mo.md(
+                """
+        ## Lettura dei dati di Holzapfel e Klotz 2021
+
+        Presi dalla TABLE V.
+
+        
+        """
+            ),
+            holzapfel,
+        ]
+    )
+    return
+
+
+@app.cell
+def __(pd):
+    holzapfel = pd.read_csv(
+        "../holzapfel_klotz_2021.txt", delimiter="[\ \t]+", engine="python"
+    )
+    return holzapfel,
+
+
+@app.cell
+def __(R_KJmol, holzapfel, plt, thermal_properties):
+    plt.scatter(x=holzapfel["T(K)"], y=holzapfel["C_V/R"], label="Holzapfel 2021")
+    plt.scatter(
+        x=thermal_properties["temperatures"],
+        y=thermal_properties["heat_capacity"] / R_KJmol,
+        label="MACE-MP-0",
+    )
+    plt.legend()
+    return
+
+
+@app.cell
+def __(R_KJmol, holzapfel, np, plt, thermal_properties):
+    plt.scatter(
+        x=np.log10(holzapfel["T(K)"].loc[1:]),
+        y=np.log10(holzapfel["C_V/R"].loc[1:]),
+        label="Holzapfel",
+    )
+    plt.scatter(
+        x=np.log10(thermal_properties["temperatures"][1:]),
+        y=np.log10(thermal_properties["heat_capacity"][1:] / R_KJmol),
+        label="MACE-MP-0",
+    )
+    plt.legend()
+    return
+
+
+@app.cell
+def __(np):
+    help(np.log)
+    return
 
 
 if __name__ == "__main__":
