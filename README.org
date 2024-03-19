@@ -6,3 +6,6 @@ dell'articolo dellapiaDMCICE13AmbientHigh2022.
 
 Le simulazioni vanno eseguite senza ottimizzare la geometria. Le strutture di
 riferimento impiegate dall'articolo sono nella cartella [[file:strutture/ICE13/]].
+* Studio dei fononi per la struttura Ih del ghiaccio
+Vedi la cartella
+[[file:simulazioni/02_water/04_crystal_phonons/phonopy/MACE-MP-0-d3-medium/ICE-Ih/]]
