@@ -109,10 +109,10 @@ def __(mo):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(evp_to_kjmol, pl):
     with open(
-        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/01_molecule/MACE-ICE13-1/e_gas.txt",
+        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/01_molecule/MACE-ICE13-1_patridge/e_gas.txt",
         "r",
     ) as _f:
         e_gas_mace_ice13_1 = float(_f.readlines()[0])
@@ -125,14 +125,8 @@ def __(evp_to_kjmol, pl):
         (pl.col("e_lattice_ev") * evp_to_kjmol).alias("e_lattice_kjmol")
     )
 
-    with open(
-        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/01_molecule/MACE-ICE13-1-D3/e_gas.txt",
-        "r",
-    ) as _f:
-        e_gas_mace_ice13_1_d3 = float(_f.readlines()[0])
-
     df_mace_ice13_1
-    return df_mace_ice13_1, e_gas_mace_ice13_1, e_gas_mace_ice13_1_d3
+    return df_mace_ice13_1, e_gas_mace_ice13_1
 
 
 @app.cell(hide_code=True)
@@ -232,6 +226,7 @@ def __(
         label="revPBE-D3",
         marker="s",
         linestyle="--",
+        linewidth=3,
     )
 
     # MACE-ICE13-1
@@ -240,6 +235,8 @@ def __(
         df_mace_ice13_1["e_lattice_kjmol"],
         marker="o",
         label="MACE-ICE13-1",
+        linewidth=1,
+        markersize=4,
     )
 
     # PBE-D3
@@ -292,8 +289,28 @@ def __(
 
 @app.cell
 def __(mo):
-    mo.md("**Commento**: la discrepanza visibile tra i valori di MACE-ICE13-1 e revPBE-D3 può essere imputabile a una diversa configurazione scelta per la geometria della molecola d'acqua, rispetto alle condizioni impiegate per il training del modello.")
+    mo.md(
+        """
+        ~~**Commento**: la discrepanza visibile tra i valori di MACE-ICE13-1 e revPBE-D3 può essere imputabile a una diversa configurazione scelta per la geometria della molecola d'acqua, rispetto alle condizioni impiegate per il training del modello.~~
+
+        Usando la geometria corretta per la molecola d'acqua nello stato gassoso, i risultati di MACE-ICE13-1 aderiscono in modo molto soddisfacente a quelli del riferimento revPBE-D3.
+        """
+    )
     return
+
+
+@app.cell
+def __(df_mace_ice13_1, df_rev_pbe_d3, mo):
+    # Compute the MAE
+    mae = (
+        (df_mace_ice13_1["e_lattice_kjmol"] - df_rev_pbe_d3["e_lattice_kjmol"])
+        .abs()
+        .mean()
+    )
+    mo.md(
+        f"La media degli errori assoluti tra MACE-ICE13-1 e revPBE-D3 è {mae:.2f} kJ/mol."
+    )
+    return mae,
 
 
 @app.cell
