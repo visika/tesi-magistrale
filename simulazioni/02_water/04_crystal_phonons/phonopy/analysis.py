@@ -121,6 +121,24 @@ def __(connections, labels, phonopy, qpoints):
 
 
 @app.cell
+def __(phonopy):
+    mace_ice13_1_s3 = {}
+    mace_ice13_1_s3["basepath"] = "MACE-ICE13-1/ICE-Ih/supercell=3/"
+    mace_ice13_1_s3["ph"] = phonopy.load(
+        mace_ice13_1_s3["basepath"] + "phonopy_params.yaml"
+    )
+    return mace_ice13_1_s3,
+
+
+@app.cell
+def __(connections, labels, mace_ice13_1_s3, qpoints):
+    mace_ice13_1_s3["ph"].run_band_structure(
+        qpoints, path_connections=connections, labels=labels, is_legacy_plot=False
+    )
+    return
+
+
+@app.cell
 def __(mo):
     mo.md("## Plot di tutte le bande trovate")
     return
@@ -139,12 +157,27 @@ def __(mo):
 
 
 @app.cell
-def __(mace_ice13_1, mace_mp_0, plt):
+def __(mace_ice13_1, plt):
     _fig, _ax = plt.subplots(
         ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
     mace_ice13_1["ph"].band_structure.plot(_ax)
-    mace_mp_0["ph"].plot_band_structure()
+
+    _ax[0].set_ylim(0, 5)
+    _ax[0].grid(axis="x")
+    _ax[0].set_ylabel("Frequency (THz)")
+
+    _fig.delaxes(_ax[1])
+    _fig
+    return
+
+
+@app.cell
+def __(mace_ice13_1_s3, plt):
+    _fig, _ax = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
+    )
+    mace_ice13_1_s3["ph"].band_structure.plot(_ax)
 
     _ax[0].set_ylim(0, 5)
     _ax[0].grid(axis="x")
@@ -195,6 +228,8 @@ def __(connections, labels, mace_ice13_1, mace_mp_0, plt):
     ]
     _axs[0].legend(custom_lines, ["MACE-ICE13-1", "MACE-MP-0"])
 
+    _fig.suptitle("Supercell $2 \\times 2 \\times 2$")
+
     _fig
     return (
         BandPlot,
@@ -205,6 +240,49 @@ def __(connections, labels, mace_ice13_1, mace_mp_0, plt):
         custom_lines,
         n,
     )
+
+
+@app.cell
+def __(
+    Line2D,
+    band_plot,
+    connections,
+    labels,
+    mace_ice13_1,
+    mace_ice13_1_s3,
+    plt,
+):
+    _n = len(
+        [x for x in mace_ice13_1["ph"]._band_structure.path_connections if not x]
+    )
+
+    _fig, _axs = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
+    )
+    _dict = mace_ice13_1["ph"].get_band_structure_dict()
+    _frequencies = _dict["frequencies"]
+    _distances = _dict["distances"]
+
+    band_plot(_axs, _frequencies, _distances, connections, labels, fmt="r--")
+
+    _dict = mace_ice13_1_s3["ph"].get_band_structure_dict()
+    _frequencies = _dict["frequencies"]
+    _distances = _dict["distances"]
+    band_plot(_axs, _frequencies, _distances, connections, labels, fmt="g-")
+
+    _axs[0].set_ylim(0, 5)
+    _fig.delaxes(_axs[1])
+    _axs[0].set_ylabel("Frequency (THz)")
+    _axs[0].grid()
+
+    _custom_lines = [
+        Line2D([0], [0], color="r", lw=2, ls="--"),
+        Line2D([0], [0], color="g", lw=2),
+    ]
+    _axs[0].legend(_custom_lines, ["MACE-ICE13-1 S2", "MACE-ICE13-1 S3"])
+
+    _fig
+    return
 
 
 @app.cell
@@ -234,10 +312,10 @@ def __(mesh, mo):
 
 
 @app.cell
-def __(mace_ice13_1, mace_mp_0, mesh, plt):
+def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
     _sigma = 0.05
 
-    # mace_ice13_1["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
+    mace_ice13_1["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
     mace_ice13_1["ph"].run_total_dos(
         sigma=_sigma,
         freq_min=0,
@@ -258,7 +336,25 @@ def __(mace_ice13_1, mace_mp_0, mesh, plt):
         zorder=10,
     )
 
-    # mace_mp_0["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
+    mace_ice13_1_s3["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
+    mace_ice13_1_s3["ph"].run_total_dos(
+        sigma=_sigma,
+        freq_min=0,
+        freq_max=14,
+        freq_pitch=None,
+        use_tetrahedron_method=True,
+    )
+    total_dos = mace_ice13_1_s3["ph"].get_total_dos_dict()
+
+    ax.plot(
+        total_dos["frequency_points"],
+        total_dos["total_dos"],
+        color="green",
+        label="MACE-ICE13-1 S3",
+        zorder=20,
+    )
+
+    mace_mp_0["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
     mace_mp_0["ph"].run_total_dos(
         sigma=_sigma,
         freq_min=0,
@@ -320,77 +416,50 @@ def __(mo):
 
 
 @app.cell
-def __(mo):
-    t_min = mo.ui.slider(
-        start=0,
-        stop=999,
-        debounce=False,
-        label="t_min",
-        value=0,
-        show_value=True,
-        orientation="vertical",
-    ).form()
-    t_max = mo.ui.slider(
-        start=1,
-        stop=1000,
-        debounce=False,
-        label="t_max",
-        value=100,
-        show_value=True,
-        orientation="vertical",
-    ).form()
-    t_step = mo.ui.slider(
-        start=1,
-        stop=100,
-        debounce=False,
-        label="t_step",
-        value=10,
-        show_value=True,
-        orientation="vertical",
-    ).form()
-    return t_max, t_min, t_step
-
-
-@app.cell
-def __(mo, t_max, t_min, t_step):
-    mo.hstack([t_min, t_max, t_step])
-    return
-
-
-@app.cell
-def __(mace_ice13_1, mace_mp_0, numero_molecole, plt):
+def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, numero_molecole, plt):
     mace_ice13_1["ph"].run_mesh(mesh=100.0)
     # ph.run_mesh(mesh=[_m] * 3)
 
 
-    def build_thermal_properties(ph, t_step=2, t_min=0, t_max=50):
+    def build_thermal_properties(ph, t_step=1, t_min=0, t_max=50):
         ph.run_thermal_properties(t_step=t_step, t_min=t_min, t_max=t_max)
         tp = ph.get_thermal_properties_dict()
         tp["heat_capacity"] = tp["heat_capacity"] / numero_molecole
         return tp
 
 
-    mace_ice13_1["thermal_properties"] = build_thermal_properties(
+    mace_ice13_1["thermal_properties_flubacher"] = build_thermal_properties(
         mace_ice13_1["ph"]
     )
-    mace_mp_0["thermal_properties"] = build_thermal_properties(mace_mp_0["ph"])
+    mace_mp_0["thermal_properties_flubacher"] = build_thermal_properties(mace_mp_0["ph"])
+    mace_ice13_1_s3["thermal_properties_flubacher"] = build_thermal_properties(
+        mace_ice13_1_s3["ph"]
+    )
 
     R_KJmol = 8.31446261815
 
     plt.plot(
-        mace_ice13_1["thermal_properties"]["temperatures"],
-        mace_ice13_1["thermal_properties"]["heat_capacity"] / R_KJmol,
+        mace_ice13_1["thermal_properties_flubacher"]["temperatures"],
+        mace_ice13_1["thermal_properties_flubacher"]["heat_capacity"] / R_KJmol,
         marker="o",
         label="MACE-ICE13-1",
         color="red",
     )
 
     plt.plot(
-        mace_mp_0["thermal_properties"]["temperatures"],
-        mace_mp_0["thermal_properties"]["heat_capacity"] / R_KJmol,
+        mace_mp_0["thermal_properties_flubacher"]["temperatures"],
+        mace_mp_0["thermal_properties_flubacher"]["heat_capacity"] / R_KJmol,
         marker="o",
         label="MACE-MP-0",
         color="blue",
+    )
+
+    plt.plot(
+        mace_ice13_1_s3["thermal_properties_flubacher"]["temperatures"],
+        mace_ice13_1_s3["thermal_properties_flubacher"]["heat_capacity"] / R_KJmol,
+        marker="o",
+        label="MACE-ICE13-1 S3",
+        color="green",
     )
 
     plt.xlabel("Temperature (K)")
@@ -448,6 +517,7 @@ def __(
     flubacher_heat_capacities_J,
     flubacher_temps,
     mace_ice13_1,
+    mace_ice13_1_s3,
     mace_mp_0,
     plt,
 ):
@@ -456,19 +526,27 @@ def __(
         y=flubacher_heat_capacities_J,
         label="Flubacher 1960",
         color="green",
+        marker="x"
     )
     plt.scatter(
-        x=mace_ice13_1["thermal_properties"]["temperatures"],
-        y=mace_ice13_1["thermal_properties"]["heat_capacity"],
+        x=mace_ice13_1["thermal_properties_flubacher"]["temperatures"],
+        y=mace_ice13_1["thermal_properties_flubacher"]["heat_capacity"],
         label="MACE-ICE13-1",
         color="red",
     )
 
     plt.scatter(
-        x=mace_mp_0["thermal_properties"]["temperatures"],
-        y=mace_mp_0["thermal_properties"]["heat_capacity"],
+        x=mace_mp_0["thermal_properties_flubacher"]["temperatures"],
+        y=mace_mp_0["thermal_properties_flubacher"]["heat_capacity"],
         label="MACE-MP-0",
         color="blue",
+    )
+
+    plt.scatter(
+        x=mace_ice13_1_s3["thermal_properties_flubacher"]["temperatures"],
+        y=mace_ice13_1_s3["thermal_properties_flubacher"]["heat_capacity"],
+        label="MACE-ICE13-1 S3",
+        color="green",
     )
 
     plt.xlabel("Temperature (K)")
@@ -487,30 +565,43 @@ def __(
     flubacher_heat_capacities_cal,
     flubacher_temps,
     mace_ice13_1,
+    mace_ice13_1_s3,
     mace_mp_0,
     plt,
 ):
     x = flubacher_temps**2
     y = flubacher_heat_capacities_cal / flubacher_temps**3 * 1e5
 
-    plt.scatter(x, y, color="green", label="Flubacher 1960")
+    plt.scatter(x, y, color="green", label="Flubacher 1960", marker="x")
 
     plt.scatter(
-        mace_ice13_1["thermal_properties"]["temperatures"] ** 2,
-        mace_ice13_1["thermal_properties"]["heat_capacity"] / cal2J
-        / mace_ice13_1["thermal_properties"]["temperatures"] ** 3
+        mace_ice13_1["thermal_properties_flubacher"]["temperatures"] ** 2,
+        mace_ice13_1["thermal_properties_flubacher"]["heat_capacity"]
+        / cal2J
+        / mace_ice13_1["thermal_properties_flubacher"]["temperatures"] ** 3
         * 1e5,
         color="red",
         label="MACE-ICE13-1",
     )
 
     plt.scatter(
-        mace_mp_0["thermal_properties"]["temperatures"] ** 2,
-        mace_mp_0["thermal_properties"]["heat_capacity"] / cal2J
-        / mace_mp_0["thermal_properties"]["temperatures"] ** 3
+        mace_mp_0["thermal_properties_flubacher"]["temperatures"] ** 2,
+        mace_mp_0["thermal_properties_flubacher"]["heat_capacity"]
+        / cal2J
+        / mace_mp_0["thermal_properties_flubacher"]["temperatures"] ** 3
         * 1e5,
         color="blue",
         label="MACE-MP-0",
+    )
+
+    plt.scatter(
+        mace_ice13_1_s3["thermal_properties_flubacher"]["temperatures"] ** 2,
+        mace_ice13_1_s3["thermal_properties_flubacher"]["heat_capacity"]
+        / cal2J
+        / mace_ice13_1_s3["thermal_properties_flubacher"]["temperatures"] ** 3
+        * 1e5,
+        color="green",
+        label="MACE-ICE13-1 S3",
     )
 
     plt.xlabel("$T^2$")
@@ -560,6 +651,7 @@ def __(
     build_thermal_properties,
     holzapfel,
     mace_ice13_1,
+    mace_ice13_1_s3,
     mace_mp_0,
     plt,
 ):
@@ -568,6 +660,7 @@ def __(
         y=holzapfel["C_V/R"],
         label="Holzapfel 2021",
         color="green",
+        marker="x",
     )
 
     mace_ice13_1["thermal_properties"] = build_thermal_properties(
@@ -592,18 +685,39 @@ def __(
         color="blue",
     )
 
+    mace_ice13_1_s3["thermal_properties"] = build_thermal_properties(
+        mace_ice13_1_s3["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_ice13_1_s3["thermal_properties"]["temperatures"],
+        y=mace_ice13_1_s3["thermal_properties"]["heat_capacity"] / R_KJmol,
+        label="MACE-ICE13-1 S3",
+        color="green",
+    )
+
     plt.xlabel("Temperature (K)")
+    plt.ylabel("$C_V/R$")
     plt.legend()
     return
 
 
 @app.cell
-def __(R_KJmol, holzapfel, mace_ice13_1, mace_mp_0, np, plt):
+def __(
+    R_KJmol,
+    holzapfel,
+    mace_ice13_1,
+    mace_ice13_1_s3,
+    mace_mp_0,
+    np,
+    plt,
+):
     plt.scatter(
         x=np.log10(holzapfel["T(K)"].loc[1:]),
         y=np.log10(holzapfel["C_V/R"].loc[1:]),
-        label="Holzapfel",
+        label="Holzapfel 2021",
         color="green",
+        marker="x",
     )
 
     plt.scatter(
@@ -617,15 +731,22 @@ def __(R_KJmol, holzapfel, mace_ice13_1, mace_mp_0, np, plt):
 
     plt.scatter(
         x=np.log10(mace_mp_0["thermal_properties"]["temperatures"][1:]),
-        y=np.log10(
-            mace_mp_0["thermal_properties"]["heat_capacity"][1:] / R_KJmol
-        ),
+        y=np.log10(mace_mp_0["thermal_properties"]["heat_capacity"][1:] / R_KJmol),
         label="MACE-MP-0",
         color="blue",
     )
 
+    plt.scatter(
+        x=np.log10(mace_ice13_1_s3["thermal_properties"]["temperatures"][1:]),
+        y=np.log10(
+            mace_ice13_1_s3["thermal_properties"]["heat_capacity"][1:] / R_KJmol
+        ),
+        label="MACE-ICE13-1 S3",
+        color="green",
+    )
+
     plt.xlabel("log10(Temperature (K))")
-    plt.ylabel("log10(Heat capacity / R)")
+    plt.ylabel("log10($C_V/R$)")
     plt.legend()
     return
 
@@ -633,6 +754,11 @@ def __(R_KJmol, holzapfel, mace_ice13_1, mace_mp_0, np, plt):
 @app.cell
 def __(np):
     help(np.log)
+    return
+
+
+@app.cell
+def __():
     return
 
 
