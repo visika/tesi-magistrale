@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+#
+# Questo script serve a calcolare le forze dovute agli spostamenti finiti.
+# Successivamente a questo viene l'analisi delle componenti armoniche.
+
+# nc è il lato della supercella da usare
+nc = 2
+
 import phonopy
 from ase import Atoms
 from datetime import datetime
@@ -59,7 +66,6 @@ cell = ASE2PhonopyAtoms(atoms)
 
 t = datetime.now()
 print(f"Displacements started at {t}")
-nc = 2
 supercell_matrix = ((nc, 0, 0), (0, nc, 0), (0, 0, nc))
 ph = phonopy.Phonopy(cell, supercell_matrix)
 ph.generate_displacements(distance=0.01)
