@@ -1,10 +1,10 @@
 import marimo
 
-__generated_with = "0.2.13"
+__generated_with = "0.3.3"
 app = marimo.App(layout_file="layouts/analysis.grid.json")
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(mo):
     mo.md(
         """
@@ -26,31 +26,10 @@ def __():
     return pd,
 
 
-@app.cell
-def __(pd):
-    df = pd.read_csv('MACE-MP-0/energies.csv')
-    # Sort the dataframe according to distance
-    df = df.sort_values(by='distance')
-    df
-    return df,
-
-
-@app.cell
-def __():
-    # Read value from file
-    f = open(
-        "../../01_molecule/01.8_molecule_converge_fmax_parallel_dispersion/medium/1e-8/e_gas.txt",
-        "r",
-    )
-    e_gas_ev = float(f.read())
-    # e_gas_ev = -14.170072284496875
-    e_gas_ev
-    return e_gas_ev, f
-
-
 @app.cell(hide_code=True)
 def __():
     import marimo as mo
+
     mo.md(
         """
         La binding energy si calcola come
@@ -64,81 +43,117 @@ def __():
 
 
 @app.cell
-def __(df, e_gas_ev):
-    df['binding_energy'] = df['energy'] - 2 * e_gas_ev
-    df["binding_energy_kjmol"] = df["binding_energy"] * 96.4916
-    df.plot(
-        x="distance",
-        y="binding_energy_kjmol",
-        ylim=(-35, 0),
-        xlabel="$r_{OO}$",
-        ylabel="Binding energy (kJ/mol)",
-        xlim=(2, 7),
-        title="MACE-MP-0 medium D"
-    )
-    return
+def __(pd):
+    def df_binding_energy(model: str, molecule_energy):
+        """
+        model: name of the model
+        molecule_energy: energy of the molecule in eV
+        """
+        df = pd.read_csv(f"{model}/energies.csv")
+        df = df.sort_values(by="distance")
+        df["binding_energy"] = df["energy"] - 2 * molecule_energy
+        df["binding_energy_kjmol"] = df["binding_energy"] * 96.4916
+        return df
+    return df_binding_energy,
 
 
 @app.cell
-def __(pd):
-    df_n2p2 = pd.read_csv('n2p2/energies.csv')
-    df_n2p2 = df_n2p2.sort_values(by='distance')
-    df_n2p2.plot(x="distance", y="energy")
+def __(df_binding_energy):
+    with open("../../01_molecule/01.8_molecule_converge_fmax_parallel_dispersion/medium/1e-8/e_gas.txt",
+        "r",) as _f:
+        e_gas_ev = float(_f.read())
+        df = df_binding_energy("MACE-MP-0", e_gas_ev)
+    return df, e_gas_ev
+
+
+@app.cell
+def __(df_binding_energy):
     e_gas_n2p2_ev = -468.46641416393885
-    df_n2p2['binding_energy'] = df_n2p2['energy'] - 2 * e_gas_n2p2_ev
-    df_n2p2["binding_energy_kjmol"] = df_n2p2["binding_energy"] * 96.4916
-    df_n2p2.plot(
-        x="distance",
-        y="binding_energy_kjmol",
-        xlabel="$r_{OO}$",
-        xlim=(2, 7),
-        title="n2p2"
-    )
+    df_n2p2 = df_binding_energy("n2p2", e_gas_n2p2_ev)
     return df_n2p2, e_gas_n2p2_ev
 
 
 @app.cell
-def __(mo):
-    mo.md("## Studio di MACE-ICE13")
-    return
-
-
-@app.cell
-def __(pd):
-    df_ice13 = pd.read_csv("MACE-ICE13/energies.csv")
-    df_ice13 = df_ice13.sort_values(by="distance")
-    df_ice13.plot(x="distance", y="energy")
-    _f = open(
-        "../../01_molecule/MACE-ICE13/dispersion=True/1e-8/e_gas.txt",
-        "r",
-    )
-    e_gas_ice13_ev = float(_f.read())
-    # e_gas_ice13_ev = -14.285827697209658
-    df_ice13["binding_energy"] = df_ice13["energy"] - 2 * e_gas_ice13_ev
-    df_ice13["binding_energy_kjmol"] = df_ice13["binding_energy"] * 96.4916
-    df_ice13.plot(
-        x="distance",
-        y="binding_energy_kjmol",
-        xlabel="$r_{OO}$",
-        ylabel="Binding energy (kJ/mol)",
-        xlim=(2, 7),
-        ylim=(-25, 0),
-        title="MACE-ICE13 D",
-    )
+def __(df_binding_energy):
+    with open(
+        "../../01_molecule/MACE-ICE13/dispersion=True/1e-8/e_gas.txt", "r"
+    ) as _f:
+        e_gas_ice13_ev = float(_f.read())
+        df_ice13 = df_binding_energy("MACE-ICE13", e_gas_ice13_ev)
     return df_ice13, e_gas_ice13_ev
 
 
 @app.cell
+def __(df_binding_energy):
+    with open(
+        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/01_molecule/MACE-ICE13-1/e_gas.txt",
+        "r",
+    ) as _f:
+        e_gas_mace_ice13_1 = float(_f.read())
+        df_mace_ice13_1 = df_binding_energy("MACE-ICE13-1", e_gas_mace_ice13_1)
+    return df_mace_ice13_1, e_gas_mace_ice13_1
+
+
+@app.cell
+def __(df, df_ice13, df_mace_ice13_1, df_n2p2):
+    # Plot all the data
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(layout="constrained")
+
+    ax.plot(
+        df["distance"],
+        df["binding_energy_kjmol"],
+        label="MACE-MP-0 medium+D",
+        marker="o",
+    )
+    ax.plot(
+        df_n2p2["distance"],
+        df_n2p2["binding_energy_kjmol"],
+        label="n2p2",
+        marker="o",
+    )
+    ax.plot(
+        df_ice13["distance"],
+        df_ice13["binding_energy_kjmol"],
+        label="MACE-ICE13",
+        marker="o",
+    )
+    ax.plot(
+        df_mace_ice13_1["distance"],
+        df_mace_ice13_1["binding_energy_kjmol"],
+        label="MACE-ICE13-1",
+        marker="s",
+    )
+
+    ax.set_xlabel("$r_{OO}$")
+    ax.set_ylabel("Binding energy (kJ/mol)")
+
+    ax.set_ylim(-35, 0)
+
+    # Draw a horizontal line
+    ax.axhline(y=-22.7, color="r", linestyle="--", label="Exp. value")
+
+    # Draw a vertical line
+    ax.axvline(x=2.98, color="r", linestyle="--")
+
+    ax.legend()
+
+    # fig.savefig("binding_energy.png")
+    return ax, fig, plt
+
+
+@app.cell(disabled=True)
 def __():
     # View the geometries
     from ase.visualize import view
     from ase.io import read
     import glob
-    filenames = glob.glob("MACE-ICE13/final_dist=*.xyz")
+    filenames = glob.glob("MACE-ICE13-1/final_dist=*.xyz")
     filenames = sorted(filenames)
     filenames
     atoms = [read(f) for f in filenames]
-    # view(atoms)
+    view(atoms)
     return atoms, filenames, glob, read, view
 
 

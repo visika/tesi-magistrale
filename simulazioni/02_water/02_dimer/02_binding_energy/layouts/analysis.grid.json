@@ -22,8 +22,11 @@
         "position": null
       },
       {
+        "position": null
+      },
+      {
         "position": [
-          8,
+          0,
           0,
           8,
           18
@@ -34,14 +37,6 @@
       },
       {
         "position": null
-      },
-      {
-        "position": [
-          0,
-          0,
-          8,
-          18
-        ]
       },
       {
         "position": null
