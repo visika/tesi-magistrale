@@ -137,7 +137,7 @@ def __(df, dispersion, fmax, model, plt):
     plt.xlabel("Displacement (Å)")
     plt.ylabel("Frequency (cm^-1)")
 
-    # plt.savefig("MACE-ICE13-1/frequencies.png")
+    # plt.savefig("MACE-xxx-y/frequencies.png")
     return groups, title_fmax
 
 
