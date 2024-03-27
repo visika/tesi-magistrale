@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.2.13"
+__generated_with = "0.3.3"
 app = marimo.App(layout_file="layouts/01.9_analysis.grid.json")
 
 
@@ -71,10 +71,16 @@ def __(glob):
                 filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
             )
         elif model == "MACE-ICE13":
-            root = "MACE-ICE13"
+            root = model
             filenames = glob.glob(
                 f"{root}/" f"dispersion={dispersion}/" f"{fmax}/*_summary.txt"
             )
+            filenames = sorted(
+                filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
+            )
+        elif model == "MACE-ICE13-1":
+            root = model
+            filenames = glob.glob(f"{root}/" f"*_summary.txt")
             filenames = sorted(
                 filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
             )
@@ -84,7 +90,7 @@ def __(glob):
 
 @app.cell
 def __(mo):
-    models = ["small", "medium", "large", "MACE-ICE13"]
+    models = ["small", "medium", "large", "MACE-ICE13", "MACE-ICE13-1"]
     model = mo.ui.dropdown(options=models, value="small", label="Modello")
 
     fmaxs = ["1e-1", "1e-2", "1e-3", "1e-4", "1e-5", "1e-6", "1e-7", "1e-8"]
@@ -117,14 +123,22 @@ def __(df, dispersion, fmax, model, plt):
     plt.yscale("symlog", linthresh=1e-1)
     plt.ylim(-1e4, 1e4)
     plt.legend(ncol=2)
+
+    if model.value == "MACE-ICE13-1":
+        title_fmax = ", fmax=1e-8"
+    else:
+        title_fmax = f", fmax={fmax.value}"
+
     plt.title(
         f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
         f"{' D' if dispersion.value else ''}"
-        f", fmax={fmax.value}"
+        f"{title_fmax}"
     )
     plt.xlabel("Displacement (Å)")
     plt.ylabel("Frequency (cm^-1)")
-    return groups,
+
+    # plt.savefig("MACE-ICE13-1/frequencies.png")
+    return groups, title_fmax
 
 
 if __name__ == "__main__":
