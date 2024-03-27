@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.2.13"
+__generated_with = "0.3.3"
 app = marimo.App(layout_file="layouts/analysis.grid.json")
 
 
@@ -21,7 +21,7 @@ def __(mo):
 
 @app.cell
 def __(mo):
-    models = ["small", "medium", "large", "MACE-ICE13", "n2p2"]
+    models = ["small", "medium", "large", "MACE-ICE13", "MACE-ICE13-1", "n2p2"]
     model = mo.ui.dropdown(options=models, value="small", label="Modello")
     model
     return model, models
@@ -47,8 +47,8 @@ def __(glob):
         if model in ["small", "medium", "large"]:
             root = "MACE-MP-0"
             filenames = glob.glob(f"{root}/{model}/*_summary.txt")
-        elif model == "MACE-ICE13":
-            root = "MACE-ICE13"
+        elif model in ["MACE-ICE13", "MACE-ICE13-1"]:
+            root = model
             filenames = glob.glob(f"{root}/*_summary.txt")
         elif model == "n2p2":
             root = "n2p2"
@@ -113,8 +113,8 @@ def __(df, model, plt):
     plt.ylim(-1e4, 1e4)
     if model.value in ["small", "medium", "large"]:
         plt.title(f"MACE-MP-0 {model.value} D")
-    elif model.value == "MACE-ICE13":
-        plt.title("MACE-ICE13 D")
+    elif model.value in ["MACE-ICE13", "MACE-ICE13-1"]:
+        plt.title(model.value)
     elif model.value == "n2p2":
         plt.title(f"n2p2")
     plt.xlabel("Displacement (Å)")
@@ -151,13 +151,17 @@ def __():
 
 @app.cell
 def __(model, read):
-    if model.value in ["small", "medium", "large"]:
-        atoms = read(f"MACE-MP-0/{model.value}/final.xyz")
-    elif model.value == "MACE-ICE13":
-        atoms = read("MACE-ICE13/final.xyz")
-    elif model.value == "n2p2":
-        atoms = read("n2p2/01_relax-positions/final.pdb")
-    return atoms,
+    def atoms_reader(model: str):
+        if model in ["small", "medium", "large"]:
+            atoms = read(f"MACE-MP-0/{model}/final.xyz")
+        elif model in ["MACE-ICE13", "MACE-ICE13-1"]:
+            atoms = read(f"{model}/final.xyz")
+        elif model == "n2p2":
+            atoms = read("n2p2/01_relax-positions/final.pdb")
+        return atoms
+
+    atoms = atoms_reader(model.value)
+    return atoms, atoms_reader
 
 
 @app.cell
@@ -170,15 +174,72 @@ def __():
 def __(atoms, mo):
     mo.md(
         f"""
-        |valore|letteratura|simulato|
-        |------|-----------|--------|
-        |Angolo alpha|5.5°|{atoms.get_angle(0, 3, 5).round(1)}°|
-        |Angolo interno della molecola accettore| 104.87° | {atoms.get_angle(1, 0, 2).round(2)}°|
-        |Angolo interno della molecola donore| 104.83° | {atoms.get_angle(4, 3, 5).round(2)}°|
-        |Distanza O-O|291.2 pm = 2.912 Å|{atoms.get_distance(0, 3).round(2)} Å|
-        |Angolo beta|124.4°|{atoms.get_angle(1, 0, 3).round(1)}°|
+        ## Geometria
+        |valore|letteratura|simulato|errore|
+        |------|-----------|--------|------|
+        |Angolo alpha|{(alpha_ref := 5.5)}°|{(alpha_sim := atoms.get_angle(0, 3, 5).round(1))}°|{(alpha_sim - alpha_ref).round(2)}|
+        |Angolo interno della molecola accettore| {(ang_int_acc_ref := 104.87)}° | {(ang_int_acc_sim := atoms.get_angle(1, 0, 2).round(2))}°|{(ang_int_acc_sim - ang_int_acc_ref).round(2)}
+        |Angolo interno della molecola donore| {(ang_int_don_ref := 104.83)}° | {(ang_int_don_sim := atoms.get_angle(4, 3, 5).round(2))}°|{(ang_int_don_sim - ang_int_don_ref).round(2)}
+        |Distanza O-O|291.2 pm = {(r_oo_ref := 2.912)} Å|{(r_oo_sim := atoms.get_distance(0, 3).round(2))} Å|{(r_oo_sim - r_oo_ref).round(2)}
+        |Angolo beta|{(beta_ref := 124.4)}°|{(beta_sim := atoms.get_angle(1, 0, 3).round(1))}°|{(beta_sim - beta_ref).round(1)}
         """
     )
+    return (
+        alpha_ref,
+        alpha_sim,
+        ang_int_acc_ref,
+        ang_int_acc_sim,
+        ang_int_don_ref,
+        ang_int_don_sim,
+        beta_ref,
+        beta_sim,
+        r_oo_ref,
+        r_oo_sim,
+    )
+
+
+@app.cell
+def __(mo):
+    mo.md("## Studio degli errori")
+    return
+
+
+@app.cell
+def __(
+    alpha_ref,
+    ang_int_acc_ref,
+    ang_int_don_ref,
+    atoms_reader,
+    beta_ref,
+    mo,
+    models,
+    pd,
+    r_oo_ref,
+):
+    _df = pd.DataFrame()
+
+    for _model in models:
+        _atoms = atoms_reader(_model)
+        _new_df = pd.DataFrame(
+            {
+                "modello": _model,
+                "alpha": abs(_atoms.get_angle(0, 3, 5) - alpha_ref).round(1),
+                "ang_int_acc": abs(_atoms.get_angle(1, 0, 2) - ang_int_acc_ref).round(
+                    2
+                ),
+                "ang_int_don": abs(_atoms.get_angle(4, 3, 5) - ang_int_don_ref).round(
+                    2
+                ),
+                "r_oo": abs(_atoms.get_distance(0, 3) - r_oo_ref).round(2),
+                "beta": abs(_atoms.get_angle(1, 0, 3) - beta_ref).round(1),
+            },
+            index=["modello"],
+        )
+        _df = pd.concat([_df, _new_df], axis=0, ignore_index=True)
+
+    # _df.style.highlight_min(axis=0, color="lightgreen")
+    # _df.style.background_gradient(axis=0, cmap="Greens_r")
+    mo.ui.table(_df)
     return
 
 
