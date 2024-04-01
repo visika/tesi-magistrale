@@ -450,6 +450,7 @@ def __(
 
     plt.xlabel("Structure")
     plt.ylabel("Relative lattice energy (kJ/mol)")
+    plt.title("Relative lattice energy")
     plt.grid()
 
     plt.legend()
