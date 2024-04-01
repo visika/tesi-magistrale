@@ -8,7 +8,7 @@ app = marimo.App()
 def __(mo):
     mo.md(
         """
-        # Grafici per il confronto di MACE-MP-0 e MACE-ICE13-1 con i rispettivi pseudopotenziali di riferimento
+        # Confronto di MACE-MP-0 e MACE-ICE13-1 con i rispettivi pseudopotenziali di riferimento
 
         I dati per i 13 cristalli di ghiaccio analizzati con MACE-MP-0 medium con dispersione sono presenti nella cartella `09_ICE13_MACE`.
 
@@ -16,7 +16,7 @@ def __(mo):
 
         Per calcolare l'energia del reticolo, si calcola la differenza \(E_\mathrm{lattice} \coloneqq E_\mathrm{crystal} - E_\mathrm{gas}\).
 
-        La quantità \(E_\mathrm{gas}\) è stata calcolata nelle run con codice `01`. In particolare, la simulazione con migliore convergenza è nella cartella `01.8_molecule_converge_fmax_parallel_dispersion`.
+        La quantità \(E_\mathrm{gas}\) è stata calcolata nelle run con codice `01_molecule`. In particolare, la simulazione con migliore convergenza è nella cartella `01.8_molecule_converge_fmax_parallel_dispersion`. Si fa presente che la molecola di riferimento usata nell'articolo ICE13 è quella denominata Patridge. È stata usata appunto questa geometria per i risultati con MACE-ICE13-1, e deve essere rifatta per gli altri potenziali a loro volta.
         """
     )
     return
@@ -44,7 +44,14 @@ def __():
         "r",
     )
     e_gas_large_dispersion_ev = float(_f.readlines()[0])
-    return e_gas_large_dispersion_ev, e_gas_medium_dispersion_ev
+
+    with open("/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/01_molecule/MACE-MP-0_patridge/e_gas.txt") as _f:
+        e_gas_patridge_mace_mp_0 = float(_f.readlines()[0])
+    return (
+        e_gas_large_dispersion_ev,
+        e_gas_medium_dispersion_ev,
+        e_gas_patridge_mace_mp_0,
+    )
 
 
 @app.cell
@@ -55,7 +62,12 @@ def __():
 
 
 @app.cell
-def __(e_gas_medium_dispersion_ev, evp_to_kjmol, pl):
+def __(
+    e_gas_medium_dispersion_ev,
+    e_gas_patridge_mace_mp_0,
+    evp_to_kjmol,
+    pl,
+):
     df_medium_d = pl.read_csv("ICE13_MACE_medium/crystal_energies.csv")
     df_medium_d = df_medium_d.with_columns(
         (pl.col("e_crys") - e_gas_medium_dispersion_ev).alias("e_lattice_evp")
@@ -67,7 +79,17 @@ def __(e_gas_medium_dispersion_ev, evp_to_kjmol, pl):
         (pl.col("e_lattice_evp") * 1e3).alias("e_lattice_mevp")
     )
     # df_medium_d
+    df_medium_d = df_medium_d.with_columns(
+        (pl.col("e_crys") - e_gas_patridge_mace_mp_0).alias(
+            "e_lattice_patridge_ev"
+        )
+    )
     return df_medium_d,
+
+
+@app.cell
+def __():
+    return
 
 
 @app.cell
@@ -198,7 +220,7 @@ def __(pl):
     return df_rev_pbe_d3, rev_pbe_d3_kjmol
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(
     df_dmc,
     df_large_d,
@@ -259,6 +281,13 @@ def __(
         label="MACE-MP-0 medium+D3",
     )
 
+    plt.plot(
+        df_medium_d["structure"],
+        df_medium_d["e_lattice_patridge_ev"] * evp_to_kjmol,
+        marker="o",
+        label="MACE-MP-0 medium (Patridge)",
+    )
+
     # MACE-MP-0 large
     plt.plot(
         df_large_d["structure"],
@@ -270,9 +299,11 @@ def __(
     plt.xlabel("Structure")
     plt.ylabel("Lattice energy (kJ/mol)")
     plt.grid()
-    plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=3, loc="upper center")
+    plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=2, loc="upper center")
     plt.title("Absolute lattice energy")
-    ax
+
+    # fig.savefig("absolute_lattice_energy.png")
+    fig
     return ax, fig
 
 
