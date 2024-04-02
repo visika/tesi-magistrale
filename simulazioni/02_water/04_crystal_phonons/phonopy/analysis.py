@@ -14,6 +14,8 @@ def __(mo):
         Queste quantità fisiche sono conservate nel file `phonopy_params.yaml`.
 
         Con gli strumenti di ASE è possibile visualizzare la prima zona di Brillouin della geometria in esame, ottenendo le coordinate dei punti speciali.
+
+        Si confrontano i risultati delle simulazioni con i valori in letteratura disponibili.
         """
     )
     return
@@ -312,7 +314,7 @@ def __(mesh, mo):
 
 
 @app.cell
-def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
+def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh):
     _sigma = 0.05
 
     mace_ice13_1["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
@@ -324,17 +326,6 @@ def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
         use_tetrahedron_method=True,
     )
     # ph.write_total_dos(filename=f"total_dos_mesh_{mesh.value}.dat")
-    total_dos = mace_ice13_1["ph"].get_total_dos_dict()
-
-    fig, ax = plt.subplots(layout="constrained")
-
-    ax.plot(
-        total_dos["frequency_points"],
-        total_dos["total_dos"],
-        color="red",
-        label="MACE-ICE13-1",
-        zorder=10,
-    )
 
     mace_ice13_1_s3["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
     mace_ice13_1_s3["ph"].run_total_dos(
@@ -343,15 +334,6 @@ def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
         freq_max=14,
         freq_pitch=None,
         use_tetrahedron_method=True,
-    )
-    total_dos = mace_ice13_1_s3["ph"].get_total_dos_dict()
-
-    ax.plot(
-        total_dos["frequency_points"],
-        total_dos["total_dos"],
-        color="green",
-        label="MACE-ICE13-1 S3",
-        zorder=20,
     )
 
     mace_mp_0["ph"].run_mesh([mesh.value, mesh.value, mesh.value])
@@ -362,14 +344,37 @@ def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
         freq_pitch=None,
         use_tetrahedron_method=True,
     )
-    total_dos = mace_mp_0["ph"].get_total_dos_dict()
+    return
+
+
+@app.cell
+def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
+    fig, ax = plt.subplots(layout="constrained")
 
     ax.plot(
-        total_dos["frequency_points"],
-        total_dos["total_dos"],
+        mace_ice13_1["ph"].get_total_dos_dict()["frequency_points"],
+        mace_ice13_1["ph"].get_total_dos_dict()["total_dos"],
+        color="red",
+        label="MACE-ICE13-1",
+        zorder=10,
+    )
+
+    ax.plot(
+        mace_ice13_1_s3["ph"].get_total_dos_dict()["frequency_points"],
+        mace_ice13_1_s3["ph"].get_total_dos_dict()["total_dos"],
+        color="green",
+        label="MACE-ICE13-1 S3",
+        zorder=20,
+    )
+
+    ax.plot(
+        mace_mp_0["ph"].get_total_dos_dict()["frequency_points"],
+        mace_mp_0["ph"].get_total_dos_dict()["total_dos"],
         color="blue",
         label="MACE-MP-0",
         zorder=1,
+        linestyle="-",
+        linewidth=0.5,
     )
 
     ax.set_ylim(bottom=0)
@@ -392,7 +397,7 @@ def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh, plt):
     plt.grid()
     plt.legend(loc="upper left")
     ax
-    return K2THz, THz2K, ax, fig, secax, total_dos
+    return K2THz, THz2K, ax, fig, secax
 
 
 @app.cell(disabled=True)
@@ -623,8 +628,6 @@ def __(holzapfel, mo):
         ## Lettura dei dati di Holzapfel e Klotz 2021
 
         Presi dalla TABLE V.
-
-
         """
             ),
             holzapfel,
@@ -698,6 +701,145 @@ def __(
 
     plt.xlabel("Temperature (K)")
     plt.ylabel("$C_V/R$")
+    plt.title("Constant volume heat capacity")
+    plt.legend()
+    return
+
+
+@app.cell
+def __(
+    R_KJmol,
+    build_thermal_properties,
+    holzapfel,
+    mace_ice13_1,
+    mace_ice13_1_s3,
+    mace_mp_0,
+    plt,
+):
+    # Zoom sulla zona a basse temperature
+
+    plt.scatter(
+        x=holzapfel["T(K)"],
+        y=holzapfel["C_V/R"],
+        label="Holzapfel 2021",
+        color="green",
+        marker="x",
+    )
+
+    mace_ice13_1["thermal_properties"] = build_thermal_properties(
+        mace_ice13_1["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_ice13_1["thermal_properties"]["temperatures"],
+        y=mace_ice13_1["thermal_properties"]["heat_capacity"] / R_KJmol,
+        label="MACE-ICE13-1",
+        color="red",
+    )
+
+    mace_mp_0["thermal_properties"] = build_thermal_properties(
+        mace_mp_0["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_mp_0["thermal_properties"]["temperatures"],
+        y=mace_mp_0["thermal_properties"]["heat_capacity"] / R_KJmol,
+        label="MACE-MP-0",
+        color="blue",
+    )
+
+    mace_ice13_1_s3["thermal_properties"] = build_thermal_properties(
+        mace_ice13_1_s3["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_ice13_1_s3["thermal_properties"]["temperatures"],
+        y=mace_ice13_1_s3["thermal_properties"]["heat_capacity"] / R_KJmol,
+        label="MACE-ICE13-1 S3",
+        color="green",
+    )
+
+    plt.xlabel("Temperature (K)")
+    plt.ylabel("$C_V/R$")
+    plt.title("Constant volume heat capacity")
+
+    plt.xlim(-0.5, 31)
+    plt.ylim(-0.01, 0.5)
+
+    plt.legend()
+    return
+
+
+@app.cell
+def __(
+    R_KJmol,
+    build_thermal_properties,
+    flubacher_heat_capacities_J,
+    flubacher_temps,
+    holzapfel,
+    mace_ice13_1,
+    mace_ice13_1_s3,
+    mace_mp_0,
+    plt,
+):
+    # Plot di Holzapfel insieme a Flubacher
+
+    plt.scatter(
+        x=holzapfel["T(K)"],
+        y=holzapfel["C_V/R"] * R_KJmol,
+        label="Holzapfel 2021",
+        color="green",
+        marker="+",
+    )
+
+    plt.scatter(
+        x=flubacher_temps,
+        y=flubacher_heat_capacities_J,
+        label="Flubacher 1960",
+        color="green",
+        marker="x"
+    )
+
+    mace_ice13_1["thermal_properties"] = build_thermal_properties(
+        mace_ice13_1["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_ice13_1["thermal_properties"]["temperatures"],
+        y=mace_ice13_1["thermal_properties"]["heat_capacity"],
+        label="MACE-ICE13-1",
+        color="red",
+    )
+
+    mace_mp_0["thermal_properties"] = build_thermal_properties(
+        mace_mp_0["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_mp_0["thermal_properties"]["temperatures"],
+        y=mace_mp_0["thermal_properties"]["heat_capacity"],
+        label="MACE-MP-0",
+        color="blue",
+    )
+
+    mace_ice13_1_s3["thermal_properties"] = build_thermal_properties(
+        mace_ice13_1_s3["ph"], t_step=5, t_min=0, t_max=265
+    )
+
+    plt.scatter(
+        x=mace_ice13_1_s3["thermal_properties"]["temperatures"],
+        y=mace_ice13_1_s3["thermal_properties"]["heat_capacity"],
+        label="MACE-ICE13-1 S3",
+        color="green",
+    )
+
+    plt.xlabel("Temperature (K)")
+    plt.ylabel("J/K/mol")
+    plt.title("Constant volume heat capacity")
+
+    plt.xlim(-0.5, 31)
+    plt.ylim(-0.2, 4)
+
     plt.legend()
     return
 
@@ -747,6 +889,7 @@ def __(
 
     plt.xlabel("log10(Temperature (K))")
     plt.ylabel("log10($C_V/R$)")
+    plt.title("Constant volume heat capacity")
     plt.legend()
     return
 
