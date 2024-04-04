@@ -6,12 +6,34 @@ app = marimo.App()
 
 @app.cell
 def __():
+    import marimo as mo
+    return mo,
+
+
+@app.cell
+def __(mo):
+    mo.md(
+        """
+        # Dispersione fononica del ghiaccio pesante
+
+        Si simula la configurazione indicata dall'articolo Strässle2004.
+        """
+    )
+    return
+
+
+@app.cell
+def __():
     import os
+    import phonopy
     from ase.io import read
+    from phonopy.phonon.band_structure import get_band_qpoints_and_path_connections
 
     small_pressure = {}
 
-    small_pressure["basepath"] = "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/pressure=0.05GPa_supercell=3"
+    small_pressure["basepath"] = (
+        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/pressure=0.05GPa_supercell=3"
+    )
 
     print(
         "Pressure = 0.05 GPa:",
@@ -20,7 +42,9 @@ def __():
 
     big_pressure = {}
 
-    big_pressure["basepath"] = "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/pressure=0.5GPa_supercell=3"
+    big_pressure["basepath"] = (
+        "/home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/pressure=0.5GPa_supercell=3"
+    )
 
     print(
         "Pressure = 0.5 GPa:",
@@ -30,27 +54,37 @@ def __():
     for p in [small_pressure, big_pressure]:
         p["atoms"] = read(p["basepath"] + "/optimized.xyz")
         p["bandpath"] = p["atoms"].cell.bandpath()
-    return big_pressure, os, p, read, small_pressure
 
+    print("Masses:")
+    print(small_pressure["atoms"].get_masses())
 
-@app.cell
-def __(small_pressure):
-    small_pressure["atoms"].get_masses()
-    return
+    labels = ["A", "G", "K", "M", "G"]
+    for _p in [small_pressure, big_pressure]:
+        _p["path"] = [_p["bandpath"].special_points.get(key) for key in labels]
+
+    for _p in [small_pressure, big_pressure]:
+        _p["qpoints"], _p["connections"] = get_band_qpoints_and_path_connections(
+            [_p["path"]], npoints=101
+        )
+
+    for _p in [small_pressure, big_pressure]:
+        _p["phonon"] = phonopy.load(_p["basepath"] + "/phonopy_params.yaml")
+    return (
+        big_pressure,
+        get_band_qpoints_and_path_connections,
+        labels,
+        os,
+        p,
+        phonopy,
+        read,
+        small_pressure,
+    )
 
 
 @app.cell
 def __(small_pressure):
     small_pressure["bandpath"].plot()
     return
-
-
-@app.cell
-def __(big_pressure, small_pressure):
-    labels = ["A", "G", "K", "M", "G"]
-    for _p in [small_pressure, big_pressure]:
-        _p["path"] = [_p["bandpath"].special_points.get(key) for key in labels]
-    return labels,
 
 
 @app.cell
@@ -61,40 +95,20 @@ def __(small_pressure):
 
 @app.cell
 def __(big_pressure):
-    big_pressure["path"]
-    return
-
-
-@app.cell
-def __(big_pressure, small_pressure):
-    from phonopy.phonon.band_structure import get_band_qpoints_and_path_connections
-
-    for _p in [small_pressure, big_pressure]:
-        _p["qpoints"], _p["connections"] = get_band_qpoints_and_path_connections(
-            [_p["path"]], npoints=101
-        )
-    return get_band_qpoints_and_path_connections,
-
-
-@app.cell
-def __(small_pressure):
-    small_pressure["qpoints"]
+    print(big_pressure["path"])
     return
 
 
 @app.cell
 def __(small_pressure):
-    small_pressure["connections"]
+    print(small_pressure["qpoints"])
     return
 
 
 @app.cell
-def __(big_pressure, small_pressure):
-    import phonopy
-
-    for _p in [small_pressure, big_pressure]:
-        _p["phonon"] = phonopy.load(_p["basepath"] + "/phonopy_params.yaml")
-    return phonopy,
+def __(small_pressure):
+    print(small_pressure["connections"])
+    return
 
 
 @app.cell
@@ -110,10 +124,20 @@ def __(big_pressure, labels, small_pressure):
 
 
 @app.cell
-def __(big_pressure, labels, small_pressure):
+def __():
     import matplotlib.pyplot as plt
-    from phonopy.phonon.band_structure import band_plot
+    # from phonopy.phonon.band_structure import band_plot
+    from phonopy.phonon.band_structure import BandPlot
+    def band_plot(axs, frequencies, distances, path_connections, labels, fmt="r-"):
+        """Return band structure plot."""
+        bp = BandPlot(axs)
+        bp.decorate(labels, path_connections, frequencies, distances)
+        bp.plot(distances, frequencies, path_connections, fmt=fmt)
+    return BandPlot, band_plot, plt
 
+
+@app.cell
+def __(band_plot, big_pressure, labels, plt, small_pressure):
     n = len(
         [
             x
@@ -134,29 +158,38 @@ def __(big_pressure, labels, small_pressure):
         band_plot(_axs, _frequencies, _distances, connections, labels, fmt=fmt)
 
 
-    _plot(small_pressure["phonon"], small_pressure["connections"], fmt="r-")
-    _plot(big_pressure["phonon"], big_pressure["connections"], fmt="b-")
+    _plot(small_pressure["phonon"], small_pressure["connections"], fmt="k-")
+    _plot(big_pressure["phonon"], big_pressure["connections"], fmt="k--")
+
+    # Create placeholders for the legend
+    _axs[0].plot([], [], "k-", label="Pressure = 0.05 GPa")
+    _axs[0].plot([], [], "k--", label="Pressure = 0.5 GPa")
+    _axs[0].legend()
 
     _fig.delaxes(_axs[1])
     _ax = _axs[0]
     _ax.set_ylim(0, 5)
     _ax.set_ylabel("Frequency (THz)")
     _ax.grid()
+    _ax.set_title("$\mathrm{D_2O}$ Ih")
+
+    # _fig.savefig("band_structure.svg")
 
     _fig
-    return band_plot, n, plt
+    return n,
 
 
 @app.cell
 def __(big_pressure, plt, small_pressure):
     _fig, _ax = plt.subplots(layout="constrained")
 
-    for _p in [small_pressure, big_pressure]:
-        _p["phonon"].run_mesh([16, 16, 16])
+    for _p, _fmt in zip([small_pressure, big_pressure], ["k-", "k--"]):
+        # Calcola la DOS, necessario solo la prima volta, poi si può commentare
+        # _p["phonon"].run_mesh([16, 16, 16])
         _p["phonon"].run_total_dos(sigma=0.05, freq_max=11)
         _p["total_dos"] = _p["phonon"].get_total_dos_dict()
 
-        _ax.plot(_p["total_dos"]["frequency_points"], _p["total_dos"]["total_dos"])
+        _ax.plot(_p["total_dos"]["frequency_points"], _p["total_dos"]["total_dos"], _fmt)
 
 
     def THz2K(THz):
@@ -175,9 +208,9 @@ def __(big_pressure, plt, small_pressure):
     _ax.set_xlabel("Frequency (THz)")
     _ax.set_ylabel("DOS (1/THz)")
     _ax.legend(["Pressure = 0.05 GPa", "Pressure = 0.5 GPa"])
-    _ax.set_title("D2O Ih")
+    _ax.set_title("$\mathrm{D_2O}$ Ih")
 
-    # plt.savefig("total_dos.png")
+    # plt.savefig("total_dos.svg")
 
     _fig
     return K2THz, THz2K, secax
