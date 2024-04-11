@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.3.3"
-app = marimo.App(layout_file="layouts/analysis.grid.json")
+__generated_with = "0.3.9"
+app = marimo.App()
 
 
 @app.cell(hide_code=True)
@@ -59,8 +59,10 @@ def __(pd):
 
 @app.cell
 def __(df_binding_energy):
-    with open("../../01_molecule/01.8_molecule_converge_fmax_parallel_dispersion/medium/1e-8/e_gas.txt",
-        "r",) as _f:
+    with open(
+        "../../01_molecule/01.8_molecule_converge_fmax_parallel_dispersion/medium/1e-8/e_gas.txt",
+        "r",
+    ) as _f:
         e_gas_ev = float(_f.read())
         df = df_binding_energy("MACE-MP-0", e_gas_ev)
     return df, e_gas_ev
@@ -95,49 +97,51 @@ def __(df_binding_energy):
 
 
 @app.cell
-def __(df, df_ice13, df_mace_ice13_1, df_n2p2):
+def __(df, df_mace_ice13_1, df_n2p2):
     # Plot all the data
     import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots(layout="constrained")
 
     ax.plot(
+        df_mace_ice13_1["distance"],
+        df_mace_ice13_1["binding_energy"],
+        label="MACE-ICE13-1",
+        marker="s",
+        markersize=5,
+    )
+    ax.plot(
         df["distance"],
-        df["binding_energy_kjmol"],
+        df["binding_energy"],
         label="MACE-MP-0 medium+D",
         marker="o",
+        markersize=5,
     )
     ax.plot(
         df_n2p2["distance"],
-        df_n2p2["binding_energy_kjmol"],
+        df_n2p2["binding_energy"],
         label="n2p2",
-        marker="o",
-    )
-    ax.plot(
-        df_ice13["distance"],
-        df_ice13["binding_energy_kjmol"],
-        label="MACE-ICE13",
-        marker="o",
-    )
-    ax.plot(
-        df_mace_ice13_1["distance"],
-        df_mace_ice13_1["binding_energy_kjmol"],
-        label="MACE-ICE13-1",
-        marker="s",
+        marker="^",
+        markersize=5,
     )
 
-    ax.set_xlabel("$r_{OO}$")
-    ax.set_ylabel("Binding energy (kJ/mol)")
+    ax.set_xlabel("$r_{OO}$ (Å)")
+    ax.set_ylabel("Binding energy (eV)")
 
-    ax.set_ylim(-35, 0)
+    # ax.set_ylim(-35, 0)
+    ax.set_ylim(-0.36, 0)
 
     # Draw a horizontal line
-    ax.axhline(y=-22.7, color="r", linestyle="--", label="Exp. value")
+    # kjmol : -22.7
+    # 22.7 kilojoule / mole = 0.235268921197 eV
+    ax.axhline(y=-0.235268921197, color="r", linestyle="--", label="Exp. value")
 
     # Draw a vertical line
+    # angstrom : 2.98
     ax.axvline(x=2.98, color="r", linestyle="--")
 
     ax.legend()
+    plt.title("Dimer binding energy")
 
     # fig.savefig("binding_energy.png")
     return ax, fig, plt
