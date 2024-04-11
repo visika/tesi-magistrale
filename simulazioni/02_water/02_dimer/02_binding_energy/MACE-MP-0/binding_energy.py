@@ -6,6 +6,7 @@ from mace.calculators import mace_mp
 from ase.optimize import BFGS
 from ase.constraints import FixBondLength
 
+# Leggi la geometria iniziale del dimero
 atoms = read("init.xyz")
 
 calc = mace_mp(model="medium", dispersion=True, default_dtype="float64", device="cuda")
