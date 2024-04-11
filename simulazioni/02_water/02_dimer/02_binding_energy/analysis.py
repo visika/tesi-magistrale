@@ -128,7 +128,6 @@ def __(df, df_mace_ice13_1, df_n2p2):
     ax.set_xlabel("$r_{OO}$ (Å)")
     ax.set_ylabel("Binding energy (eV)")
 
-    # ax.set_ylim(-35, 0)
     ax.set_ylim(-0.36, 0)
 
     # Draw a horizontal line
