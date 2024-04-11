@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-from ase.constraints import FixBondLength
-from ase.io import read, write
 import numpy as np
-from ase.optimize import BFGS
-from mace.calculators import mace_mp
 import pandas as pd
+from ase.io import read, write
+from mace.calculators import mace_mp
+from ase.optimize import BFGS
+from ase.constraints import FixBondLength
 
 atoms = read("init.xyz")
 
