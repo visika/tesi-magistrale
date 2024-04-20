@@ -1,0 +1,16 @@
+#+title: Dinamica molecolare e RDF
+In questa simulazione eseguo una run di dinamica molecolare di acqua liquida a 300K
+e cerco di ottenere la RDF per confrontarla con l'esperimento.
+
+La dinamica molecolare secondo Langevin è descritta nella documentazione di ASE:
+https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
+Questa è una dinamica molecolare a N, V, T costanti.
+
+Un'altra possibile analisi è data dal calcolo del coefficiente di diffusione:
+https://wiki.fysik.dtu.dk/ase/ase/md.html#ase.md.analysis.DiffusionCoefficient
+
+In questa run si accorcia il timestep per conservare l'accuratezza, ma al
+contempo ci si assicura che il lasso di tempo totale simulato sia maggiore di
+1ps, perché si sa dalla letteratura che il tempo di vita dei legami H è attorno
+a 1 ps, e si è verificato nelle simulazioni precedenti che in 1ps il sistema
+termalizza appena.
