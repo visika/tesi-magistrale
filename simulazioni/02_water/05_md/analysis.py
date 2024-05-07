@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.4.2"
+__generated_with = "0.4.11"
 app = marimo.App()
 
 
@@ -8,12 +8,20 @@ app = marimo.App()
 def __():
     import marimo as mo
     from ase import units
-    return mo, units
+    import matplotlib.pyplot as plt
+    return mo, plt, units
 
 
 @app.cell
 def __(mo):
-    mo.md("# Visualizzazione dei dati sperimentali")
+    mo.md(
+        """
+        # Visualizzazione dei dati sperimentali
+
+        I dati descrivono la radial distribution function tra gli atomi di ossigeno.
+        Nell'ultima colonna si trovano anche gli errori sui dati, che è possibile graficare.
+        """
+    )
     return
 
 
@@ -42,14 +50,24 @@ def __(df):
 
 
 @app.cell
-def __(df):
+def __(df, mo, plt):
     # Plot g_OO(r) vs r
-    import matplotlib.pyplot as plt
+
     plt.plot(df["r"], df["g_OO(r)"])
+    plt.fill_between(
+        df["r"],
+        df["g_OO(r)"] - df["error"],
+        df["g_OO(r)"] + df["error"],
+        alpha=0.3,
+    )
     # Add grid, slightly transparent and dashed
     plt.grid(alpha=0.5, linestyle="--")
-    plt.gca()
-    return plt,
+
+    plt.title("Experimental Radial Distribution Function")
+    mo.mpl.interactive(plt.gcf())
+
+    # DONE metti errore
+    return
 
 
 @app.cell
@@ -185,7 +203,7 @@ def __(DiffusionCoefficient, trajectory_297K, units):
     return coef_297K,
 
 
-@app.cell
+@app.cell(disabled=True)
 def __(DiffusionCoefficient, trajectory_297K_MP0, units):
     # Coefficiente di diffusione per la simulazione con MACE-MP-0 a 297.15 K
     _md_timestep = 0.5 * units.fs
@@ -238,6 +256,8 @@ def __(plt, trajectory_10ps):
     plt.title("Temperatura del sistema,\ntempo di simulazione 10ps, termostato di Langevin 273.15K")
     plt.legend()
     plt.gca()
+
+    # TODO Effettuare simulazioni a tempi più lunghi, per l'acqua parliamo di 10-100 ps
     return temperatures_10ps,
 
 
@@ -318,6 +338,8 @@ def __(analysis, trajectory_1ps):
 
     rmax = 7
     nbins = 80
+    # TODO riduci nbins a 40 per verificare se si riduce la banda di deviazione std
+    # TODO approfondisci autocorrelazione
 
     for t in trajectory_1ps:
         geo = t.copy()
@@ -346,39 +368,7 @@ def __(analysis, trajectory_1ps):
     )
 
 
-@app.cell
-def __(analysis, nbins, rmax, trajectory_297K):
-    _image = trajectory_297K[100]
-    # Select only oxygen atoms
-    _mask = [s == "O" for s in _image.get_chemical_symbols()]
-    _oxygens = _image[_mask]
-
-    rdf_297K = []
-
-    # Considera solo le immagini dalla 100 in poi,
-    # per scartare la parte di termalizzazione
-    for _t in trajectory_297K[100:]:
-        _geo = _t.copy()
-        # Prendi solo gli ossigeni
-        _geo = _geo[_mask]
-        _data = analysis.get_rdf(atoms=_geo, rmax=rmax, nbins=nbins)
-        rdf_297K.append(_data)
-    return rdf_297K,
-
-
-@app.cell
-def __(np, rdf_297K):
-    rdf_297K_average = np.mean([e[0] for e in rdf_297K], axis=0)
-    return rdf_297K_average,
-
-
-@app.cell
-def __(np, rdf_297K):
-    rdf_297K_std = np.std([e[0] for e in rdf_297K], axis=0)
-    return rdf_297K_std,
-
-
-@app.cell
+@app.cell(disabled=True)
 def __(analysis, nbins, rmax, trajectory_297K):
     rdf_oh_297K = []
     for _t in trajectory_297K[100:]:
@@ -402,7 +392,7 @@ def __(np, rdf_oh_297K):
     return rdf_oh_297K_std,
 
 
-@app.cell
+@app.cell(disabled=True)
 def __(analysis, nbins, np, rmax, trajectory_297K):
     _image = trajectory_297K[100]
     # Select only oxygen atoms
@@ -504,7 +494,7 @@ def __(analysis, nbins, np, rmax, trajectory_05ps):
     return rdf_05ps, rdf_05ps_average, rdf_05ps_std
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(
     nbins,
     np,
@@ -532,13 +522,13 @@ def __(
     return ax, fig, x
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(mo):
     mo.md("## RDF della prima e dell'ultima istanza")
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(analysis, nbins, np, plt, rmax, trajectory_1ps):
     _image = trajectory_1ps[0]
     _image_last = trajectory_1ps[-1]
@@ -560,13 +550,18 @@ def __(analysis, nbins, np, plt, rmax, trajectory_1ps):
     return rdf, rdf_last
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(mo):
-    mo.md("# Confronto di simulazione e dati sperimentali")
+    mo.md(
+        """
+        # Confronto di simulazione e dati sperimentali
+        ## RDF OO
+        """
+    )
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(df, plt, rdf_1ps_average, rdf_1ps_std, rmax, x):
     plt.plot(df["r"], df["g_OO(r)"], label="Experiment", color="tab:blue")
     # Plot the RDF of the simulation with standard deviation
@@ -594,13 +589,54 @@ def __(df, plt, rdf_1ps_average, rdf_1ps_std, rmax, x):
 
 
 @app.cell
-def __(df, plt, rdf_297K, rdf_297K_average, rdf_297K_std, rmax):
+def __(mo):
+    mo.md("### Traiettoria a 297.15 K con MACE-ICE13-1, tempo di simulazione 5 ps")
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md("#### Analisi con nbins=80")
+    return
+
+
+@app.cell
+def __(analysis, nbins, np, rmax, trajectory_297K):
+    _image = trajectory_297K[100]
+    # Select only oxygen atoms
+    _mask = [s == "O" for s in _image.get_chemical_symbols()]
+    _oxygens = _image[_mask]
+
+    rdf_297K = []
+
+    # Considera solo le immagini dalla 100 in poi,
+    # per scartare la parte di termalizzazione
+    for _t in trajectory_297K[100:]:
+        _geo = _t.copy()
+        # Prendi solo gli ossigeni
+        _geo = _geo[_mask]
+        _data = analysis.get_rdf(atoms=_geo, rmax=rmax, nbins=nbins)
+        rdf_297K.append(_data)
+
+    rdf_297K_average = np.mean([e[0] for e in rdf_297K], axis=0)
+    rdf_297K_std = np.std([e[0] for e in rdf_297K], axis=0)
+    return rdf_297K, rdf_297K_average, rdf_297K_std
+
+
+@app.cell
+def __(df, mo, plt, rdf_297K, rdf_297K_average, rdf_297K_std, rmax):
     plt.plot(df["r"], df["g_OO(r)"], label="Experiment", color="tab:blue")
+
+    plt.fill_between(
+        df["r"],
+        df["g_OO(r)"] - df["error"],
+        df["g_OO(r)"] + df["error"],
+        alpha=0.3,
+    )
+
     # Plot the RDF of the simulation with standard deviation
     _asse_x = rdf_297K[0][1]
-    plt.plot(
-        _asse_x, rdf_297K_average, label="MACE-ICE13-1", color="tab:green"
-    )
+    plt.plot(_asse_x, rdf_297K_average, label="MACE-ICE13-1", color="tab:green")
     plt.fill_between(
         _asse_x,
         rdf_297K_average - rdf_297K_std,
@@ -616,14 +652,87 @@ def __(df, plt, rdf_297K, rdf_297K_average, rdf_297K_std, rmax):
     # Set xlim to rmax
     plt.xlim(0, rmax)
     plt.legend()
-    plt.title("Radial Distribution Function of liquid water\nLangevin NVT MD, T=297.15 K, simulation time: 5 ps")
+    plt.title(
+        "Radial Distribution Function of liquid water\nLangevin NVT MD, T=297.15 K, simulation time: 5 ps, nbins=80"
+    )
+
+    plt.ylim(top=3.0, bottom=-0.5)
 
     # plt.savefig("rdf.png")
-    plt.gca()
+    mo.mpl.interactive(plt.gcf())
+
+    # TODO per calcolare D, simulazione NVE
+
+    # TODO per calcolare densità, simulazione NPT
     return
 
 
 @app.cell
+def __(mo):
+    mo.md("#### Analisi con nbins=40")
+    return
+
+
+@app.cell
+def __(analysis, df, mo, np, plt, rmax, trajectory_297K):
+    _image = trajectory_297K[100]
+    # Select only oxygen atoms
+    _mask = [s == "O" for s in _image.get_chemical_symbols()]
+    _oxygens = _image[_mask]
+
+    _rdf = []
+    _nbins = 40
+
+    # Considera solo le immagini dalla 100 in poi,
+    # per scartare la parte di termalizzazione
+    for _t in trajectory_297K[100:]:
+        _geo = _t.copy()
+        # Prendi solo gli ossigeni
+        _geo = _geo[_mask]
+        _data = analysis.get_rdf(atoms=_geo, rmax=rmax, nbins=_nbins)
+        _rdf.append(_data)
+
+    _rdf_average = np.mean([e[0] for e in _rdf], axis=0)
+    _rdf_std = np.std([e[0] for e in _rdf], axis=0)
+
+    plt.plot(df["r"], df["g_OO(r)"], label="Experiment", color="tab:blue")
+
+    plt.fill_between(
+        df["r"],
+        df["g_OO(r)"] - df["error"],
+        df["g_OO(r)"] + df["error"],
+        alpha=0.3,
+    )
+
+    # Plot the RDF of the simulation with standard deviation
+    _asse_x = _rdf[0][1]
+    plt.plot(_asse_x, _rdf_average, label="MACE-ICE13-1", color="tab:green")
+    plt.fill_between(
+        _asse_x,
+        _rdf_average - _rdf_std,
+        _rdf_average + _rdf_std,
+        alpha=0.3,
+        color="tab:green",
+    )
+
+    plt.xlabel("r [Å]")
+    plt.ylabel("$g_\mathrm{OO}(r)$")
+    plt.grid(ls="--", alpha=0.5)
+
+    # Set xlim to rmax
+    plt.xlim(0, rmax)
+    plt.ylim(top=3.0, bottom=-0.5)
+    plt.legend()
+    plt.title(
+        f"Radial Distribution Function of liquid water\nLangevin NVT MD, T=297.15 K, simulation time: 5 ps, nbins={_nbins}"
+    )
+
+    # plt.savefig("rdf.png")
+    mo.mpl.interactive(plt.gcf())
+    return
+
+
+@app.cell(hide_code=True)
 def __(
     df,
     plt,
@@ -653,14 +762,16 @@ def __(
     # Set xlim to rmax
     plt.xlim(0, rmax)
     plt.legend()
-    plt.title("Radial Distribution Function of liquid water\nLangevin NVT MD, T=297.15 K, simulation time: 5 ps")
+    plt.title(
+        "Radial Distribution Function of liquid water\nLangevin NVT MD, T=297.15 K, simulation time: 5 ps"
+    )
 
     # plt.savefig("rdf.png")
     plt.gca()
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(
     df,
     plt,
@@ -702,7 +813,7 @@ def __(
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(mo):
     mo.md(
         """
@@ -931,6 +1042,14 @@ def __(trajectory_297K):
 @app.cell
 def __(trajectory_297K):
     trajectory_297K[0].pbc
+    return
+
+
+@app.cell
+def __(trajectory_297K):
+    _v = trajectory_297K[-1].get_volume()
+    _m = trajectory_297K[-1].get_masses().sum()
+    _m / _v * 1.66053906660
     return
 
 
