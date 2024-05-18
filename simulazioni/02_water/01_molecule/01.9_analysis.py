@@ -132,10 +132,12 @@ def __(df, dispersion, fmax, mo, model, os, plt):
 
     model_string = f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
 
+    dispersion_string = f"{' D' if dispersion.value else ''}"
+
     plt.title(
         title_string := f"H2O molecule vibration modes\n"
         + model_string
-        + f"{' D' if dispersion.value else ''}"
+        + dispersion_string
         + ", "
         f"{title_fmax}"
     )
@@ -148,13 +150,14 @@ def __(df, dispersion, fmax, mo, model, os, plt):
 
     save_folder = "Grafici"
     os.makedirs(save_folder, exist_ok=True)
-    save_path = f"{save_folder}/{model_string} {title_fmax}.svg"
+    save_path = f"{save_folder}/{model_string}{dispersion_string} {title_fmax}.svg"
     plt.savefig(save_path)
     print(f"Saved to {save_path}")
 
     # Show an interactive marimo plot
     mo.mpl.interactive(plt.gcf())
     return (
+        dispersion_string,
         groups,
         model_string,
         save_folder,
