@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.3.3"
+__generated_with = "0.6.0"
 app = marimo.App(layout_file="layouts/01.9_analysis.grid.json")
 
 
@@ -10,7 +10,8 @@ def __():
     import pandas as pd
     import matplotlib.pyplot as plt
     import glob
-    return glob, mo, pd, plt
+    import os
+    return glob, mo, os, pd, plt
 
 
 @app.cell
@@ -115,30 +116,57 @@ def __(dispersion, fmax, get_summaries, model, pd, read_frequencies):
 
 
 @app.cell
-def __(df, dispersion, fmax, model, plt):
+def __(df, dispersion, fmax, mo, model, os, plt):
     groups = df.groupby("#")
     for _name, _group in groups:
         plt.plot(_group["delta"], _group["cm^-1"], marker="x", label=_name)
     plt.xscale("log")
     plt.yscale("symlog", linthresh=1e-1)
     plt.ylim(-1e4, 1e4)
-    plt.legend(ncol=2)
+    plt.legend(ncol=3)
 
     if model.value == "MACE-ICE13-1":
-        title_fmax = ", fmax=1e-8"
+        title_fmax = "fmax=1e-8"
     else:
-        title_fmax = f", fmax={fmax.value}"
+        title_fmax = f"fmax={fmax.value}"
+
+    model_string = f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
 
     plt.title(
-        f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
-        f"{' D' if dispersion.value else ''}"
+        title_string := f"H2O molecule vibration modes\n"
+        + model_string
+        + f"{' D' if dispersion.value else ''}"
+        + ", "
         f"{title_fmax}"
     )
     plt.xlabel("Displacement (Å)")
-    plt.ylabel("Frequency (cm^-1)")
+    plt.ylabel("Frequency ($\mathrm{cm}^{-1}$)")
+    # plt.grid()
 
-    # plt.savefig("MACE-xxx-y/frequencies.png")
-    return groups, title_fmax
+    # Hide the top of the frame
+    plt.gca().spines[["top", "bottom", "left", "right"]].set_visible(False)
+
+    save_folder = "Grafici"
+    os.makedirs(save_folder, exist_ok=True)
+    save_path = f"{save_folder}/{model_string} {title_fmax}.svg"
+    plt.savefig(save_path)
+    print(f"Saved to {save_path}")
+
+    # Show an interactive marimo plot
+    mo.mpl.interactive(plt.gcf())
+    return (
+        groups,
+        model_string,
+        save_folder,
+        save_path,
+        title_fmax,
+        title_string,
+    )
+
+
+@app.cell
+def __():
+    return
 
 
 if __name__ == "__main__":
