@@ -1,7 +1,7 @@
 import marimo
 
-__generated_with = "0.4.11"
-app = marimo.App()
+__generated_with = "0.5.1"
+app = marimo.App(app_title="Analisi RDF")
 
 
 @app.cell
@@ -10,6 +10,25 @@ def __():
     from ase import units
     import matplotlib.pyplot as plt
     return mo, plt, units
+
+
+@app.cell
+def __():
+    from ase.geometry import analysis
+    from ase.io import Trajectory
+    return Trajectory, analysis
+
+
+@app.cell
+def __():
+    from ase.io import write
+    return write,
+
+
+@app.cell
+def __():
+    from ase.visualize import view
+    return view,
 
 
 @app.cell
@@ -72,15 +91,8 @@ def __(df, mo, plt):
 
 @app.cell
 def __(mo):
-    mo.md("# Visualizzazione dei dati delle simulazioni")
+    mo.md("# Lettura delle traiettorie e visualizzazione dei dati delle simulazioni")
     return
-
-
-@app.cell
-def __():
-    from ase.geometry import analysis
-    from ase.io import Trajectory
-    return Trajectory, analysis
 
 
 @app.cell
@@ -109,6 +121,51 @@ def __(Trajectory):
         mode="r",
     )
     return trajectory_05ps, trajectory_10ps, trajectory_1ps, trajectory_297K
+
+
+@app.cell
+def __(trajectory_297K, view):
+    view(trajectory_297K)
+    return
+
+
+@app.cell
+def __(trajectory_297K, write):
+    write(filename="traiettoria.pdb", images=trajectory_297K)
+    return
+
+
+@app.cell
+def __(Trajectory):
+    # Attenzione, il timestep di questa simulazione è differente, timestep=100
+    traj_100ps = Trajectory(
+        "2024-05-08_NVT_MACE-ICE13-1_100ps/MD-NVT/molecular_dynamics.traj"
+    )
+    return traj_100ps,
+
+
+@app.cell
+def __(traj_100ps):
+    len(traj_100ps)
+    return
+
+
+@app.cell
+def __(traj_100ps, view):
+    view(traj_100ps[0])
+    return
+
+
+@app.cell
+def __(traj_100ps):
+    len(traj_100ps[0])/3
+    return
+
+
+@app.cell
+def __(traj_100ps, view):
+    view(traj_100ps[2000])
+    return
 
 
 @app.cell
@@ -159,7 +216,7 @@ def __(trajectory_1ps, units):
     return DiffusionCoefficient, coef
 
 
-@app.cell
+@app.cell(disabled=True)
 def __(coef):
     coef.print_data()
     return
@@ -326,6 +383,66 @@ def __(plt, trajectory_297K_MP0_no_disp):
 
 
 @app.cell
+def __(mo, plt):
+    def grafico_temperatura(traiettoria, title=None, ymax=350):
+        plt.plot([a.get_temperature() for a in traiettoria])
+
+        plt.xlabel("Step")
+        plt.ylabel("Temperature [K]")
+
+        # Set ylim
+        plt.ylim(0, ymax)
+        ax = plt.gca()
+        ax.spines[["top", "left", "right"]].set_visible(False)
+
+        plt.title(title)
+
+        return mo.mpl.interactive(plt.gcf())
+    return grafico_temperatura,
+
+
+@app.cell
+def __(grafico_temperatura, traj_100ps):
+    grafico_temperatura(traj_100ps, title="MACE-ICE13-1 100 ps")
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md("## Calcolo delle RDF")
+    return
+
+
+@app.cell
+def __(analysis):
+    def calcola_rdf(traiettoria, rmax=7, nbins=40):
+        image = traiettoria[100]
+        mask = [symbol == "O" for symbol in image.get_chemical_symbols()]
+        oxygens = image[mask]
+
+        rdf = []
+
+        for atoms in traiettoria[100:]:
+            geo = atoms.copy()
+            geo = geo[mask]
+            data = analysis.get_rdf(atoms=geo, rmax=rmax, nbins=nbins)
+            rdf.append(data)
+
+        return rdf
+    return calcola_rdf,
+
+
+@app.cell
+def __(np):
+    def calcola_rdf_average(rdf):
+        return np.mean([e[0] for e in rdf], axis=0)
+
+    def calcola_rdf_std(rdf):
+        return np.std([e[0] for e in rdf], axis=0)
+    return calcola_rdf_average, calcola_rdf_std
+
+
+@app.cell
 def __(analysis, trajectory_1ps):
     import numpy as np
 
@@ -433,6 +550,19 @@ def __(analysis, nbins, rmax, trajectory_297K_MP0):
         _data = analysis.get_rdf(atoms=_geo, rmax=rmax, nbins=nbins)
         rdf_297K_MP0.append(_data)
     return rdf_297K_MP0,
+
+
+@app.cell
+def __(calcola_rdf, traj_100ps):
+    rdf_100ps = calcola_rdf(traj_100ps)
+    return rdf_100ps,
+
+
+@app.cell
+def __(calcola_rdf_average, calcola_rdf_std, rdf_100ps):
+    rdf_100ps_average = calcola_rdf_average(rdf_100ps)
+    rdf_100ps_std = calcola_rdf_std(rdf_100ps)
+    return rdf_100ps_average, rdf_100ps_std
 
 
 @app.cell
@@ -732,6 +862,68 @@ def __(analysis, df, mo, np, plt, rmax, trajectory_297K):
     return
 
 
+@app.cell
+def __(df, mo, plt, rmax):
+    def grafica_rdf(
+        rdf,
+        rdf_average,
+        rdf_std,
+        model=None,
+        simulation_time=None,
+        temperature=None,
+    ):
+        plt.plot(df["r"], df["g_OO(r)"], label="Experiment", color="tab:blue")
+
+        plt.fill_between(
+            df["r"],
+            df["g_OO(r)"] - df["error"],
+            df["g_OO(r)"] + df["error"],
+            alpha=0.3,
+            color="tab:blue",
+        )
+
+        plt.plot(rdf[0][1], rdf_average, color="tab:green", label=model)
+        plt.fill_between(
+            rdf[0][1],
+            rdf_average - rdf_std,
+            rdf_average + rdf_std,
+            alpha=0.3,
+            color="tab:green",
+        )
+
+        plt.xlabel("r [Å]")
+        plt.ylabel("$g_\mathrm{OO}(r)$")
+        plt.grid(ls="--", alpha=0.5)
+
+        plt.xlim(0, rmax)
+        plt.ylim(top=3.0, bottom=-0.5)
+
+        plt.legend()
+
+        ax = plt.gca()
+        ax.spines[["top", "bottom", "right"]].set_visible(False)
+
+        plt.title(
+            f"Radial Distribution Function of liquid water, Langevin NVT\n{model}, T={temperature} K, simulation time: {simulation_time}"
+        )
+
+        return mo.mpl.interactive(plt.gcf())
+    return grafica_rdf,
+
+
+@app.cell
+def __(grafica_rdf, rdf_100ps, rdf_100ps_average, rdf_100ps_std):
+    grafica_rdf(
+        rdf_100ps,
+        rdf_100ps_average,
+        rdf_100ps_std,
+        model="MACE-ICE13-1",
+        simulation_time="100 ps",
+        temperature=297.15,
+    )
+    return
+
+
 @app.cell(hide_code=True)
 def __(
     df,
@@ -944,12 +1136,6 @@ def __(ice):
 
 @app.cell
 def __():
-    from ase.visualize import view
-    return view,
-
-
-@app.cell
-def __():
     # view([ice, double_ice])
     return
 
@@ -1131,6 +1317,314 @@ def __(mo, trajectory_10ps):
 def __():
     # ❯ pint-convert 1u/angstrom^3 g/cm^3 
     # 1.0 unified_atomic_mass_unit / angstrom ** 3 = 1.66053906660(50) g/cm³
+    return
+
+
+@app.cell
+def __():
+    # Creo una cella con meno molecole d'acqua
+    128 / 4
+    return
+
+
+@app.cell
+def __():
+    from ase import Atoms
+    from ase.lattice.hexagonal import Hexagonal
+    small_cell = Hexagonal(symbol="H2O")
+    return Atoms, Hexagonal, small_cell
+
+
+@app.cell
+def __(small_cell, view):
+    view(small_cell)
+    return
+
+
+@app.cell
+def __(view):
+    from ase.collections import g2
+    from ase.build import molecule
+    view(molecule("H2O"))
+    return g2, molecule
+
+
+@app.cell
+def __():
+    from ase.build import bulk
+    return bulk,
+
+
+@app.cell
+def __():
+    return
+
+
+@app.cell
+def __():
+    from ase.lattice.hexagonal import HexagonalFactory
+
+
+    class HexagonalH2OFactory(HexagonalFactory):
+        bravais_basis = [
+            [7.816, 11.083, 5.235],
+            [8.147, 10.193, 5.372],
+            [8.561, 11.602, 5.396],
+        ]
+        element_basis = (1, 0, 0)
+
+
+    HEX_H2O = HexagonalH2OFactory()
+    return HEX_H2O, HexagonalFactory, HexagonalH2OFactory
+
+
+@app.cell
+def __(HEX_H2O):
+    lattice = HEX_H2O(
+        symbol=("H", "O"), latticeconstant={"a": 1, "b": 1, "c": 1}, size=(1, 1, 1)
+    )
+    return lattice,
+
+
+@app.cell
+def __(lattice, view):
+    view(lattice)
+    return
+
+
+@app.cell
+def __(read):
+    molecules = read(
+        "/home/mariano/Progetti/tesi-magistrale/strutture/128_molecules/h2o-128.pdb"
+    )
+    return molecules,
+
+
+@app.cell
+def __(molecules, view):
+    view(molecules)
+    return
+
+
+@app.cell
+def __(read):
+    cif = read("/home/mariano/Scaricati/H2O-Ice-Ih.cif")
+    return cif,
+
+
+@app.cell
+def __(cif, view):
+    view(cif)
+    return
+
+
+@app.cell
+def __(read):
+    ice_ih = read(
+        "/home/mariano/Progetti/tesi-magistrale/strutture/ICE13/Ih/POSCAR"
+    )
+    return ice_ih,
+
+
+@app.cell
+def __(ice_ih):
+    len(ice_ih) / 3
+    return
+
+
+@app.cell
+def __(ice_ih, view):
+    view(ice_ih * (2, 1, 1))
+    return
+
+
+@app.cell
+def __(ice_ih):
+    _v = ice_ih.get_volume()
+    _m = ice_ih.get_masses().sum()
+    _m / _v * 1.66053906660
+    return
+
+
+@app.cell
+def __(calculate_density, molecule):
+    the_molecule = molecule("H2O")
+    cell_size = 3.11
+    the_molecule.set_cell([cell_size] * 3)
+    the_molecule.set_pbc(True)
+    the_molecule.center()
+    calculate_density(the_molecule)
+    return cell_size, the_molecule
+
+
+@app.cell
+def __(the_molecule):
+    the_molecule.get_cell().get_bravais_lattice()
+    return
+
+
+@app.cell
+def __(the_molecule):
+    the_molecule.pbc
+    return
+
+
+@app.cell
+def __(the_molecule):
+    the_molecules = the_molecule * 2
+    return the_molecules,
+
+
+@app.cell
+def __(the_molecules, view):
+    view(the_molecules)
+    return
+
+
+@app.cell
+def __(the_molecules):
+    the_molecules.get_cell().get_bravais_lattice()
+    return
+
+
+@app.cell
+def __(calculate_density, the_molecules):
+    calculate_density(the_molecules)
+    return
+
+
+@app.cell
+def __(the_molecules):
+    len(the_molecules) / 3
+    return
+
+
+@app.cell
+def __():
+    def calculate_density(atoms):
+        v = atoms.get_volume()
+        m = atoms.get_masses().sum()
+        return m / v * 1.66053906660
+    return calculate_density,
+
+
+@app.cell
+def __(mo):
+    mo.md("# Analisi degli effetti di size")
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md("## 8 molecole")
+    return
+
+
+@app.cell
+def __(Trajectory):
+    traj_8molecules = Trajectory(
+        "2024-05-09_effetti_di_size/8_molecules/MD-NVT/molecular_dynamics.traj"
+    )
+    return traj_8molecules,
+
+
+@app.cell
+def __(traj_8molecules, view):
+    view(traj_8molecules)
+    return
+
+
+@app.cell
+def __(grafico_temperatura, traj_8molecules):
+    grafico_temperatura(traj_8molecules, title="8 molecole", ymax=None)
+    return
+
+
+@app.cell
+def __(calcola_rdf, traj_8molecules):
+    rdf_8molecules = calcola_rdf(traj_8molecules, rmax=3)
+    return rdf_8molecules,
+
+
+@app.cell
+def __(calcola_rdf_average, calcola_rdf_std, rdf_8molecules):
+    rdf_8molecules_average = calcola_rdf_average(rdf_8molecules)
+    rdf_8molecules_std = calcola_rdf_std(rdf_8molecules)
+    return rdf_8molecules_average, rdf_8molecules_std
+
+
+@app.cell
+def __(
+    grafica_rdf,
+    rdf_8molecules,
+    rdf_8molecules_average,
+    rdf_8molecules_std,
+):
+    # Grafico 8 molecole
+    grafica_rdf(
+        rdf_8molecules,
+        rdf_8molecules_average,
+        rdf_8molecules_std,
+        model="MACE-ICE13-1",
+        simulation_time="10 ps",
+        temperature=297.15,
+    )
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md("## 27 molecole")
+    return
+
+
+@app.cell
+def __(Trajectory):
+    traj_27molecules = Trajectory(
+        "2024-05-09_effetti_di_size/27_molecules/MD-NVT/molecular_dynamics.traj"
+    )
+    return traj_27molecules,
+
+
+@app.cell
+def __(grafico_temperatura, traj_27molecules):
+    grafico_temperatura(traj_27molecules, title="27 molecole", ymax=None)
+    return
+
+
+@app.cell
+def __(
+    calcola_rdf,
+    calcola_rdf_average,
+    calcola_rdf_std,
+    traj_27molecules,
+):
+    rdf_27molecules = calcola_rdf(traj_27molecules, rmax=4.6, nbins=40)
+    rdf_27molecules_average = calcola_rdf_average(rdf_27molecules)
+    rdf_27molecules_std = calcola_rdf_std(rdf_27molecules)
+    return rdf_27molecules, rdf_27molecules_average, rdf_27molecules_std
+
+
+@app.cell
+def __(
+    grafica_rdf,
+    rdf_27molecules,
+    rdf_27molecules_average,
+    rdf_27molecules_std,
+):
+    grafica_rdf(
+        rdf_27molecules,
+        rdf_27molecules_average,
+        rdf_27molecules_std,
+        model="MACE-ICE13-1",
+        simulation_time="10 ps",
+        temperature=297.15,
+    )
+    return
+
+
+@app.cell
+def __():
     return
 
 
