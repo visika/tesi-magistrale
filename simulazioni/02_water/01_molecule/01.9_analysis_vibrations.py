@@ -1,7 +1,10 @@
 import marimo
 
 __generated_with = "0.6.0"
-app = marimo.App(layout_file="layouts/01.9_analysis.grid.json")
+app = marimo.App(
+    app_title="Studio delle vibrazioni della molecola d'acqua",
+    layout_file="layouts/01.9_analysis.grid.json",
+)
 
 
 @app.cell
@@ -127,10 +130,11 @@ def __(df, dispersion, fmax, mo, model, os, plt):
 
     if model.value == "MACE-ICE13-1":
         title_fmax = "fmax=1e-8"
+        model_string = model.value
     else:
         title_fmax = f"fmax={fmax.value}"
+        model_string = f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
 
-    model_string = f"{'MACE-MP-0' if model.value in ['small', 'medium', 'large'] else ''} {model.value}"
 
     dispersion_string = f"{' D' if dispersion.value else ''}"
 
@@ -165,11 +169,6 @@ def __(df, dispersion, fmax, mo, model, os, plt):
         title_fmax,
         title_string,
     )
-
-
-@app.cell
-def __():
-    return
 
 
 if __name__ == "__main__":
