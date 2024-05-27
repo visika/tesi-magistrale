@@ -198,5 +198,5 @@ The reference value for the O-H distance is 0.96 $angstrom$. @PhysicalChemistryW
 = Water dimer
 
 = Acknowledgments
-This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
+// This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 #bibliography("bibliography.yml")
