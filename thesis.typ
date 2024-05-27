@@ -5,6 +5,7 @@
     paper: "a4",
     margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm)
 )
+#set heading(numbering: "1.")
 
 #[ // Title page
     #set align(center)
@@ -53,18 +54,24 @@
     #pagebreak()
 ]
 
+#set page(
+    paper: "a4",
+    margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm)
+)
+
+#par(justify: true)[
+    *Abstract*
+
+    Molecular crystals play an important role in the field of materials science, particularly in drug development, electronics, and renewable energy sectors.
+ 
+    In this work we will study the properties of molecular crystals, using recently developed Machine Learning potentials to model their behaviour and characteristics. We will be primarily focusing on water as the initial subject, followed by a study of a selection of other molecular crystals.
+ 
+    Traditional approaches often grapple with the trade-off between computational expense and accuracy. The application of Machine Learning potentials captures complex intermolecular interactions with a significantly reduced computational cost compared to traditional ab-initio methods.
+ 
+    We will study the capabilities of trained Machine Learning potentials to accurately predict lattice energies, polymorphic behaviours, and response to external conditions like temperature and pressure. We will also study dynamic properties such as phonon spectra to complete the insight into the physical and chemical behaviours of molecular crystals.
+]
+
 #outline()
-#set heading(numbering: "1.")
-
-= Abstract
-
-Molecular crystals play an important role in the field of materials science, particularly in drug development, electronics, and renewable energy sectors.
- 
-In this work we will study the properties of molecular crystals, using recently developed Machine Learning potentials to model their behaviour and characteristics. We will be primarily focusing on water as the initial subject, followed by a study of a selection of other molecular crystals.
- 
-Traditional approaches often grapple with the trade-off between computational expense and accuracy. The application of Machine Learning potentials captures complex intermolecular interactions with a significantly reduced computational cost compared to traditional ab-initio methods.
- 
-We will study the capabilities of trained Machine Learning potentials to accurately predict lattice energies, polymorphic behaviours, and response to external conditions like temperature and pressure. We will also study dynamic properties such as phonon spectra to complete the insight into the physical and chemical behaviours of molecular crystals.
 
 = Introduction
 
