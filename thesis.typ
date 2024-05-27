@@ -228,6 +228,10 @@ The value found for the O-H distance is 0.970 $angstrom$.
 
 = Water dimer
 
+== Vibrations analysis
+// TODO /home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/02_dimer/01_optimize/analysis.py
+== Binding energy
+
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 #bibliography(("bibliography.yml", "bibliography.bib"))
