@@ -202,6 +202,30 @@ converged configurations.
 The reference value for the H-O-H angle is 104.5°. @PhysicalChemistryWater2020
 The reference value for the O-H distance is 0.96 $angstrom$. @PhysicalChemistryWater2020
 
+The simulation was performed using the fine-tuned MACE-ICE13-1 model.
+
+```python
+calculator = MACECalculator(
+    "/ibiscostorage/VirtualMatterLab/MACE-ICE13/MACE-ICE13-1.model",
+    default_dtype="float64",
+    device="cuda",
+)
+opt = BFGS(atoms, logfile="optimization.log", trajectory="optimization.traj")
+opt.run(fmax=1e-8, steps=1000)
+write("final.xyz", images=atoms)
+```
+
+The final geometry was analyzed through the visualizer integrated in ase:
+
+```sh
+ase gui final.xyz
+```
+
+#image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png")
+
+The value found for the H-O-H angle is 104.0°.
+The value found for the O-H distance is 0.970 $angstrom$.
+
 = Water dimer
 
 = Acknowledgments
