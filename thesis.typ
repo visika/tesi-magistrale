@@ -193,7 +193,7 @@ converged configurations.
     figure(
         image(
             "simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg",
-        ), caption: "Convergence of the MACE-ICE13-1 model with respect to fmax",
+        ), caption: "Frequencies calculated with the MACE-ICE13-1 model at converged fmax",
     )
 )
 
