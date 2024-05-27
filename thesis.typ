@@ -84,7 +84,7 @@ Quantum Monte Carlo, DFT, quali sono i problemi.
 
 == Prima parte: studio di letteratura
 = Tools
-Ibisco, MACE, ASE.
+Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
 
 = Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
 = Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
@@ -206,4 +206,4 @@ The reference value for the O-H distance is 0.96 $angstrom$. @PhysicalChemistryW
 
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
-#bibliography("bibliography.yml")
+#bibliography(("bibliography.yml", "bibliography.bib"))
