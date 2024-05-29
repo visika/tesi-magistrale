@@ -243,6 +243,20 @@ The water dimer was analyzed using different models:
   ],
 )
 
+== Geometry parameters
+
+#let dimer_geometry_errors = csv("simulazioni/02_water/02_dimer/01_optimize/errori.csv")
+#figure(
+  table(
+    columns: dimer_geometry_errors.first().len(), ..dimer_geometry_errors.flatten(),
+  ), caption: [
+    Errors of the geometry parameters of the dimer, obtained from different
+    calculator models, with respect to reference values
+    @barnettBornOppenheimerMoleculardynamicsSimulations1993
+    @sprikInitioMolecularDynamics1996.
+  ],
+)
+
 == Binding energy
 
 = Acknowledgments
