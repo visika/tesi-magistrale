@@ -232,7 +232,17 @@ distance is 0.970 $angstrom$.
 = Water dimer
 
 == Vibrations analysis
-// TODO /home/mariano/Progetti/tesi-magistrale/simulazioni/02_water/02_dimer/01_optimize/analysis.py
+
+The water dimer was analyzed using different models:
+
+#figure(
+  grid(
+    columns: 2, image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"), image("simulazioni/02_water/02_dimer/01_optimize/Grafici/medium.png"), image("simulazioni/02_water/02_dimer/01_optimize/Grafici/large.png"), image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
+  ), caption: [
+    Structure optimization of the water dimer and vibration analysis.
+  ],
+)
+
 == Binding energy
 
 = Acknowledgments
