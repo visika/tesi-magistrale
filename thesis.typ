@@ -2,73 +2,77 @@
 #set document(title: title)
 #set text(font: "New Computer Modern", size: 12pt)
 #set page(
-    paper: "a4",
-    margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm)
+  paper: "a4", margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
 )
 #set heading(numbering: "1.")
 
 #[ // Title page
-    #set align(center)
+  #set align(center)
 
-    #text(1.5em, [*UNIVERSITÀ DEGLI STUDI DI NAPOLI* \ *"FEDERICO II"*])
+  #text(1.5em, [*UNIVERSITÀ DEGLI STUDI DI NAPOLI* \ *"FEDERICO II"*])
 
-    #v(3mm)
+  #v(3mm)
 
-    // University Logo
-    #image("thesis/imgs/University_Federico_II_Logo.svg", width: 25%)
+  // University Logo
+  #image("thesis/imgs/University_Federico_II_Logo.svg", width: 25%)
 
-    #v(1cm)
+  #v(1cm)
 
-    *Scuola Politecnica e delle Scienze di Base*
+  *Scuola Politecnica e delle Scienze di Base*
 
-    *Area Didattica di Scienze Matematiche Fisiche e Naturali*
+  *Area Didattica di Scienze Matematiche Fisiche e Naturali*
 
-    #v(8mm)
+  #v(8mm)
 
-    *Dipartimento di Fisica "Ettore Pancini"*
+  *Dipartimento di Fisica "Ettore Pancini"*
 
-    #v(20mm)
+  #v(20mm)
 
-    _Laurea Magistrale in Fisica_
+  _Laurea Magistrale in Fisica_
 
-    #v(5mm)
+  #v(5mm)
 
-    #text(1.5em, title)
+  #text(1.5em, title)
 
-    #v(25mm)
+  #v(25mm)
 
-    #grid(
-        columns: 2,
-        align: (left, right),
-        column-gutter: 8cm,
-        row-gutter: 2.5mm,
-        [*Relatori*], [*Candidato*],
-        [Prof. Dario Alfè], [Mariano Mollo],
-        [Prof. Andrea Zen], [Matr. N94000618]
-    )
+  #grid(
+    columns: 2, align: (left, right), column-gutter: 8cm, row-gutter: 2.5mm, [*Relatori*], [*Candidato*], [Prof. Dario Alfè], [Mariano Mollo], [Prof. Andrea Zen], [Matr. N94000618],
+  )
 
-    #v(5.5mm)
+  #v(5.5mm)
 
-    #text(1.2em, "Anno Accademico 2023/2024")
+  #text(1.2em, "Anno Accademico 2023/2024")
 
-    #pagebreak()
-]
+  #pagebreak() ]
 
 #set page(
-    paper: "a4",
-    margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm)
+  paper: "a4", margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm),
 )
 
-#par(justify: true)[
-    *Abstract*
+#par(
+  justify: true,
+)[
+  *Abstract*
 
-    Molecular crystals play an important role in the field of materials science, particularly in drug development, electronics, and renewable energy sectors.
- 
-    In this work we will study the properties of molecular crystals, using recently developed Machine Learning potentials to model their behaviour and characteristics. We will be primarily focusing on water as the initial subject, followed by a study of a selection of other molecular crystals.
- 
-    Traditional approaches often grapple with the trade-off between computational expense and accuracy. The application of Machine Learning potentials captures complex intermolecular interactions with a significantly reduced computational cost compared to traditional ab-initio methods.
- 
-    We will study the capabilities of trained Machine Learning potentials to accurately predict lattice energies, polymorphic behaviours, and response to external conditions like temperature and pressure. We will also study dynamic properties such as phonon spectra to complete the insight into the physical and chemical behaviours of molecular crystals.
+  Molecular crystals play an important role in the field of materials science,
+  particularly in drug development, electronics, and renewable energy sectors.
+
+  In this work we will study the properties of molecular crystals, using recently
+  developed Machine Learning potentials to model their behaviour and
+  characteristics. We will be primarily focusing on water as the initial subject,
+  followed by a study of a selection of other molecular crystals.
+
+  Traditional approaches often grapple with the trade-off between computational
+  expense and accuracy. The application of Machine Learning potentials captures
+  complex intermolecular interactions with a significantly reduced computational
+  cost compared to traditional ab-initio methods.
+
+  We will study the capabilities of trained Machine Learning potentials to
+  accurately predict lattice energies, polymorphic behaviours, and response to
+  external conditions like temperature and pressure. We will also study dynamic
+  properties such as phonon spectra to complete the insight into the physical and
+  chemical behaviours of molecular crystals.
 ]
 
 #outline()
@@ -79,8 +83,7 @@ Qual è il problema e cosa si va a fare.
 
 Molecular crystals are a class of materials of great technological importance.
 
-L'acqua, i legami etc etc...
-Quantum Monte Carlo, DFT, quali sono i problemi.
+L'acqua, i legami etc etc... Quantum Monte Carlo, DFT, quali sono i problemi.
 
 == Prima parte: studio di letteratura
 = Tools
@@ -95,7 +98,8 @@ The first task is the optimization of the geometry of the water molecule.
 
 == Convergence of vibrations with respect to fmax
 
-To optimize the geometry we have to choose an optimizer. In the following, BFGS was chosen:
+To optimize the geometry we have to choose an optimizer. In the following, BFGS
+was chosen:
 
 ```python
 from ase.optimize import BFGS
@@ -188,19 +192,18 @@ converged configurations.
 
 === MACE-ICE13-1
 
-#grid(columns: (2fr, 1fr),
-    [The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with dispersion.],
-    figure(
-        image(
-            "simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg",
-        ), caption: "Frequencies calculated with the MACE-ICE13-1 model at converged fmax",
-    )
+#grid(
+  columns: (2fr, 1fr), [The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
+    dispersion.], figure(
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"), caption: "Frequencies calculated with the MACE-ICE13-1 model at converged fmax",
+  ),
 )
 
 == Geometry optimization
 
 The reference value for the H-O-H angle is 104.5°. @PhysicalChemistryWater2020
-The reference value for the O-H distance is 0.96 $angstrom$. @PhysicalChemistryWater2020
+The reference value for the O-H distance is 0.96 $angstrom$.
+@PhysicalChemistryWater2020
 
 The simulation was performed using the fine-tuned MACE-ICE13-1 model.
 
@@ -223,8 +226,8 @@ ase gui final.xyz
 
 #image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png")
 
-The value found for the H-O-H angle is 104.0°.
-The value found for the O-H distance is 0.970 $angstrom$.
+The value found for the H-O-H angle is 104.0°. The value found for the O-H
+distance is 0.970 $angstrom$.
 
 = Water dimer
 
