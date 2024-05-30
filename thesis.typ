@@ -232,7 +232,12 @@ Molecular crystals are a class of materials of great technological importance.
 
 L'acqua, i legami etc etc... Quantum Monte Carlo, DFT, quali sono i problemi.
 
-== Prima parte: studio di letteratura
+== Motivation
+
+== Research question
+
+= Theory
+
 = Tools
 Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
 
