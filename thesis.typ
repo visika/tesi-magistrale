@@ -397,6 +397,9 @@ referenced as Patridge 1997 from the authors.
 
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg"),
+  caption: [
+    Performance of MACE for the 13 ice polymorphs considered on the absolute lattice energy, compared with reference models. @dellapiaDMCICE13AmbientHigh2022
+  ],
 )
 
 #figure(
@@ -424,6 +427,9 @@ and is independent of the configuration of the monomer in the gas phase.
 
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg"),
+  caption: [
+    Performance of MACE for the 13 ice polymorphs considered on the relative lattice energy, compared with reference models. @dellapiaDMCICE13AmbientHigh2022
+  ],
 )
 
 = Acknowledgments
