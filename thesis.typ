@@ -489,6 +489,13 @@ and is independent of the configuration of the monomer in the gas phase.
 
 = Crystal phonons
 
+== Band structure
+
+== Phonons DOS
+
+== Heat capacity
+
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 #bibliography(("bibliography.yml", "bibliography.bib"))
+
