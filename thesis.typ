@@ -320,6 +320,34 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
 
 == Binding energy
 
+The binding energy is calculated as
+
+$ Delta E_2 := E_2 - 2 E_1 $
+
+where $E_2$ is the energy of the dimer, $E_1$ is the energy of one molecule.
+
+To determine the equilibrium geometry of the dimer from the study of the binding
+energy, $Delta E_2$ must be minimized with respect to the internal coordinates.
+To reduce the complexity of the task, the optimization is constrained to the
+single degree of freedom of the OO distance.
+@klopperComputationalDeterminationEquilibrium2000
+
+Typical values for the binding energy obtained from DFT simulations at
+equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
+-0.12 eV). @sprikInitioMolecularDynamics1996 @mukhopadhyayWaterDimerII2018
+
+#figure(
+  image("simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.png"),
+  caption: [
+    Dimer binding energy for different calculators. The vertical dashed line
+    corresponds to the reference value for the equilibrium OO distance,
+    corresponding to the experimental value of $2.98 angstrom$
+    @dykeStructureWaterDimer1977 @mukhopadhyayWaterDimerII2018. The horizontal
+    dashed line corresponds to $-0.24 "eV"$
+    @curtissStudiesMolecularAssociation1979.
+  ],
+)
+
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 #bibliography(("bibliography.yml", "bibliography.bib"))
