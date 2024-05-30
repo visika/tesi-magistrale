@@ -140,6 +140,8 @@ Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
 Introducing @ase.
 The `Atoms` object contains the positions of the atoms and the properties of the cell.
 
+== MACE
+
 = Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
 = Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
 
