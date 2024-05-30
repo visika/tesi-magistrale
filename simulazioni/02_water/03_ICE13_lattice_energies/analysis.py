@@ -533,7 +533,15 @@ def __(df_large_d, df_medium_d, df_pbe_d3, mo, plt):
     plt.xlim(-80, -60)
     plt.ylim(-80, -60)
 
-    plt.grid()
+    # plt.grid()
+
+    # Remove all the frames
+    _ax = plt.gca()
+    _ax.spines["top"].set_visible(False)
+    _ax.spines["right"].set_visible(False)
+    _ax.spines["left"].set_visible(False)
+    _ax.spines["bottom"].set_visible(False)
+
     plt.legend()
     plt.title("Lattice energies comparison")
     plt.savefig("scatterplot_mace-mp-0_vs_pbe.svg")
@@ -556,7 +564,7 @@ def __(df_mace_ice13_1, df_rev_pbe_d3, mo, plt):
         df_rev_pbe_d3["e_lattice_kjmol"],
     )
 
-    plt.xlabel("MACE-ICE13-1 D3 (kJ/mol)")
+    plt.xlabel("MACE-ICE13-1 (kJ/mol)")
     plt.ylabel("revPBE-D3 (kJ/mol)")
 
     plt.axline((0, 0), slope=1, linestyle="--")
@@ -564,7 +572,15 @@ def __(df_mace_ice13_1, df_rev_pbe_d3, mo, plt):
     plt.xlim(-60, -54)
     plt.ylim(-60, -54)
 
-    plt.grid()
+    # plt.grid()
+
+    # Remove all the frames
+    _ax = plt.gca()
+    _ax.spines["top"].set_visible(False)
+    _ax.spines["right"].set_visible(False)
+    _ax.spines["left"].set_visible(False)
+    _ax.spines["bottom"].set_visible(False)
+
     plt.title("Lattice energies comparison")
     plt.savefig("scatterplot_mace-ice13-1_vs_revpbed3.svg")
     mo.mpl.interactive(plt.gcf())
