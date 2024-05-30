@@ -253,19 +253,70 @@ The water dimer was analyzed using different models:
   ],
 )
 
-== Geometry parameters
+== Geometry optimization
+
+The optimization was performed starting from an initial configuration
+approximately reproducing the geometry represented in @dimer-structure. The BFGS
+optimizer was used with the MACE-MP-0 models and the MACE-ICE13-1 model, with a
+force threshold of `1e-8`. The code describing the initial geometry is available
+in @init.xyz. The results comparing the optimized geometry with literature
+reference are available in @dimer-geometry-table and @dimer-geometry-errors.
+
+#figure(
+  image("thesis/imgs/klopper-fig1.gif"),
+  caption: [
+    The equilibrium structure of the water dimer. (Image taken from
+    @klopperComputationalDeterminationEquilibrium2000)
+  ],
+) <dimer-structure>
+
+#figure(
+  ```
+  6
+  # CELL(abcABC):  200.00000   200.00000   200.00000    90.00000    90.00000    90.00000  Step:          67  Bead:       0 positions{angstrom}  cell{atomic_unit}
+         O  1.36346e-01 -9.67442e-01  2.40661e-01
+         H -7.79751e-01 -8.69284e-01  3.06661e-02
+         H  5.34721e-01 -1.44347e+00 -4.71854e-01
+         O  1.42482e+00  1.38927e+00  9.26440e-01
+         H  1.72033e+00  1.29319e+00  1.81419e+00
+         H  9.82564e-01  5.67597e-01  7.04541e-01
+  ```,
+  caption: [
+    init.xyz
+  ],
+) <init.xyz>
+
+#let dimer_geometry_table = csv("simulazioni/02_water/02_dimer/01_optimize/geometria.csv")
+#figure(
+  table(
+    columns: dimer_geometry_table.first().len(),
+    table.header([Model], $alpha$, $theta_a$, $theta_d$, $r_"OO" (angstrom)$, $beta$),
+    ..dimer_geometry_table.flatten(),
+  ),
+  caption: [
+    Geometry values after optimization of the dimer, obtained from different
+    calculator models, and from reference
+    @klopperComputationalDeterminationEquilibrium2000.
+    `small`, `medium`, `large` refer to MACE-MP-0.
+  ],
+) <dimer-geometry-table>
 
 #let dimer_geometry_errors = csv("simulazioni/02_water/02_dimer/01_optimize/errori.csv")
 #figure(
   table(
-    columns: dimer_geometry_errors.first().len(), ..dimer_geometry_errors.flatten(),
-  ), caption: [
-    Errors of the geometry parameters of the dimer, obtained from different
-    calculator models, with respect to reference values
+    columns: dimer_geometry_errors.first().len(),
+    table.header([Model], $alpha$, $theta_a$, $theta_d$, $r_"OO" (angstrom)$, $beta$),
+    ..dimer_geometry_errors.flatten(),
+  ),
+  caption: [
+    Errors of the geometry parameters after optimization of the dimer, obtained from
+    different calculator models, with respect to reference values
+    @klopperComputationalDeterminationEquilibrium2000
     @barnettBornOppenheimerMoleculardynamicsSimulations1993
-    @sprikInitioMolecularDynamics1996.
+    @sprikInitioMolecularDynamics1996. `small`, `medium`, `large` refer to
+    MACE-MP-0.
   ],
-)
+) <dimer-geometry-errors>
 
 == Binding energy
 
