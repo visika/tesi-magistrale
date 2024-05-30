@@ -287,9 +287,7 @@ The final geometry was analyzed through the visualizer integrated in ase:
 ase gui final.xyz
 ```
 
-#figure(
-  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png"),
-)
+#figure(image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png"))
 
 The value found for the H-O-H angle is 104.0°. The value found for the O-H
 distance is 0.970 $angstrom$.
@@ -305,6 +303,7 @@ The water dimer was analyzed using different models:
     columns: 2,
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"),
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/medium.png"),
+
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/large.png"),
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
   ),
@@ -350,7 +349,14 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
 #figure(
   table(
     columns: dimer_geometry_table.first().len(),
-    table.header([Model], $alpha$, $theta_a$, $theta_d$, $r_"OO" (angstrom)$, $beta$),
+    table.header(
+      [Model],
+      $alpha$,
+      $theta_a$,
+      $theta_d$,
+      $r_"OO" (angstrom)$,
+      $beta$,
+    ),
     ..dimer_geometry_table.flatten(),
   ),
   caption: [
@@ -365,7 +371,14 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
 #figure(
   table(
     columns: dimer_geometry_errors.first().len(),
-    table.header([Model], $alpha$, $theta_a$, $theta_d$, $r_"OO" (angstrom)$, $beta$),
+    table.header(
+      [Model],
+      $alpha$,
+      $theta_a$,
+      $theta_d$,
+      $r_"OO" (angstrom)$,
+      $beta$,
+    ),
     ..dimer_geometry_errors.flatten(),
   ),
   caption: [
@@ -448,9 +461,10 @@ referenced as Patridge 1997 from the authors.
     columns: 2,
     image("simulazioni/02_water/03_ICE13_lattice_energies/scatterplot_mace-mp-0_vs_pbe.svg"),
     image("simulazioni/02_water/03_ICE13_lattice_energies/scatterplot_mace-ice13-1_vs_revpbed3.svg"),
-  ), caption: [
+  ),
+  caption: [
     Scatter plot comparison of MACE models versus their respective reference models.
-  ]
+  ],
 )
 
 == Relative lattice energy
