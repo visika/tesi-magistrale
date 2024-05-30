@@ -9,6 +9,11 @@
 #let title = "Properties of molecular crystals using machine learning potentials"
 #set document(title: title)
 #set text(font: "New Computer Modern", size: 12pt)
+
+// Justify paragraphs but not code blocks
+#set par(justify: true, first-line-indent: 1em)
+#show raw.where(block: true): set par(justify: false)
+
 #set page(
   paper: "a4",
   margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
