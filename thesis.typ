@@ -40,7 +40,13 @@
   #v(25mm)
 
   #grid(
-    columns: 2, align: (left, right), column-gutter: 8cm, row-gutter: 2.5mm, [*Relatori*], [*Candidato*], [Prof. Dario Alfè], [Mariano Mollo], [Prof. Andrea Zen], [Matr. N94000618],
+    columns: 2,
+    align: (left, right),
+    column-gutter: 8cm,
+    row-gutter: 2.5mm,
+    [*Relatori*], [*Candidato*],
+    [Prof. Dario Alfè], [Mariano Mollo],
+    [Prof. Andrea Zen], [Matr. N94000618],
   )
 
   #v(5.5mm)
@@ -50,12 +56,11 @@
   #pagebreak() ]
 
 #set page(
-  paper: "a4", margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm),
+  paper: "a4",
+  margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm),
 )
 
-#par(
-  justify: true,
-)[
+#par(justify: true)[
   *Abstract*
 
   Molecular crystals play an important role in the field of materials science,
