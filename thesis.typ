@@ -14,7 +14,6 @@
   numbering: "i",
   footer: [],
 )
-#set heading(numbering: "1.")
 
 #[ // Title page
   #set align(center)
@@ -72,7 +71,7 @@
 )
 
 #par(justify: true)[
-  *Abstract*
+  = Abstract
 
   Molecular crystals play an important role in the field of materials science,
   particularly in drug development, electronics, and renewable energy sectors.
