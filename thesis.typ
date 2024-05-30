@@ -11,7 +11,7 @@
 #set page(
   paper: "a4",
   margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
-  numbering: "1",
+  numbering: none,
 )
 #set heading(numbering: "1.")
 
@@ -61,9 +61,12 @@
 
   #pagebreak() ]
 
+#pagebreak()
+
 #set page(
   paper: "a4",
   margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm),
+  numbering: "i",
 )
 
 #par(justify: true)[
@@ -122,6 +125,9 @@
 )
 
 #pagebreak()
+
+#set page(numbering: "1")
+#counter(page).update(1)
 
 = Introduction
 
