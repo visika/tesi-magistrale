@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.3.3"
+__generated_with = "0.6.13"
 app = marimo.App()
 
 
@@ -85,11 +85,6 @@ def __(
         )
     )
     return df_medium_d,
-
-
-@app.cell
-def __():
-    return
 
 
 @app.cell
@@ -229,6 +224,7 @@ def __(
     df_pbe_d3,
     df_rev_pbe_d3,
     evp_to_kjmol,
+    mo,
     plt,
 ):
     fig = plt.figure(layout="constrained")
@@ -274,18 +270,19 @@ def __(
     )
 
     # MACE-MP-0 medium
-    plt.plot(
-        df_medium_d["structure"],
-        df_medium_d["e_lattice_evp"] * evp_to_kjmol,
-        marker="o",
-        label="MACE-MP-0 medium+D3",
-    )
+    # plt.plot(
+    #     df_medium_d["structure"],
+    #     df_medium_d["e_lattice_evp"] * evp_to_kjmol,
+    #     marker="o",
+    #     label="MACE-MP-0 medium+D3",
+    # )
 
     plt.plot(
         df_medium_d["structure"],
         df_medium_d["e_lattice_patridge_ev"] * evp_to_kjmol,
         marker="o",
-        label="MACE-MP-0 medium (Patridge)",
+        # label="MACE-MP-0 medium (Patridge)",
+        label="MACE-MP-0 medium+D3",
     )
 
     # MACE-MP-0 large
@@ -298,12 +295,18 @@ def __(
 
     plt.xlabel("Structure")
     plt.ylabel("Lattice energy (kJ/mol)")
-    plt.grid()
-    plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=2, loc="upper center")
+    # plt.grid()
+    plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=3, loc="upper center")
     plt.title("Absolute lattice energy")
 
-    # fig.savefig("absolute_lattice_energy.png")
-    fig
+    # Remove frames
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+
+    fig.savefig("absolute_lattice_energy.svg")
+    mo.mpl.interactive(plt.gcf())
     return ax, fig
 
 
@@ -380,6 +383,7 @@ def __(
     df_medium_d,
     df_pbe_d3,
     df_rev_pbe_d3,
+    mo,
     pl,
     plt,
 ):
@@ -404,6 +408,12 @@ def __(
     _mace_mp_0_medium = get_relative_lattice_energy(df_medium_d)
 
     # Plot the relative lattice energy
+
+    _fig = plt.figure(layout="constrained")
+    _ax = plt.subplot(111)
+
+    # Draw the horizontal line at 0
+    plt.axhline(0, color="black", linewidth=0.5)
 
     plt.plot(
         _dmc["structure"],
@@ -451,9 +461,19 @@ def __(
     plt.xlabel("Structure")
     plt.ylabel("Relative lattice energy (kJ/mol)")
     plt.title("Relative lattice energy")
-    plt.grid()
+    # plt.grid()
 
     plt.legend()
+
+    # Remove frames
+    _ax.spines["top"].set_visible(False)
+    _ax.spines["right"].set_visible(False)
+    _ax.spines["left"].set_visible(False)
+    _ax.spines["bottom"].set_visible(False)
+
+    # plt.savefig("relative_lattice_energy.svg")
+
+    mo.mpl.interactive(plt.gcf())
     return get_relative_lattice_energy,
 
 
@@ -481,8 +501,8 @@ def __(mo):
     return
 
 
-@app.cell(hide_code=True)
-def __(df_large_d, df_medium_d, df_pbe_d3, plt):
+@app.cell
+def __(df_large_d, df_medium_d, df_pbe_d3, mo, plt):
     # Make a scatter plot between MACE medium-D and PBE-D3
 
     # Make the figure a square
@@ -515,7 +535,9 @@ def __(df_large_d, df_medium_d, df_pbe_d3, plt):
 
     plt.grid()
     plt.legend()
-    # plt.savefig("scatterplot_mace_vs_pbe.png", dpi=300)
+    plt.title("Lattice energies comparison")
+    plt.savefig("scatterplot_mace-mp-0_vs_pbe.svg")
+    mo.mpl.interactive(plt.gcf())
     return
 
 
@@ -526,7 +548,7 @@ def __(mo):
 
 
 @app.cell
-def __(df_mace_ice13_1, df_rev_pbe_d3, plt):
+def __(df_mace_ice13_1, df_rev_pbe_d3, mo, plt):
     plt.figure(figsize=(6, 6))
 
     plt.scatter(
@@ -543,7 +565,9 @@ def __(df_mace_ice13_1, df_rev_pbe_d3, plt):
     plt.ylim(-60, -54)
 
     plt.grid()
-    plt.gca()
+    plt.title("Lattice energies comparison")
+    plt.savefig("scatterplot_mace-ice13-1_vs_revpbed3.svg")
+    mo.mpl.interactive(plt.gcf())
     return
 
 
