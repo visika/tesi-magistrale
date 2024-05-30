@@ -348,6 +348,43 @@ equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
   ],
 )
 
+= Lattice energy
+
+The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
+
+$ E_"crystal" := E / N_(#ce("H_2O")) $
+
+$ E_"lattice" := E_"crystal" - E_"gas" $
+
+The quantity $E_"gas"$ is calculated in the same manner as in @sec-molecule,
+with the distinction that optimization was not performed;
+the molecule from Patridge
+// TODO cita
+was used, as instructed by the article by della Pia.
+// TODO cita
+
+== Absolute lattice energy
+
+#figure(
+  image("simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg"),
+)
+
+#figure(
+  grid(
+    columns: 2,
+    image("simulazioni/02_water/03_ICE13_lattice_energies/scatterplot_mace-mp-0_vs_pbe.svg"),
+    image("simulazioni/02_water/03_ICE13_lattice_energies/scatterplot_mace-ice13-1_vs_revpbed3.svg"),
+  ), caption: [
+    Scatter plot comparison of MACE models versus their respective reference models.
+  ]
+)
+
+== Relative lattice energy
+
+#figure(
+  image("simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg"),
+)
+
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 #bibliography(("bibliography.yml", "bibliography.bib"))
