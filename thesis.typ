@@ -392,6 +392,17 @@ referenced as Patridge 1997 from the authors.
 
 == Relative lattice energy
 
+In @dellapiaDMCICE13AmbientHigh2022 it is noted that there is interest in capturing the relative stability of the ice polymorphs, i.e., the stability with respect to a fixed crystalline phase instead of the gas state.
+This property is more relevant in, e.g., the computation of the water phase diagram.
+Therefore, we assess the relative stability of the crystalline phases by computing the relative lattice energy with respect to hexagonal ice Ih.
+
+For a general polymorph $x$,
+the relative lattice energy is computed as
+$
+  Delta E_"lattice"^x := E_"lattice"^x - E_"lattice"^"Ih"
+$
+and is independent of the configuration of the monomer in the gas phase.
+
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg"),
 )
