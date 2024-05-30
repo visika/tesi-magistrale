@@ -1,5 +1,6 @@
 #import "@preview/whalogen:0.2.0": ce
 #import "@preview/glossarium:0.4.1": make-glossary, print-glossary, gls, glspl
+#import "@preview/hydra:0.4.0": hydra
 #show: make-glossary
 
 // For glossarium links
@@ -127,15 +128,102 @@
 
 #pagebreak()
 
-#set page(numbering: "1")
-#counter(page).update(1)
+// https://github.com/typst/typst/discussions/3122
+// New first level headings will appear on the right page
+// and there will be absolutely nothing on the blank pages
 
-// Put this rule after the outlines, because they contain first level headings
-#show heading.where(level: 1): it => {
-  pagebreak(weak: true, to: "odd")
-  it
+#let find-labels(name) = {
+  return query(name).map(label => label.location().page())
 }
 
+#let page-header = context {
+  let empty-pages = find-labels(<empty-page>)
+  let new-chapters = find-labels(<new-chapter>)
+  if new-chapters.len() > 0 {
+    if new-chapters.contains(here().page()) [
+      // _a new chapter starts on this page_
+      #return
+    ]
+
+    // get the index of the next <new-chapter> label
+    let new-chapter-index = new-chapters.position(page => page > here().page())
+    if new-chapter-index != none {
+      let empty-page = empty-pages.at(new-chapter-index)
+      if empty-page < here().page() [
+        // _this is an empty page to make the next chapter start on an odd page_
+        #return
+      ]
+    }
+  }
+
+  context {
+    if calc.odd(here().page()) {
+      align(right, hydra(1))
+    } else {
+      align(left, hydra(2))
+    }
+    // line(length: 100%)
+  }
+}
+
+#let page-footer = context {
+  // since the page breaks in chapter-heading() are inserted after the <empty-page> label,
+  // the selector has to look "before" the current page to find the relevant label
+  let empty-page-labels = query(selector(<empty-page>).before(here()))
+  if empty-page-labels.len() > 0 {
+    let empty-page = empty-page-labels.last().location().page()
+    // look back at the most recent <new-chapter> label
+    let new-chapter = query(
+      selector(<new-chapter>).before(here()),
+    ).last().location().page()
+    // check that there is no <new-chapter> label on the current page
+    if (new-chapter != here().page()) and (empty-page + 1 == here().page()) [
+      // _this is an empty page where the page number should be omitted_
+      #return
+    ]
+  }
+
+  let page-display = counter(page).display(here().page-numbering())
+  h(1fr) + page-display + h(1fr)
+}
+
+#show heading.where(level: 1): it => [
+  #[] <empty-page>
+  #pagebreak(to: "even", weak: true)
+  #[] <new-chapter>
+  #pagebreak(to: "odd", weak: true)
+  // #set text(font: "Neo Euler")
+  #grid(
+    columns: 2,
+    inset: (x: 5mm, y: 2mm),
+    align: horizon + center,
+    grid.vline(position: end),
+    [
+      #set text(size: 48pt)
+      #counter(heading).display()
+    ],
+    upper(it.body),
+  )
+  #v(2em)
+]
+
+#show outline.entry.where(level: 1): it => {
+  // reverse the results of the label queries to find the last <empty-page> label for the targeted page
+  // the method array.position() will always return the first one...
+  let empty-pages = find-labels(<empty-page>).rev()
+  let new-chapters = query(<new-chapter>).rev()
+  let empty-page-index = empty-pages.position(page => page == int(it.page.text))
+  let new-chapter = new-chapters.at(empty-page-index)
+  link(
+    new-chapter.location(),
+  )[#it.body #box(width: 1fr)[#it.fill] #new-chapter.location().page()]
+}
+
+#set page(header: page-header, footer: page-footer, numbering: "1")
+#counter(page).update(1)
+
+// Qui iniziano i contenuti della tesi
+#set heading(numbering: "1.1")
 = Introduction
 
 Qual è il problema e cosa si va a fare.
