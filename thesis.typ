@@ -1,4 +1,9 @@
 #import "@preview/whalogen:0.2.0": ce
+#import "@preview/glossarium:0.4.1": make-glossary, print-glossary, gls, glspl
+#show: make-glossary
+
+// For glossarium links
+#show link: set text(fill: blue.darken(60%))
 
 #let title = "Properties of molecular crystals using machine learning potentials"
 #set document(title: title)
@@ -6,6 +11,7 @@
 #set page(
   paper: "a4",
   margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
+  numbering: "1",
 )
 #set heading(numbering: "1.")
 
@@ -102,6 +108,19 @@
   target: figure.where(kind: raw),
 )
 
+#heading(numbering: none, outlined: false, [Glossary])
+#print-glossary(
+  (
+    (
+      key: "ase",
+      short: "ASE",
+      long: "Atomic Simulation Environment",
+    ),
+    (key: "md", short: "MD", long: "Molecular Dynamics"),
+  ),
+  show-all: true,
+)
+
 #pagebreak()
 
 = Introduction
@@ -118,6 +137,7 @@ Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
 
 == ASE
 
+Introducing @ase.
 The `Atoms` object contains the positions of the atoms and the properties of the cell.
 
 = Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
