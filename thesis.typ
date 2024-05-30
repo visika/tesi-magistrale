@@ -11,7 +11,8 @@
 #set page(
   paper: "a4",
   margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
-  numbering: none,
+  numbering: "i",
+  footer: [],
 )
 #set heading(numbering: "1.")
 
@@ -67,6 +68,7 @@
   paper: "a4",
   margin: (right: 3cm, left: 3.5cm, top: 3.5cm, bottom: 3.5cm),
   numbering: "i",
+  footer: none,
 )
 
 #par(justify: true)[
