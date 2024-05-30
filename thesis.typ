@@ -1,3 +1,5 @@
+#import "@preview/whalogen:0.2.0": ce
+
 #let title = "Properties of molecular crystals using machine learning potentials"
 #set document(title: title)
 #set text(font: "New Computer Modern", size: 12pt)
