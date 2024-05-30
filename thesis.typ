@@ -4,7 +4,8 @@
 #set document(title: title)
 #set text(font: "New Computer Modern", size: 12pt)
 #set page(
-  paper: "a4", margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
+  paper: "a4",
+  margin: (right: 3cm, left: 3.5cm, top: 4.5cm, bottom: 3.5cm),
 )
 #set heading(numbering: "1.")
 
