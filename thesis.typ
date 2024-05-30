@@ -127,38 +127,32 @@ for d in [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
 
 #figure(
   grid(
-    columns: 3, image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-1.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-4.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-8.svg",
-    ),
-  ), caption: "Convergence of the small model with respect to fmax",
+    columns: 3,
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-1.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-4.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-8.svg"),
+  ),
+  caption: "Convergence of the small model with respect to fmax",
 )
 
 #figure(
   grid(
-    columns: 3, image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-4.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-8.svg",
-    ),
-  ), caption: "Convergence of the medium model with respect to fmax",
+    columns: 3,
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-4.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-8.svg"),
+  ),
+  caption: "Convergence of the medium model with respect to fmax",
 )
 
 #figure(
   grid(
-    columns: 3, image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-1.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-4.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-8.svg",
-    ),
-  ), caption: "Convergence of the large model with respect to fmax",
+    columns: 3,
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-1.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-4.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-8.svg"),
+  ),
+  caption: "Convergence of the large model with respect to fmax",
 )
 
 === With dispersion
@@ -168,46 +162,43 @@ converged configurations.
 
 #figure(
   grid(
-    columns: 3, image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-1.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-4.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-8.svg",
-    ),
-  ), caption: "Convergence of the small model with respect to fmax",
+    columns: 3,
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-1.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-4.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-8.svg"),
+  ),
+  caption: "Convergence of the small model with respect to fmax",
 )
 
 #figure(
   grid(
-    columns: 3, image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-1.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-4.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-8.svg",
-    ),
-  ), caption: "Convergence of the medium model with respect to fmax",
+    columns: 3,
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-1.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-4.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-8.svg"),
+  ),
+  caption: "Convergence of the medium model with respect to fmax",
 )
 
 #figure(
   grid(
-    columns: 3, image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-1.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-4.svg",
-    ), image(
-      "simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-8.svg",
-    ),
-  ), caption: "Convergence of the large model with respect to fmax",
+    columns: 3,
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-1.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-4.svg"),
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-8.svg"),
+  ),
+  caption: "Convergence of the large model with respect to fmax",
 )
 
 === MACE-ICE13-1
 
 #grid(
-  columns: (2fr, 1fr), [The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
-    dispersion.], figure(
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"), caption: "Frequencies calculated with the MACE-ICE13-1 model at converged fmax",
+  columns: (2fr, 1fr),
+  [The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
+    dispersion.],
+  figure(
+    image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"),
+    caption: "Frequencies calculated with the MACE-ICE13-1 model at converged fmax",
   ),
 )
 
@@ -236,7 +227,9 @@ The final geometry was analyzed through the visualizer integrated in ase:
 ase gui final.xyz
 ```
 
-#image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png")
+#figure(
+  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png"),
+)
 
 The value found for the H-O-H angle is 104.0°. The value found for the O-H
 distance is 0.970 $angstrom$.
@@ -249,8 +242,13 @@ The water dimer was analyzed using different models:
 
 #figure(
   grid(
-    columns: 2, image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"), image("simulazioni/02_water/02_dimer/01_optimize/Grafici/medium.png"), image("simulazioni/02_water/02_dimer/01_optimize/Grafici/large.png"), image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
-  ), caption: [
+    columns: 2,
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"),
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/medium.png"),
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/large.png"),
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
+  ),
+  caption: [
     Structure optimization of the water dimer and vibration analysis.
   ],
 )
