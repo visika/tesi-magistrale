@@ -129,6 +129,12 @@
 #set page(numbering: "1")
 #counter(page).update(1)
 
+// Put this rule after the outlines, because they contain first level headings
+#show heading.where(level: 1): it => {
+  pagebreak(weak: true, to: "odd")
+  it
+}
+
 = Introduction
 
 Qual è il problema e cosa si va a fare.
