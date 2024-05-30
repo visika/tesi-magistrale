@@ -87,6 +87,21 @@
 
 #outline()
 
+#outline(
+  title: [List of Figures],
+  target: figure.where(kind: image),
+)
+
+#outline(
+  title: [List of Tables],
+  target: figure.where(kind: table),
+)
+
+#outline(
+  title: [List of Code Blocks],
+  target: figure.where(kind: raw),
+)
+
 #pagebreak()
 
 = Introduction
