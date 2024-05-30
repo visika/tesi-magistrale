@@ -231,15 +231,34 @@ converged configurations.
 
 === MACE-ICE13-1
 
+The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
+dispersion.
+
+Convergence of results for the MACE-ICE13-1 model is achieved for displacements below $10^(-4) angstrom$.
+The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corresponds to negligible energy, as can be observed in the representative output in @code-monomer-vibrations-mace-ice13-1-output and therefore does not pose a issue.
+
 #grid(
-  columns: (2fr, 1fr),
-  [The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
-    dispersion.],
-  figure(
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"),
-    caption: "Frequencies calculated with the MACE-ICE13-1 model at converged fmax",
-  ),
+  columns: 2,
+  [#figure(
+      image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"),
+      caption: "Frequencies calculated with the MACE-ICE13-1 model at an appropriate fmax for convergence.",
+    ) <fig-monomer-vibrations-mace-ice13-1>],
+  [
+    #figure(
+      raw(
+        read("simulazioni/02_water/01_molecule/MACE-ICE13-1/H2O_delta=1e-06_summary.txt"),
+      ),
+      caption: [
+        H2O_delta=1e-06_summary.txt
+      ],
+    ) <code-monomer-vibrations-mace-ice13-1-output>
+  ],
 )
+
+== Zero-point vibrational energy
+
+The computation with MACE-ICE13-1 results in a zero-point energy of $0.565 "eV"$.
+This value is compared with the reference value of $+0.575 "eV"$. @eisenbergWaterMolecule2005
 
 == Geometry optimization
 
