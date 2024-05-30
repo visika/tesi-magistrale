@@ -130,7 +130,7 @@ test = ["pytest (>=7.0.0)", "pytest-xdist (>=2.1.0)"]
 type = "git"
 url = "https://gitlab.com/ase/ase.git"
 reference = "HEAD"
-resolved_reference = "124fc7571aa52e29168316060e9b3b77a8ad2319"
+resolved_reference = "079b7fb44f5d024bebbcb4598362aa136ae3c603"
 
 [[package]]
 name = "asttokens"
@@ -1539,13 +1539,13 @@ wandb = ["wandb"]
 
 [[package]]
 name = "marimo"
-version = "0.6.8"
+version = "0.6.13"
 description = "A library for making reactive notebooks and apps"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "marimo-0.6.8-py3-none-any.whl", hash = "sha256:898c6dc93300906d9be015d9166298156e4c061a5576738a113b6327b561d63c"},
-    {file = "marimo-0.6.8.tar.gz", hash = "sha256:5d0ae5795e10ec7ceb862de58ceb354ad072750989984eddc3281116ff5c8224"},
+    {file = "marimo-0.6.13-py3-none-any.whl", hash = "sha256:ee40f66a8b829b1cb32de536a569fd6f3604e0ac4472142840bfb515df1156b6"},
+    {file = "marimo-0.6.13.tar.gz", hash = "sha256:797112296ddb6782b9ba617650e19ef7c52cb73194872ebf93555a90601657ac"},
 ]
 
 [package.dependencies]
@@ -1565,9 +1565,9 @@ uvicorn = ">=0.22.0"
 websockets = ">=10.0.0,<13.0.0"
 
 [package.extras]
-dev = ["autoclasstoc (>=1.6.0,<1.7.0)", "black (>=23.3.0,<23.4.0)", "build (>=0.10.0,<0.11.0)", "click (<8.1.4)", "furo (==2024.5.6)", "httpx (>=0.26.0,<0.27.0)", "mypy (>=1.7.0,<1.8.0)", "myst-parser (>=3.0.1,<3.1.0)", "pandas (>=1.3.0)", "pandas-stubs (>=1.3.0)", "pillow (>=10.2.0,<10.3.0)", "polars (==0.19.12)", "pyarrow (>=15.0.2,<16)", "pyarrow-stubs (>=10)", "pypandoc (>=1.11,<2.0)", "pytest (>=7.4.0,<7.5.0)", "pytest-asyncio (>=0.23.4,<0.24.0)", "pytest-codecov (>=0.5.1,<0.6.0)", "ruff (>=0.3.6,<0.4.0)", "sphinx (==7.0.1)", "sphinx-copybutton (>=0.5.2,<0.6.0)", "sphinx-design (>=0.5.0,<0.6.0)", "sphinx-new-tab-link (>=0.4.0,<0.5.0)", "sphinx-sitemap (>=2.6.0,<2.7.0)", "types-Markdown (>=3.6.0.20240316,<3.7.0.0)", "types-Pillow (>=10.2.0.20240311,<10.3.0.0)", "types-PyYAML (>=6.0.12.20240311,<6.1.0.0)", "types-Pygments (>=2.17.0.20240310,<2.18.0.0)", "types-psutil (>=5.9.5.20240423,<5.10.0.0)", "typos (>=1.17.1,<1.18.0)"]
+dev = ["autoclasstoc (>=1.6.0,<1.7.0)", "black (>=23.3.0,<23.4.0)", "build (>=0.10.0,<0.11.0)", "click (<8.1.4)", "furo (==2024.5.6)", "httpx (>=0.26.0,<0.27.0)", "mypy (>=1.7.0,<1.8.0)", "myst-parser (>=3.0.1,<3.1.0)", "pandas (>=1.3.0)", "pandas-stubs (>=1.3.0)", "pillow (>=10.2.0,<10.3.0)", "polars (==0.20.30)", "pyarrow (>=15.0.2,<16)", "pyarrow-stubs (>=10)", "pypandoc (>=1.11,<2.0)", "pytest (>=7.4.0,<7.5.0)", "pytest-asyncio (>=0.23.4,<0.24.0)", "pytest-codecov (>=0.5.1,<0.6.0)", "ruff (>=0.3.6,<0.4.0)", "sphinx (==7.0.1)", "sphinx-copybutton (>=0.5.2,<0.6.0)", "sphinx-design (>=0.5.0,<0.6.0)", "sphinx-new-tab-link (>=0.4.0,<0.5.0)", "sphinx-sitemap (>=2.6.0,<2.7.0)", "types-Markdown (>=3.6.0.20240316,<3.7.0.0)", "types-Pillow (>=10.2.0.20240311,<10.3.0.0)", "types-PyYAML (>=6.0.12.20240311,<6.1.0.0)", "types-Pygments (>=2.17.0.20240310,<2.18.0.0)", "types-psutil (>=5.9.5.20240423,<5.10.0.0)", "typos (>=1.17.1,<1.18.0)"]
 testcore = ["click (<8.1.4)", "httpx (>=0.26.0,<0.27.0)", "pytest (>=7.4.0,<7.5.0)", "pytest-asyncio (>=0.23.4,<0.24.0)", "pytest-codecov (>=0.5.1,<0.6.0)"]
-testoptional = ["altair (>=5.0.0)", "anywidget (>=0.9.3,<0.10.0)", "ipython (>=8.12.3,<8.13.0)", "nbformat (>=5.0.0)", "openai (>=1.12.0,<1.13.0)", "pandas (>=1.3.0)", "pandas-stubs (>=1.3.0)", "pillow (>=10.2.0,<10.3.0)", "polars (==0.19.12)", "pyarrow (>=15.0.2,<16)", "pyarrow-stubs (>=10)", "types-Pillow (>=10.2.0.20240311,<10.3.0.0)"]
+testoptional = ["altair (>=5.0.0)", "anywidget (>=0.9.3,<0.10.0)", "ipython (>=8.12.3,<8.13.0)", "nbformat (>=5.0.0)", "openai (>=1.12.0,<1.13.0)", "pandas (>=1.3.0)", "pandas-stubs (>=1.3.0)", "pillow (>=10.2.0,<10.3.0)", "polars (==0.20.30)", "pyarrow (>=15.0.2,<16)", "pyarrow-stubs (>=10)", "types-Pillow (>=10.2.0.20240311,<10.3.0.0)"]
 
 [[package]]
 name = "markdown"
@@ -2695,13 +2695,13 @@ twisted = ["twisted"]
 
 [[package]]
 name = "prompt-toolkit"
-version = "3.0.44"
+version = "3.0.45"
 description = "Library for building powerful interactive command lines in Python"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "prompt_toolkit-3.0.44-py3-none-any.whl", hash = "sha256:205a20669633d042d3722a528b8e7cd3f4dbd9e1450935f596c2cc61166762dd"},
-    {file = "prompt_toolkit-3.0.44.tar.gz", hash = "sha256:c1dfd082c4259964bc8bcce1f8460d9dbeb5d4a37bfc25b8082bc02cd41c8af6"},
+    {file = "prompt_toolkit-3.0.45-py3-none-any.whl", hash = "sha256:a29b89160e494e3ea8622b09fa5897610b437884dcdcd054fdc1308883326c2a"},
+    {file = "prompt_toolkit-3.0.45.tar.gz", hash = "sha256:07c60ee4ab7b7e90824b61afa840c8f5aad2d46b3e2e10acc33d8ecc94a49089"},
 ]
 
 [package.dependencies]
@@ -3144,13 +3144,13 @@ rpds-py = ">=0.7.0"
 
 [[package]]
 name = "requests"
-version = "2.32.2"
+version = "2.32.3"
 description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "requests-2.32.2-py3-none-any.whl", hash = "sha256:fc06670dd0ed212426dfeb94fc1b983d917c4f9847c863f313c9dfaaffb7c23c"},
-    {file = "requests-2.32.2.tar.gz", hash = "sha256:dd951ff5ecf3e3b3aa26b40703ba77495dab41da839ae72ef3c8e5d8e2433289"},
+    {file = "requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6"},
+    {file = "requests-2.32.3.tar.gz", hash = "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760"},
 ]
 
 [package.dependencies]
@@ -3569,17 +3569,17 @@ full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.7
 
 [[package]]
 name = "sympy"
-version = "1.12"
+version = "1.12.1"
 description = "Computer algebra system (CAS) in Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "sympy-1.12-py3-none-any.whl", hash = "sha256:c3588cd4295d0c0f603d0f2ae780587e64e2efeedb3521e46b9bb1d08d184fa5"},
-    {file = "sympy-1.12.tar.gz", hash = "sha256:ebf595c8dac3e0fdc4152c51878b498396ec7f30e7a914d6071e674d49420fb8"},
+    {file = "sympy-1.12.1-py3-none-any.whl", hash = "sha256:9b2cbc7f1a640289430e13d2a56f02f867a1da0190f2f99d8968c2f74da0e515"},
+    {file = "sympy-1.12.1.tar.gz", hash = "sha256:2877b03f998cd8c08f07cd0de5b767119cd3ef40d09f41c30d722f6686b0fb88"},
 ]
 
 [package.dependencies]
-mpmath = ">=0.19"
+mpmath = ">=1.1.0,<1.4.0"
 
 [[package]]
 name = "tabulate"
@@ -3934,13 +3934,13 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "uvicorn"
-version = "0.29.0"
+version = "0.30.0"
 description = "The lightning-fast ASGI server."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "uvicorn-0.29.0-py3-none-any.whl", hash = "sha256:2c2aac7ff4f4365c206fd773a39bf4ebd1047c238f8b8268ad996829323473de"},
-    {file = "uvicorn-0.29.0.tar.gz", hash = "sha256:6a69214c0b6a087462412670b3ef21224fa48cae0e452b5883e8e8bdfdd11dd0"},
+    {file = "uvicorn-0.30.0-py3-none-any.whl", hash = "sha256:78fa0b5f56abb8562024a59041caeb555c86e48d0efdd23c3fe7de7a4075bdab"},
+    {file = "uvicorn-0.30.0.tar.gz", hash = "sha256:f678dec4fa3a39706bbf49b9ec5fc40049d42418716cea52b53f07828a60aa37"},
 ]
 
 [package.dependencies]
