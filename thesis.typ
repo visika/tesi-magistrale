@@ -352,18 +352,29 @@ equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
 
 The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
 
-$ E_"crystal" := E / N_(#ce("H_2O")) $
-
-$ E_"lattice" := E_"crystal" - E_"gas" $
-
-The quantity $E_"gas"$ is calculated in the same manner as in @sec-molecule,
-with the distinction that optimization was not performed;
-the molecule from Patridge
-// TODO cita
-was used, as instructed by the article by della Pia.
-// TODO cita
+#figure(
+  image("thesis/imgs/dellapia2022_f1.jpeg", width: 100%),
+  caption: [
+    Crystalline structures of the systems contained in the DMC-ICE13 dataset.
+    Image obtained from @dellapiaDMCICE13AmbientHigh2022 @salzmannAdvancesExperimentalExploration2019.
+  ],
+)
 
 == Absolute lattice energy
+
+The physical quantity usually considered to establish the stability of a crystal
+is its absolute lattice energy, which is the energy per molecule gained upon
+assuming the crystal form with respect to the gas phase.
+It can be computed as @dellapiaDMCICE13AmbientHigh2022
+$ E_"lattice" := E_"crystal" - E_"gas", $
+where $E_"crystal"$ is the energy per molecule in the crystal phase, and $E_"gas"$ is the energy of the isolated molecule.
+
+$ E_"crystal" := E / N_(#ce("H_2O")) $
+
+The quantity $E_"gas"$ is calculated in the same manner as in @sec-molecule,
+however, with the distinction that optimization was not performed;
+to align the computed results with the reference paper, the same fixed gas phase molecule was used,
+referenced as Patridge 1997 from the authors.
 
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg"),
