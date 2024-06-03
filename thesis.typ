@@ -11,7 +11,7 @@
 #set text(font: "New Computer Modern", size: 12pt)
 
 // Justify paragraphs but not code blocks
-#set par(justify: true, first-line-indent: 1em)
+#set par(justify: false, first-line-indent: 1em)
 #show raw.where(block: true): set par(justify: false)
 
 #set page(
@@ -135,6 +135,10 @@
     (key: "pbe", short: "PBE", long: "Perdew-Burke-Ernzerhof"),
     (key: "dmc", short: "DMC", long: "Diffusion Monte Carlo"),
     (key: "paw", short: "PAW", long: "Projector-Augmented plane Wave"),
+    (key: "zpe", short: "ZPE", long: "Zero Point Energy"),
+    (key: "tnqn", short: "T&QN", long: "Thermal and Quantum Nuclear"),
+    (key: "xdm", short: "XDM", long: "Exchange-hole Dipole Moment"),
+    (key: "gga", short: "GGA", long: "Generalized Gradient Approximation"),
   ),
   show-all: true,
 )
@@ -220,6 +224,8 @@
   #v(2em)
 ]
 
+#show heading.where(level: 2): it => upper(it)
+
 #show outline.entry.where(level: 1): it => {
   // reverse the results of the label queries to find the last <empty-page> label for the targeted page
   // the method array.position() will always return the first one...
@@ -237,7 +243,29 @@
 
 // Qui iniziano i contenuti della tesi
 #set heading(numbering: "1.1")
+#set par(justify: true)
+#set math.equation(numbering: "(1)")
+
 = Introduction
+
+#box(
+  stroke: 2pt + red,
+  inset: 1mm,
+  [
+    // TODO Riprendi introduzione dall'articolo introduttivo di MACE
+    *From MACE*:
+    Machine-learned force fields have transformed the atomistic modelling of materials by enabling simulations of _ab initio_ quality on unprecedented time and length scales.
+    However, they are currently limited by:
+    1. the significant computational and human effort that must go into development and validation of potentials for each particular system of interest; and
+    2. a general lack of transferability from one chemical system to the next.
+    Here, using the state-of-the-art MACE architecture we introduce a single general-purpose ML model, trained on a public database of 150k inorganic crystals, that is capable of running stable molecular dynamics on molecules and materials.
+    We demonstrate the power of the MACE-MP-0 model --- and its qualitative and at times quantitative accuracy --- on a diverse set problems in the physical sciences, including the properties of solids, liquids, gases, and chemical reactions.
+    The model can be applied out of the box and as a starting or "foundation model" for any atomistic system of interest and is thus a step towards democatising the revolution of ML force fields by lowering the barriers to entry.
+    @batatiaFoundationModelAtomistic2023
+  ],
+)
+
+// TODO Descrivi cristalli molecolari e compara l'acqua come esempio caratterizzante
 
 Qual è il problema e cosa si va a fare.
 
@@ -247,9 +275,131 @@ L'acqua, i legami etc etc... Quantum Monte Carlo, DFT, quali sono i problemi.
 
 == Motivation
 
+DFT potentials are hard to make and it is hard to account for all the contributions.
+They consume much time and resources.
+
+The main quantity to consider to assess the stability of a crystal is its lattice energy, $E_"latt"$, which is the energy per molecule gained upon assuming the crystal form with respect to the gas state.
+It can be computed as:
+$
+  E_"latt" = E_"crys" - E_"gas",
+$ <eq-zen_2018_1>
+with $E_"crys"$ as the energy per molecule in the crystal state and $E_"gas"$ as the energy of the isolated molecule.
+
+Typically, the computation of $E_"latt"$ is performed at zero temperature and considering only the electronic contribution, i.e., quantum nuclear effects are neglected. @beranPredictingMolecularCrystal2016
+The lattice energy is not directly assessable experimentally, but it can be indirectly obtained from experimental measures of the sublimation enthalpy, $Delta_"sub" H(T)$, at a given temperature $T$, by including a (theoretically evaluated) energy contribution, $Delta_"T&QN" (T)$, accounting for thermal and quantum nuclear effects:
+$
+  Delta_"sub" H(T) = -E_"latt" + Delta_"T&QN" (T).
+$
+The evaluation of $Delta_"T&QN" (T)$ can be challenging, especially for large molecules where anharmonic contributions are important. @reillyUnderstandingRoleVibrations2013
+Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, accurate theoretical evaluations of $E_"latt"$ are of help for comparison.
+
+In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
+By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions; noticing that in the crystal there are no trans-rotational contributions; considering as negligible the pressure times volume term, $p V$; we have that
+$
+  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (
+    E_"el"^s + E_"vib"^s
+  ),
+$ <eq-zen_si_14>
+where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
+By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
+Thus, @eq-zen_si_14 simplifies to
+$
+  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (
+    T
+  ) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (
+    T
+  ) + 7 / 2 R T quad & "for linear molecules",
+$
+where the term $Delta E_"vib" (T)$ contains both the thermal and the quantum nuclear contributions.
+Notice from <eq-zen_2018_1> that $Delta E_"el" = E_"el"^g - E_"el"^s$ is precisely the opposite of the lattice energy $E_"latt"$; thus:
+$
+  & Delta_"T&QN" (T) = Delta E_"vib" (
+    T
+  ) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"T&QN" (T) = Delta E_"vib" (
+    T
+  ) + 7 / 2 R T quad & "for linear molecules".
+$ <eq-zen_si_16>
+
+Vibrations in the solid molecular crystals can usually be separated into intra-molecular and inter-molecular vibrations, $E_"vib"^s = E_"vib"^(s,"intra") + E_"vib"^(s,"inter")$, and the stiffest intra-molecular modes are decoupled from the intermolecular modes.
+Intra-molecular vibrations have similar modes and frequencies than the gas-phase molecule;
+thus we can conveniently write:
+$
+  Delta E_"vib" = Delta E_"vib"^"relax" - E_"vib"^(s,"inter")
+$
+where $Delta E_"vib"^"relax" := E_"vib"^g - E_"vib"^(s,"intra")$ is the change in (intra-molecular) vibrational energy given when molecules are packed in the crystal form.
+
+At this point, a first approach can be to do a drastic approximation (which is anyway often found in the literature), that is to assume that intra-molecular frequencies in the solid are exactly the same as in the gas phase (i.e. $Delta E_"vib"^"relax" approx 0$), then to take the high temperature limit for the inter-molecular vibrations (i.e. $E_"vib"^(s,"intra") approx 6 R T$) and to neglect any zero-point motion, yielding $Delta E_"vib" (T) approx - 6 R T$ (Dulong-Petit law).
+In non-linear molecules, that would imply that $Delta_"T&QN" approx -2 R T$, that is $4.96 "kJ/mol"$ at room temperature, $T=298.15K$, and zero at $T=0K$. This is a poor approximation. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+This approximation is particularly bad for water ice. @zenFastAccurateQuantum2018[SI §12.B] @whalleyEnergiesPhasesIce1984
+
+A more reliable approach is to calculate the vibrational energies for the solid and gas phase in the harmonic limit, considering for each frequency $omega$ a contribution
+$
+  epsilon(omega,T) = (planck.reduce omega) / 2 + (planck.reduce omega) / (
+  exp((planck.reduce omega) / (k_B T)) - 1
+  ),
+$
+where the first term in the right hand side accounts for the @zpe contribution and the second for the thermal one.
+
+This yields
+$
+  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (
+    T
+  ) = integral epsilon(omega, T) g(omega) dif omega,
+$ <eq-zen_si_19>
+where $omega_i$ are the frequencies of the isolated molecule,
+which are $3M-6$ ($M$ is the number of atoms in the molecule) for a non-linear molecule,
+and $3M-5$ for a linear molecule;
+$g(omega)$ is the phonon density of states in the solid. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012 @reillyUnderstandingRoleVibrations2013
+
+Notice that whenever we employ @eq-zen_si_19 to evaluate $Delta_"T&QN"$ in @eq-zen_si_16, we are subject to errors not only coming from the harmonic approximation, but also from the limitations of the computational approaches (typically @dft) used for the evaluations of the frequencies and the phonon spectrum.
+Different choices of the exchange-correlation functional in @dft can lead to differences in terms of $Delta_("T&QN")$ quite larger than $1 "kJ/mol"$.
+In particular, inaccuracies on the evaluation of high frequency modes mostly affects the @zpe contribution, while low frequencies modes affect mostly the thermal contribution.
+
+=== Dispersion interactions
+
+Dispersion interactions are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
+The representation of dispersion interactions in @dft is not possible within local or semilocal functionals because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+
+The @xdm model describes the dispersion energy of two neutral fragments as the electrostatic interaction of the dipoles formed by electrons and their associated exchange holes.
+The dispersion energy is added to the @dft energy
+$
+  E = E_"DFT" + E_"disp",
+$ <eq-otero_2012_1>
+where $E_"disp"$ contains the usual $R^(-6)$ leading term as well as two additional higher order atomic-pairwise terms
+$
+  E_"disp" = -1 / 2 sum_(i j) sum_(n = 6,8,10) (C_(n,i j)) / (
+  R^n_("vdw", i j) + R^n_(i j)
+  ).
+$ <eq-otero_2012_2>
+The fundamental objects in this equation are the inter-atomic interaction coefficients $C_(n, i j)$ that in the @xdm model are calculated exclusively from first-principles quantities using second-order perturbation theory.
+
+All the objects above are parameter-free, except for the damping expression in <eq-otero_2012_2>.
+The interatomic van der Waals radii ($R_("vdw", i j)$) control the distance at which the pairwise dispersion interactions are switched off.
+
+Because the dispersion coefﬁcients are calculated rather than ﬁtted,
+@eq-otero_2012_1 works under the assumption that the @dft functional presents a completely dispersionless behavior.
+This requirement is not met by most @gga functionals,
+which are sometimes too repulsive and sometimes spuriously binding,
+depending on the reduced-density-gradient tail behavior of the exchange enhancement factors.
+
+// TODO DFT-D sempre da otero
+DFT-D3 by @grimmeConsistentAccurateInitio2010.
+
 == Research question
 
+#set quote(block: true)
+
+Taking into account the disruptive innovation brought in the molecular dynamics field by machine learning force fields, this thesis will try to answer the following question:
+#quote[what is the performance of machine learning force fields in the simulation of water?]
+The following chapters will introduce the theoretical foundations and the tools needed to pursue this question.
+
 = Theory
+
+== DFT
+== Phonons
+== Neural nerworks
 
 = Tools
 Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
@@ -261,14 +411,17 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 
 == MACE
 
-= Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
-= Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
+= Results
 
-= Water molecule <sec-molecule>
+Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
+
+Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
+
+== Water molecule <sec-molecule>
 
 The first task is the optimization of the geometry of the water molecule.
 
-== Convergence of vibrations with respect to fmax
+=== Convergence of vibrations with respect to fmax
 
 To optimize the geometry we have to choose an optimizer. In the following, BFGS
 was chosen:
@@ -315,7 +468,7 @@ for d in [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
   caption: "Convergence of the large model with respect to fmax",
 )
 
-=== With dispersion
+==== With dispersion
 
 Inclusion of dispersion contributions leads to minimal differences in the
 converged configurations.
@@ -350,7 +503,7 @@ converged configurations.
   caption: "Convergence of the large model with respect to fmax",
 )
 
-=== MACE-ICE13-1
+==== MACE-ICE13-1
 
 The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
 dispersion.
@@ -376,12 +529,12 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
   ],
 )
 
-== Zero-point vibrational energy
+=== Zero-point vibrational energy
 
 The computation with MACE-ICE13-1 results in a zero-point energy of $0.565 "eV"$.
 This value is compared with the reference value of $+0.575 "eV"$. @eisenbergWaterMolecule2005
 
-== Geometry optimization
+=== Geometry optimization
 
 The reference value for the H-O-H angle is 104.5°. @PhysicalChemistryWater2020
 The reference value for the O-H distance is 0.96 $angstrom$.
@@ -411,9 +564,9 @@ ase gui final.xyz
 The value found for the H-O-H angle is 104.0°. The value found for the O-H
 distance is 0.970 $angstrom$.
 
-= Water dimer
+== Water dimer
 
-== Vibrations analysis
+=== Vibrations analysis
 
 The water dimer was analyzed using different models:
 
@@ -431,7 +584,7 @@ The water dimer was analyzed using different models:
   ],
 )
 
-== Geometry optimization
+=== Geometry optimization
 
 The optimization was performed starting from an initial configuration
 approximately reproducing the geometry represented in @dimer-structure. The BFGS
@@ -510,7 +663,7 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
   ],
 ) <dimer-geometry-errors>
 
-== Binding energy
+=== Binding energy
 
 The binding energy is calculated as
 
@@ -540,7 +693,7 @@ equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
   ],
 )
 
-= Lattice energy
+== Lattice energy
 
 The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
 
@@ -552,7 +705,7 @@ The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
   ],
 )
 
-== Absolute lattice energy
+=== Absolute lattice energy
 
 The physical quantity usually considered to establish the stability of a crystal
 is its absolute lattice energy, which is the energy per molecule gained upon
@@ -586,7 +739,7 @@ referenced as Patridge 1997 from the authors.
   ],
 )
 
-== Relative lattice energy
+=== Relative lattice energy
 
 In @dellapiaDMCICE13AmbientHigh2022 it is noted that there is interest in capturing the relative stability of the ice polymorphs, i.e., the stability with respect to a fixed crystalline phase instead of the gas state.
 This property is more relevant in, e.g., the computation of the water phase diagram.
@@ -606,17 +759,47 @@ and is independent of the configuration of the monomer in the gas phase.
   ],
 )
 
-= Crystal phonons
+== Crystal phonons
 
-== Band structure
+=== Band structure
 
-== Phonons DOS
+#image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
 
-== Heat capacity
+=== Phonons DOS
+
+#image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg")
+
+=== Heat capacity
+
+#image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg")
+
+== RDF
 
 = Conclusions
 
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
-#bibliography(("bibliography.yml", "bibliography.bib"))
+
+#show heading.where(level: 1): it => [
+  #[] <empty-page>
+  #pagebreak(to: "even", weak: true)
+  #[] <new-chapter>
+  #pagebreak(to: "odd", weak: true)
+  // #set text(font: "Neo Euler")
+  // #grid(
+  //   columns: 2,
+  //   inset: (x: 5mm, y: 2mm),
+  //   align: horizon + center,
+  //   grid.vline(position: end),
+  //   [
+  //     #set text(size: 48pt)
+  //     #counter(heading).display()
+  //   ],
+  // upper(it.body),
+  // )
+  #upper(it.body)
+  #v(2em)
+]
+
+#bibliography(("Tesi magistrale.bib", "bibliography.bib"))
 
