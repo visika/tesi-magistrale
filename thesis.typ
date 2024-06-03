@@ -387,6 +387,10 @@ depending on the reduced-density-gradient tail behavior of the exchange enhancem
 // TODO DFT-D sempre da otero
 DFT-D3 by @grimmeConsistentAccurateInitio2010.
 
+=== The role of anharmonic contributions
+// TODO
+@rossiAnharmonicQuantumFluctuations2016
+
 == Research question
 
 #set quote(block: true)
