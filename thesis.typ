@@ -775,6 +775,10 @@ and is independent of the configuration of the monomer in the gas phase.
 
 == RDF
 
+@md
+
+#image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
+
 = Conclusions
 
 = Acknowledgments
