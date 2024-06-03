@@ -1,7 +1,10 @@
 import marimo
 
-__generated_with = "0.3.3"
-app = marimo.App(layout_file="layouts/analysis.grid.json")
+__generated_with = "0.6.12"
+app = marimo.App(
+    app_title="Stabilita del dimero d'acqua",
+    layout_file="layouts/analysis.grid.json",
+)
 
 
 @app.cell
@@ -10,7 +13,8 @@ def __():
     import pandas as pd
     import matplotlib.pyplot as plt
     import glob
-    return glob, mo, pd, plt
+    import os
+    return glob, mo, os, pd, plt
 
 
 @app.cell
@@ -21,7 +25,14 @@ def __(mo):
 
 @app.cell
 def __(mo):
-    models = ["small", "medium", "large", "MACE-ICE13", "MACE-ICE13-1", "n2p2"]
+    models = [
+        "small",
+        "medium",
+        "large",
+        # "MACE-ICE13",
+        "MACE-ICE13-1",
+        # "n2p2"
+    ]
     model = mo.ui.dropdown(options=models, value="small", label="Modello")
     model
     return model, models
@@ -103,7 +114,7 @@ def __(build_frequencies_dataframe, filenames, pd):
 
 
 @app.cell
-def __(df, model, plt):
+def __(df, mo, model, os, plt):
     groups = df.groupby("#")
     for _name, _group in groups:
         plt.plot(_group["delta"], _group["cm^-1"], marker="x", label=_name)
@@ -112,14 +123,25 @@ def __(df, model, plt):
     plt.legend(ncol=2)
     plt.ylim(-1e4, 1e4)
     if model.value in ["small", "medium", "large"]:
-        plt.title(f"MACE-MP-0 {model.value} D")
+        plt.title(f"MACE-MP-0 {model.value} + D")
     elif model.value in ["MACE-ICE13", "MACE-ICE13-1"]:
         plt.title(model.value)
     elif model.value == "n2p2":
         plt.title(f"n2p2")
     plt.xlabel("Displacement (Å)")
-    plt.ylabel("Frequency (cm^-1)")
-    return groups,
+    plt.ylabel("Frequency ($\mathrm{cm}^{-1}$)")
+
+    # remove the frames
+    for spine in plt.gca().spines.values():
+        spine.set_visible(False)
+
+    # create directory
+    os.makedirs("Grafici", exist_ok=True)
+    # plt.savefig(f"Grafici/{model.value}.png")
+
+    # interactive plot
+    mo.mpl.interactive(plt.gcf())
+    return groups, spine
 
 
 @app.cell(hide_code=True)
@@ -224,12 +246,12 @@ def __(
             {
                 "modello": _model,
                 "alpha": abs(_atoms.get_angle(0, 3, 5) - alpha_ref).round(1),
-                "ang_int_acc": abs(_atoms.get_angle(1, 0, 2) - ang_int_acc_ref).round(
-                    2
-                ),
-                "ang_int_don": abs(_atoms.get_angle(4, 3, 5) - ang_int_don_ref).round(
-                    2
-                ),
+                "ang_int_acc": abs(
+                    _atoms.get_angle(1, 0, 2) - ang_int_acc_ref
+                ).round(2),
+                "ang_int_don": abs(
+                    _atoms.get_angle(4, 3, 5) - ang_int_don_ref
+                ).round(2),
                 "r_oo": abs(_atoms.get_distance(0, 3) - r_oo_ref).round(2),
                 "beta": abs(_atoms.get_angle(1, 0, 3) - beta_ref).round(1),
             },
@@ -237,9 +259,60 @@ def __(
         )
         _df = pd.concat([_df, _new_df], axis=0, ignore_index=True)
 
+    # Export to CSV
+    _df.to_csv("errori.csv", index=False, header=False)
+
     # _df.style.highlight_min(axis=0, color="lightgreen")
     # _df.style.background_gradient(axis=0, cmap="Greens_r")
-    mo.ui.table(_df)
+    mo.ui.table(_df, label="Errori")
+    return
+
+
+@app.cell
+def __(
+    alpha_ref,
+    ang_int_acc_ref,
+    ang_int_don_ref,
+    atoms_reader,
+    beta_ref,
+    mo,
+    models,
+    pd,
+    r_oo_ref,
+):
+    # Build a table with geometry values for each model and from reference
+    _df = pd.DataFrame()
+    _new_df = pd.DataFrame(
+        {
+            "modello": "Reference",
+            "alpha": alpha_ref,
+            "ang_int_acc": ang_int_acc_ref,
+            "ang_int_don": ang_int_don_ref,
+            "r_oo": r_oo_ref,
+            "beta": beta_ref,
+        },
+        index=["modello"],
+    )
+    _df = pd.concat([_df, _new_df], axis=0, ignore_index=True)
+    for _model in models:
+        _atoms = atoms_reader(_model)
+        _new_df = pd.DataFrame(
+            {
+                "modello": _model,
+                "alpha": _atoms.get_angle(0, 3, 5).round(1),
+                "ang_int_acc": _atoms.get_angle(1, 0, 2).round(2),
+                "ang_int_don": _atoms.get_angle(4, 3, 5).round(2),
+                "r_oo": _atoms.get_distance(0, 3).round(2),
+                "beta": _atoms.get_angle(1, 0, 3).round(1),
+            },
+            index=["modello"],
+        )
+        _df = pd.concat([_df, _new_df], axis=0, ignore_index=True)
+
+    # Export to CSV
+    _df.to_csv("geometria.csv", index=False, header=False)
+
+    mo.ui.table(_df, label="Geometria")
     return
 
 

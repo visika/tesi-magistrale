@@ -1,0 +1,11 @@
+[language-server.tinymist]
+command = "tinymist"
+config = { formatterMode = "typstyle" }
+
+[[language]]
+name = "typst"
+# language-servers = ["tinymist"]
+language-servers = ["typst-lsp"]
+# formatter = { command = "typstfmt", args = ["--output", "-"] }
+formatter = { command = "typstyle" }
+auto-format = true

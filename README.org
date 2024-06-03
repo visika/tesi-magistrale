@@ -1,4 +1,9 @@
 #+title: Tesi magistrale
+* Inizializzazione del progetto
+#+begin_src shell
+pyenv install
+poetry install
+#+end_src
 * Studio delle energie assoluta e relativa di reticolo per 13 polimorfi del ghiaccio
 Nella cartella [[file:simulazioni/02_water/03_ICE13_lattice_energies/]] sono
 presenti simulazioni con MACE-MP-0 che si confrontano con i risultati

@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.3.9"
+__generated_with = "0.6.12"
 app = marimo.App()
 
 
@@ -75,7 +75,7 @@ def __(df_binding_energy):
     return df_n2p2, e_gas_n2p2_ev
 
 
-@app.cell
+@app.cell(disabled=True)
 def __(df_binding_energy):
     with open(
         "../../01_molecule/MACE-ICE13/dispersion=True/1e-8/e_gas.txt", "r"
@@ -97,11 +97,20 @@ def __(df_binding_energy):
 
 
 @app.cell
-def __(df, df_mace_ice13_1, df_n2p2):
+def __(df, df_mace_ice13_1, df_n2p2, mo):
     # Plot all the data
     import matplotlib.pyplot as plt
 
     fig, ax = plt.subplots(layout="constrained")
+
+    # Draw a horizontal line
+    # kjmol : -22.7
+    # 22.7 kilojoule / mole = 0.235268921197 eV
+    ax.axhline(y=-0.235268921197, color="r", linestyle="--", label="Equilibrium exp. value")
+
+    # Draw a vertical line
+    # angstrom : 2.98
+    ax.axvline(x=2.98, color="r", linestyle="--")
 
     ax.plot(
         df_mace_ice13_1["distance"],
@@ -110,6 +119,7 @@ def __(df, df_mace_ice13_1, df_n2p2):
         marker="s",
         markersize=5,
     )
+
     ax.plot(
         df["distance"],
         df["binding_energy"],
@@ -117,6 +127,7 @@ def __(df, df_mace_ice13_1, df_n2p2):
         marker="o",
         markersize=5,
     )
+
     ax.plot(
         df_n2p2["distance"],
         df_n2p2["binding_energy"],
@@ -130,17 +141,16 @@ def __(df, df_mace_ice13_1, df_n2p2):
 
     ax.set_ylim(-0.36, 0)
 
-    # Draw a horizontal line
-    # kjmol : -22.7
-    # 22.7 kilojoule / mole = 0.235268921197 eV
-    ax.axhline(y=-0.235268921197, color="r", linestyle="--", label="Exp. value")
-
-    # Draw a vertical line
-    # angstrom : 2.98
-    ax.axvline(x=2.98, color="r", linestyle="--")
-
     ax.legend()
     plt.title("Dimer binding energy")
+
+    # remove the left and right spines
+    ax.spines["left"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+
+    # interactive plot
+    mo.mpl.interactive(plt.gcf())
 
     # fig.savefig("binding_energy.png")
     return ax, fig, plt
