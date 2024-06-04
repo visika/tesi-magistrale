@@ -384,12 +384,32 @@ This requirement is not met by most @gga functionals,
 which are sometimes too repulsive and sometimes spuriously binding,
 depending on the reduced-density-gradient tail behavior of the exchange enhancement factors.
 
+==== DFT-D3
 // TODO DFT-D sempre da otero
-DFT-D3 by @grimmeConsistentAccurateInitio2010.
+The total DFT-D3 energy is given by @grimmeConsistentAccurateInitio2010
+$
+  E_"DFT-D3" = E_"KS-DFT" - E_"disp",
+$
+where $E_"KS-DFT"$ is the usual self-consistent KS energy as obtained from the chosen DF and $E_"disp"$ is the dispersion correction as a sum of two- and three-body energies,
+$
+  E_"disp" = E^((2)) + E^((3)),
+$
+with the most important two-body term given by
+$
+  E^((
+    2
+  )) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (
+    r_(A B)
+  ).
+$
+
+Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
 
 === The role of anharmonic contributions
 // TODO
 @rossiAnharmonicQuantumFluctuations2016
+
+Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
 
 == Research question
 
