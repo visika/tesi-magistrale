@@ -249,6 +249,35 @@
 = Introduction
 
 #box(
+  stroke: 2pt + green,
+  inset: 1mm,
+  [
+    The structure and properties of molecular crystals have long been of great interest,
+    not just for fundamental reasons of understanding molecular aggregation but also due to their numerous applications.
+    As the preferred form of active pharmaceutical ingredients for oral administration, the dissolution and morphology of drug-molecule crystals are very important for bio-availability and processing. @blagdenCrystalEngineeringActive2007
+    For these reasons alone the prediction of molecular crystal structures is of the utmost importance. @priceComputationalPredictionPharmaceutical2004
+    In addition, molecular crystals can also have a wide range of optical, electronic, and mechanical properties, @reddyMechanicalPropertiesMolecular2010 which in some cases can be tuned based on environmental variables @martinsTemperaturePressureInducedProton2009 or composition. @karkiImprovingMechanicalProperties2009 @reillyUnderstandingRoleVibrations2013
+  ],
+)
+
+#figure(
+  image("thesis/imgs/karki2009_graphical_abstact.jpg", width: 50%),
+  caption: [
+    Poor mechanical properties of paracetamol are improved through the strategy of cocrystal formation.
+    Graphical Abstract taken from @karkiImprovingMechanicalProperties2009.
+  ],
+)
+
+#box(
+  stroke: 2pt + green,
+  inset: 1mm,
+  [
+    While many studies have focused on the role of dispersion, 25, 29, 30 few have critically assessed the shortcomings of semi-local functionals in detail.
+    For example, the de-localisation or selfinteraction errors in DFT31 can often have a signiﬁcant effect on hydrogen-bonded systems. @reillyUnderstandingRoleVibrations2013
+  ],
+)
+
+#box(
   stroke: 2pt + red,
   inset: 1mm,
   [
@@ -409,7 +438,17 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
 // TODO
 @rossiAnharmonicQuantumFluctuations2016
 
+The harmonic treatment ignores effects due to anharmonic thermal motion and cell expansion. @reillyUnderstandingRoleVibrations2013
+
+In the harmonic approximation, supercell phonon calculations show signiﬁcant deviations from the widely used Dulong-Petit law, as noted elsewhere. @reillyUnderstandingRoleVibrations2013
+
 Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
+
+Exact exchange, which is rarely considered in DFT studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
+
+Hybrid functionals are often not used in the study of cohesive properties of molecular crystals,
+@al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+largely due to their additional computational cost, which particularly in a plane-wave basis can reach more than an order of magnitude larger than the corresponding semi-local functional. @reillyUnderstandingRoleVibrations2013
 
 == Research question
 
