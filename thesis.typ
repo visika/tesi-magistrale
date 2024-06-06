@@ -450,6 +450,10 @@ Hybrid functionals are often not used in the study of cohesive properties of mol
 @al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
 largely due to their additional computational cost, which particularly in a plane-wave basis can reach more than an order of magnitude larger than the corresponding semi-local functional. @reillyUnderstandingRoleVibrations2013
 
+=== Machine Learning potentials
+
+The facile generation of machine-learning potentials for a diverse set of polymorphic compounds—benzene, glycine, and succinic acid—and predictions of thermodynamic stabilities in qualitative and quantitative agreement with experiments highlight that predictive thermodynamic studies of industrially relevant molecular materials are no longer a daunting task. @kapilCompleteDescriptionThermodynamic2022
+
 == Research question
 
 #set quote(block: true)
