@@ -462,7 +462,7 @@ The following chapters will introduce the theoretical foundations and the tools 
 
 == DFT
 == Phonons
-== Neural nerworks
+== Neural networks
 
 = Tools
 Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
