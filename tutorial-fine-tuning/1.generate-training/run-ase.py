@@ -44,6 +44,7 @@ dyn.attach(
     MDLogger(dyn, atoms, "md.log", header=True, stress=False, mode="a"), interval=4
 )
 print("Finished setting dynamics")
+
 t = datetime.now()
 print(f"Starting dynamics at {t}")
 dyn.run(10000)
