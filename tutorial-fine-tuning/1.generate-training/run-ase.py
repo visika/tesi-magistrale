@@ -10,9 +10,13 @@ import ase.units as units
 from mace.calculators import mace_mp
 
 # mace=MACECalculator('/rds/user/fd385/hpc-work/work/MolCrys/ICE/it_0/models/MACE_model_large_swa.model', default_dtype='float64',device='cuda')
-mace = mace_mp()
+print("Loading calculator")
+calculator = mace_mp(
+    model="medium", dispersion=False, default_dtype="float32", device="cuda"
+)
 atoms = read("POSCAR", 0)
-atoms.calc = mace
+atoms.calc = calculator
+print("Finished loading calculator")
 
 # dyn = Langevin(
 #     atoms,
