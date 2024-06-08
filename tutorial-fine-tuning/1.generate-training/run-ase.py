@@ -1,5 +1,6 @@
 import numpy as np
 from ase.io import read
+from datetime import datetime
 
 # from mace.calculators.mace import MACECalculator
 from ase.md.langevin import Langevin  # NVT molecular dynamics
@@ -24,4 +25,7 @@ dyn = Langevin(
 dyn.attach(
     MDLogger(dyn, atoms, "md.log", header=True, stress=False, mode="a"), interval=4
 )
+t = datetime.now()
+print(f"Starting dynamics at {t}")
 dyn.run(10000)
+print(f"Finished dynamics after {datetime.now() - t}")
