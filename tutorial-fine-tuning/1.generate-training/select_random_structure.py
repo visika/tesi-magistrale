@@ -1,18 +1,16 @@
-import numpy as np
-import ase 
-from ase.io import read, write 
+import ase
+import random
+from ase.io import read, write
 from ase.io.trajectory import Trajectory
 
-import random
+# trj=read('md.xyz', index=':')
+trajectory = Trajectory("md.traj", "r")
 
-#trj=read('md.xyz', index=':')
-trj=Trajectory('md.traj','r')
+number_of_structures = 50
+interval_to_sample = range(2000, len(trajectory))
+random_numbers = random.sample(interval_to_sample, k=number_of_structures)
+print(f"Random numbers: {random_numbers}")
 
-rnd = [random.randint(250, len(trj)-1) for _ in range(5)] # change 5 to how many structures you want
-print(rnd)
+random_geometries = [trajectory[j] for j in random_numbers]
 
-rnd_geo=[]
-for j in rnd:
-    rnd_geo.append(trj[j])
-
-write(images=rnd_geo, format='extxyz', filename='data_for_train.extxyz')
+write(images=random_geometries, format="extxyz", filename="data_for_train.extxyz")
