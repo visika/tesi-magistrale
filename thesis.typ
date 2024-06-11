@@ -483,7 +483,7 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 Fine-tuning a MACE model is composed of three steps:
 
 1. generate-training
-2. computer-reference
+2. compute-reference
 3. fine-tune
 
 = Results
