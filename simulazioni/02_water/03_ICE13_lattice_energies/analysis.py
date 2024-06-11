@@ -305,7 +305,7 @@ def __(
     ax.spines["left"].set_visible(False)
     ax.spines["bottom"].set_visible(False)
 
-    fig.savefig("absolute_lattice_energy.svg")
+    # fig.savefig("absolute_lattice_energy.svg")
     mo.mpl.interactive(plt.gcf())
     return ax, fig
 
@@ -334,6 +334,40 @@ def __(df_mace_ice13_1, df_rev_pbe_d3, mo):
         f"La media degli errori assoluti tra MACE-ICE13-1 e revPBE-D3 è {mae:.2f} kJ/mol."
     )
     return mae,
+
+
+@app.cell
+def __(df_dmc, df_mace_ice13_1, mo):
+    # Compute the MAE between MACE-ICE13-1 and DMC
+    mae_ice13_dmc = (
+        (df_mace_ice13_1["e_lattice_kjmol"] - df_dmc["e_lattice_kjmol"])
+        .abs()
+        .mean()
+    )
+    mo.md(
+        f"La media degli errori assoluti tra MACE-ICE13-1 e DMC è {mae_ice13_dmc:.2f} kJ/mol."
+    )
+    return mae_ice13_dmc,
+
+
+@app.cell
+def __(mae_ice13_dmc, mo, pl, plt):
+    # Display a bar graph of the MAE of each model with respect to DMC
+    mae_table = [
+        ["MACE-ICE13-1", mae_ice13_dmc],
+        ["MACE-MP-0 medium", 0.0],
+        ["MACE-MP-0 large", 0.0],
+    ]
+
+    mae_df = pl.DataFrame(mae_table, schema=["model", "mae"])
+    mae_df
+    plt.figure(figsize=(6, 6))
+    plt.bar(mae_df["model"], mae_df["mae"])
+    plt.ylabel("MAE (kJ/mol)")
+    plt.title("Mean Absolute Error")
+    # plt.savefig("mae_models.svg")
+    mo.mpl.interactive(plt.gcf())
+    return mae_df, mae_table
 
 
 @app.cell
