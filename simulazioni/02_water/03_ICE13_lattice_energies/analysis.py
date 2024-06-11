@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.13"
+__generated_with = "0.6.0"
 app = marimo.App()
 
 
@@ -146,6 +146,20 @@ def __(evp_to_kjmol, pl):
     return df_mace_ice13_1, e_gas_mace_ice13_1
 
 
+@app.cell
+def __(e_gas_mace_ice13_0, evp_to_kjmol, pl):
+    df_mace_mmollo_0 = pl.read_csv("MACE-mmollo-0/crystal_energies.csv")
+    df_mace_mmollo_0 = df_mace_mmollo_0.with_columns(
+        (pl.col("e_crys") - e_gas_mace_ice13_0).alias("e_lattice_ev")
+    )
+    df_mace_mmollo_0 = df_mace_mmollo_0.with_columns(
+        (pl.col("e_lattice_ev") * evp_to_kjmol).alias("e_lattice_kjmol")
+    )
+
+    df_mace_mmollo_0
+    return df_mace_mmollo_0,
+
+
 @app.cell(hide_code=True)
 def __(evp_to_kjmol, pl):
     dmc_mev_table = [
@@ -220,6 +234,7 @@ def __(
     df_dmc,
     df_large_d,
     df_mace_ice13_1,
+    df_mace_mmollo_0,
     df_medium_d,
     df_pbe_d3,
     df_rev_pbe_d3,
@@ -291,6 +306,14 @@ def __(
         df_large_d["e_lattice_kjmol"],
         marker="o",
         label="MACE-MP-0 large+D3",
+    )
+
+    # MACE-mmollo-0
+    plt.plot(
+        df_mace_mmollo_0["structure"],
+        df_mace_mmollo_0["e_lattice_kjmol"],
+        marker="o",
+        label="MACE-mmollo-0",
     )
 
     plt.xlabel("Structure")
