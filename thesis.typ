@@ -486,6 +486,41 @@ Fine-tuning a MACE model is composed of three steps:
 2. compute-reference
 3. fine-tune
 
+#figure(
+  [
+    #let my-node(..args) = node(
+      corner-radius: 5pt,
+      ..args,
+    )
+
+    #diagram(
+      node-stroke: 1pt,
+      my-node((0, 0), [Generate samples \ from NPT MD]),
+      edge(
+    "-|>",
+    [data_for_train.extxyz],
+    bend: 45deg,
+    // label-sep: 1em,
+  ),
+      my-node((1, 0), [Compute reference \ DFT pseudopotential]),
+      edge(
+        "-|>",
+        align(
+          center,
+          [training_set.xyz \ test_set.xyz],
+        ),
+        bend: 45deg,
+      ),
+      my-node((2, 0), [Fine tune \ MACE]),
+      edge("-|>"),
+      my-node((3, 0.5), [Model]),
+      edge((2, 0), (3, -0.5), "-|>"),
+      my-node((3, -0.5), [Errors]),
+    )
+  ],
+  caption: [Flow diagram for fine-tuning of MACE.],
+)
+
 = Results
 
 Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
