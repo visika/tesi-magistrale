@@ -478,6 +478,14 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 
 == MACE
 
+=== Fine-tuning a custom model
+
+Fine-tuning a MACE model is composed of three steps:
+
+1. generate-training
+2. computer-reference
+3. fine-tune
+
 = Results
 
 Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
