@@ -1,0 +1,19 @@
+!NPAR = 2
+ISMEAR=0
+SIGMA=0.01
+   
+!PREC   = Normal
+!EDIFF  = 1E-4
+!ENCUT=1000
+
+!Ionic Relaxation
+ISIF=2
+!GGA=RE
+ 
+!vdW
+IVDW=11 !DFT-D3 available as of VASP.5.3.4
+
+!ALGO=Conjugate
+
+LWAVE=.FALSE.
+LCHARG=.FALSE.
