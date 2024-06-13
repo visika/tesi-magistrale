@@ -877,7 +877,7 @@ referenced as Patridge 1997 from the authors.
   ],
 )
 
-The MACE-ICE13-1 model achieves a MAE with respect to DMC of $0.90 "kJ/mol"$.
+The MACE-ICE13-1 model achieves a @mae with respect to DMC of $0.90 "kJ/mol"$.
 
 #figure(
   grid(
