@@ -481,6 +481,19 @@ largely due to their additional computational cost, which particularly in a plan
 
 The facile generation of machine-learning potentials for a diverse set of polymorphic compounds—benzene, glycine, and succinic acid—and predictions of thermodynamic stabilities in qualitative and quantitative agreement with experiments highlight that predictive thermodynamic studies of industrially relevant molecular materials are no longer a daunting task. @kapilCompleteDescriptionThermodynamic2022
 
+#box(
+  stroke: 2pt + red,
+  inset: 1mm,
+  [
+    Modern #glspl("mlp") // TODO cite 31 V. L. Deringer, M. A. Caro, G. Csányi, Machine learning interatomic potentials as emerging tools for materials science. Adv. Mater. 31, e1902765 (2019).
+    permit accurately reproducing ab initio #glspl("pes") and dramatically reduce the cost of performing simulations approaching ab initio accuracy. // TODO cite 32 J. Lan et al., Simulating the ghost: Quantum dynamics of the solvated electron. Nat. Commun. 12, 766 (2021). Nat. Commun.12
+    @kapilCompleteDescriptionThermodynamic2022
+  ],
+)
+
+@kapilCompleteDescriptionThermodynamic2022 puts the cost of calculations into perspective,
+highlighting that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely physical functionals.
+
 == Research question
 
 #set quote(block: true)
