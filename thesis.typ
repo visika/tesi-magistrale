@@ -1,6 +1,7 @@
 #import "@preview/whalogen:0.2.0": ce
 #import "@preview/glossarium:0.4.1": make-glossary, print-glossary, gls, glspl
 #import "@preview/hydra:0.4.0": hydra
+#import "@preview/fletcher:0.4.5" as fletcher: diagram, node, edge
 #show: make-glossary
 
 // For glossarium links
