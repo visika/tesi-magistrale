@@ -1,0 +1,29 @@
+mace_run_train \
+  --name="MACE-mmollo-0" \
+  --foundation_model="small" \
+  --train_file="training_set.extxyz" \
+  --valid_fraction=0.1 \
+  --test_file="test_set.extxyz" \
+  --E0s="{1:-0.14003657,8:-0.01132296}" \
+  --model="MACE" \
+  --default_dtype='float32' \
+  --r_max=6.0 \
+  --loss="stress" \
+  --scaling="rms_forces_scaling" \
+  --error_table="PerAtomMAE" \
+  --batch_size=2 \
+  --max_num_epochs=2000 \
+  --forces_weight=550 \
+  --energy_weight=10000 \
+  --swa \
+  --start_swa=1000 \
+  --swa_forces_weight=550 \
+  --swa_energy_weight=10000 \
+  --swa_stress_weight=5 \
+  --swa_lr=0.00025 \
+  --ema \
+  --ema_decay=0.99 \
+  --amsgrad \
+  --restart_latest \
+  --device=cuda \
+  --seed=1
