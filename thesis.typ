@@ -449,7 +449,7 @@ In the harmonic approximation, supercell phonon calculations show signiﬁcant d
 
 Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
 
-Exact exchange, which is rarely considered in DFT studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
+Exact exchange, which is rarely considered in @dft studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
 
 Hybrid functionals are often not used in the study of cohesive properties of molecular crystals,
 @al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
