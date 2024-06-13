@@ -140,6 +140,10 @@
     (key: "tnqn", short: "T&QN", long: "Thermal and Quantum Nuclear"),
     (key: "xdm", short: "XDM", long: "Exchange-hole Dipole Moment"),
     (key: "gga", short: "GGA", long: "Generalized Gradient Approximation"),
+    (key: "csp", short: "CSP", long: "Crystal Structure Prediction"),
+    (key: "pes", short: "PES", long: "Potential Energy Surface"),
+    (key: "qti", short: "QTI", long: "Quantum Thermodynamic Integration"),
+    (key: "vasp", short: "VASP", long: "Vienna Ab initio Simulation Package"),
   ),
   show-all: true,
 )
