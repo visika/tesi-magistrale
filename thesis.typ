@@ -496,6 +496,12 @@ highlighting that mixed ab initio and @mlp calculations require between three an
 
 == Research question
 
+=== Ice polymorphs
+
+Previous works combine @pi approaches with #glspl("mlp") for ice polymorphs
+// TODO kapil 29 : V. Kapil, E. Engel, M. Rossi, M. Ceriotti, Assessment of approximate methods for anharmonic free energies. J. Chem. Theory Comput. 15, 5845–5857 (2019).
+@chengInitioThermodynamicsLiquid2019
+
 #set quote(block: true)
 
 Taking into account the disruptive innovation brought in the molecular dynamics field by machine learning force fields, this thesis will try to answer the following question:
@@ -966,6 +972,13 @@ and is independent of the configuration of the monomer in the gas phase.
 #image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
 
 = Conclusions
+
+#box(
+  stroke: blue + 2pt,
+  inset: 1mm,
+  [The accuracy of the new approaches sets the stage for future studies of kinetic effects as wess as full $p-T$ phase diagrams in a reliable and computationally efficient manner. @kapilCompleteDescriptionThermodynamic2022
+  ],
+)
 
 = Acknowledgments
 // This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
