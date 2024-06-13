@@ -4,7 +4,7 @@ for model in small medium large; do
         mkdir -p $model/$fmax
         cp sbatch.sh $model/$fmax
         cp converge_fmax.py $model/$fmax
-        cd $model/$fmax
+        cd $model/$fmax || exit
         sed -i "s/mmm/$model/g" sbatch.sh
         sed -i "s/fff/$fmax/g" sbatch.sh
         sed -i "s/pfmax/$fmax/g" sbatch.sh
