@@ -20,3 +20,6 @@ phonopy_params.yaml
 
 # Elaborato
 thesis.pdf
+
+# File pesanti
+*.traj
