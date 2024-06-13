@@ -214,7 +214,7 @@
   #pagebreak(to: "even", weak: true)
   #[] <new-chapter>
   #pagebreak(to: "odd", weak: true)
-  // #set text(font: "Neo Euler")
+  #set text(font: "Neo Euler")
   #grid(
     columns: 2,
     inset: (x: 5mm, y: 2mm),
