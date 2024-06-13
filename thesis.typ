@@ -537,6 +537,24 @@ Fine-tuning a MACE model is composed of three steps.
   caption: [Flow diagram for fine-tuning of MACE.],
 )
 
+#figure(
+  image("tutorial-fine-tuning/1.generate-training/run_2024-06-08/Figure_1_i_T.png"),
+  caption: [
+    Temperature during sample generation.
+  ],
+) <fig-finetune-sample-temperature>
+
+#figure(
+  grid(
+    columns: 2,
+    image("tutorial-fine-tuning/analysis/loss_over_epochs.svg"),
+    image("tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg"),
+  ),
+  caption: [
+    Loss (left) and @mae of the energy (right) over epochs plots for the fine-tuning of a new model on ice Ih, with MACE-MP-0 small as foundation model.
+  ],
+) <fig-finetune-epochs>
+
 = Results
 
 Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
