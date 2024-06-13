@@ -480,11 +480,27 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 
 === Fine-tuning a custom model
 
-Fine-tuning a MACE model is composed of three steps:
+// TODO Cita kaur2024
 
-1. generate-training
-2. compute-reference
-3. fine-tune
+Fine-tuning a MACE model is composed of three steps.
+// TODO Spiega meglio cosa è e a cosa serve il fine-tuning
+
+1. *Sample the phase space* to obtain representatives of the system under the thermodynamic conditions we are interesed in.
+  This was obtained employing NPT dynamics as provided by @ase to generate 10000 images with variety.
+  Of this total, 50 representatives were randomly chosen from the images after thermalization.
+  See @fig-finetune-sample-temperature for the thermalization pattern.
+  // TODO menziona scelta tra termostato di Berensden e Parrinello, con citazioni.
+2. *Compute the reference* values for the energies, forces and stresses.
+  For this step we executed single point self-consistent calculations on each representative of the samples,
+  using a @paw @pbe @dft pseudo-potential through @vasp.
+  The output files are then converted, joined and shuffled to compose the training and test sets for the machine learning procedure.
+3. *Fine tune* the foundation model on the new dataset; in our case MACE-MP-0 was chosen.
+  #footnote([
+    Reference procedures are available at https://github.com/ACEsuit/mace?tab=readme-ov-file#finetuning-foundation-models
+  ])
+  The training and test sets are the input data for the training of the neural network that underlies MACE.
+  The training spans 2000 epochs, at the end of which the compiled model is obtained, along with statistics.
+  Plot showing neural network loss and error on energy versus epochs are available in @fig-finetune-epochs.
 
 #figure(
   [
