@@ -603,6 +603,15 @@ Fine-tuning a MACE model is composed of three steps.
 
 = Results
 
+#box(
+  stroke: red,
+  inset: 1mm,
+  [
+    This chapter presents the results of the study, focusing on the properties of molecular crystals modeled using machine learning potentials.
+    The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons.
+  ],
+)
+
 Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
 
 Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
