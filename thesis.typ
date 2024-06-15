@@ -618,7 +618,9 @@ Terza parte: simulazione per qualche sistema in cui l'approccio analitico non fu
 
 == The water molecule <sec-molecule>
 
-The first task is the optimization of the geometry of the water molecule.
+The first task is the optimization of the geometry and calculation of vibrational properties of the water molecule.
+We studied the relaxation of the geometry of a single water molecule, also referred to as the monomer, and compared the results with physical values of the gas phase molecule. The optimization is tackled with two concurring methods:
+static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
 === Convergence of vibrations with respect to fmax
 
