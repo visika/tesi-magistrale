@@ -622,22 +622,56 @@ The first task is the optimization of the geometry and calculation of vibrationa
 We studied the relaxation of the geometry of a single water molecule, also referred to as the monomer, and compared the results with physical values of the gas phase molecule. The optimization is tackled with two concurring methods:
 static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
-=== Convergence of vibrations with respect to fmax
+=== The optimization algorithm
 
-To optimize the geometry we have to choose an optimizer. In the following, BFGS
-was chosen:
+The procedure to optimize the geometry of the molecule requires the correct setting of a few parameters, namely:
 
-```python
-from ase.optimize import BFGS
-opt = BFGS(atoms, logfile="optimization.log", trajectory="optimization.traj")
-opt.run(fmax=1e-8, steps=1000)
+- the calculator and the data type
+- the starting geometry and cell properties
+- the optimizer algorithm
+- the force threshold to stop the optimization
+- the maximum number of steps of the optimization
 
-for d in [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
-    vib = Vibrations(atoms, delta=d, nfree=4, name=f"vib_delta={d}")
-    vib.run()
-    vib.summary(log=f"H2O_delta={d}_summary.txt")
-    vib.clean()
-```
+The calculators chosen for the optimization are MACE-MP-0, in the small, medium and large variants, and MACE-ICE13-1.
+As advised by the calculators, the float64 data type was chosen for optimization, where float32 is advised for molecular dynamics runs for improved speed.
+
+The initial geometry was set up so that the HOH atoms formed a right angle, and the OH distance was $1 angstrom$.
+By dealing with a force field, it was possible to set up a cell in vacuum without periodic boundary conditions.
+
+@ase offers a variety of different optimisers, from which we have chosen BFGS, a local optimisation algorithm of the quasi-Newton category, where the forces of consecutive steps are used to dynamically update a Hessian describing the curvature of the potential energy landscape.
+The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in atomic units of force.
+The convergence criterion is that the force on all individual atoms should be less than fmax:
+$
+  max_a |arrow(F)_a| < f_"max"
+$
+
+For the present purposes, `fmax=1e-8` yielded satisfactory results for the different calculator models tested.
+
+The second parameter is the number of steps after which to stop the optimization procedure.
+If the steps employed to optimize the geometry, given the desired fmax, are larger than the steps parameter, the procedure is halted and the geometry is considered as not converged.
+A value of `steps=1000` is largely above the actual number of steps required for convergence of the geometry.
+
+#[
+  #show figure: set align(left)
+  #figure(
+    ```python
+    from ase.optimize import BFGS
+    opt = BFGS(
+      atoms,
+      logfile="optimization.log",
+      trajectory="optimization.traj"
+    )
+    opt.run(fmax=1e-8, steps=1000)
+    ```,
+    caption: [
+      Initialisation and run of the optimizer.
+    ],
+  )
+]
+
+=== Assessment of the dynamical stability
+
+Studying the vibrational properties of the geometry obtained at the end of the optimization procedure allows us to assess if the final geometry is a stable or unstable configuration.
 
 #figure(
   grid(
@@ -727,6 +761,24 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
         H2O_delta=1e-06_summary.txt
       ],
     ) <code-monomer-vibrations-mace-ice13-1-output>
+  ],
+)
+
+#figure(
+  ```python
+  for d in [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
+      vib = Vibrations(
+        atoms,
+        delta=d,
+        nfree=4,
+        name=f"vib_delta={d}"
+      )
+      vib.run()
+      vib.summary(log=f"H2O_delta={d}_summary.txt")
+      vib.clean()
+  ```,
+  caption: [
+    Computation of vibrational properties for different values of the displacement of atoms.
   ],
 )
 
