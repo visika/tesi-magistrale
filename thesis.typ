@@ -673,6 +673,8 @@ A value of `steps=1000` is largely above the actual number of steps required for
 === Assessment of the dynamical stability
 
 Studying the vibrational properties of the geometry obtained at the end of the optimization procedure allows us to assess if the final geometry is a stable or unstable configuration.
+The vibrational modes are calculated from a finite difference approximation of the Hessian matrix, displacing atoms according to a parameter named `delta`, measured in $angstrom$.
+#footnote[https://wiki.fysik.dtu.dk/ase/ase/vibrations/modes.html]
 
 #let large_figure(content, caption: none) = figure(
   box(width: 125%, content),
