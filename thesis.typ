@@ -673,7 +673,12 @@ A value of `steps=1000` is largely above the actual number of steps required for
 
 Studying the vibrational properties of the geometry obtained at the end of the optimization procedure allows us to assess if the final geometry is a stable or unstable configuration.
 
-#figure(
+#let large_figure(content, caption: none) = figure(
+  box(width: 125%, content),
+  caption: caption,
+)
+
+#large_figure(
   grid(
     columns: 3,
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small fmax=1e-1.svg"),
@@ -683,7 +688,7 @@ Studying the vibrational properties of the geometry obtained at the end of the o
   caption: "Convergence of the small model with respect to fmax",
 )
 
-#figure(
+#large_figure(
   grid(
     columns: 3,
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg"),
@@ -693,7 +698,7 @@ Studying the vibrational properties of the geometry obtained at the end of the o
   caption: "Convergence of the medium model with respect to fmax",
 )
 
-#figure(
+#large_figure(
   grid(
     columns: 3,
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large fmax=1e-1.svg"),
@@ -708,7 +713,7 @@ Studying the vibrational properties of the geometry obtained at the end of the o
 Inclusion of dispersion contributions leads to minimal differences in the
 converged configurations.
 
-#figure(
+#large_figure(
   grid(
     columns: 3,
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-1.svg"),
@@ -718,7 +723,7 @@ converged configurations.
   caption: "Convergence of the small model with respect to fmax",
 )
 
-#figure(
+#large_figure(
   grid(
     columns: 3,
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-1.svg"),
@@ -728,7 +733,7 @@ converged configurations.
   caption: "Convergence of the medium model with respect to fmax",
 )
 
-#figure(
+#large_figure(
   grid(
     columns: 3,
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-1.svg"),
