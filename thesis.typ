@@ -681,6 +681,10 @@ Frequencies are indexed in ascending order, and *imaginary frequencies*, represe
 Inclusion of dispersion contributions in calculators leads to minimal differences in the
 converged configurations.
 
+The stability of configurations is dependent in a discriminant way on the `delta` and `fmax` parameters.
+The analysis confirms that the value of `fmax=1e-4` yields unstable configurations, while `fmax=1e-8` is appropriate to obtain stable configurations.
+Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure convergence of calculations.
+
 #let large_figure(content, caption: none) = figure(
   box(width: 125%, content),
   caption: caption,
