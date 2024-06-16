@@ -1,0 +1,6 @@
+model,zpe,error
+small,0.561,-0.014
+medium,0.554,-0.021
+large,0.558,-0.017
+MACE-ICE13-1,0.565,-0.01
+Reference,0.575,0.0

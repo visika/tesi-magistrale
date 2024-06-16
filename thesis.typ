@@ -794,10 +794,25 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
   ],
 )
 
-=== Zero-point vibrational energy
+==== Zero-point vibrational energy
 
-The computation with MACE-ICE13-1 results in a zero-point energy of $0.565 "eV"$.
-This value is compared with the reference value of $+0.575 "eV"$. @eisenbergWaterMolecule2005
+The @zpe from the computation models is shown in @table:zpe.
+The MACE-ICE13-1 model shows the best agreement with reference data from literature @eisenbergWaterMolecule2005, with a discrepancy of $0.01 "eV"$.
+
+#let zero_point_energies_table = csv("simulazioni/02_water/01_molecule/zero_point_energies.csv")
+#figure(
+  table(
+    columns: zero_point_energies_table.first().len(),
+    // table.header(..zero_point_energies_table.first()),
+    table.header([Model], [@zpe ($"eV"$)], [Discrepancy (eV)]),
+    ..zero_point_energies_table.slice(1).flatten(),
+  ),
+  caption: [
+    Zero-point energies for the employed calculators and reference value @eisenbergWaterMolecule2005.
+    The difference between calculated and reference value is also shown in the last column.
+    small, medium and large models refer to MACE-MP-0.
+  ],
+) <table:zpe>
 
 === Geometry optimization
 

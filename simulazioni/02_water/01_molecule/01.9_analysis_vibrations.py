@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.0"
+__generated_with = "0.6.19"
 app = marimo.App(
     app_title="Studio delle vibrazioni della molecola d'acqua",
     layout_file="layouts/01.9_analysis.grid.json",
@@ -169,6 +169,55 @@ def __(df, dispersion, fmax, mo, model, os, plt):
         title_fmax,
         title_string,
     )
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## Studio delle energie di punto zero")
+    return
+
+
+@app.cell
+def __():
+    import re
+
+    def read_zero_point_energy(filename):
+        with open(
+            filename,
+            "r",
+        ) as _f:
+            zpe_line = _f.readlines()[-1]
+            zpe = re.findall(r"[-+]?(?:\d*\.*\d+)", zpe_line)[0]
+            return zpe
+    return re, read_zero_point_energy
+
+
+@app.cell
+def __(get_summaries, mo, pd, read_zero_point_energy):
+    _fmax = "1e-8"
+    _dispersion = True
+    _zpes = []
+    _models = ["small", "medium", "large", "MACE-ICE13-1"]
+
+    for _model in _models:
+        _summary_filename = get_summaries(_model, _fmax, _dispersion)[0]
+        _zpes.append(float(read_zero_point_energy(_summary_filename)))
+    _df = pd.concat(
+        [
+            pd.DataFrame({"model": _models, "zpe": _zpes}),
+            # @eisenbergWaterMolecule2005
+            pd.DataFrame({"model": "Reference", "zpe": 0.575}, index=[0]),
+        ]
+    )
+
+    # Compute the errors
+    _df["error"] = round(_df["zpe"] - 0.575, 3)
+
+    # Export to CSV
+    _df.to_csv("zero_point_energies.csv", index=False)
+
+    mo.ui.table(_df)
+    return
 
 
 if __name__ == "__main__":
