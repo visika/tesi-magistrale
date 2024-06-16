@@ -622,6 +622,48 @@ The first task is the optimization of the geometry and calculation of vibrationa
 We studied the relaxation of the geometry of a single water molecule, also referred to as the monomer, and compared the results with physical values of the gas phase molecule. The optimization is tackled with two concurring methods:
 static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
+=== Geometry optimization
+
+To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in literature.
+
+The first value concerns the charachteristic $#ce("HOH")$ *bend angle* of the molecule;
+the accurate description of this physical value is a required test to ensure the validity of the models.
+As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergWaterMolecule2005 @PhysicalChemistryWater2020.
+
+The second value is the $#ce("OH")$ *bond length*.
+@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergWaterMolecule2005 @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
+
+#let monomer_angles_table = csv("simulazioni/02_water/01_molecule/angles.csv")
+#figure(
+  table(
+    columns: monomer_angles_table.first().len(),
+    table.header([Model], [$#ce("HOH")$ Angle (°)], [Discrepancy (°)]),
+    ..monomer_angles_table.slice(1).flatten(),
+  ),
+  caption: [
+    The calculated $#ce("HOH")$ bend angle for the gas phase water monomer, and difference with respect to reference.
+    small, medium and large refer to MACE-MP-0.
+  ],
+) <table:hoh-angle>
+
+#let monomer_bond_length_table = csv("simulazioni/02_water/01_molecule/bond_lengths.csv")
+#figure(
+  table(
+    columns: monomer_bond_length_table.first().len(),
+    table.header(
+      [Model],
+      [Bond length ($angstrom$)],
+      [Discrepancy ($angstrom$)],
+    ),
+    ..monomer_bond_length_table.slice(1).flatten(),
+  ),
+  caption: [
+    Calculated $#ce("OH")$ bond lengths for the gas phase water monomer, and difference with respect to reference.
+  ],
+) <table:oh-bond-length>
+
+The following sections detail the procedure to assess the convergence and stability of the obtained geometries, as well as explore the energetics of the molecule.
+
 === The optimization algorithm
 
 The procedure to optimize the geometry of the molecule requires the correct setting of a few parameters, namely:
@@ -813,36 +855,6 @@ The MACE-ICE13-1 model shows the best agreement with reference data from literat
     small, medium and large models refer to MACE-MP-0.
   ],
 ) <table:zpe>
-
-=== Geometry optimization
-
-The reference value for the H-O-H angle is 104.5°. @PhysicalChemistryWater2020
-The reference value for the O-H distance is 0.96 $angstrom$.
-@PhysicalChemistryWater2020
-
-The simulation was performed using the fine-tuned MACE-ICE13-1 model.
-
-```python
-calculator = MACECalculator(
-    "/ibiscostorage/VirtualMatterLab/MACE-ICE13/MACE-ICE13-1.model",
-    default_dtype="float64",
-    device="cuda",
-)
-opt = BFGS(atoms, logfile="optimization.log", trajectory="optimization.traj")
-opt.run(fmax=1e-8, steps=1000)
-write("final.xyz", images=atoms)
-```
-
-The final geometry was analyzed through the visualizer integrated in ase:
-
-```sh
-ase gui final.xyz
-```
-
-#figure(image("simulazioni/02_water/01_molecule/MACE-ICE13-1/ase_gui.png"))
-
-The value found for the H-O-H angle is 104.0°. The value found for the O-H
-distance is 0.970 $angstrom$.
 
 == Water dimer
 

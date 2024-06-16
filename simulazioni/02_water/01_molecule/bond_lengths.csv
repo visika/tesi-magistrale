@@ -1,0 +1,6 @@
+model,bond_length,discrepancy
+small,0.97430,0.01712
+medium,0.97296,0.01578
+large,0.97267,0.01549
+MACE-ICE13-1,0.96974,0.01256
+Reference,0.95718,0.00000

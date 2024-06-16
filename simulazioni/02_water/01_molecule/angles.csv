@@ -1,0 +1,6 @@
+model,angle,discrepancy
+small,105.652,1.129
+medium,104.106,-0.417
+large,104.494,-0.029
+MACE-ICE13-1,103.970,-0.553
+Reference,104.523,0.000
