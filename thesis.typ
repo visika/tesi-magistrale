@@ -676,6 +676,9 @@ Studying the vibrational properties of the geometry obtained at the end of the o
 The vibrational modes are calculated from a finite difference approximation of the Hessian matrix, displacing atoms according to a parameter named `delta`, measured in $angstrom$.
 #footnote[https://wiki.fysik.dtu.dk/ase/ase/vibrations/modes.html]
 
+The following figures represent the frequencies of the vibration modes of the optimized water molecule obtained with @ase plotted against the displacement parameter `delta`, using different calculator models and values of the `fmax` parameter.
+Frequencies are indexed in ascending order, and *imaginary frequencies*, representing unstable configurations, are shown as negative values in the graphs.
+
 #let large_figure(content, caption: none) = figure(
   box(width: 125%, content),
   caption: caption,
