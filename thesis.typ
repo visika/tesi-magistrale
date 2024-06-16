@@ -678,6 +678,8 @@ The vibrational modes are calculated from a finite difference approximation of t
 
 The following figures represent the frequencies of the vibration modes of the optimized water molecule obtained with @ase plotted against the displacement parameter `delta`, using different calculator models and values of the `fmax` parameter.
 Frequencies are indexed in ascending order, and *imaginary frequencies*, representing unstable configurations, are shown as negative values in the graphs.
+Inclusion of dispersion contributions in calculators leads to minimal differences in the
+converged configurations.
 
 #let large_figure(content, caption: none) = figure(
   box(width: 125%, content),
@@ -713,11 +715,6 @@ Frequencies are indexed in ascending order, and *imaginary frequencies*, represe
   ),
   caption: "Convergence of the large model with respect to fmax",
 )
-
-==== With dispersion
-
-Inclusion of dispersion contributions leads to minimal differences in the
-converged configurations.
 
 #large_figure(
   grid(
