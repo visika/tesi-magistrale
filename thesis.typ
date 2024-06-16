@@ -727,7 +727,7 @@ Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure conver
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-4.svg"),
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-8.svg"),
   ),
-  caption: "Convergence of the small model with respect to fmax",
+  caption: "Convergence of the small model with dispersion with respect to fmax",
 )
 
 #large_figure(
@@ -737,7 +737,7 @@ Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure conver
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-4.svg"),
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-8.svg"),
   ),
-  caption: "Convergence of the medium model with respect to fmax",
+  caption: "Convergence of the medium model with dispersion with respect to fmax",
 )
 
 #large_figure(
@@ -747,7 +747,7 @@ Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure conver
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-4.svg"),
     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-8.svg"),
   ),
-  caption: "Convergence of the large model with respect to fmax",
+  caption: "Convergence of the large model with dispersion with respect to fmax",
 )
 
 ==== MACE-ICE13-1
