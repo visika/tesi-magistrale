@@ -932,7 +932,7 @@ The MACE-ICE13-1 model shows the best agreement with reference data from literat
   ],
 ) <table:zpe>
 
-== Water dimer
+== The water dimer
 
 === Vibrations analysis
 
