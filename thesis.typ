@@ -1024,7 +1024,7 @@ equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
     dashed line corresponds to $-0.24 "eV"$
     @curtissStudiesMolecularAssociation1979.
   ],
-)
+) <fig:binding-energy>
 
 == Lattice energy
 
