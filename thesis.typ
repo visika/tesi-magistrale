@@ -1006,7 +1006,7 @@ It can be computed as @dellapiaDMCICE13AmbientHigh2022
 $ E_"lattice" := E_"crystal" - E_"gas", $
 where $E_"crystal"$ is the energy per molecule in the crystal phase, and $E_"gas"$ is the energy of the isolated molecule.
 
-$ E_"crystal" := E / N_(#ce("H_2O")) $
+$ E_"crystal" := E / N_(#ce("H2O")) $
 
 The quantity $E_"gas"$ is calculated in the same manner as in @sec-molecule,
 however, with the distinction that optimization was not performed;
