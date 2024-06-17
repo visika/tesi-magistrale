@@ -1,0 +1,6 @@
+model,cm^-1,error
+Reference,1594.59,0.00
+small,1485.10,-109.49
+medium,1601.10,6.51
+large,1497.30,-97.29
+MACE-ICE13-1,1607.80,13.21

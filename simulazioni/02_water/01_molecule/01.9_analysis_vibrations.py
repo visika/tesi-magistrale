@@ -220,5 +220,109 @@ def __(get_summaries, mo, pd, read_zero_point_energy):
     return
 
 
+@app.cell(hide_code=True)
+def __(mo):
+    mo.md(rf"## Studio dei primi tre modi normali di vibrazione")
+    return
+
+
+@app.cell
+def __(get_summaries, pd, read_frequencies):
+    _models = ["small", "medium", "large", "MACE-ICE13-1"]
+
+
+    def le_mie_frequenze(model):
+        _fname = get_summaries(model, "1e-8", True)[0]
+        _df = read_frequencies(_fname)
+        return _df.tail(3)
+
+
+    ni_1_reference = 3656.65
+    ni_2_reference = 1594.59
+    ni_3_reference = 3755.79
+
+    # Tre discorsi separati per ciascuna frequenza
+    ni_1 = pd.DataFrame({"model": "Reference", "cm^-1": ni_1_reference}, index=[0])
+    ni_2 = pd.DataFrame({"model": "Reference", "cm^-1": ni_2_reference}, index=[0])
+    ni_3 = pd.DataFrame({"model": "Reference", "cm^-1": ni_3_reference}, index=[0])
+
+    for _model in _models:
+        _df = le_mie_frequenze(_model)
+        ni_1 = pd.concat(
+            [
+                ni_1,
+                pd.DataFrame(
+                    {"model": _model, "cm^-1": _df["cm^-1"].iloc[-2]}, index=[0]
+                ),
+            ],
+            ignore_index=True,
+        )
+        ni_2 = pd.concat(
+            [
+                ni_2,
+                pd.DataFrame(
+                    {"model": _model, "cm^-1": _df["cm^-1"].iloc[-3]}, index=[0]
+                ),
+            ],
+            ignore_index=True,
+        )
+        ni_3 = pd.concat(
+            [
+                ni_3,
+                pd.DataFrame(
+                    {"model": _model, "cm^-1": _df["cm^-1"].iloc[-1]}, index=[0]
+                ),
+            ],
+            ignore_index=True,
+        )
+
+    # Calcolo delle discrepanze
+    ni_1["error"] = ni_1["cm^-1"] - ni_1_reference
+    ni_2["error"] = ni_2["cm^-1"] - ni_2_reference
+    ni_3["error"] = ni_3["cm^-1"] - ni_3_reference
+
+    # Esportazione in CSV
+    ni_1.to_csv("ni_1.csv", index=False, float_format="%.2f")
+    ni_2.to_csv("ni_2.csv", index=False, float_format="%.2f")
+    ni_3.to_csv("ni_3.csv", index=False, float_format="%.2f")
+    return (
+        le_mie_frequenze,
+        ni_1,
+        ni_1_reference,
+        ni_2,
+        ni_2_reference,
+        ni_3,
+        ni_3_reference,
+    )
+
+
+@app.cell
+def __(mo, ni_1, ni_2, ni_3):
+    mo.hstack([ni_1, ni_2, ni_3])
+    return
+
+
+@app.cell
+def __():
+    from ase.vibrations import Vibrations
+    from ase.io import read
+
+    from mace.calculators import mace_mp
+
+    calculator = mace_mp(model="medium", device="cpu", default_dtype="float64")
+
+    h2o = read("MACE-ICE13-1/final.xyz")
+    h2o.calc = calculator
+
+    vib = Vibrations(h2o)
+    vib.clean()
+    vib.run()
+    vib.write_mode(-1)
+    vib.write_mode(-2)
+    vib.write_mode(-3)
+    vib.summary()
+    return Vibrations, calculator, h2o, mace_mp, read, vib
+
+
 if __name__ == "__main__":
     app.run()

@@ -712,9 +712,78 @@ A value of `steps=1000` is largely above the actual number of steps required for
   )
 ]
 
-=== Assessment of the dynamical stability
+=== Molecular vibrations and assessment of the dynamical stability
 
-Studying the vibrational properties of the geometry obtained at the end of the optimization procedure allows us to assess if the final geometry is a stable or unstable configuration.
+The nuclei of molecules, far from occupying fixed positions with respect to each other, are in continual state of vibration, even at 0°K.
+An important feature of these vibrations is that they can be described by a limited number of basic vibrations known as the normal modes.
+A normal mode is a vibration in which all the nuclei oscillate with the same frequency and the same phase.
+The water molecule has three normal modes and every possible vibration of the molecule can be described as a superposition of these three modes.
+
+The normal modes of vibration of water are shown in @fig:h2o-normal-modes.
+Because the motion of the nuclei in the $nu_1$ and $nu_3$ vibrations is nearly along the direction of the $#ce("O - H")$, these modes are often referred to as $#ce("O - H")$ stretching vibrations.
+Similarly, because the $#ce("H")$ nuclei in $nu_2$ move in directions almost perpendicular to the bonds, $nu_2$ is referred to as the $#ce("H - O - H")$ bending vibration.
+In fact, $nu_1$ involves a small amount of $#ce("H - O - H")$ bending, and $nu_2$ involves a small amount of $#ce("O - H")$ stretching.
+The mode $nu_3$ is called the asymmetric stretching vibration to distinguish it from the symmetric stretching vibration $nu_1$. @eisenbergStructurePropertiesWater2005[§1.1 (d)]
+
+#figure(
+  image("thesis/imgs/eisenberg2005_fig1.1.gif", width: 50%),
+  caption: [
+    The normal modes of vibration of $#ce("H2O")$.
+    Taken from @eisenbergWaterMolecule2005.
+  ],
+) <fig:h2o-normal-modes>
+
+The computed values for the three normal modes, and comparison with reference values @eisenbergWaterMolecule2005, are shown in @table:ni_1, @table:ni_2, @table:ni_3 below.
+
+#let ni_1_table = csv("simulazioni/02_water/01_molecule/ni_1.csv")
+#figure(
+  table(
+    columns: ni_1_table.first().len(),
+    table.header(
+      [Model],
+      [Frequency ($"cm"^(-1)$)],
+      [Discrepancy ($"cm"^(-1)$)],
+    ),
+    ..ni_1_table.slice(1).flatten(),
+  ),
+  caption: [
+    $nu_1$
+  ],
+) <table:ni_1>
+
+#let ni_2_table = csv("simulazioni/02_water/01_molecule/ni_2.csv")
+#figure(
+  table(
+    columns: ni_2_table.first().len(),
+    table.header(
+      [Model],
+      [Frequency ($"cm"^(-1)$)],
+      [Discrepancy ($"cm"^(-1)$)],
+    ),
+    ..ni_2_table.slice(1).flatten(),
+  ),
+  caption: [
+    $nu_2$
+  ],
+) <table:ni_2>
+
+#let ni_3_table = csv("simulazioni/02_water/01_molecule/ni_3.csv")
+#figure(
+  table(
+    columns: ni_3_table.first().len(),
+    table.header(
+      [Model],
+      [Frequency ($"cm"^(-1)$)],
+      [Discrepancy ($"cm"^(-1)$)],
+    ),
+    ..ni_3_table.slice(1).flatten(),
+  ),
+  caption: [
+    $nu_3$
+  ],
+) <table:ni_3>
+
+Studying the vibrational properties of the geometry obtained at the end of the optimization procedure also allows us to assess if the final geometry is a stable or unstable configuration.
 The vibrational modes are calculated from a finite difference approximation of the Hessian matrix, displacing atoms according to a parameter named `delta`, measured in $angstrom$.
 #footnote[https://wiki.fysik.dtu.dk/ase/ase/vibrations/modes.html]
 
