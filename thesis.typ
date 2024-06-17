@@ -932,6 +932,9 @@ The MACE-ICE13-1 model shows the best agreement with reference data from literat
   ],
 ) <table:zpe>
 
+The results so far indicate that the medium, large MACE-MP-0, and MACE-ICE13-1 approximate better the properties of the water molecule,
+while the small MACE-MP-0 model is the worst of them in this regard.
+
 == The water dimer
 
 === Vibrations analysis
