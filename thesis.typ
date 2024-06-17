@@ -954,6 +954,9 @@ The water dimer was analyzed using different models:
     Structure optimization of the water dimer and vibration analysis.
   ],
 )
+After analyzing the properties of the water molecule it is time to study a slightly more elaborate system.
+The water dimer exposes a bigger number of geometric features and vibrational modes.
+Moreover, a charactheristic physical quantity, the binding energy, allows to quantitatively evaluate the performance of the models.
 
 === Geometry optimization
 
