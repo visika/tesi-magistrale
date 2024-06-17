@@ -862,6 +862,9 @@ Resources on the water dimer are abundant, on both the theory and experiment sid
 @mukhopadhyayWaterDimerII2018
 @barnettBornOppenheimerMoleculardynamicsSimulations1993
 @mukhopadhyayWaterDimerExperimental2015
+@schutzWaterDimerInteraction1997
+@klopperComputationalDeterminationEquilibrium2000
+@hobzaReliableTheoreticalTreatment1999
 
 === Geometry optimization
 
