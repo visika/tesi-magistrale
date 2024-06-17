@@ -1,0 +1,5 @@
+model,absolute error sum
+small,1201.8
+medium,1098.0
+large,909.3
+MACE-ICE13-1,487.7

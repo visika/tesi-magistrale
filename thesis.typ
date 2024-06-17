@@ -1065,6 +1065,21 @@ A displacement smaller than $10^(-4) angstrom$ is required for all the models to
   ],
 )
 
+In @table:dimer-frequencies-sum-absolute-errors we make a summary of the predictive power of each model of the frequencies of the normal modes of the dimer, as compared to reference @barnettBornOppenheimerMoleculardynamicsSimulations1993.
+MACE-ICE13-1 demonstrates the best overall adherence to the experimental frequencies.
+
+#let dimer_vibrations_sum_absolute_errors = csv("simulazioni/02_water/02_dimer/01_optimize/frequencies_sum_of_absolute_errors.csv")
+#figure(
+  table(
+    columns: dimer_vibrations_sum_absolute_errors.first().len(),
+    table.header([Model], [Sum of absolute errors ($"cm"^(-1)$)]),
+    ..dimer_vibrations_sum_absolute_errors.slice(1).flatten()
+  ),
+  caption: [
+    Sum of absolute errors, computed as the difference between the value of the frequencies obtained with caluculator models and reference.
+  ],
+) <table:dimer-frequencies-sum-absolute-errors>
+
 === Binding energy
 
 The binding energy is calculated as

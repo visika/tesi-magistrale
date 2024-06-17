@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.12"
+__generated_with = "0.6.19"
 app = marimo.App(
     app_title="Stabilita del dimero d'acqua",
     layout_file="layouts/analysis.grid.json",
@@ -92,6 +92,7 @@ def __(immaginari_a_negativi, pd):
 @app.cell
 def __(get_filenames, model):
     filenames = get_filenames(model.value)
+    filenames
     return filenames,
 
 
@@ -313,6 +314,90 @@ def __(
     _df.to_csv("geometria.csv", index=False, header=False)
 
     mo.ui.table(_df, label="Geometria")
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## Compare the frequencies")
+    return
+
+
+@app.cell
+def __(immaginari_a_negativi, pd):
+    def read_frequencies(filename):
+        with open(
+            filename,
+            "r",
+        ) as _f:
+            df = pd.read_csv(
+                _f.name,
+                skiprows=[0, 2],
+                skipfooter=2,
+                engine="python",
+                delimiter="\ +",
+            )
+        df["cm^-1"] = df["cm^-1"].apply(immaginari_a_negativi)
+        return df
+    return read_frequencies,
+
+
+@app.cell
+def __(get_filenames, mo, models, nu_reference, pd, read_frequencies):
+    _df = pd.DataFrame()
+
+    for _model in models:
+        _fname = get_filenames(_model)[0]
+        print(_fname)
+        _freqs = read_frequencies(_fname)
+        _real_freqs = _freqs[_freqs["cm^-1"] > 0].reset_index(drop=True)
+        _real_freqs["discrepancy"] = abs(
+            _real_freqs["cm^-1"] - nu_reference[::-1]
+        ).round(2)
+        _absolute_error = _real_freqs["discrepancy"].sum()
+        _new_df = pd.DataFrame(
+            {
+                "model": _model,
+                "absolute error sum": _absolute_error,
+            },
+            index=["model"],
+        )
+        _df = pd.concat([_df, _new_df], axis=0, ignore_index=True)
+
+    # Export to CSV
+    _df.to_csv(
+        "frequencies_sum_of_absolute_errors.csv",
+        index=False,
+        header=True,
+        float_format="%.1f",
+    )
+
+    mo.ui.table(_df)
+    return
+
+
+@app.cell
+def __():
+    nu_reference = [
+        3714,
+        3698,
+        3626,
+        3548,
+        1618,
+        1600,
+        520,
+        320,
+        243,
+        174,
+        155,
+        151,
+    ]
+    return nu_reference,
+
+
+@app.cell
+def __(nu_reference):
+    len(nu_reference)
     return
 
 
