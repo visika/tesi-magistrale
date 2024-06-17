@@ -898,6 +898,7 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
   ),
 )
 
+
 #figure(
   ```python
   for d in [1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
