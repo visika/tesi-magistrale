@@ -514,93 +514,6 @@ The following chapters will introduce the theoretical foundations and the tools 
 == Phonons
 == Neural networks
 
-= Tools
-Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
-
-== ASE
-
-Introducing @ase.
-The `Atoms` object contains the positions of the atoms and the properties of the cell.
-
-== MACE
-
-=== Fine-tuning a custom model
-
-// TODO Cita kaur2024
-
-Fine-tuning a MACE model is composed of three steps.
-// TODO Spiega meglio cosa è e a cosa serve il fine-tuning
-
-1. *Sample the phase space* to obtain representatives of the system under the thermodynamic conditions we are interesed in.
-  This was obtained employing NPT dynamics as provided by @ase to generate 10000 images with variety.
-  Of this total, 50 representatives were randomly chosen from the images after thermalization.
-  See @fig-finetune-sample-temperature for the thermalization pattern.
-  // TODO menziona scelta tra termostato di Berensden e Parrinello, con citazioni.
-2. *Compute the reference* values for the energies, forces and stresses.
-  For this step we executed single point self-consistent calculations on each representative of the samples,
-  using a @paw @pbe @dft pseudo-potential through @vasp.
-  The output files are then converted, joined and shuffled to compose the training and test sets for the machine learning procedure.
-3. *Fine tune* the foundation model on the new dataset; in our case MACE-MP-0 was chosen.
-  #footnote([
-    Reference procedures are available at https://github.com/ACEsuit/mace?tab=readme-ov-file#finetuning-foundation-models
-  ])
-  The training and test sets are the input data for the training of the neural network that underlies MACE.
-  The training spans 2000 epochs, at the end of which the compiled model is obtained, along with statistics.
-  Plot showing neural network loss and error on energy versus epochs are available in @fig-finetune-epochs.
-
-#figure(
-  [
-    #let my-node(..args) = node(
-      corner-radius: 5pt,
-      ..args,
-    )
-
-    #diagram(
-      node-stroke: 1pt,
-      my-node((0, 0), [Generate samples \ from NPT MD]),
-      edge(
-    "-|>",
-    [data_for_train.extxyz],
-    bend: 45deg,
-    // label-sep: 1em,
-  ),
-      my-node((1, 0), [Compute reference \ DFT pseudopotential]),
-      edge(
-        "-|>",
-        align(
-          center,
-          [training_set.xyz \ test_set.xyz],
-        ),
-        bend: 45deg,
-      ),
-      my-node((2, 0), [Fine tune \ MACE]),
-      edge("-|>"),
-      my-node((3, 0.5), [Model]),
-      edge((2, 0), (3, -0.5), "-|>"),
-      my-node((3, -0.5), [Errors]),
-    )
-  ],
-  caption: [Flow diagram for fine-tuning of MACE.],
-)
-
-#figure(
-  image("tutorial-fine-tuning/1.generate-training/run_2024-06-08/Figure_1_i_T.png"),
-  caption: [
-    Temperature during sample generation.
-  ],
-) <fig-finetune-sample-temperature>
-
-#figure(
-  grid(
-    columns: 2,
-    image("tutorial-fine-tuning/analysis/loss_over_epochs.svg"),
-    image("tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg"),
-  ),
-  caption: [
-    Loss (left) and @mae of the energy (right) over epochs plots for the fine-tuning of a new model on ice Ih, with MACE-MP-0 small as foundation model.
-  ],
-) <fig-finetune-epochs>
-
 = Results
 
 #box(
@@ -1197,6 +1110,93 @@ and is independent of the configuration of the monomer in the gas phase.
 @md
 
 #image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
+
+= Tools
+Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
+
+== ASE
+
+Introducing @ase.
+The `Atoms` object contains the positions of the atoms and the properties of the cell.
+
+== MACE
+
+=== Fine-tuning a custom model
+
+// TODO Cita kaur2024
+
+Fine-tuning a MACE model is composed of three steps.
+// TODO Spiega meglio cosa è e a cosa serve il fine-tuning
+
+1. *Sample the phase space* to obtain representatives of the system under the thermodynamic conditions we are interesed in.
+  This was obtained employing NPT dynamics as provided by @ase to generate 10000 images with variety.
+  Of this total, 50 representatives were randomly chosen from the images after thermalization.
+  See @fig-finetune-sample-temperature for the thermalization pattern.
+  // TODO menziona scelta tra termostato di Berensden e Parrinello, con citazioni.
+2. *Compute the reference* values for the energies, forces and stresses.
+  For this step we executed single point self-consistent calculations on each representative of the samples,
+  using a @paw @pbe @dft pseudo-potential through @vasp.
+  The output files are then converted, joined and shuffled to compose the training and test sets for the machine learning procedure.
+3. *Fine tune* the foundation model on the new dataset; in our case MACE-MP-0 was chosen.
+  #footnote([
+    Reference procedures are available at https://github.com/ACEsuit/mace?tab=readme-ov-file#finetuning-foundation-models
+  ])
+  The training and test sets are the input data for the training of the neural network that underlies MACE.
+  The training spans 2000 epochs, at the end of which the compiled model is obtained, along with statistics.
+  Plot showing neural network loss and error on energy versus epochs are available in @fig-finetune-epochs.
+
+#figure(
+  [
+    #let my-node(..args) = node(
+      corner-radius: 5pt,
+      ..args,
+    )
+
+    #diagram(
+      node-stroke: 1pt,
+      my-node((0, 0), [Generate samples \ from NPT MD]),
+      edge(
+    "-|>",
+    [data_for_train.extxyz],
+    bend: 45deg,
+    // label-sep: 1em,
+  ),
+      my-node((1, 0), [Compute reference \ DFT pseudopotential]),
+      edge(
+        "-|>",
+        align(
+          center,
+          [training_set.xyz \ test_set.xyz],
+        ),
+        bend: 45deg,
+      ),
+      my-node((2, 0), [Fine tune \ MACE]),
+      edge("-|>"),
+      my-node((3, 0.5), [Model]),
+      edge((2, 0), (3, -0.5), "-|>"),
+      my-node((3, -0.5), [Errors]),
+    )
+  ],
+  caption: [Flow diagram for fine-tuning of MACE.],
+)
+
+#figure(
+  image("tutorial-fine-tuning/1.generate-training/run_2024-06-08/Figure_1_i_T.png"),
+  caption: [
+    Temperature during sample generation.
+  ],
+) <fig-finetune-sample-temperature>
+
+#figure(
+  grid(
+    columns: 2,
+    image("tutorial-fine-tuning/analysis/loss_over_epochs.svg"),
+    image("tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg"),
+  ),
+  caption: [
+    Loss (left) and @mae of the energy (right) over epochs plots for the fine-tuning of a new model on ice Ih, with MACE-MP-0 small as foundation model.
+  ],
+) <fig-finetune-epochs>
 
 = Conclusions
 
