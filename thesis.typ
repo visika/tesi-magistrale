@@ -1061,6 +1061,7 @@ A displacement smaller than $10^(-4) angstrom$ is required for all the models to
   ),
   caption: [
     Structure optimization of the water dimer and vibration analysis.
+    Negative values represent imaginary frequencies.
   ],
 )
 
