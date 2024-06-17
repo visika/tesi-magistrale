@@ -869,22 +869,29 @@ dispersion.
 Convergence of results for the MACE-ICE13-1 model is achieved for displacements below $10^(-4) angstrom$.
 The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corresponds to negligible energy, as can be observed in the representative output in @code-monomer-vibrations-mace-ice13-1-output and therefore does not pose a issue.
 
-#grid(
-  columns: 2,
-  [#figure(
-      image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"),
-      caption: "Frequencies calculated with the MACE-ICE13-1 model at an appropriate fmax for convergence.",
-    ) <fig-monomer-vibrations-mace-ice13-1>],
-  [
-    #figure(
-      raw(
-        read("simulazioni/02_water/01_molecule/MACE-ICE13-1/H2O_delta=1e-06_summary.txt"),
-      ),
-      caption: [
-        H2O_delta=1e-06_summary.txt
+#align(
+  center,
+  box(
+    width: 125%,
+    grid(
+      columns: 2,
+      gutter: 3pt,
+      [#figure(
+          image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"),
+          caption: [Frequencies calculated with the MACE-ICE13-1 model with the most restrictive `fmax`.],
+        ) <fig-monomer-vibrations-mace-ice13-1>],
+      [
+        #figure(
+          raw(
+            read("simulazioni/02_water/01_molecule/MACE-ICE13-1/H2O_delta=1e-06_summary.txt"),
+          ),
+          caption: [
+            Vibrational analysis representative output from ASE for the normal modes of the water molecule.
+          ],
+        ) <code-monomer-vibrations-mace-ice13-1-output>
       ],
-    ) <code-monomer-vibrations-mace-ice13-1-output>
-  ],
+    ),
+  ),
 )
 
 #figure(
