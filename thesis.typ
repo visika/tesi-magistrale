@@ -954,9 +954,10 @@ Resources on the water dimer are abundant, on both the theory and experiment sid
 
 The optimization was performed starting from an initial configuration
 approximately reproducing the geometry represented in @dimer-structure. The BFGS
-optimizer was used with the MACE-MP-0 models and the MACE-ICE13-1 model, with a
-force threshold of `1e-8`. The code describing the initial geometry is available
-in @init.xyz. The results comparing the optimized geometry with literature
+optimizer was used with the three MACE-MP-0 models and the MACE-ICE13-1 model, with a
+force threshold of `fmax=1e-8`. The code describing the initial geometry is available
+in @init.xyz.
+The results comparing values and errors of the soft, intermolecular, features of the optimized geometry with respect to literature
 reference are available in @dimer-geometry-table and @dimer-geometry-errors.
 
 #figure(
