@@ -937,23 +937,6 @@ while the small MACE-MP-0 model is the worst of them in this regard.
 
 == The water dimer
 
-=== Vibrations analysis
-
-The water dimer was analyzed using different models:
-
-#figure(
-  grid(
-    columns: 2,
-    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"),
-    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/medium.png"),
-
-    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/large.png"),
-    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
-  ),
-  caption: [
-    Structure optimization of the water dimer and vibration analysis.
-  ],
-)
 After analyzing the properties of the water molecule it is time to study a slightly more elaborate system.
 The water dimer exposes a bigger number of geometric features and vibrational modes.
 Moreover, a charactheristic physical quantity, the binding energy, allows to quantitatively evaluate the performance of the models.
@@ -1036,6 +1019,24 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
     MACE-MP-0.
   ],
 ) <dimer-geometry-errors>
+
+=== Vibrations analysis
+
+The water dimer was analyzed using different models:
+
+#figure(
+  grid(
+    columns: 2,
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"),
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/medium.png"),
+
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/large.png"),
+    image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
+  ),
+  caption: [
+    Structure optimization of the water dimer and vibration analysis.
+  ],
+)
 
 === Binding energy
 
