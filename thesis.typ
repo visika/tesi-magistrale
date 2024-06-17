@@ -945,6 +945,10 @@ while the small MACE-MP-0 model is the worst of them in this regard.
 After analyzing the properties of the water molecule it is time to study a slightly more elaborate system.
 The water dimer exposes a bigger number of geometric features and vibrational modes.
 Moreover, a charactheristic physical quantity, the binding energy, allows to quantitatively evaluate the performance of the models.
+Resources on the water dimer are abundant, on both the theory and experiment sides.
+@mukhopadhyayWaterDimerII2018
+@barnettBornOppenheimerMoleculardynamicsSimulations1993
+@mukhopadhyayWaterDimerExperimental2015
 
 === Geometry optimization
 
