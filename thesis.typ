@@ -1040,6 +1040,10 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
   ],
 ) <dimer-geometry-errors>
 
+The overall results exhibit a better accuracy of the MACE-MP-0 large and MACE-ICE13-1 models,
+holding first and second place with lowest discrepancies with respect to reference most of the time,
+while the small and medium MACE-MP-0 models lag behind.
+
 === Vibrations analysis
 
 The water dimer was analyzed using different models:
