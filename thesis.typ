@@ -1046,7 +1046,9 @@ while the small and medium MACE-MP-0 models lag behind.
 
 === Vibrations analysis
 
-The water dimer was analyzed using different models:
+Similarly to the procedure adopted for the monomer,
+normal modes of the water dimer were analyzed to assess the dynamical stability of the optimized geometry.
+A displacement smaller than $10^(-4) angstrom$ is required for all the models to converge to stable configurations.
 
 #figure(
   grid(
