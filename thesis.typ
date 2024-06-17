@@ -1050,7 +1050,7 @@ Similarly to the procedure adopted for the monomer,
 normal modes of the water dimer were analyzed to assess the dynamical stability of the optimized geometry.
 A displacement smaller than $10^(-4) angstrom$ is required for all the models to converge to stable configurations.
 
-#figure(
+#large_figure(
   grid(
     columns: 2,
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/small.png"),
