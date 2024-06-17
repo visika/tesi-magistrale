@@ -1007,7 +1007,7 @@ where $E_2$ is the energy of the dimer, $E_1$ is the energy of one molecule.
 To determine the equilibrium geometry of the dimer from the study of the binding
 energy, $Delta E_2$ must be minimized with respect to the internal coordinates.
 To reduce the complexity of the task, the optimization is constrained to the
-single degree of freedom of the OO distance.
+single degree of freedom of the $#ce("O - O")$ distance.
 @klopperComputationalDeterminationEquilibrium2000
 
 Typical values for the binding energy obtained from DFT simulations at
