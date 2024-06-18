@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.0"
+__generated_with = "0.6.19"
 app = marimo.App()
 
 
@@ -229,12 +229,11 @@ def __(pl):
     return df_rev_pbe_d3, rev_pbe_d3_kjmol
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(
     df_dmc,
     df_large_d,
     df_mace_ice13_1,
-    df_mace_mmollo_0,
     df_medium_d,
     df_pbe_d3,
     df_rev_pbe_d3,
@@ -309,16 +308,16 @@ def __(
     )
 
     # MACE-mmollo-0
-    plt.plot(
-        df_mace_mmollo_0["structure"],
-        df_mace_mmollo_0["e_lattice_kjmol"],
-        marker="o",
-        label="MACE-mmollo-0",
-    )
+    # plt.plot(
+    #     df_mace_mmollo_0["structure"],
+    #     df_mace_mmollo_0["e_lattice_kjmol"],
+    #     marker="o",
+    #     label="MACE-mmollo-0",
+    # )
 
     plt.xlabel("Structure")
     plt.ylabel("Lattice energy (kJ/mol)")
-    # plt.grid()
+    plt.grid(axis="y")
     plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=3, loc="upper center")
     plt.title("Absolute lattice energy")
 
@@ -433,7 +432,7 @@ def __(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(
     df_dmc,
     df_mace_ice13_1,
@@ -518,7 +517,7 @@ def __(
     plt.xlabel("Structure")
     plt.ylabel("Relative lattice energy (kJ/mol)")
     plt.title("Relative lattice energy")
-    # plt.grid()
+    plt.grid(axis="y")
 
     plt.legend()
 
