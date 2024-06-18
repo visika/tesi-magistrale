@@ -1013,6 +1013,10 @@ single degree of freedom of the $#ce("O - O")$ distance.
   See https://wiki.fysik.dtu.dk/ase/ase/constraints.html#the-fixbondlength-class
 ]
 @klopperComputationalDeterminationEquilibrium2000
+Distances between 2 and 6 $angstrom$ were sampled to build the graph,
+with a denser sampling near the respective minima for each of the calculators.
+Once the two molecules are spaced apart of the fixed distance, a relaxation is performed and the potential energy of the system is calculated.
+
 In @fig:binding-energy the binding energy is graphed against the $#ce("O - O")$ distance, $r_"OO"$,
 for MACE-MP-0 medium and MACE-ICE13-1.
 The equilibrium distance according to @dykeStructureWaterDimer1977 @mukhopadhyayWaterDimerII2018, $r_"OO" = 2.98 angstrom$, is most accurately predicted by MACE-ICE13-1, while MACE-MP-0 medium is off by about a quarter of a $angstrom$.
@@ -1021,7 +1025,7 @@ Typical values for the binding energy obtained from @dft simulations at
 equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
 -0.12 eV) @sprikInitioMolecularDynamics1996 @mukhopadhyayWaterDimerII2018.
 Reference @curtissStudiesMolecularAssociation1979 reports the binding energy for the water dimer to be $-5.44 plus.minus 0.7 "kcal/mol"$ that corresponds to $0.24 plus.minus 0.03 "eV/particle"$.
-As MACE-ICE13-1 is trained on revPBE-D3, its predicted binding energy lies in the expected stripe according to @dft simulations.
+As MACE-ICE13-1 is trained on revPBE-D3, its predicted binding energy lies in the expected region according to @dft simulations.
 
 #figure(
   image("simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
