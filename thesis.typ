@@ -1169,6 +1169,8 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 @flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
 @holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih.
 
+In the quasi-harmonic approximation the lattice vibrations are assumed to be harmonic but with frequencies dependent upon the volume. @leadbetterThermodynamicVibrationalProperties1965
+
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg")
 
 == RDF
