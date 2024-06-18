@@ -1101,13 +1101,15 @@ $
   Delta E_"lattice"^x := E_"lattice"^x - E_"lattice"^"Ih"
 $
 and is independent of the configuration of the monomer in the gas phase.
+@fig:relative-lattice-energy shows the computed relative lattice energy for the 13 selected polymorphs of water.
+MACE-ICE13-1 shows a great adherence to its reference potential, revPBE-D3, positioning itself closely to the @dmc quality of results.
 
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg"),
   caption: [
     Performance of MACE for the 13 ice polymorphs considered on the relative lattice energy, compared with reference models. @dellapiaDMCICE13AmbientHigh2022
   ],
-)
+) <fig:relative-lattice-energy>
 
 == Crystal phonons
 
