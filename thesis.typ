@@ -1131,6 +1131,33 @@ Using MACE on CPU allows us to employ also $4 times 4 times 4$ supercells, at th
 
 === Band structure
 
+To build the band structure of ice Ih,
+we have to define the band path on which the frequencies are calculated.
+The crystal form of ice Ih is hexagonal.
+#footnote[https://en.wikipedia.org/wiki/Phases_of_ice#Known_phases]
+The Brillouin zone of the hexagonal lattice is also hexagonal.
+In the Brillouin zone one can find several points of high symmetry that are of special interest, called _critical points_.
+Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
+
+#grid(
+  columns: 2,
+  align: horizon,
+  [
+    - $Gamma$: center of the Brillouin zone
+    - $A$: center of a hexagonal face
+    - $H$: corner point
+    - $K$: middle of an edge joining two rectangular faces
+    - $L$: middle of an edge joining a hexagonal and a rectangular face
+    - $M$: center of a rectangular face
+  ],
+  [
+    #figure(
+      image("strutture/ICE13/Ih/bandpath.svg"),
+      caption: [Bandpath of ice Ih.],
+    )
+  ],
+)
+
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
 
 === Phonons DOS
