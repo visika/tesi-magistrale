@@ -1166,6 +1166,9 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 
 === Heat capacity
 
+@flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
+@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih.
+
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg")
 
 == RDF
