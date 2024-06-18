@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.12"
+__generated_with = "0.6.19"
 app = marimo.App()
 
 
@@ -97,7 +97,7 @@ def __(df_binding_energy):
 
 
 @app.cell
-def __(df, df_mace_ice13_1, df_n2p2, mo):
+def __(df, df_mace_ice13_1, mo):
     # Plot all the data
     import matplotlib.pyplot as plt
 
@@ -128,18 +128,18 @@ def __(df, df_mace_ice13_1, df_n2p2, mo):
         markersize=5,
     )
 
-    ax.plot(
-        df_n2p2["distance"],
-        df_n2p2["binding_energy"],
-        label="n2p2",
-        marker="^",
-        markersize=5,
-    )
+    # ax.plot(
+    #     df_n2p2["distance"],
+    #     df_n2p2["binding_energy"],
+    #     label="n2p2",
+    #     marker="^",
+    #     markersize=5,
+    # )
 
     ax.set_xlabel("$r_{OO}$ (Å)")
     ax.set_ylabel("Binding energy (eV)")
 
-    ax.set_ylim(-0.36, 0)
+    ax.set_ylim(-0.35, 0)
 
     ax.legend()
     plt.title("Dimer binding energy")
@@ -149,10 +149,10 @@ def __(df, df_mace_ice13_1, df_n2p2, mo):
     ax.spines["right"].set_visible(False)
     ax.spines["bottom"].set_visible(False)
 
+    # fig.savefig("binding_energy.svg")
+
     # interactive plot
     mo.mpl.interactive(plt.gcf())
-
-    # fig.savefig("binding_energy.png")
     return ax, fig, plt
 
 

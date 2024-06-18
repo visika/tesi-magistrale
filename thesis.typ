@@ -1020,7 +1020,7 @@ Reference @curtissStudiesMolecularAssociation1979 reports the binding energy for
 As MACE-ICE13-1 is trained on revPBE-D3, its predicted binding energy lies in the expected stripe according to @dft simulations.
 
 #figure(
-  image("simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.png"),
+  image("simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
   caption: [
     Dimer binding energy for different calculators. The vertical dashed line
     corresponds to the reference value for the equilibrium OO distance,
