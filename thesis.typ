@@ -1008,6 +1008,10 @@ To determine the equilibrium geometry of the dimer from the study of the binding
 energy, $Delta E_2$ must be minimized with respect to the internal coordinates.
 To reduce the complexity of the task, the optimization is constrained to the
 single degree of freedom of the $#ce("O - O")$ distance.
+#footnote[
+  The FixBondLength class from @ase was employed to enforce the constraint.
+  See https://wiki.fysik.dtu.dk/ase/ase/constraints.html#the-fixbondlength-class
+]
 @klopperComputationalDeterminationEquilibrium2000
 In @fig:binding-energy the binding energy is graphed against the $#ce("O - O")$ distance, $r_"OO"$,
 for MACE-MP-0 medium and MACE-ICE13-1.
