@@ -1,10 +1,10 @@
 import marimo
 
-__generated_with = "0.3.9"
+__generated_with = "0.6.19"
 app = marimo.App()
 
 
-@app.cell
+@app.cell(hide_code=True)
 def __(mo):
     mo.md(
         """
@@ -83,7 +83,13 @@ def __(bandpath):
 
 @app.cell
 def __(mo):
-    mo.md("Bisogna costruire un percorso. Scegliamo per ora di seguire quello studiato nell'articolo di Strässle, Saitta, Klotz del 2004, che segue il percorso \(A\Gamma K M \Gamma\).")
+    mo.md(
+        """
+        ## Costruzione di Strässle
+
+        Bisogna costruire un percorso. Scegliamo per ora di seguire quello studiato nell'articolo di Strässle, Saitta, Klotz del 2004, che segue il percorso \(A\Gamma K M \Gamma\).
+        """
+    )
     return
 
 
@@ -99,6 +105,26 @@ def __(bandpath, get_band_qpoints_and_path_connections):
         # rec_lattice=atoms.cell.reciprocal()
     )
     return connections, labels, path, qpoints
+
+
+@app.cell
+def __(mo):
+    mo.md(
+        rf"""
+        ## Costruzione di Gupta
+
+        L'articolo @guptaPhononsAnomalousThermal2018
+        """
+    )
+    return
+
+
+@app.cell
+def __(atoms, mo):
+    labels_gupta = ["G", "A", "K", "H", "M", "L", "G"]
+    bandpath_gupta = atoms.cell.bandpath(labels_gupta)
+    mo.mpl.interactive(bandpath_gupta.plot())
+    return bandpath_gupta, labels_gupta
 
 
 @app.cell
