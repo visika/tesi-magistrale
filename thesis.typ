@@ -1076,7 +1076,7 @@ referenced as Patridge 1997 from the authors.
 
 The MACE-ICE13-1 model achieves a @mae with respect to DMC of $0.90 "kJ/mol"$.
 
-#figure(
+#large_figure(
   grid(
     columns: 2,
     image("simulazioni/02_water/03_ICE13_lattice_energies/scatterplot_mace-mp-0_vs_pbe.svg"),
