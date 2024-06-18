@@ -1065,7 +1065,8 @@ $ E_"crystal" := E / N_(#ce("H2O")) $
 The quantity $E_"gas"$ is calculated in the same manner as in @sec-molecule,
 however, with the distinction that optimization was not performed;
 to align the computed results with the reference paper, the same fixed gas phase molecule was used,
-referenced as Patridge 1997 from the authors.
+referenced as Patridge 1997 from the original authors,
+to correctly reproduce the computational setup.
 
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg"),
