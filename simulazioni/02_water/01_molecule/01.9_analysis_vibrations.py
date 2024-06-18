@@ -3,7 +3,7 @@ import marimo
 __generated_with = "0.6.19"
 app = marimo.App(
     app_title="Studio delle vibrazioni della molecola d'acqua",
-    layout_file="layouts/01.9_analysis.grid.json",
+    layout_file="layouts/01.9_analysis_vibrations.grid.json",
 )
 
 
