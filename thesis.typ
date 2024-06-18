@@ -1115,6 +1115,20 @@ MACE-ICE13-1 shows a great adherence to its reference potential, revPBE-D3, posi
 
 == Crystal phonons
 
+The current implementation of phonons calculation in @ase
+#footnote[https://wiki.fysik.dtu.dk/ase/ase/phonons.html]
+is outclassed by Phonopy. #footnote[See https://gitlab.com/ase/ase-workshop-discussion/-/issues/7#note_245747917 and https://gitlab.com/ase/ase/-/issues/1235]
+
+Normal modes of vibration are calculated using the so-called *small displacement method*.
+This method is increasingly more accurate with bigger and bigger supercells.
+
+The first thing to do is to build a supercell.
+The Ih ice structure was analyzed;
+it is composed of 36 atoms, that is 12 water molecules.
+// TODO Definisci struttura del ghiaccio Ih
+The biggest supercell that the GPU cuda version of MACE can handle is the $3 times 3 times 3$.
+Using MACE on CPU allows us to employ also $4 times 4 times 4$ supercells, at the expense of a significantly increased computation time.
+
 === Band structure
 
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
