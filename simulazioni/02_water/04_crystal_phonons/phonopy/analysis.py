@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.19"
+__generated_with = "0.6.20"
 app = marimo.App()
 
 
@@ -30,7 +30,16 @@ def __():
     import matplotlib.pyplot as plt
     from phonopy.phonon.band_structure import get_band_qpoints_and_path_connections
     from phonopy.phonon.band_structure import get_band_qpoints
+
+    from mpl_toolkits.axes_grid1 import ImageGrid
+    from phonopy.phonon.band_structure import BandPlot
+    from phonopy.phonon.band_structure import BandStructure
+    from phonopy.phonon.band_structure import band_plot
     return (
+        BandPlot,
+        BandStructure,
+        ImageGrid,
+        band_plot,
         get_band_qpoints,
         get_band_qpoints_and_path_connections,
         mo,
@@ -82,6 +91,17 @@ def __(bandpath):
 
 
 @app.cell
+def __(atoms, bandpath, mo):
+    _labels = []
+    _path = [bandpath.special_points.get(key) for key in _labels]
+
+    _bandpath = atoms.cell.bandpath(_labels)
+
+    mo.mpl.interactive(_bandpath.plot())
+    return
+
+
+@app.cell
 def __(mo):
     mo.md(
         """
@@ -94,9 +114,11 @@ def __(mo):
 
 
 @app.cell
-def __(bandpath, get_band_qpoints_and_path_connections):
+def __(atoms, bandpath, get_band_qpoints_and_path_connections, mo):
     labels = ["A", "G", "K", "M", "G"]
     path = [bandpath.special_points.get(key) for key in labels]
+
+    _bandpath = atoms.cell.bandpath(labels)
 
     qpoints, connections = get_band_qpoints_and_path_connections(
         # qpoints = get_band_qpoints(
@@ -104,6 +126,8 @@ def __(bandpath, get_band_qpoints_and_path_connections):
         npoints=101,
         # rec_lattice=atoms.cell.reciprocal()
     )
+
+    mo.mpl.interactive(_bandpath.plot())
     return connections, labels, path, qpoints
 
 
@@ -125,6 +149,63 @@ def __(atoms, mo):
     bandpath_gupta = atoms.cell.bandpath(labels_gupta)
     mo.mpl.interactive(bandpath_gupta.plot())
     return bandpath_gupta, labels_gupta
+
+
+@app.cell
+def __(
+    bandpath_gupta,
+    get_band_qpoints_and_path_connections,
+    labels_gupta,
+):
+    # Build the path for phonopy
+    path_gupta = [bandpath_gupta.special_points.get(key) for key in labels_gupta]
+
+    qpoints_gupta, connections_gupta = get_band_qpoints_and_path_connections(
+        [path_gupta],
+        npoints=101,
+    )
+
+    path_gupta
+    return connections_gupta, path_gupta, qpoints_gupta
+
+
+@app.cell
+def __(connections_gupta, labels_gupta, mace_ice13_1_s3, qpoints_gupta):
+    mace_ice13_1_s3["ph"].run_band_structure(
+        qpoints_gupta,
+        path_connections=connections_gupta,
+        labels=labels_gupta,
+        is_legacy_plot=False,
+    )
+    mace_ice13_1_s3["ph"].plot_band_structure().gca()
+    return
+
+
+@app.cell
+def __(mace_ice13_1_s3, mo, plt):
+    _fig, _ax = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
+    )
+    mace_ice13_1_s3["ph"].band_structure.plot(_ax)
+
+    _ax[0].set_ylim(0, 5)
+    _ax[0].grid(axis="x")
+    _ax[0].set_ylabel("Frequency (THz)")
+
+    _fig.delaxes(_ax[1])
+    plt.title("MACE-ICE13-1 supercell 3x3x3")
+
+    # Remove top frame
+    _ax[0].spines["top"].set_visible(False)
+    _ax[0].spines["left"].set_visible(False)
+    _ax[0].spines["right"].set_visible(False)
+
+    import os
+    os.makedirs("Grafici", exist_ok=True)
+    # plt.savefig("Grafici/bandstructure_mace-ice13-1_s3_gupta.svg")
+
+    mo.mpl.interactive(_fig)
+    return os,
 
 
 @app.cell
@@ -154,7 +235,14 @@ def __(connections, labels, phonopy, qpoints):
 
 
 @app.cell
+def __():
+    # enhance below with https://docs.marimo.io/guides/performance.html
+    return
+
+
+@app.cell
 def __(phonopy):
+    # WARNING Expensive, run just once
     mace_ice13_1_s3 = {}
     mace_ice13_1_s3["basepath"] = "MACE-ICE13-1/ICE-Ih/supercell=3/"
     mace_ice13_1_s3["ph"] = phonopy.load(
@@ -176,6 +264,18 @@ def __(connections, labels, mace_ice13_1_s3, qpoints):
     )
     mace_ice13_1_s3["ph"].plot_band_structure().gca()
     # plt.savefig("mace_ice13_1_s3_band_structure_complete.svg")
+    return
+
+
+@app.cell
+def __(connections_gupta, labels_gupta, mace_ice13_1_s3, qpoints_gupta):
+    mace_ice13_1_s3["ph"].run_band_structure(
+        qpoints_gupta,
+        path_connections=connections_gupta,
+        labels=labels_gupta,
+        is_legacy_plot=False,
+    )
+    mace_ice13_1_s3["ph"].plot_band_structure().gca()
     return
 
 
@@ -219,12 +319,7 @@ def __(mace_ice13_1_s3, plt):
 
 
 @app.cell
-def __(connections, labels, mace_ice13_1, mace_mp_0, plt):
-    from mpl_toolkits.axes_grid1 import ImageGrid
-    from phonopy.phonon.band_structure import BandPlot
-    from phonopy.phonon.band_structure import BandStructure
-    from phonopy.phonon.band_structure import band_plot
-
+def __(band_plot, connections, labels, mace_ice13_1, mace_mp_0, plt):
     n = len(
         [x for x in mace_ice13_1["ph"]._band_structure.path_connections if not x]
     )
@@ -261,15 +356,7 @@ def __(connections, labels, mace_ice13_1, mace_mp_0, plt):
     _fig.suptitle("Supercell $2 \\times 2 \\times 2$")
 
     _fig
-    return (
-        BandPlot,
-        BandStructure,
-        ImageGrid,
-        Line2D,
-        band_plot,
-        custom_lines,
-        n,
-    )
+    return Line2D, custom_lines, n
 
 
 @app.cell

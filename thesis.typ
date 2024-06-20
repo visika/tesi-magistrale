@@ -1220,10 +1220,32 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
   ],
   [
     #figure(
-      image("strutture/ICE13/Ih/bandpath.svg"),
-      caption: [Bandpath of ice Ih.],
+      image("strutture/ICE13/Ih/brillouin_zone_special_points.svg"),
+      caption: [Special points of the Brillouin zone of ice Ih.],
     )
   ],
+)
+
+// TODO Inserisci asse con le energie in meV
+#large_box(
+  grid(
+    columns: 2,
+    align: horizon,
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
+        caption: [Phonon bandpath dispersion calculation.],
+      )],
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
+        caption: [Bandpath chosen by @guptaPhononsAnomalousThermal2018.],
+      )],
+
+    [#figure(
+        image("thesis/imgs/gupta2018_fig4_H2O.png"),
+        caption: [Phonon bandpath dispersion reference, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
+      )],
+    [The bandpath calculation results in a similar representation of reference data.],
+  ),
 )
 
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
