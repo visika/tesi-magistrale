@@ -627,6 +627,14 @@ The second value is the $#ce("OH")$ *bond length*.
   ],
 ) <table:hoh-angle>
 
+#figure(
+  image(
+    "simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg",
+    width: 90%,
+  ),
+  caption: [Convergence of the $#ce("HOH")$ angle with respect to the `fmax` parameter.],
+)
+
 #let monomer_bond_length_table = csv("simulazioni/02_water/01_molecule/bond_lengths.csv")
 #figure(
   table(
