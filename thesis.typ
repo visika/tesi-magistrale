@@ -1323,7 +1323,7 @@ Fine-tuning a MACE model is composed of three steps.
   ],
 ) <fig-finetune-sample-temperature>
 
-#figure(
+#large_figure(
   grid(
     columns: 2,
     image("tutorial-fine-tuning/analysis/loss_over_epochs.svg"),
