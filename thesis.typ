@@ -512,6 +512,74 @@ The following chapters will introduce the theoretical foundations and the tools 
 
 == DFT
 == Phonons
+== Molecular dynamics
+=== The Verlet algorithm
+The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion. @alfeNotesStatisticalComputational2023
+It is a discretization of Newton's equations of motion:
+$
+  arrow(f)_i = M dot.double(arrow(r))_i = - (partial U(
+    {arrow(r)}
+  )) / (partial arrow(r)_i)
+$ <eq:verlet-newton>
+Let us consider the Taylor expansion of the position of particle $i$ at time $t$, $arrow(r)_i (t)$, computed with forward and backward differences:
+$
+  arrow(r)_i (t + delta t)
+  = arrow(r)_i (t) + dot(arrow(r))_i (
+    t
+  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+    delta t
+  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4)
+$
+$
+  arrow(r)_i (t - delta t)
+  = arrow(r)_i (t) - dot(arrow(r))_i (
+    t
+  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+    delta t
+  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4)
+$
+Summing the two equations side by side, we obtain:
+$
+  arrow(r)_i (t + delta t) + arrow(r)_i (t - delta t)
+  = 2 arrow(r)_i + dot.double(arrow(r))_i (t) (delta t)^2 + O((delta t)^4)
+$
+Consider the expression of $dot.double(arrow(r))_i$ in terms of $arrow(f)_i$ from @eq:verlet-newton, $dot.double(arrow(r))_i (t) = 1/M arrow(f)_i (t)$; substituting, we obtain:
+$
+  arrow(r)_i (t + delta t)
+  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (
+    delta t
+  )^2 + O((delta t)^4)
+$ <eq:verlet-algorithm>
+@eq:verlet-algorithm is known ad the Verlet algorithm.
+@verletComputerExperimentsClassical1967[Eq. (4)]
+
+We can re-express the equation in terms of the velocities
+$
+  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (
+    t - delta t
+  )) / (2 delta t)
+$
+$
+  - arrow(r)_i (t - delta t)
+  = arrow(v)_i (t) dot 2 delta t
+  - arrow(r)_i (t + delta t)
+$
+$
+  2 arrow(r)_i (t + delta t)
+  = 2 arrow(r)_i (t)
+  + 2 arrow(v)_i (t) delta t
+  + 1 / M arrow(f)_i (t) (delta t)^2
+  + O((delta t)^4)
+$
+$
+  arrow(r)_i (t + delta t)
+  = arrow(r)_i (t)
+  + arrow(v)_i (t) delta t
+  + 1 / (2M) arrow(f)_i (t) (delta t)^2
+  + O((delta t)^4)
+$
+This expression gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
+
 == Neural networks
 
 = Results
@@ -558,6 +626,14 @@ The second value is the $#ce("OH")$ *bond length*.
     small, medium and large refer to MACE-MP-0.
   ],
 ) <table:hoh-angle>
+
+#figure(
+  image(
+    "simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg",
+    width: 90%,
+  ),
+  caption: [Convergence of the $#ce("HOH")$ angle with respect to the `fmax` parameter.],
+)
 
 #let monomer_bond_length_table = csv("simulazioni/02_water/01_molecule/bond_lengths.csv")
 #figure(
@@ -1152,10 +1228,32 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
   ],
   [
     #figure(
-      image("strutture/ICE13/Ih/bandpath.svg"),
-      caption: [Bandpath of ice Ih.],
+      image("strutture/ICE13/Ih/brillouin_zone_special_points.svg"),
+      caption: [Special points of the Brillouin zone of ice Ih.],
     )
   ],
+)
+
+// TODO Inserisci asse con le energie in meV
+#large_box(
+  grid(
+    columns: 2,
+    align: horizon,
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
+        caption: [Phonon bandpath dispersion calculation.],
+      )],
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
+        caption: [Bandpath chosen by @guptaPhononsAnomalousThermal2018.],
+      )],
+
+    [#figure(
+        image("thesis/imgs/gupta2018_fig4_H2O.png"),
+        caption: [Phonon bandpath dispersion reference, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
+      )],
+    [The bandpath calculation results in a similar representation of reference data.],
+  ),
 )
 
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
@@ -1255,7 +1353,7 @@ Fine-tuning a MACE model is composed of three steps.
   ],
 ) <fig-finetune-sample-temperature>
 
-#figure(
+#large_figure(
   grid(
     columns: 2,
     image("tutorial-fine-tuning/analysis/loss_over_epochs.svg"),
