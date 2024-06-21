@@ -229,6 +229,156 @@ def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, plt):
 
 
 @app.cell
+def __(THz2meV, band_plot, meV2THz):
+    def plot_the_structure(ax, ph, connections, labels, fmt):
+        _dict = ph.get_band_structure_dict()
+        _frequencies = _dict["frequencies"]
+        _distances = _dict["distances"]
+        band_plot(ax, _frequencies, _distances, connections, labels, fmt=fmt)
+
+    def style_bandstructure_plot(ax):
+        ax.set_ylim(0, 5)
+        ax.grid(axis="x")
+        ax.set_ylabel("Frequency (THz)")
+        ax.spines["top"].set_visible(False)
+        
+    def make_second_axis(ax):
+        _secax = ax.secondary_yaxis("right", functions=(THz2meV, meV2THz))
+        _secax.set_ylabel("E (meV)")
+    return make_second_axis, plot_the_structure, style_bandstructure_plot
+
+
+@app.cell
+def __(
+    Line2D,
+    connections_gupta,
+    labels_gupta,
+    mace_ice13_1,
+    mace_ice13_1_s3,
+    make_second_axis,
+    mo,
+    plot_the_structure,
+    plt,
+    style_bandstructure_plot,
+):
+    # mace_ice13_1["ph"].run_band_structure(
+    #     qpoints_gupta,
+    #     path_connections=connections_gupta,
+    #     labels=labels_gupta,
+    #     is_legacy_plot=False,
+    # )
+
+    _fig, _axs = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
+    )
+
+
+    plot_the_structure(
+        _axs, mace_ice13_1["ph"], connections_gupta, labels_gupta, fmt="r--"
+    )
+    plot_the_structure(
+        _axs, mace_ice13_1_s3["ph"], connections_gupta, labels_gupta, fmt="g-"
+    )
+
+    _fig.delaxes(_axs[1])
+
+
+    style_bandstructure_plot(_axs[0])
+
+    _custom_lines = [
+        Line2D([0], [0], color="r", lw=2, ls="--"),
+        Line2D([0], [0], color="g", lw=2),
+    ]
+    _axs[0].legend(_custom_lines, ["MACE-ICE13-1 S2", "MACE-ICE13-1 S3"])
+
+
+    make_second_axis(_axs[0])
+    # _secax = _axs[0].secondary_yaxis("right", functions=(THz2meV, meV2THz))
+    # _secax.set_ylabel("E (meV)")
+
+    # _fig.savefig("Grafici/bandstructure_mace-ice13-1_s2-s3_gupta_zoom.svg")
+    mo.mpl.interactive(_fig)
+    return
+
+
+@app.cell
+def __(
+    Line2D,
+    connections_gupta,
+    labels_gupta,
+    mace_ice13_1,
+    mace_mp_0,
+    make_second_axis,
+    mo,
+    plot_the_structure,
+    plt,
+    style_bandstructure_plot,
+):
+    # mace_mp_0["ph"].run_band_structure(
+    #     qpoints_gupta,
+    #     path_connections=connections_gupta,
+    #     labels=labels_gupta,
+    #     is_legacy_plot=False,
+    # )
+
+    _fig, _axs = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
+    )
+
+    plot_the_structure(
+        _axs, mace_ice13_1["ph"], connections_gupta, labels_gupta, fmt="r-"
+    )
+    plot_the_structure(
+        _axs, mace_mp_0["ph"], connections_gupta, labels_gupta, fmt="b-"
+    )
+
+    _fig.delaxes(_axs[1])
+
+    style_bandstructure_plot(_axs[0])
+
+    _custom_lines = [
+        Line2D([0], [0], color="r", lw=2),
+        Line2D([0], [0], color="b", lw=2),
+    ]
+    _axs[0].legend(_custom_lines, ["MACE-ICE13-1", "MACE-MP-0 medium + D3"])
+
+    make_second_axis(_axs[0])
+
+    _fig.suptitle("Supercell $2 \\times 2 \\times 2$")
+
+    # _fig.savefig("Grafici/bandstructure_mace-ice13-1-mace-mp.0_s2_gupta_zoom.svg")
+    mo.mpl.interactive(_fig)
+    return
+
+
+@app.cell
+def __(mace_mp_0, make_second_axis, mo, os, plt, style_bandstructure_plot):
+    _fig, _ax = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
+    )
+    mace_mp_0["ph"].band_structure.plot(_ax)
+
+    _fig.delaxes(_ax[1])
+
+    style_bandstructure_plot(_ax[0])
+
+    plt.title("MACE-MP-0 supercell 2x2x2")
+
+    make_second_axis(_ax[0])
+
+    os.makedirs("Grafici", exist_ok=True)
+    # plt.savefig("Grafici/bandstructure_mace-mp-0_s2_gupta.svg")
+
+    mo.mpl.interactive(_fig)
+    return
+
+
+@app.cell
+def __():
+    return
+
+
+@app.cell
 def __(connections, labels, phonopy, qpoints):
     mace_mp_0 = {}
     mace_mp_0["basepath"] = "MACE-MP-0-d3-medium/ICE-Ih/supercell=2/"

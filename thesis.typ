@@ -1243,12 +1243,12 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
     [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg"),
         caption: [
-          The full bandstructure of ice Ih, computed using MACE-ICE13-1.
+          The bandstructure of ice Ih, computed using MACE-ICE13-1 and a $3 times 3 times 3$ supercell.
         ],
       )],
     [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
-        caption: [Bandpath chosen by @guptaPhononsAnomalousThermal2018.],
+        caption: [The bandpath chosen by @guptaPhononsAnomalousThermal2018.],
       )],
 
     [#figure(
@@ -1265,8 +1265,34 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 )
 
 The bandstructure calculations result in a approximate reproduction of reference data, as can be observed comparing @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta.
+Frequencies are significantly higher than reference; the source of this discrepancy is not clear, and might be due to improper volume optimization of our geometry or a built-in issue of the calculator; indeed, a compression of the material results in higher overall frequencies.
+This issue has yet to be investigated at the time of writing.
+Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
 
-#image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
+As reference @guptaPhononsAnomalousThermal2018 employed a $2 times 2 times 2$ supercell for its calculations, we tested the convergence of calculations with respect to a higher supercell.
+Limitation of resources allowed the calculation of the frequencies using at most $3 times 3 times 3$ supercell.
+The comparison of the results with the different supercells is shown in @fig:phonons-bandstructure-ice-ih-mace-ice13-1-compare-s2-s3.
+
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 10pt,
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s2-s3_gupta_zoom.svg"),
+        caption: [Comparison of the bandstructures computed with $2 times 2 times 2$ and $3 times 3 times 3$ supercells.],
+      ) <fig:phonons-bandstructure-ice-ih-mace-ice13-1-compare-s2-s3>],
+    [
+      #let original = read("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-mp-0_s2_gupta.svg")
+      #let changed = original.replace(
+        "#ff0000",
+        blue.to-hex(),
+      )
+      #figure(
+        image.decode(changed),
+        caption: [Bandstructure of ice Ih computed with MACE-MP-0.],
+      ) <fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom>],
+  ),
+)
 
 === Phonons DOS
 
