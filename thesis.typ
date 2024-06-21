@@ -1235,14 +1235,16 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
   ],
 )
 
-// TODO Inserisci asse con le energie in meV
 #large_box(
   grid(
     columns: 2,
     align: horizon,
+    gutter: 10pt,
     [#figure(
-        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
-        caption: [Phonon bandpath dispersion calculation.],
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg"),
+        caption: [
+          The full bandstructure of ice Ih, computed using MACE-ICE13-1.
+        ],
       )],
     [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
@@ -1250,12 +1252,19 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
       )],
 
     [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
+        caption: [
+          Phonon bandstructure of ice Ih, computed using MACE-ICE13-1.
+        ],
+      ) <fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom>],
+    [#figure(
         image("thesis/imgs/gupta2018_fig4_H2O.png"),
         caption: [Phonon bandpath dispersion reference, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
-      )],
-    [The bandpath calculation results in a similar representation of reference data.],
+      ) <fig:phonons-bandstructure-ice-ih-gupta>],
   ),
 )
+
+The bandstructure calculations result in a approximate reproduction of reference data, as can be observed comparing @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta.
 
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s2vss3_band_structure_zoom.svg")
 

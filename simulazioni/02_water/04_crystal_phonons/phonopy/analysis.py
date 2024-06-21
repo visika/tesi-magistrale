@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.20"
+__generated_with = "0.6.22"
 app = marimo.App()
 
 
@@ -170,19 +170,34 @@ def __(
 
 
 @app.cell
-def __(connections_gupta, labels_gupta, mace_ice13_1_s3, qpoints_gupta):
-    mace_ice13_1_s3["ph"].run_band_structure(
-        qpoints_gupta,
-        path_connections=connections_gupta,
-        labels=labels_gupta,
-        is_legacy_plot=False,
+def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, os, plt):
+    _fig, _ax = plt.subplots(
+        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
-    mace_ice13_1_s3["ph"].plot_band_structure().gca()
+    mace_ice13_1_s3["ph"].band_structure.plot(_ax)
+
+    _ax[0].set_ylim(bottom=0)
+    _ax[0].grid(axis="x")
+    _ax[0].set_ylabel("Frequency (THz)")
+
+    _fig.delaxes(_ax[1])
+    plt.title("MACE-ICE13-1 supercell 3x3x3")
+
+    # Remove top frame
+    _ax[0].spines["top"].set_visible(False)
+
+    _secax = _ax[0].secondary_yaxis("right", functions=(THz2meV, meV2THz))
+    _secax.set_ylabel("E (meV)")
+
+    os.makedirs("Grafici", exist_ok=True)
+    # plt.savefig("Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg")
+
+    mo.mpl.interactive(_fig)
     return
 
 
 @app.cell
-def __(mace_ice13_1_s3, mo, plt):
+def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, plt):
     _fig, _ax = plt.subplots(
         ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
@@ -192,15 +207,20 @@ def __(mace_ice13_1_s3, mo, plt):
     _ax[0].grid(axis="x")
     _ax[0].set_ylabel("Frequency (THz)")
 
+
     _fig.delaxes(_ax[1])
     plt.title("MACE-ICE13-1 supercell 3x3x3")
 
     # Remove top frame
     _ax[0].spines["top"].set_visible(False)
-    _ax[0].spines["left"].set_visible(False)
-    _ax[0].spines["right"].set_visible(False)
+    # _ax[0].spines["left"].set_visible(False)
+    # _ax[0].spines["right"].set_visible(False)
+
+    _secax = _ax[0].secondary_yaxis("right", functions=(THz2meV, meV2THz))
+    _secax.set_ylabel("E (meV)")
 
     import os
+
     os.makedirs("Grafici", exist_ok=True)
     # plt.savefig("Grafici/bandstructure_mace-ice13-1_s3_gupta.svg")
 
@@ -237,18 +257,24 @@ def __(connections, labels, phonopy, qpoints):
 @app.cell
 def __():
     # enhance below with https://docs.marimo.io/guides/performance.html
-    return
+    import functools
+    return functools,
 
 
 @app.cell
-def __(phonopy):
+def __(functools, phonopy):
     # WARNING Expensive, run just once
     mace_ice13_1_s3 = {}
     mace_ice13_1_s3["basepath"] = "MACE-ICE13-1/ICE-Ih/supercell=3/"
-    mace_ice13_1_s3["ph"] = phonopy.load(
+
+    @functools.cache
+    def phonopy_load_cached(input):
+        return phonopy.load(input)
+
+    mace_ice13_1_s3["ph"] = phonopy_load_cached(
         mace_ice13_1_s3["basepath"] + "phonopy_params.yaml"
     )
-    return mace_ice13_1_s3,
+    return mace_ice13_1_s3, phonopy_load_cached
 
 
 @app.cell
