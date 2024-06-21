@@ -1120,7 +1120,8 @@ As MACE-ICE13-1 is trained on revPBE-D3, its predicted binding energy lies in th
 The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
 The correct estimate of the lattice energies, absolute and relative, is of great interest for water and molecular crystals in general.
 
-The best values for the energies are condiered to be the @dmc calculations.
+The best values for the energies are consiered to be the @dmc calculations.
+@guptaPhononsAnomalousThermal2018 found that the revPBE functional gives the closest structure and dynamical properties of ice Ih.
 
 #figure(
   image("thesis/imgs/dellapia2022_f1.jpeg", width: 100%),
