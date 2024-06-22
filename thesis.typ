@@ -1159,6 +1159,9 @@ to correctly reproduce the computational setup.
 The MACE-ICE13-1 model achieves a @mae with respect to DMC of $0.90 "kJ/mol"$.
 @xc functionals are generally classified as good if their @mae is ≲4 kJ/mol (≲2 kJ/mol) for the absolute (relative) lattice energy. @dellapiaDMCICE13AmbientHigh2022[§III]
 
+A possible improvement in the quality of calculations could be investigated employing bigger supercells for the calculation of lattice energies.
+We could expect a different yield for the #glspl("mlp") as force field potentials are particularly suitable for dealing with a large number of particles, and the Ewald summation might be relevant for the quality of results in the present setting.
+
 #large_figure(
   grid(
     columns: 2,
