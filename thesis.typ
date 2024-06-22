@@ -1151,7 +1151,7 @@ to correctly reproduce the computational setup.
 #figure(
   image("simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg"),
   caption: [
-    Performance of MACE for the 13 ice polymorphs considered on the absolute lattice energy, compared with reference models. @dellapiaDMCICE13AmbientHigh2022
+    Performance of MACE for the 13 ice polymorphs considered on the absolute lattice energy, compared with reference models from @dellapiaDMCICE13AmbientHigh2022.
   ],
 )
 
