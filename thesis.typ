@@ -144,6 +144,7 @@
     (key: "pes", short: "PES", long: "Potential Energy Surface"),
     (key: "qti", short: "QTI", long: "Quantum Thermodynamic Integration"),
     (key: "vasp", short: "VASP", long: "Vienna Ab initio Simulation Package"),
+    (key: "xc", short: "XC", long: "Exchange–Correlation"),
   ),
   show-all: true,
 )
@@ -1156,6 +1157,7 @@ to correctly reproduce the computational setup.
 )
 
 The MACE-ICE13-1 model achieves a @mae with respect to DMC of $0.90 "kJ/mol"$.
+@xc functionals are generally classified as good if their @mae is ≲4 kJ/mol (≲2 kJ/mol) for the absolute (relative) lattice energy. @dellapiaDMCICE13AmbientHigh2022[§III]
 
 #large_figure(
   grid(
