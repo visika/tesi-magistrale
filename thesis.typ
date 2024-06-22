@@ -2,6 +2,7 @@
 #import "@preview/glossarium:0.4.1": make-glossary, print-glossary, gls, glspl
 #import "@preview/hydra:0.4.0": hydra
 #import "@preview/fletcher:0.4.5" as fletcher: diagram, node, edge
+#import "@preview/tablem:0.1.0": tablem
 #show: make-glossary
 
 // For glossarium links
@@ -1296,6 +1297,41 @@ The comparison of the results with the different supercells is shown in @fig:pho
         image.decode(changed),
         caption: [Bandstructure of ice Ih computed with MACE-MP-0.],
       ) <fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom>],
+  ),
+)
+
+==== Timing
+
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 5pt,
+    align: horizon,
+    figure(
+      tablem(
+        ignore-second-row: false,
+        [
+          |supercell|device|optimization time|forces time|
+          |1|cuda|45s|8s|
+          |2|cuda|44s|50s|
+          |3|cuda|44s|21s|
+          |4|cpu|5m 23s|1h 47m 7s|
+        ],
+      ),
+      caption: [Execution times with phonopy.],
+    ),
+    figure(
+      tablem(
+        ignore-second-row: false,
+        [
+          |supercell|time|device|
+          |2|1m 30s|cuda|
+          |4|fail (out of memory)|cuda|
+          |4|7h 32m| cpu|
+        ],
+      ),
+      caption: [Execution times with Phonons by @ase.],
+    ),
   ),
 )
 
