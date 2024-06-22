@@ -1337,6 +1337,14 @@ The comparison of the results with the different supercells is shown in @fig:pho
 
 === Phonons DOS
 
+#figure(
+  image("thesis/imgs/holzapfel2021_fig21.png"),
+  caption: [
+    Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021.
+    Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
+  ],
+)
+
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg")
 
 === Heat capacity
