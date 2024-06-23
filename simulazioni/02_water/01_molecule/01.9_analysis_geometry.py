@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.20"
+__generated_with = "0.6.22"
 app = marimo.App()
 
 
@@ -154,6 +154,8 @@ def __(get_results, plt, read):
     plt.xlabel("fmax")
     plt.ylabel("H-O-H angle")
     plt.title("MACE-MP-0 large")
+
+    plt.grid(alpha=0.5)
 
     # remove frames
     for spine in plt.gca().spines.values():
