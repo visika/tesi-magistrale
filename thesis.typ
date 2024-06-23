@@ -1241,6 +1241,11 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
   ],
 )
 
+The bandpath is chosen following the reference article @guptaPhononsAnomalousThermal2018, that is sampling the Brillouin zone passing through critical points $Gamma, A, K, H, M, L, Gamma$ by means of straight line segments.
+See @fig:bandpath-gupta for the graphical representation of the bandpath.
+The line segments are sampled with a number of points, named q-points.
+The number of q-points in each path including end points is chosen as 101.
+
 #large_box(
   grid(
     columns: 2,
@@ -1255,7 +1260,7 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
     [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
         caption: [The bandpath chosen by @guptaPhononsAnomalousThermal2018.],
-      )],
+      ) <fig:bandpath-gupta>],
 
     [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
