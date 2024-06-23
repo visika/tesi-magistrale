@@ -1371,11 +1371,17 @@ compared to reference data.
 === Heat capacity
 
 @flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
-@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih.
+@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; that analysis is reproduced as reference data in @fig:heat-capacity-mace-holzapfel.
 
 In the quasi-harmonic approximation the lattice vibrations are assumed to be harmonic but with frequencies dependent upon the volume. @leadbetterThermodynamicVibrationalProperties1965
 
-#image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg")
+#figure(
+  image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg"),
+  caption: [
+    Heat capacity of ice Ih.
+    Comparison of results from simulation with different calculators (S3 indicates supercell 3x3x3, otherwise supercell is 2x2x2) and reference data @holzapfelCoherentThermodynamicModel2021.
+  ],
+) <fig:heat-capacity-mace-holzapfel>
 
 == RDF
 
