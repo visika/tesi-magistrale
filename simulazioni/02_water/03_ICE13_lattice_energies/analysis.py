@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.19"
+__generated_with = "0.6.22"
 app = marimo.App()
 
 
@@ -229,7 +229,7 @@ def __(pl):
     return df_rev_pbe_d3, rev_pbe_d3_kjmol
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(
     df_dmc,
     df_large_d,
@@ -320,6 +320,7 @@ def __(
     plt.grid(axis="y")
     plt.legend(bbox_to_anchor=(0.5, -0.12), ncol=3, loc="upper center")
     plt.title("Absolute lattice energy")
+    plt.ylim(bottom=-80-1)
 
     # Remove frames
     ax.spines["top"].set_visible(False)
@@ -586,10 +587,10 @@ def __(df_large_d, df_medium_d, df_pbe_d3, mo, plt):
 
     plt.axline((0, 0), slope=1, linestyle="--")
 
-    plt.xlim(-80, -60)
-    plt.ylim(-80, -60)
+    plt.xlim(-80, -60+0.01)
+    plt.ylim(-80-0.1, -60)
 
-    # plt.grid()
+    plt.grid()
 
     # Remove all the frames
     _ax = plt.gca()
@@ -625,10 +626,10 @@ def __(df_mace_ice13_1, df_rev_pbe_d3, mo, plt):
 
     plt.axline((0, 0), slope=1, linestyle="--")
 
-    plt.xlim(-60, -54)
-    plt.ylim(-60, -54)
+    plt.xlim(-60, -54+0.01)
+    plt.ylim(-60-0.01, -54)
 
-    # plt.grid()
+    plt.grid()
 
     # Remove all the frames
     _ax = plt.gca()
