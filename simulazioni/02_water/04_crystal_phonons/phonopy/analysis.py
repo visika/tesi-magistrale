@@ -51,6 +51,12 @@ def __():
 
 
 @app.cell
+def __():
+    import os
+    return os,
+
+
+@app.cell
 def __(read):
     atoms = read(
         "/home/mariano/Progetti/tesi-magistrale/strutture/ICE13/Ih/POSCAR"
@@ -58,6 +64,33 @@ def __(read):
     # view(atoms)
     bandpath = atoms.cell.bandpath()
     return atoms, bandpath
+
+
+@app.cell
+def __(mo, read):
+    atomini = read(
+        "/home/mariano/Progetti/tesi-magistrale/strutture/ICE13/Ih/POSCAR"
+    )
+    mo.mpl.interactive(atomini.cell.bandpath().plot())
+    return atomini,
+
+
+@app.cell
+def __(atoms):
+    atoms.cell
+    return
+
+
+@app.cell
+def __(atoms):
+    atoms.cell.volume
+    return
+
+
+@app.cell
+def __(atoms):
+    atoms.cell.cellpar()
+    return
 
 
 @app.cell
@@ -146,8 +179,10 @@ def __(mo):
 @app.cell
 def __(atoms, mo):
     labels_gupta = ["G", "A", "K", "H", "M", "L", "G"]
-    bandpath_gupta = atoms.cell.bandpath(labels_gupta)
-    mo.mpl.interactive(bandpath_gupta.plot())
+    bandpath_gupta = atoms.cell.bandpath(labels_gupta, density=0)
+    _ax = bandpath_gupta.plot()
+    # _ax.figure.savefig("Grafici/bandpath_gupta.svg")
+    mo.mpl.interactive(_ax)
     return bandpath_gupta, labels_gupta
 
 
@@ -170,7 +205,38 @@ def __(
 
 
 @app.cell
-def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, os, plt):
+def __(THz2meV, band_plot, meV2THz):
+    def plot_the_structure(ax, ph, connections, labels, fmt):
+        _dict = ph.get_band_structure_dict()
+        _frequencies = _dict["frequencies"]
+        _distances = _dict["distances"]
+        band_plot(ax, _frequencies, _distances, connections, labels, fmt=fmt)
+
+    def style_bandstructure_plot(ax):
+        ax.set_ylim(0, 5)
+        ax.grid(axis="x")
+        ax.set_ylabel("Frequency (THz)")
+        ax.spines["top"].set_visible(False)
+
+    def make_second_axis(ax):
+        _secax = ax.secondary_yaxis("right", functions=(THz2meV, meV2THz))
+        _secax.set_ylabel("E (meV)")
+    return make_second_axis, plot_the_structure, style_bandstructure_plot
+
+
+@app.cell
+def __(connections_gupta, labels_gupta, mace_ice13_1_s3, qpoints_gupta):
+    mace_ice13_1_s3["ph"].run_band_structure(
+        qpoints_gupta,
+        path_connections=connections_gupta,
+        labels=labels_gupta,
+        is_legacy_plot=False,
+    )
+    return
+
+
+@app.cell
+def __(mace_ice13_1_s3, make_second_axis, mo, os, plt):
     _fig, _ax = plt.subplots(
         ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
@@ -186,8 +252,7 @@ def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, os, plt):
     # Remove top frame
     _ax[0].spines["top"].set_visible(False)
 
-    _secax = _ax[0].secondary_yaxis("right", functions=(THz2meV, meV2THz))
-    _secax.set_ylabel("E (meV)")
+    make_second_axis(_ax[0])
 
     os.makedirs("Grafici", exist_ok=True)
     # plt.savefig("Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg")
@@ -197,7 +262,7 @@ def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, os, plt):
 
 
 @app.cell
-def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, plt):
+def __(mace_ice13_1_s3, make_second_axis, mo, os, plt):
     _fig, _ax = plt.subplots(
         ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
@@ -216,36 +281,24 @@ def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, plt):
     # _ax[0].spines["left"].set_visible(False)
     # _ax[0].spines["right"].set_visible(False)
 
-    _secax = _ax[0].secondary_yaxis("right", functions=(THz2meV, meV2THz))
-    _secax.set_ylabel("E (meV)")
-
-    import os
+    make_second_axis(_ax[0])
 
     os.makedirs("Grafici", exist_ok=True)
     # plt.savefig("Grafici/bandstructure_mace-ice13-1_s3_gupta.svg")
 
     mo.mpl.interactive(_fig)
-    return os,
+    return
 
 
 @app.cell
-def __(THz2meV, band_plot, meV2THz):
-    def plot_the_structure(ax, ph, connections, labels, fmt):
-        _dict = ph.get_band_structure_dict()
-        _frequencies = _dict["frequencies"]
-        _distances = _dict["distances"]
-        band_plot(ax, _frequencies, _distances, connections, labels, fmt=fmt)
-
-    def style_bandstructure_plot(ax):
-        ax.set_ylim(0, 5)
-        ax.grid(axis="x")
-        ax.set_ylabel("Frequency (THz)")
-        ax.spines["top"].set_visible(False)
-        
-    def make_second_axis(ax):
-        _secax = ax.secondary_yaxis("right", functions=(THz2meV, meV2THz))
-        _secax.set_ylabel("E (meV)")
-    return make_second_axis, plot_the_structure, style_bandstructure_plot
+def __(connections_gupta, labels_gupta, mace_ice13_1, qpoints_gupta):
+    mace_ice13_1["ph"].run_band_structure(
+        qpoints_gupta,
+        path_connections=connections_gupta,
+        labels=labels_gupta,
+        is_legacy_plot=False,
+    )
+    return
 
 
 @app.cell
@@ -261,17 +314,9 @@ def __(
     plt,
     style_bandstructure_plot,
 ):
-    # mace_ice13_1["ph"].run_band_structure(
-    #     qpoints_gupta,
-    #     path_connections=connections_gupta,
-    #     labels=labels_gupta,
-    #     is_legacy_plot=False,
-    # )
-
     _fig, _axs = plt.subplots(
         ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
-
 
     plot_the_structure(
         _axs, mace_ice13_1["ph"], connections_gupta, labels_gupta, fmt="r--"
@@ -302,6 +347,17 @@ def __(
 
 
 @app.cell
+def __(connections_gupta, labels_gupta, mace_mp_0, qpoints_gupta):
+    mace_mp_0["ph"].run_band_structure(
+        qpoints_gupta,
+        path_connections=connections_gupta,
+        labels=labels_gupta,
+        is_legacy_plot=False,
+    )
+    return
+
+
+@app.cell
 def __(
     Line2D,
     connections_gupta,
@@ -314,13 +370,6 @@ def __(
     plt,
     style_bandstructure_plot,
 ):
-    # mace_mp_0["ph"].run_band_structure(
-    #     qpoints_gupta,
-    #     path_connections=connections_gupta,
-    #     labels=labels_gupta,
-    #     is_legacy_plot=False,
-    # )
-
     _fig, _axs = plt.subplots(
         ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
     )
@@ -428,73 +477,6 @@ def __(functools, phonopy):
 
 
 @app.cell
-def __(mo):
-    mo.md("## Plot di tutte le bande trovate")
-    return
-
-
-@app.cell
-def __(connections, labels, mace_ice13_1_s3, qpoints):
-    mace_ice13_1_s3["ph"].run_band_structure(
-        qpoints, path_connections=connections, labels=labels, is_legacy_plot=False
-    )
-    mace_ice13_1_s3["ph"].plot_band_structure().gca()
-    # plt.savefig("mace_ice13_1_s3_band_structure_complete.svg")
-    return
-
-
-@app.cell
-def __(connections_gupta, labels_gupta, mace_ice13_1_s3, qpoints_gupta):
-    mace_ice13_1_s3["ph"].run_band_structure(
-        qpoints_gupta,
-        path_connections=connections_gupta,
-        labels=labels_gupta,
-        is_legacy_plot=False,
-    )
-    mace_ice13_1_s3["ph"].plot_band_structure().gca()
-    return
-
-
-@app.cell
-def __(mo):
-    mo.md("## Zoom sulle bande più basse")
-    return
-
-
-@app.cell
-def __(mace_ice13_1, plt):
-    _fig, _ax = plt.subplots(
-        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
-    )
-    mace_ice13_1["ph"].band_structure.plot(_ax)
-
-    _ax[0].set_ylim(0, 5)
-    _ax[0].grid(axis="x")
-    _ax[0].set_ylabel("Frequency (THz)")
-
-    _fig.delaxes(_ax[1])
-    _fig
-    return
-
-
-@app.cell
-def __(mace_ice13_1_s3, plt):
-    _fig, _ax = plt.subplots(
-        ncols=2, nrows=1, layout="constrained", width_ratios=[9999, 1]
-    )
-    mace_ice13_1_s3["ph"].band_structure.plot(_ax)
-
-    _ax[0].set_ylim(0, 5)
-    _ax[0].grid(axis="x")
-    _ax[0].set_ylabel("Frequency (THz)")
-
-    _fig.delaxes(_ax[1])
-    plt.title("MACE-ICE13-1 supercell 3x3x3")
-    _fig
-    return
-
-
-@app.cell
 def __(band_plot, connections, labels, mace_ice13_1, mace_mp_0, plt):
     n = len(
         [x for x in mace_ice13_1["ph"]._band_structure.path_connections if not x]
@@ -586,6 +568,24 @@ def __(mo):
 
 
 @app.cell
+def __():
+    def THz2K(THz):
+        return THz * 47.9924307337
+
+
+    def K2THz(K):
+        return K * 0.0208366191233
+        
+    def THz2meV(THz):
+        return THz * 4.13566769692
+
+
+    def meV2THz(meV):
+        return meV * 0.241798924208
+    return K2THz, THz2K, THz2meV, meV2THz
+
+
+@app.cell
 def __(mesh, mo):
     mo.md(
         f"""
@@ -634,7 +634,7 @@ def __(mace_ice13_1, mace_ice13_1_s3, mace_mp_0, mesh):
 
 
 @app.cell
-def __(mace_ice13_1_s3, mace_mp_0, mesh, plt):
+def __(K2THz, THz2K, mace_ice13_1_s3, mace_mp_0, mesh, plt):
     fig, ax = plt.subplots(layout="constrained")
 
     # ax.plot(
@@ -669,21 +669,12 @@ def __(mace_ice13_1_s3, mace_mp_0, mesh, plt):
     ax.set_ylabel("DOS (1/THz)")
     ax.set_title(f"{mesh.value}x{mesh.value}x{mesh.value} mesh")
 
-
-    def THz2K(THz):
-        return THz * 47.9924307337
-
-
-    def K2THz(K):
-        return K * 0.0208366191233
-
-
     secax = ax.secondary_xaxis("top", functions=(THz2K, K2THz))
     secax.set_xlabel("E (K)")
     plt.grid()
     plt.legend(loc="upper left")
     ax
-    return K2THz, THz2K, ax, fig, secax
+    return ax, fig, secax
 
 
 @app.cell
@@ -711,7 +702,7 @@ def __(mo):
 
 
 @app.cell
-def __(mace_ice13_1_s3, plt):
+def __(THz2meV, mace_ice13_1_s3, meV2THz, mo, plt):
     _mesh = 32
     mace_ice13_1_s3["ph"].run_mesh([_mesh] * 3)
 
@@ -739,15 +730,6 @@ def __(mace_ice13_1_s3, plt):
     _ax.set_ylabel("DOS (1/THz)")
     _ax.set_title(f"{_mesh}x{_mesh}x{_mesh} mesh")
 
-
-    def THz2meV(THz):
-        return THz * 4.13566769692
-
-
-    def meV2THz(meV):
-        return meV * 0.241798924208
-
-
     _secax = _ax.secondary_xaxis("top", functions=(THz2meV, meV2THz))
     _secax.set_xlabel("E (meV)")
     plt.grid()
@@ -755,8 +737,51 @@ def __(mace_ice13_1_s3, plt):
 
     # _fig.savefig("mace_ice13_1_s3_dos.svg")
 
-    _ax
-    return THz2meV, meV2THz
+    mo.mpl.interactive(_ax)
+    return
+
+
+@app.cell
+def __(K2THz, THz2K, mace_ice13_1_s3, mo, plt):
+    _mesh = 32
+    # mace_ice13_1_s3["ph"].run_mesh([_mesh] * 3)
+
+    # mace_ice13_1_s3["ph"].run_total_dos(
+    #     sigma=0.05,
+    #     freq_min=0,
+    #     freq_max=12,
+    #     freq_pitch=None,
+    #     use_tetrahedron_method=False,
+    # )
+
+    _fig, _ax = plt.subplots(layout="constrained")
+
+    _ax.plot(
+        mace_ice13_1_s3["ph"].get_total_dos_dict()["frequency_points"],
+        mace_ice13_1_s3["ph"].get_total_dos_dict()["total_dos"],
+        color="green",
+        label=f"MACE-ICE13-1 S=3 \n {_mesh}x{_mesh}x{_mesh} mesh",
+        zorder=20,
+    )
+
+    _ax.set_ylim(bottom=0)
+    _ax.set_xlim(left=0)
+    _ax.set_xlabel("Freq (THz)")
+    _ax.set_ylabel("DOS (1/THz)")
+
+    # Hide the right frame
+    _ax.spines["right"].set_visible(False)
+    _ax.spines["left"].set_visible(False)
+
+    _secax = _ax.secondary_xaxis("top", functions=(THz2K, K2THz))
+    _secax.set_xlabel("T (K)")
+    plt.grid(axis="x")
+    plt.legend()
+
+    # _fig.savefig("mace_ice13_1_s3_dos_tmp.svg")
+
+    mo.mpl.interactive(_ax)
+    return
 
 
 @app.cell(disabled=True)
