@@ -1342,13 +1342,29 @@ The comparison of the results with the different supercells is shown in @fig:pho
 
 === Phonons DOS
 
-#figure(
-  image("thesis/imgs/holzapfel2021_fig21.png"),
-  caption: [
-    Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021.
-    Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
-  ],
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 5pt,
+    figure(
+      image("thesis/imgs/holzapfel2021_fig21.png"),
+      caption: [
+        Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021.
+        Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
+      ],
+    ),
+    figure(
+      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/dos_mace-ice13-1_s3_mesh=32_zoom.svg"),
+      caption: [
+        Calculated phonons DOS, using MACE-ICE13-1 and smearing width $sigma=0.05$.
+      ],
+    ),
+  ),
 )
+
+As anticipated in the analysis of the bandstructure,
+frequencies calculated with MACE-ICE13-1 are shifted toward higher values,
+compared to reference data.
 
 #image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg")
 
