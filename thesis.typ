@@ -146,6 +146,7 @@
     (key: "qti", short: "QTI", long: "Quantum Thermodynamic Integration"),
     (key: "vasp", short: "VASP", long: "Vienna Ab initio Simulation Package"),
     (key: "xc", short: "XC", long: "Exchange–Correlation"),
+    (key: "rdf", short: "RDF", long: "Radial Distribution Function"),
   ),
   show-all: true,
 )
@@ -1421,11 +1422,35 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
   ],
 ) <fig:heat-capacity-mace-holzapfel>
 
-== RDF
+== MD
 
-@md
+=== RDF
 
-#image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
+Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
+] were performed under varying external conditions.
+A thermostat couples the system to an external heath bath.
+The @rdf of the thermalized states is shown in @fig:rdf, compared with reference data @skinnerBenchmarkOxygenoxygenPairdistribution2013 from X-ray diffraction experiment.
+The simulated phisical time shall not be less than 100ps, to allow recombination of bonds in the liquid.
+Constant NPT simulations should be more appropriate for the computation of physical properties, but they are missing at the present time.
+Further analysis can also be made on the study of the diffusion coefficient and the density of the system.
+
+#figure(
+  image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg"),
+  caption: [Radial distribution function of oxygens in liquid water.],
+) <fig:rdf>
+
+#large_figure(
+  grid(
+    columns: 2,
+    image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-mp-0_NVT_T=297.15_t=5ps.svg"),
+    image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_nbins=40.svg"),
+  ),
+  caption: [Comparison of the #glspl("rdf") obtained from @md simulations of liquid water using MACE-MP-0 and MACE-ICE13-1.],
+)
+
+#figure(
+  image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png"),
+)
 
 = Tools
 Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
