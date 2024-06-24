@@ -512,8 +512,46 @@ The following chapters will introduce the theoretical foundations and the tools 
 
 = Theory
 
-== DFT
 == Phonons
+$
+  omega^2 arrow(epsilon) = D(arrow(q)) dot epsilon
+$
+$
+  F(V,T) = U_0(V) + k_B T sum_(s=1)^3 sum_(arrow(q)) ln (
+  planck.reduce omega_(arrow(q),s)(V)) / ( k_B T
+  )
+$
+=== The small displacement method
+$
+  (f_i^x, f_i^y, f_i^z)
+  = -Phi(arrow(r)_i^0) dot (u, 0, 0)
+  = -u vec(phi_(0i)^(x x), phi_(0i)^(y x), phi_(0i)^(z x))
+$
+
+// TODO finisci teoria
+
+$
+  D(arrow(q))
+  = 1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0) Phi_("SC")(arrow(r)_j^0)
+$
+== DFT
+Kohn-Sham equations:
+$
+  [-1 / 2 nabla^2 + v_"KS" [rho] (arrow(r))] psi_n (arrow(r))
+  = epsilon_n psi_n (arrow(r))
+$
+The aim is to find the lowest $N/2$ eigenstates of the Hamiltonian.
+These are of the type:
+$
+  psi_n = sum_(i=1)^L c_i^n phi_i
+$
+The energy can be obtained from:
+$
+  E = 2 sum_(n=1)^(N / 2) epsilon_n - 1 / 2 integral_V (rho (
+    arrow(r)'
+  ) rho(arrow(r))) / (|arrow(r) - arrow(r)'|) dif^3 arrow(r)' dif^3 arrow(r)
+  - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc"
+$
 == Molecular dynamics
 === The Verlet algorithm
 The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion. @alfeNotesStatisticalComputational2023
