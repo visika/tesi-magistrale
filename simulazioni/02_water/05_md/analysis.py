@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.5.1"
+__generated_with = "0.6.22"
 app = marimo.App(app_title="Analisi RDF")
 
 
@@ -849,6 +849,9 @@ def __(analysis, df, mo, np, plt, rmax, trajectory_297K):
     plt.ylabel("$g_\mathrm{OO}(r)$")
     plt.grid(ls="--", alpha=0.5)
 
+    plt.gca().spines["right"].set_visible(False)
+    plt.gca().spines["top"].set_visible(False)
+
     # Set xlim to rmax
     plt.xlim(0, rmax)
     plt.ylim(top=3.0, bottom=-0.5)
@@ -963,9 +966,10 @@ def __(
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(
     df,
+    mo,
     plt,
     rdf_297K_MP0_no_disp,
     rdf_297K_MP0_no_disp_average,
@@ -973,6 +977,12 @@ def __(
     rmax,
 ):
     plt.plot(df["r"], df["g_OO(r)"], label="Experiment", color="tab:blue")
+    plt.fill_between(
+        df["r"],
+        df["g_OO(r)"] - df["error"],
+        df["g_OO(r)"] + df["error"],
+        alpha=0.3,
+    )
     # Plot the RDF of the simulation with standard deviation
     _asse_x = rdf_297K_MP0_no_disp[0][1]
     plt.plot(
@@ -993,6 +1003,10 @@ def __(
     plt.ylabel("$g_\mathrm{OO}(r)$")
     plt.grid(ls="--", alpha=0.5)
 
+    # Remove the right frame
+    plt.gca().spines["right"].set_visible(False)
+    plt.gca().spines["top"].set_visible(False)
+
     # Set xlim to rmax
     plt.xlim(0, rmax)
     plt.legend()
@@ -1000,8 +1014,8 @@ def __(
         "Radial Distribution Function of liquid water\nLangevin NVT MD, T=297.15 K, simulation time: 5 ps"
     )
 
-    # plt.savefig("rdf.png")
-    plt.gca()
+    plt.savefig("Grafici/rdf_oo_mace-mp-0_NVT_T=297.15_t=5ps.svg")
+    mo.mpl.interactive(plt.gca())
     return
 
 
