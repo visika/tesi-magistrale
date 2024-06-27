@@ -644,6 +644,14 @@ The first task is the optimization of the geometry and calculation of vibrationa
 We studied the relaxation of the geometry of a single water molecule, also referred to as the monomer, and compared the results with physical values of the gas phase molecule. The optimization is tackled with two concurring methods:
 static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
+#figure(
+  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 90%),
+  caption: [
+    Render of the geometry of the water molecule,
+    optimized using MACE-ICE13-1.
+  ],
+)
+
 === Geometry optimization
 
 To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in literature.
