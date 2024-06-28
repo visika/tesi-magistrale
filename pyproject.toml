@@ -18,6 +18,7 @@ polars = "^0.20.13"
 jupyterlab = "^4.1.6"
 tornado = "^6.4"
 mdanalysis = "^2.7.0"
+pint = "^0.24.1"
 
 [build-system]
 requires = ["poetry-core"]
