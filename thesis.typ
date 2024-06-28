@@ -1410,7 +1410,7 @@ compared to reference data.
 === Heat capacity
 
 @flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
-@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; that analysis is reproduced as reference data in @fig:heat-capacity-mace-holzapfel.
+@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; the analysis of heat capacity considering harmonic terms is reproduced along with reference data in @fig:heat-capacity-mace-holzapfel.
 
 In the quasi-harmonic approximation the lattice vibrations are assumed to be harmonic but with frequencies dependent upon the volume. @leadbetterThermodynamicVibrationalProperties1965
 
