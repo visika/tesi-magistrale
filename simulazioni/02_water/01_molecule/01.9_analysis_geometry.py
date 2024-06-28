@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.22"
+__generated_with = "0.6.20"
 app = marimo.App()
 
 
@@ -144,15 +144,15 @@ def __(get_results, plt, read):
         )["angle"]
     print(angoli)
 
-    plt.plot([float(e) for e in angoli.keys()], angoli.values())
+    plt.plot([float(e) for e in angoli.keys()], angoli.values(), "o-")
 
     # Logscale
     plt.xscale("log")
 
     plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
 
-    plt.xlabel("fmax")
-    plt.ylabel("H-O-H angle")
+    plt.xlabel("fmax (au)")
+    plt.ylabel("H-O-H angle (°)")
     plt.title("MACE-MP-0 large")
 
     plt.grid(alpha=0.5)
