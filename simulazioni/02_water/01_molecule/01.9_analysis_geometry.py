@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.20"
+__generated_with = "0.6.23"
 app = marimo.App()
 
 
@@ -151,7 +151,7 @@ def __(get_results, plt, read):
 
     plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
 
-    plt.xlabel("fmax (au)")
+    plt.xlabel("fmax (eV/Å)")
     plt.ylabel("H-O-H angle (°)")
     plt.title("MACE-MP-0 large")
 
