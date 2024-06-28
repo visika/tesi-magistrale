@@ -254,6 +254,19 @@
 #set par(justify: true)
 #set math.equation(numbering: "(1)")
 
+#let large_figure(content, caption: none) = figure(
+  box(width: 125%, content),
+  caption: caption,
+)
+
+#let large_box(content) = align(
+  center,
+  box(
+    width: 125%,
+    content,
+  ),
+)
+
 = Introduction
 
 #box(
@@ -658,10 +671,10 @@ To rapidly put to the test the calculators, geometrical values of the relaxed co
 
 The first value concerns the charachteristic $#ce("HOH")$ *bend angle* of the molecule;
 the accurate description of this physical value is a required test to ensure the validity of the models.
-As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergWaterMolecule2005 @PhysicalChemistryWater2020.
+As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020.
 
 The second value is the $#ce("OH")$ *bond length*.
-@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergWaterMolecule2005 @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
+@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
 
 #let monomer_angles_table = csv("simulazioni/02_water/01_molecule/angles.csv")
 #figure(
@@ -767,59 +780,65 @@ The mode $nu_3$ is called the asymmetric stretching vibration to distinguish it 
   image("thesis/imgs/eisenberg2005_fig1.1.gif", width: 50%),
   caption: [
     The normal modes of vibration of $#ce("H2O")$.
-    Taken from @eisenbergWaterMolecule2005.
+    Taken from @eisenbergStructurePropertiesWater2005[Fig. 1.1].
   ],
 ) <fig:h2o-normal-modes>
 
-The computed values for the three normal modes, and comparison with reference values @eisenbergWaterMolecule2005, are shown in @table:ni_1, @table:ni_2, @table:ni_3 below.
+In this work, the vibration modes were studied under the harmonic approximation.
+Let us denote by $G(v_1, v_2, v_3)$ the energy above the vibrationless equilibrium state of the state with quantum numbers $v_1, v_2$ and $v_3$. Then
+$
+  G(v_1, v_2, v_3)
+  = sum_(i=1)^3 omega_i (v_i + 1 / 2)
+  + sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2)
+$
+where the sums are over normal modes.
+The $omega$s in this equation are often called the _harmonic frequencies_;
+they are the frequencies with which the molecule would vibrate if its vibrations were perfectly harmonic.
+The $x$s are the _anharmonic constants_ and describe the effect on the vibrational frequencies of the departure from purely harmonic form of the vibrations.
+@table:molecule-omega and @table:molecule-omega-errors
+contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data.
 
-#let ni_1_table = csv("simulazioni/02_water/01_molecule/ni_1.csv")
-#figure(
-  table(
-    columns: ni_1_table.first().len(),
-    table.header(
-      [Model],
-      [Frequency ($"cm"^(-1)$)],
-      [Discrepancy ($"cm"^(-1)$)],
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 10pt,
+    [
+      #let molecule_omega_table = csv("simulazioni/02_water/01_molecule/Analysis/omega.csv")
+      #figure(
+        table(
+          columns: molecule_omega_table.first().len(),
+          table.header(
+      // ..molecule_omega_table.first(),
+      [Model], $omega_1$, $omega_2$, $omega_3$
     ),
-    ..ni_1_table.slice(1).flatten(),
-  ),
-  caption: [
-    $nu_1$
-  ],
-) <table:ni_1>
-
-#let ni_2_table = csv("simulazioni/02_water/01_molecule/ni_2.csv")
-#figure(
-  table(
-    columns: ni_2_table.first().len(),
-    table.header(
-      [Model],
-      [Frequency ($"cm"^(-1)$)],
-      [Discrepancy ($"cm"^(-1)$)],
+          ..molecule_omega_table.slice(1).flatten()
+        ),
+        caption: [
+          The harmonic frequencies of the normal modes of the water molecule,
+          expressed in $"cm"^(-1)$.
+          Reference data from @eisenbergStructurePropertiesWater2005[Table 1.4].
+        ],
+      ) <table:molecule-omega>
+    ],
+    [
+      #let molecule_omega_errors_table = csv("simulazioni/02_water/01_molecule/Analysis/omega_errors.csv")
+      #figure(
+        table(
+          columns: molecule_omega_errors_table.first().len(),
+          table.header(
+      // ..molecule_omega_table.first(),
+      [Model], $omega_1$, $omega_2$, $omega_3$
     ),
-    ..ni_2_table.slice(1).flatten(),
+          ..molecule_omega_errors_table.slice(1).flatten()
+        ),
+        caption: [
+          Errors on the harmonic frequencies of the normal modes of the water molecule,
+          expressed in $"cm"^(-1)$.
+        ],
+      ) <table:molecule-omega-errors>
+    ],
   ),
-  caption: [
-    $nu_2$
-  ],
-) <table:ni_2>
-
-#let ni_3_table = csv("simulazioni/02_water/01_molecule/ni_3.csv")
-#figure(
-  table(
-    columns: ni_3_table.first().len(),
-    table.header(
-      [Model],
-      [Frequency ($"cm"^(-1)$)],
-      [Discrepancy ($"cm"^(-1)$)],
-    ),
-    ..ni_3_table.slice(1).flatten(),
-  ),
-  caption: [
-    $nu_3$
-  ],
-) <table:ni_3>
+)
 
 Studying the vibrational properties of the geometry obtained at the end of the optimization procedure also allows us to assess if the final geometry is a stable or unstable configuration.
 The vibrational modes are calculated from a finite difference approximation of the Hessian matrix, displacing atoms according to a parameter named `delta`, measured in $angstrom$.
@@ -833,11 +852,6 @@ converged configurations.
 The stability of configurations is dependent in a discriminant way on the `delta` and `fmax` parameters.
 The analysis confirms that the value of `fmax=1e-4` yields unstable configurations, while `fmax=1e-8` is appropriate to obtain stable configurations.
 Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure convergence of calculations.
-
-#let large_figure(content, caption: none) = figure(
-  box(width: 125%, content),
-  caption: caption,
-)
 
 #large_figure(
   grid(
@@ -907,14 +921,6 @@ dispersion.
 Convergence of results for the MACE-ICE13-1 model is achieved for displacements below $10^(-4) angstrom$.
 The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corresponds to negligible energy, as can be observed in the representative output in @code-monomer-vibrations-mace-ice13-1-output and therefore does not pose a issue.
 
-#let large_box(content) = align(
-  center,
-  box(
-    width: 125%,
-    content,
-  ),
-)
-
 #large_box(
   grid(
     columns: 2,
@@ -958,7 +964,7 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
 ==== Zero-point vibrational energy
 
 The @zpe from the computation models is shown in @table:zpe.
-The MACE-ICE13-1 model shows the best agreement with reference data from literature @eisenbergWaterMolecule2005, with a discrepancy of $0.01 "eV"$.
+The MACE-ICE13-1 model shows the best agreement with reference data from literature @eisenbergStructurePropertiesWater2005, with a discrepancy of $0.01 "eV"$.
 
 #let zero_point_energies_table = csv("simulazioni/02_water/01_molecule/zero_point_energies.csv")
 #figure(
@@ -969,7 +975,7 @@ The MACE-ICE13-1 model shows the best agreement with reference data from literat
     ..zero_point_energies_table.slice(1).flatten(),
   ),
   caption: [
-    Zero-point energies for the employed calculators and reference value @eisenbergWaterMolecule2005.
+    Zero-point energies for the employed calculators and reference value @eisenbergStructurePropertiesWater2005.
     The difference between calculated and reference value is also shown in the last column.
     small, medium and large models refer to MACE-MP-0.
   ],

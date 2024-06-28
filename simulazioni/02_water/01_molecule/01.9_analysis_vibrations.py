@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.19"
+__generated_with = "0.6.23"
 app = marimo.App(
     app_title="Studio delle vibrazioni della molecola d'acqua",
     layout_file="layouts/01.9_analysis_vibrations.grid.json",
@@ -220,9 +220,9 @@ def __(get_summaries, mo, pd, read_zero_point_energy):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def __(mo):
-    mo.md(rf"## Studio dei primi tre modi normali di vibrazione")
+    mo.md(rf"## Studio dei tre modi normali di vibrazione")
     return
 
 
@@ -322,6 +322,115 @@ def __():
     vib.write_mode(-3)
     vib.summary()
     return Vibrations, calculator, h2o, mace_mp, read, vib
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## Studio dei valori della reference in approssimazione armonica")
+    return
+
+
+@app.cell
+def __():
+    omega_1_reference = 3832.17
+    omega_2_reference = 1648.47
+    omega_3_reference = 3942.53
+    return omega_1_reference, omega_2_reference, omega_3_reference
+
+
+@app.cell
+def __(
+    le_mie_frequenze,
+    omega_1_reference,
+    omega_2_reference,
+    omega_3_reference,
+    pd,
+):
+    # Tre discorsi separati per ciascuna frequenza
+    omega_1 = pd.DataFrame(
+        {"model": "Reference", "cm^-1": omega_1_reference}, index=[0]
+    )
+    omega_2 = pd.DataFrame(
+        {"model": "Reference", "cm^-1": omega_2_reference}, index=[0]
+    )
+    omega_3 = pd.DataFrame(
+        {"model": "Reference", "cm^-1": omega_3_reference}, index=[0]
+    )
+
+    _models = ["small", "medium", "large", "MACE-ICE13-1"]
+    for _model in _models:
+        _df = le_mie_frequenze(_model)
+        omega_1 = pd.concat(
+            [
+                omega_1,
+                pd.DataFrame(
+                    {"model": _model, "cm^-1": _df["cm^-1"].iloc[-2]}, index=[0]
+                ),
+            ],
+            ignore_index=True,
+        )
+        omega_2 = pd.concat(
+            [
+                omega_2,
+                pd.DataFrame(
+                    {"model": _model, "cm^-1": _df["cm^-1"].iloc[-3]}, index=[0]
+                ),
+            ],
+            ignore_index=True,
+        )
+        omega_3 = pd.concat(
+            [
+                omega_3,
+                pd.DataFrame(
+                    {"model": _model, "cm^-1": _df["cm^-1"].iloc[-1]}, index=[0]
+                ),
+            ],
+            ignore_index=True,
+        )
+
+    # Calcolo delle discrepanze
+    omega_1["error"] = omega_1["cm^-1"] - omega_1_reference
+    omega_2["error"] = omega_2["cm^-1"] - omega_2_reference
+    omega_3["error"] = omega_3["cm^-1"] - omega_3_reference
+    return omega_1, omega_2, omega_3
+
+
+@app.cell
+def __(mo, omega_1, omega_2, omega_3):
+    mo.hstack([omega_1, omega_2, omega_3])
+    return
+
+
+@app.cell
+def __(omega_1, omega_2, omega_3, os, pd):
+    _df0 = omega_1["model"]
+    _df1 = omega_1["cm^-1"]
+    _df2 = omega_2["cm^-1"]
+    _df3 = omega_3["cm^-1"]
+    _df_final = pd.concat([_df0, _df1, _df2, _df3], axis=1)
+    _df_final.columns = ["Model", "ω1", "ω2", "ω3"]
+    _save_folder = "Analysis"
+    os.makedirs(_save_folder, exist_ok=True)
+    _df_final.to_csv(f"{_save_folder}/omega.csv", index=False, float_format="%.2f")
+    _df_final
+    return
+
+
+@app.cell
+def __(omega_1, omega_2, omega_3, pd):
+    # Now the same for the errors
+    _df0 = omega_1["model"]
+    _df1 = omega_1["error"]
+    _df2 = omega_2["error"]
+    _df3 = omega_3["error"]
+    _df_final = pd.concat([_df0, _df1, _df2, _df3], axis=1)
+    _df_final.columns = ["Model", "ω1", "ω2", "ω3"]
+    _save_folder = "Analysis"
+    _df_final.to_csv(
+        f"{_save_folder}/omega_errors.csv", index=False, float_format="%.2f"
+    )
+    _df_final
+    return
 
 
 if __name__ == "__main__":
