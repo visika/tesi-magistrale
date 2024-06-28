@@ -719,7 +719,7 @@ The initial geometry was set up so that the HOH atoms formed a right angle, and 
 By dealing with a force field, it was possible to set up a cell in vacuum without periodic boundary conditions.
 
 @ase offers a variety of different optimisers, from which we have chosen BFGS, a local optimisation algorithm of the quasi-Newton category, where the forces of consecutive steps are used to dynamically update a Hessian describing the curvature of the potential energy landscape.
-The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in atomic units of force.
+The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in $"eV" angstrom^(-1)$.
 The convergence criterion is that the force on all individual atoms should be less than fmax:
 #footnote[https://wiki.fysik.dtu.dk/ase/ase/optimize.html]
 $
