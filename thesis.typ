@@ -527,6 +527,12 @@ The following chapters will introduce the theoretical foundations and the tools 
 = Theory
 
 == Phonons
+The _dynamical matrix_:
+$
+  D(arrow(q)) :=
+  1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
+  Phi(arrow(w)_i^0 - arrow(r)_j^0) dot arrow(epsilon)
+$ <eq:dynamical-matrix>
 $
   omega^2 arrow(epsilon) = D(arrow(q)) dot epsilon
 $
@@ -536,18 +542,117 @@ $
   )
 $
 === The small displacement method
+
+#box(
+  stroke: 2pt + red,
+  inset: 1pt,
+  [
+    Let us consider the crystal in the ground state and displace one particle from its equilibrium position.
+    Let the displacement be along the $x$ axis, $arrow(u) := (u, 0, 0)$.
+    The forces acting on all particles in the system, including the displaced one, are given by:
+  ],
+)
+
 $
   (f_i^x, f_i^y, f_i^z)
   = -Phi(arrow(r)_i^0) dot (u, 0, 0)
   = -u vec(phi_(0i)^(x x), phi_(0i)^(y x), phi_(0i)^(z x))
 $
 
+#box(
+  stroke: 2pt + red,
+  inset: 1pt,
+  [
+    from which we obtain the first columnt of the force constant matrix:
+  ],
+)
+
+$
+  phi_(0i)^(x x) = - f_i^x / u, quad
+  phi_(0i)^(y x) = - f_i^y / u, quad
+  phi_(0i)^(z x) = - f_i^z / u
+$
+
+To obtain the other columns, we need to repeat the procedure with displacements $(0,u,0)$ and $(0,0,u)$.
+A set of three forces calculations is sufficient to compute the full force constants matrix.
+
+In practical calculations, it is not possible to include all the infinite particles of a lattice;
+therefore, we use a procedure that approximates the evaluation of the force constants matrix, with an error that can be systematically reduced.
+We consider a _supercell_, which is an integer multiple of the primitive cell in the three spatial directions. We can define three multiplicative integers, one for each direction, $i,j,k$.
+Named $arrow(a)_1, arrow(a)_2, arrow(a)_3$ the lattice vectors of the primitive cell,
+the periodicity of the supercell is described by the multiplied lattice vectors:
+$
+  arrow(A)_1 := i arrow(a)_1, quad
+  arrow(A)_2 := j arrow(a)_2, quad
+  arrow(A)_3 := k arrow(a)_3
+$
+The reciprocal lattice vectors of the supercell are defined as follow:
+$
+  arrow(B)_1 := 2 pi (arrow(A)_2 times arrow(A)_3) / V, quad
+  arrow(B)_2 := 2 pi (arrow(A)_3 times arrow(A)_1) / V, quad
+  arrow(B)_3 := 2 pi (arrow(A)_1 times arrow(A)_2) / V,
+$
+with $V := (arrow(A)_1 times arrow(A)_2) dot arrow(A)_3$ as the volume of the supercell.
+Following the periodicity of the finite supercell,
+the displacement by an amount $arrow(u)$ of one particle
+causes the displacement of all its periodic images too,
+located at positions
+$arrow(L) := n arrow(A)_1 + m arrow(A)_2 + l arrow(A)_3$,
+with $n,m,l$ any three integers.
+The obtained forces are:
+$
+  arrow(f)_i
+  = - sum_(arrow(L)) Phi (arrow(r)_i^0 + arrow(L)) dot arrow(u)
+$
+where the sum runs over all possible $arrow(L)$ vectors distancing different supercells.
+We do not have direct access to the elements of $Phi(arrow(r)_i^0)$,
+but only to the force constants matrix of the supercell, defined as:
+$
+  Phi_"SC" (arrow(r)_i^0)
+  := sum_(arrow(L)) Phi (arrow(r)_i^0 + arrow(L)).
+$ <eq:force-constants-matrix-supercell>
+This also implies that it is impossible to obtain the exact dynamical matrix,
+which requires knowledge of every element of the force constants matrix.
+We can rewrite @eq:dynamical-matrix as:
+$
+  D(arrow(q))
+  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (
+    arrow(r)_j^0 + arrow(L)
+  )) Phi(arrow(r)_j^0 + arrow(L)) \
+  &= 1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
+  sum_arrow(L) e^(i arrow(q) dot arrow(L))
+  Phi(arrow(r)_j^0 + arrow(L))
+$
+with the sum over $j$ running on the lattice sites $arrow(r)_j^0$ belonging to the supercell.
+Consider now the term $sum_arrow(L) e^(i arrow(q) dot arrow(L)) Phi(arrow(r)_j^0 + arrow(L))$ and compare it with @eq:force-constants-matrix-supercell.
+For every $arrow(q)$ such that $e^(i arrow(q) dot arrow(L)) = 1$ we obtain:
+
+// TODO definisci vettori del reticolo
+// TODO definisci matrice dinamica
 // TODO finisci teoria
 
 $
   D(arrow(q))
   = 1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0) Phi_("SC")(arrow(r)_j^0)
 $
+
+Since $Phi_"SC"$ can be calculated,
+at these particular $arrow(q)$ vectors the dynamical matrix is exact.
+We can carachterize these special $arrow(q)$ vectors as the linear combinations of the reciprocal vectors of the supercell with integer coefficients $n',m',l'$.
+We can verify this statement calculating, given $arrow(q) := n' arrow(B)_1 + m' arrow(B)_2 + l' arrow(B)_3$
+and $arrow(L) := n arrow(A)_1 + m arrow(A)_2 + l arrow(A)_3$,
+$arrow(q) dot arrow(L) = (n n' + m m' + l l') 2pi$,
+which yields $e^(i arrow(q) + arrow(L)) = 1$.
+
+Increasing the size of the supercell, the Brillouin zone is populated with more exact phonons;
+inbetween those points we obtain a _Fourier interpolation_,
+which becomes more and more accurate as we increase the size of the supercell.
+Eventually, the supercell is so large that the force constants matrix is negligible at its edges;
+when this happens, the only term contributing in the sum in @eq:force-constants-matrix-supercell is that with $arrow(L) = arrow(0)$;
+as we increase the size of the supercell, the supercell force constants matrix asymptotically approaches the force constants matrix,
+$Phi_"SC" (arrow(r)_i^0) tilde.eq Phi(arrow(r)_i^0)$.
+In this limit, the Fourier interpolation is accurate everywhere.
+
 == DFT
 Kohn-Sham equations:
 $
