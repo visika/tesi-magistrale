@@ -147,6 +147,12 @@
     (key: "vasp", short: "VASP", long: "Vienna Ab initio Simulation Package"),
     (key: "xc", short: "XC", long: "Exchange–Correlation"),
     (key: "rdf", short: "RDF", long: "Radial Distribution Function"),
+    (
+      key: "ccsdt",
+      short: "CCSD(T)",
+      long: "coupled cluster theory with singlets, doublets, and perturbative triplets",
+    ),
+    (key: "cbs", short: "CBS", long: "complete basis set"),
   ),
   show-all: true,
 )
@@ -1219,18 +1225,41 @@ A displacement smaller than $10^(-4) angstrom$ is required for all the models to
   ],
 )
 
-In @table:dimer-frequencies-sum-absolute-errors we make a summary of the predictive power of each model of the frequencies of the normal modes of the dimer, as compared to reference @barnettBornOppenheimerMoleculardynamicsSimulations1993.
-MACE-ICE13-1 demonstrates the best overall adherence to the experimental frequencies.
+@table:dimer-harmonic-frequencies-comparison and @table:dimer-harmonic-frequencies-errors show the comparison and the errors of the harmonic frequencies of the 12 normal modes of the water dimer with respect to reference @kalesckyLocalVibrationalModes2012;
+reference values were calculated using @ccsdt with a @cbs.
 
-#let dimer_vibrations_sum_absolute_errors = csv("simulazioni/02_water/02_dimer/01_optimize/frequencies_sum_of_absolute_errors.csv")
+#let dimer_harmonic_frequencies_comparison = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/harmonic_frequencies_comparison.csv")
 #figure(
   table(
-    columns: dimer_vibrations_sum_absolute_errors.first().len(),
-    table.header([Model], [Sum of absolute errors ($"cm"^(-1)$)]),
-    ..dimer_vibrations_sum_absolute_errors.slice(1).flatten()
+    columns: dimer_harmonic_frequencies_comparison.first().len(),
+    table.header(..dimer_harmonic_frequencies_comparison.first()),
+    ..dimer_harmonic_frequencies_comparison.slice(1).flatten()
+  ),
+  caption: [Comparison of the harmonic normal modes frequencies obtained through MACE calculators and reference @kalesckyLocalVibrationalModes2012. Frequency units are in $"cm"^(-1)$.],
+) <table:dimer-harmonic-frequencies-comparison>
+
+#let dimer_harmonic_frequencies_errors = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/harmonic_frequencies_errors.csv")
+#figure(
+  table(
+    columns: dimer_harmonic_frequencies_errors.first().len(),
+    table.header(..dimer_harmonic_frequencies_errors.first()),
+    ..dimer_harmonic_frequencies_errors.slice(1).flatten()
+  ),
+  caption: [Difference between the harmonic normal modes frequencies obtained through MACE calculators and reference @kalesckyLocalVibrationalModes2012. Frequency units are in $"cm"^(-1)$.],
+) <table:dimer-harmonic-frequencies-errors>
+
+In @table:dimer-frequencies-sum-absolute-errors we make a summary of the predictive power of each model of the frequencies of the normal modes of the dimer, as compared to reference @kalesckyLocalVibrationalModes2012.
+MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies.
+
+#let dimer_harmonic_frequencies_mae = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/mae.csv")
+#figure(
+  table(
+    columns: dimer_harmonic_frequencies_mae.first().len(),
+    table.header([Model], [MAE ($"cm"^(-1)$)]),
+    ..dimer_harmonic_frequencies_mae.slice(1).flatten()
   ),
   caption: [
-    Sum of absolute errors, computed as the difference between the value of the frequencies obtained with caluculator models and reference.
+    @mae computed as the difference between the value of the frequencies obtained with caluculator models and reference @kalesckyLocalVibrationalModes2012.
   ],
 ) <table:dimer-frequencies-sum-absolute-errors>
 

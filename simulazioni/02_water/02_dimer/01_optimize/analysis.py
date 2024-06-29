@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.19"
+__generated_with = "0.6.24"
 app = marimo.App(
     app_title="Stabilita del dimero d'acqua",
     layout_file="layouts/analysis.grid.json",
@@ -378,6 +378,7 @@ def __(get_filenames, mo, models, nu_reference, pd, read_frequencies):
 
 @app.cell
 def __():
+    # Experimental values from @barnettBornOppenheimerMoleculardynamicsSimulations1993, table II
     nu_reference = [
         3714,
         3698,
@@ -398,6 +399,143 @@ def __():
 @app.cell
 def __(nu_reference):
     len(nu_reference)
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## Confronto con le frequenze armoniche")
+    return
+
+
+@app.cell
+def __(mo):
+    # Harmonic CBS (complete basis set) frequencies from @kalesckyLocalVibrationalModes2012, table 1
+    omega_kalescky_cm_minus1 = [
+        129.2,
+        149.6,
+        156.1,
+        188.3,
+        349.8,
+        610.6,
+        1663.0,
+        1678.2,
+        3754.3,
+        3840.2,
+        3926.8,
+        3948.7,
+    ]
+
+    mo.md(f"{len(omega_kalescky_cm_minus1)} harmonic frequencies")
+    return omega_kalescky_cm_minus1,
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"Devo ora confrontare fianco a fianco le frequenze armoniche dei riferimento bibliografico con le frequenze ottenute dalla mia simulazione.")
+    return
+
+
+@app.cell
+def __(
+    get_filenames,
+    mo,
+    models,
+    omega_kalescky_cm_minus1,
+    pd,
+    read_frequencies,
+):
+    # Crea una lista in cui tenere i dati dei vari modelli
+    _dataframes_list = []
+
+    # Acquisisci le frequenze di ciascun modello
+    for _model in models:
+        # Prendi il primo filename, quello con lo spostamento più piccolo
+        _fname = get_filenames(_model)[0]
+        _freqs = read_frequencies(_fname)
+
+        # Assicurati di prendere frequenze non immaginarie
+        _real_freqs = _freqs[_freqs["cm^-1"] > 0].reset_index(drop=True)
+
+        # Crea un dataframe con il nome della colonna uguale al modello
+        _new_df = pd.DataFrame(
+            {
+                f"{_model}": _real_freqs["cm^-1"].values,
+            },
+        )
+
+        # Aggiungi il dataframe alla lista
+        _dataframes_list.append(_new_df)
+
+    # Affianca i dataframe per colonne
+    harmonic_df = pd.concat(_dataframes_list, axis=1)
+
+    # Aggiungi la colonna della referenza
+    harmonic_df["Reference"] = omega_kalescky_cm_minus1
+
+    mo.ui.table(harmonic_df)
+    return harmonic_df,
+
+
+@app.cell
+def __(harmonic_df, os):
+    # Assicurati che esista la cartella per l'esportazione dell'analisi
+    os.makedirs("Analisi", exist_ok=True)
+
+    # Esporta dati su file
+    harmonic_df.to_csv(
+        "Analisi/harmonic_frequencies_comparison.csv", index=True, header=True
+    )
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## Calcolo degli errori sulle frequenze armoniche")
+    return
+
+
+@app.cell
+def __(harmonic_df, mo, pd):
+    # Ho bisogno di calcolare riga per riga la differenze tra le frequenze ottenute tramite simulazione e la referenza
+    harmonic_errors_df = pd.DataFrame()
+
+    for _column in harmonic_df.columns:
+        harmonic_errors_df[_column] = (
+            harmonic_df[_column] - harmonic_df["Reference"]
+        ).round(2)
+
+    mo.ui.table(harmonic_errors_df)
+    return harmonic_errors_df,
+
+
+@app.cell
+def __(harmonic_errors_df):
+    # Esporta dati su file
+    harmonic_errors_df.to_csv(
+        "Analisi/harmonic_frequencies_errors.csv", index=True, header=True
+    )
+    return
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## Media degli errori assoluti")
+    return
+
+
+@app.cell
+def __(harmonic_errors_df):
+    mae = harmonic_errors_df.abs().mean().round(1)
+    mae.name = "MAE"
+    mae = mae.drop(labels="Reference")
+    mae
+    return mae,
+
+
+@app.cell
+def __(mae):
+    mae.to_csv("Analisi/mae.csv")
     return
 
 
