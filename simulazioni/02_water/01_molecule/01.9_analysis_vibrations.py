@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.23"
+__generated_with = "0.6.24"
 app = marimo.App(
     app_title="Studio delle vibrazioni della molecola d'acqua",
     layout_file="layouts/01.9_analysis_vibrations.grid.json",
@@ -102,8 +102,34 @@ def __(mo):
 
     dispersion = mo.ui.checkbox(value=False, label="Dispersione")
 
-    mo.hstack([model, fmax, dispersion])
-    return dispersion, fmax, fmaxs, model, models
+    save = mo.ui.checkbox(value=False, label="Save")
+
+    ylabel = mo.ui.checkbox(value=True, label="Y label")
+
+    xsize = mo.ui.number(value=8, start=1, stop=20, step=1, label="X size")
+    ysize = mo.ui.number(value=6, start=1, stop=20, step=1, label="Y size")
+
+
+    mo.hstack([model, fmax, dispersion, ylabel, xsize, ysize, save])
+    return (
+        dispersion,
+        fmax,
+        fmaxs,
+        model,
+        models,
+        save,
+        xsize,
+        ylabel,
+        ysize,
+    )
+
+
+@app.cell
+def __(mo):
+    fontsize = mo.ui.number(value=15, start=1, stop=20, step=1, label="Font size")
+    ticksize = mo.ui.number(start=12, stop=20, step=1, label="Ticks size")
+    mo.hstack([ticksize, fontsize])
+    return fontsize, ticksize
 
 
 @app.cell
@@ -119,14 +145,35 @@ def __(dispersion, fmax, get_summaries, model, pd, read_frequencies):
 
 
 @app.cell
-def __(df, dispersion, fmax, mo, model, os, plt):
+def __(
+    df,
+    dispersion,
+    fmax,
+    fontsize,
+    mo,
+    model,
+    os,
+    plt,
+    save,
+    ticksize,
+    ylabel,
+):
+    # plt.figure(figsize=(xsize.value, ysize.value))
+    plt.subplots(layout="constrained")
+
+    # Set labels size
+    plt.rcParams.update({"font.size": ticksize.value})
+
     groups = df.groupby("#")
     for _name, _group in groups:
         plt.plot(_group["delta"], _group["cm^-1"], marker="x", label=_name)
     plt.xscale("log")
     plt.yscale("symlog", linthresh=1e-1)
     plt.ylim(-1e4, 1e4)
-    plt.legend(ncol=3)
+    plt.legend(
+        ncol=3,
+        loc="lower left",
+    )
 
     if model.value == "MACE-ICE13-1":
         title_fmax = "fmax=1e-8"
@@ -139,24 +186,30 @@ def __(df, dispersion, fmax, mo, model, os, plt):
     dispersion_string = f"{' D' if dispersion.value else ''}"
 
     plt.title(
-        title_string := f"H2O molecule vibration modes\n"
+        title_string := f"H2O vib. modes "
         + model_string
         + dispersion_string
         + ", "
-        f"{title_fmax}"
+        f"{title_fmax}",
+        fontsize=fontsize.value,
     )
-    plt.xlabel("Displacement (Å)")
-    plt.ylabel("Frequency ($\mathrm{cm}^{-1}$)")
+    plt.xlabel("Displacement (Å)", fontsize=fontsize.value)
+
+    if ylabel.value:
+        plt.ylabel("Frequency ($\mathrm{cm}^{-1}$)")
     # plt.grid()
 
     # Hide the top of the frame
     plt.gca().spines[["top", "bottom", "left", "right"]].set_visible(False)
 
-    save_folder = "Grafici"
-    os.makedirs(save_folder, exist_ok=True)
-    save_path = f"{save_folder}/{model_string}{dispersion_string} {title_fmax}.svg"
-    plt.savefig(save_path)
-    print(f"Saved to {save_path}")
+    if save.value:
+        save_folder = "Grafici"
+        os.makedirs(save_folder, exist_ok=True)
+        save_path = (
+            f"{save_folder}/{model_string}{dispersion_string} {title_fmax}.svg"
+        )
+        plt.savefig(save_path)
+        print(f"Saved to {save_path}")
 
     # Show an interactive marimo plot
     mo.mpl.interactive(plt.gcf())

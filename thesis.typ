@@ -988,35 +988,37 @@ Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure conver
   caption: "Convergence of the large model with respect to fmax",
 )
 
-#large_figure(
-  grid(
-    columns: 3,
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-1.svg"),
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-4.svg"),
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-8.svg"),
-  ),
-  caption: "Convergence of the small model with dispersion with respect to fmax",
-)
+// #large_figure(
+//   grid(
+//     columns: 3,
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-1.svg"),
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-4.svg"),
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 small D fmax=1e-8.svg"),
+//   ),
+//   caption: "Convergence of the small model with dispersion with respect to fmax",
+// )
 
-#large_figure(
-  grid(
-    columns: 3,
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-1.svg"),
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-4.svg"),
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-8.svg"),
-  ),
-  caption: "Convergence of the medium model with dispersion with respect to fmax",
-)
+// #large_figure(
+//   grid(
+//     columns: 3,
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-1.svg"),
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-4.svg"),
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium D fmax=1e-8.svg"),
+//   ),
+//   caption: "Convergence of the medium model with dispersion with respect to fmax",
+// )
 
-#large_figure(
-  grid(
-    columns: 3,
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-1.svg"),
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-4.svg"),
-    image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-8.svg"),
-  ),
-  caption: "Convergence of the large model with dispersion with respect to fmax",
-)
+// #large_figure(
+//   grid(
+//     columns: 3,
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-1.svg"),
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-4.svg"),
+//     image("simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 large D fmax=1e-8.svg"),
+//   ),
+//   caption: "Convergence of the large model with dispersion with respect to fmax",
+// )
+
+Adding the dispersion correction to the models in this step produces insignificant differences in the results, so their graphs are omitted for brevity.
 
 ==== MACE-ICE13-1
 
@@ -1029,7 +1031,7 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
 #large_box(
   grid(
     columns: 2,
-    gutter: 3pt,
+    gutter: 7pt,
     [#figure(
         image("simulazioni/02_water/01_molecule/Grafici/MACE-ICE13-1 fmax=1e-8.svg"),
         caption: [Frequencies calculated with the MACE-ICE13-1 model with the most restrictive `fmax`.],
@@ -1040,7 +1042,7 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
           read("simulazioni/02_water/01_molecule/MACE-ICE13-1/H2O_delta=1e-06_summary.txt"),
         ),
         caption: [
-          Vibrational analysis representative output from ASE for the normal modes of the water molecule.
+          Vibrational analysis representative output from ASE for the normal modes of the water molecule, computed using MACE-ICE13-1.
         ],
       ) <code-monomer-vibrations-mace-ice13-1-output>
     ],
