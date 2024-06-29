@@ -1453,6 +1453,8 @@ The bandstructure calculations result in a approximate reproduction of reference
 Frequencies are significantly higher than reference; the source of this discrepancy is not clear, and might be due to improper volume optimization of our geometry or a built-in issue of the calculator; indeed, a compression of the material results in higher overall frequencies.
 This issue has yet to be investigated at the time of writing.
 Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
+A visual qualitative analysis of the band structure produced with MACE-MP-0 exposes several different behaviours, particularly at zone boundary points;
+most notably, see the disalignment of bands around point $M$, and at point $A$.
 
 As reference @guptaPhononsAnomalousThermal2018 employed a $2 times 2 times 2$ supercell for its calculations, we tested the convergence of calculations with respect to a higher supercell.
 Limitation of resources allowed the calculation of the frequencies using at most $3 times 3 times 3$ supercell.
