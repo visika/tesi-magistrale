@@ -1115,7 +1115,7 @@ reference are available in @dimer-geometry-table and @dimer-geometry-errors.
 #large_box(
   grid(
     columns: (1fr, 1.5fr),
-    column-gutter: 3pt,
+    column-gutter: 10pt,
     [
       #figure(
         image("thesis/imgs/klopper-fig1.gif"),
