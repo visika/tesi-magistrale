@@ -1260,20 +1260,36 @@ The equilibrium distance according to @dykeStructureWaterDimer1977 @mukhopadhyay
 Typical values for the binding energy obtained from @dft simulations at
 equilibrium position range between -20 and -12 kJ/mol (approximately -0.2 to
 -0.12 eV) @sprikInitioMolecularDynamics1996 @mukhopadhyayWaterDimerII2018.
-Reference @curtissStudiesMolecularAssociation1979 reports the binding energy for the water dimer to be $-5.44 plus.minus 0.7 "kcal/mol"$ that corresponds to $0.24 plus.minus 0.03 "eV/particle"$.
+Reference @curtissStudiesMolecularAssociation1979 reports the experimental binding energy for the water dimer to be $-5.44 plus.minus 0.7 "kcal/mol"$ that corresponds to $0.24 plus.minus 0.03 "eV/particle"$.
 As MACE-ICE13-1 is trained on revPBE-D3, its predicted binding energy lies in the expected region according to @dft simulations.
+See @fig:binding-energy-mukhopadhyay2018-fig5 for a representation of typical values of the binding energy obtained through @dft methods.
 
-#figure(
-  image("simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
-  caption: [
-    Dimer binding energy for different calculators. The vertical dashed line
-    corresponds to the reference value for the equilibrium OO distance,
-    corresponding to the experimental value of $2.98 angstrom$
-    @dykeStructureWaterDimer1977 @mukhopadhyayWaterDimerII2018. The horizontal
-    dashed line corresponds to $-0.24 "eV"$
-    @curtissStudiesMolecularAssociation1979.
-  ],
-) <fig:binding-energy>
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 10pt,
+    [#figure(
+        image("simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
+        caption: [
+          Dimer binding energy for different calculators. The vertical dashed line
+          corresponds to the reference value for the equilibrium OO distance,
+          corresponding to the experimental value of $2.98 angstrom$
+          @dykeStructureWaterDimer1977 @mukhopadhyayWaterDimerII2018. The horizontal
+          dashed line corresponds to $-0.24 "eV"$
+          @curtissStudiesMolecularAssociation1979.
+        ],
+      ) <fig:binding-energy>
+    ],
+    [#figure(
+        image("thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png"),
+        caption: [
+          Image from reference @mukhopadhyayWaterDimerII2018[Fig. 5],
+          _The interaction energy of the water dimer for the equilibrium geometry configuration calculated at different center of mass separations between the two monomers_, using @dft and other lower level methods calculations.
+        ],
+      ) <fig:binding-energy-mukhopadhyay2018-fig5>
+    ],
+  ),
+)
 
 == Lattice energy
 

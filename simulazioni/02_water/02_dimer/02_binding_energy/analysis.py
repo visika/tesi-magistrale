@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.19"
+__generated_with = "0.6.23"
 app = marimo.App()
 
 
@@ -97,7 +97,22 @@ def __(df_binding_energy):
 
 
 @app.cell
-def __(df, df_mace_ice13_1, mo):
+def __():
+    # ❯ pint-convert eV kcal/mol
+    # 1 electron_volt = 23.0605478306 kcal/mol
+
+
+    def eV2kcalmol(x):
+        return x * 23.0605478306
+
+
+    def kcalmol2eV(x):
+        return x / 23.0605478306
+    return eV2kcalmol, kcalmol2eV
+
+
+@app.cell
+def __(df, df_mace_ice13_1, eV2kcalmol, kcalmol2eV, mo):
     # Plot all the data
     import matplotlib.pyplot as plt
 
@@ -149,11 +164,15 @@ def __(df, df_mace_ice13_1, mo):
     ax.spines["right"].set_visible(False)
     ax.spines["bottom"].set_visible(False)
 
+    secax = ax.secondary_yaxis("right", functions=(eV2kcalmol, kcalmol2eV))
+    secax.spines["right"].set_visible(False)
+    secax.set_ylabel("Binding energy (kcal/mol)")
+
     # fig.savefig("binding_energy.svg")
 
     # interactive plot
     mo.mpl.interactive(plt.gcf())
-    return ax, fig, plt
+    return ax, fig, plt, secax
 
 
 @app.cell(disabled=True)
