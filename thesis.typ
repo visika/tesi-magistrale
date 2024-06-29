@@ -1546,30 +1546,32 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
 A further study was performed to analyze the performance of the calculator compared with reference data on deuterated water. @strasslePhononDispersionIce2004
 In this scenario, the fidelity is estimated to be worse than the previous case.
 
-#grid(
-  columns: (1fr, 0.95fr),
-  gutter: 15pt,
-  [
-    #figure(
-      [
-        #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/band_structure.svg")
-        #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/total_dos.svg")
-      ],
-      caption: [
-        Band structure and DOS calculated with MACE-ICE13-1.
-      ],
-    )
-  ],
-  [
-    #figure(
-      [
-        #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/bandstructure_strassle.png")
-        #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/dos_strassle.png")
-      ],
-      caption: [
-        Band structure and DOS from reference @strasslePhononDispersionIce2004.
-      ],
-    )],
+#large_box(
+  grid(
+    columns: (1fr, 0.95fr),
+    gutter: 15pt,
+    [
+      #figure(
+        [
+          #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/band_structure.svg")
+          #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/total_dos.svg")
+        ],
+        caption: [
+          Band structure and DOS calculated with MACE-ICE13-1.
+        ],
+      )
+    ],
+    [
+      #figure(
+        [
+          #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/bandstructure_strassle.png")
+          #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/dos_strassle.png")
+        ],
+        caption: [
+          Band structure and DOS from reference @strasslePhononDispersionIce2004.
+        ],
+      )],
+  ),
 )
 
 == MD
