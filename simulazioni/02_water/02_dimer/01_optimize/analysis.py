@@ -474,6 +474,9 @@ def __(
     # Aggiungi la colonna della referenza
     harmonic_df["Reference"] = omega_kalescky_cm_minus1
 
+    # Aggiorna l'indice per farlo partire da 1
+    harmonic_df.index = harmonic_df.index + 1
+
     mo.ui.table(harmonic_df)
     return harmonic_df,
 
