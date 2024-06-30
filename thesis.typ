@@ -1205,6 +1205,14 @@ The overall results exhibit a better accuracy of the MACE-MP-0 large and MACE-IC
 holding first and second place with lowest discrepancies with respect to reference most of the time,
 while the small and medium MACE-MP-0 models lag behind.
 
+#figure(
+  image("simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png"),
+  caption: [
+    Render of the final geometry of the water dimer,
+    optimized using MACE-ICE13-1.
+  ],
+)
+
 === Vibrations analysis <sec:dimer-vibrations>
 
 Similarly to the procedure adopted for the monomer,
