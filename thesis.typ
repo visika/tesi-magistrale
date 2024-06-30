@@ -1116,8 +1116,8 @@ Harmonic approximation reference values @kalesckyLocalVibrationalModes2012 were 
 The optimization was performed starting from an initial configuration
 approximately reproducing the geometry represented in @dimer-structure. The BFGS
 optimizer was used with the three MACE-MP-0 models and the MACE-ICE13-1 model, with a
-force threshold of `fmax=1e-8`. The code describing the initial geometry is available
-in @init.xyz.
+force threshold of `fmax=1e-8` (units $"eV"slash angstrom$).
+The code describing the initial geometry is available in @init.xyz.
 The results comparing values and errors of the soft, intermolecular, features of the optimized geometry with respect to literature
 reference are available in @dimer-geometry-table and @dimer-geometry-errors.
 
