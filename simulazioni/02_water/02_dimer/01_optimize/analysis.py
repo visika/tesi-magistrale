@@ -13,6 +13,7 @@ def __():
     import marimo as mo
     import pandas as pd
     import matplotlib.pyplot as plt
+    plt.style.use('tableau-colorblind10')
     import glob
     import os
     return glob, mo, os, pd, plt
@@ -491,6 +492,136 @@ def __(harmonic_df, os):
         "Analisi/harmonic_frequencies_comparison.csv", index=True, header=True
     )
     return
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"### Plot delle frequenze per ciascun modello")
+    return
+
+
+@app.cell
+def __(harmonic_df, mo, models, plt):
+    # Partiamo da harmonic_df e facciamo uno scatter plot con l'indice della frequenza sulle x e il valore della frequenza sulle y
+    markers = ["x", "o", "s", "d", "p"]
+    for _model, _marker in zip(models, markers):
+        plt.scatter(
+            harmonic_df.index,
+            harmonic_df[_model],
+            marker=_marker,
+            label=_model,
+            zorder=10,
+        )
+
+    # Mostra tutti i tick sulle x
+    plt.xticks(harmonic_df.index)
+
+    # ylabel
+    plt.ylabel("Frequenza ($\mathrm{cm}^{-1}$)")
+    # xlabel
+    plt.xlabel("Indice della frequenza")
+
+    # legenda
+    plt.legend()
+
+    plt.ylim(bottom=0)
+
+    # Remove the top spine
+    plt.gca().spines["top"].set_visible(False)
+    plt.gca().spines["left"].set_visible(False)
+    plt.gca().spines["right"].set_visible(False)
+
+    plt.grid(axis="y")
+
+    mo.mpl.interactive(plt.gcf())
+    return markers,
+
+
+@app.cell
+def __(harmonic_df, harmonic_errors_df, markers, mo, models, plt):
+    # Scatter plot degli errori
+    for _model, _marker in zip(models, markers):
+        plt.scatter(
+            harmonic_errors_df.index,
+            harmonic_errors_df[_model],
+            marker=_marker,
+            label=_model,
+            zorder=10,
+        )
+        plt.plot(
+            harmonic_errors_df.index,
+            harmonic_errors_df[_model],
+            marker=None,
+            linewidth=1,
+        )
+
+    # Mostra tutti i tick sulle x
+    plt.xticks(harmonic_df.index)
+
+    # ylabel
+    plt.ylabel("Frequenza ($\mathrm{cm}^{-1}$)")
+    # xlabel
+    plt.xlabel("Indice della frequenza")
+
+    # legenda
+    plt.legend(loc="lower left")
+
+    # remove the frames
+    for _spine in plt.gca().spines.values():
+        _spine.set_visible(False)
+
+    # Highlight the zero line
+    plt.axhline(0, color="black", linewidth=0.5)
+
+    plt.grid(axis="y")
+
+    mo.mpl.interactive(plt.gcf())
+    return
+
+
+@app.cell
+def __(harmonic_df, harmonic_errors_df, mo, models, plt):
+    width = 0.2
+    multiplier = -1.5
+
+    _fix, _ax = plt.subplots(layout="constrained")
+
+    hatches = ["////", "\\\\\\\\", "xxxx", "...."]
+
+    for _model, _hatch in zip(models, hatches):
+        offset = width * multiplier
+        _ax.bar(
+            harmonic_errors_df.index + offset,
+            harmonic_errors_df[_model],
+            width,
+            label=_model,
+            zorder=5,
+            hatch=None,
+        )
+        multiplier += 1
+
+    # Mostra tutti i tick sulle x
+    plt.xticks(harmonic_df.index)
+
+    _ax.legend()
+
+    # ylabel
+    plt.ylabel("Frequency ($\mathrm{cm}^{-1}$)")
+    # xlabel
+    plt.xlabel("Frequency index")
+
+    # remove the frames
+    for _spine in plt.gca().spines.values():
+        _spine.set_visible(False)
+
+    # Highlight the zero line
+    plt.axhline(0, color="black", linewidth=0.5, zorder=10)
+
+    plt.grid(axis="y", zorder=0)
+
+    # plt.savefig("Grafici/harmonic_frequencies_errors_barchart.svg")
+    mo.mpl.interactive(plt.gcf())
+    return hatches, multiplier, offset, width
 
 
 @app.cell

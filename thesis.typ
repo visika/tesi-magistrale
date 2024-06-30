@@ -1242,6 +1242,7 @@ A displacement smaller than $10^(-4) angstrom$ is required for all the models to
 
 @table:dimer-harmonic-frequencies-comparison and @table:dimer-harmonic-frequencies-errors show the comparison and the errors of the harmonic frequencies of the 12 normal modes of the water dimer with respect to reference @kalesckyLocalVibrationalModes2012;
 reference values were calculated using @ccsdt with a @cbs.
+Deviations from reference are also graphed in @fig:dimer-harmonic-frequencies-errors.
 
 #let dimer_harmonic_frequencies_comparison = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/harmonic_frequencies_comparison.csv")
 #figure(
@@ -1262,6 +1263,13 @@ reference values were calculated using @ccsdt with a @cbs.
   ),
   caption: [Difference between the harmonic normal modes frequencies obtained through MACE calculators and reference @kalesckyLocalVibrationalModes2012. Frequency units are in $"cm"^(-1)$.],
 ) <table:dimer-harmonic-frequencies-errors>
+
+#figure(
+  image("/simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
+  caption: [
+    Deviation of the harmonic frequencies with respect to reference @kalesckyLocalVibrationalModes2012 for each MACE calculator.
+  ],
+) <fig:dimer-harmonic-frequencies-errors>
 
 In @table:dimer-frequencies-sum-absolute-errors we make a summary of the predictive power of each model of the frequencies of the normal modes of the dimer, as compared to reference @kalesckyLocalVibrationalModes2012.
 MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies.
