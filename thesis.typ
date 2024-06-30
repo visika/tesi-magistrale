@@ -1372,6 +1372,12 @@ The correct estimate of the lattice energies, absolute and relative, is of great
 
 The best values for the energies are consiered to be the @dmc calculations.
 @guptaPhononsAnomalousThermal2018 found that the revPBE functional gives the closest structure and dynamical properties of ice Ih.
+#figure(
+  image("strutture/ICE13/Ih/Ih.png"),
+  caption: [
+    Render of the ice Ih cell.
+  ],
+)
 
 #figure(
   image("thesis/imgs/dellapia2022_f1.jpeg", width: 100%),
