@@ -2,6 +2,7 @@ import marimo
 
 __generated_with = "0.6.24"
 app = marimo.App(
+    width="medium",
     app_title="Stabilita del dimero d'acqua",
     layout_file="layouts/analysis.grid.json",
 )
@@ -537,6 +538,72 @@ def __(harmonic_errors_df):
 def __(mae):
     mae.to_csv("Analisi/mae.csv")
     return
+
+
+@app.cell
+def __(mo):
+    mo.md(rf"## ZPE")
+    return
+
+
+@app.cell
+def __():
+    from ase import units
+    zpe_kalescky = 29.16 * units.kcal / units.mol
+    zpe_kalescky
+    return units, zpe_kalescky
+
+
+@app.cell
+def __():
+    zpe_mace_ice13_1 = 1.218
+    zpe_mace_mp_0_small = 1.213
+    zpe_mace_mp_0_medium = 1.210
+    zpe_mace_mp_0_large = 1.200
+    return (
+        zpe_mace_ice13_1,
+        zpe_mace_mp_0_large,
+        zpe_mace_mp_0_medium,
+        zpe_mace_mp_0_small,
+    )
+
+
+@app.cell
+def __(
+    pd,
+    zpe_kalescky,
+    zpe_mace_ice13_1,
+    zpe_mace_mp_0_large,
+    zpe_mace_mp_0_medium,
+    zpe_mace_mp_0_small,
+):
+    # Build a dataframe with the ZPE values
+    zpe_df = pd.DataFrame(
+        {
+            "Model": [
+                "Kalescky",
+                "MACE-ICE13-1",
+                "MACE-MP-0 small",
+                "MACE-MP-0 medium",
+                "MACE-MP-0 large",
+            ],
+            "ZPE": [
+                zpe_kalescky,
+                zpe_mace_ice13_1,
+                zpe_mace_mp_0_small,
+                zpe_mace_mp_0_medium,
+                zpe_mace_mp_0_large,
+            ],
+        }
+    )
+
+    # Compute the difference with respect to reference
+    zpe_df["Error"] = (zpe_df["ZPE"] - zpe_kalescky)
+    zpe_df = zpe_df.round(3)
+
+    zpe_df.to_csv("Analisi/zpe.csv", index=False, header=True, float_format="%.3f")
+    zpe_df
+    return zpe_df,
 
 
 if __name__ == "__main__":

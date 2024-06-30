@@ -1263,6 +1263,19 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
   ],
 ) <table:dimer-frequencies-sum-absolute-errors>
 
+=== ZPE
+#let dimer_zpe = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/zpe.csv")
+#figure(
+  table(
+    columns: dimer_zpe.first().len(),
+    table.header(..dimer_zpe.first()),
+    ..dimer_zpe.slice(1).flatten()
+  ),
+  caption: [
+    #glspl("zpe") of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012. Energies are in units of eV.
+  ],
+)
+
 === Binding energy
 
 The binding energy is calculated as
