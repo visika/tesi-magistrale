@@ -1361,7 +1361,7 @@ See @fig:binding-energy-mukhopadhyay2018-fig5 for a representation of typical va
   inset: 1mm,
   [
     This chapter presents the results of the study, focusing on the properties of molecular crystals modeled using machine learning potentials.
-    The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons.
+    The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons calculations.
   ],
 )
 
