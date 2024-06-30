@@ -1369,9 +1369,9 @@ See @fig:binding-energy-mukhopadhyay2018-fig5 for a representation of typical va
 
 The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
 The correct estimate of the lattice energies, absolute and relative, is of great interest for water and molecular crystals in general.
+According to the article, the best values for the energies are consiered to be the @dmc calculations.
+Regarding @dft methods, @guptaPhononsAnomalousThermal2018 found that the revPBE functional gives the closest structure and dynamical properties of ice Ih.
 
-The best values for the energies are consiered to be the @dmc calculations.
-@guptaPhononsAnomalousThermal2018 found that the revPBE functional gives the closest structure and dynamical properties of ice Ih.
 #figure(
   image("strutture/ICE13/Ih/Ih.png"),
   caption: [
