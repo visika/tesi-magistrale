@@ -549,15 +549,9 @@ $
 $
 === The small displacement method
 
-#box(
-  stroke: 2pt + red,
-  inset: 1pt,
-  [
-    Let us consider the crystal in the ground state and displace one particle from its equilibrium position.
-    Let the displacement be along the $x$ axis, $arrow(u) := (u, 0, 0)$.
-    The forces acting on all particles in the system, including the displaced one, are given by:
-  ],
-)
+Let us consider the crystal in the ground state and displace one particle from its equilibrium position.
+Let the displacement be along the $x$ axis, $arrow(u) := (u, 0, 0)$.
+The forces acting on all particles in the system, including the displaced one, are given by:
 
 $
   (f_i^x, f_i^y, f_i^z)
@@ -565,13 +559,7 @@ $
   = -u vec(phi_(0i)^(x x), phi_(0i)^(y x), phi_(0i)^(z x))
 $
 
-#box(
-  stroke: 2pt + red,
-  inset: 1pt,
-  [
-    from which we obtain the first columnt of the force constant matrix:
-  ],
-)
+from which we obtain the first columnt of the force constant matrix:
 
 $
   phi_(0i)^(x x) = - f_i^x / u, quad
@@ -744,6 +732,8 @@ $
   + O((delta t)^4)
 $
 This expression gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
+
+=== Thermostats
 
 == Neural networks
 
