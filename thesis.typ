@@ -747,20 +747,17 @@ This expression gives access to the positions at time $t + delta t$ with just th
 
 == Neural networks
 
-= Results
+= Results I: model assessment
 
-#box(
-  stroke: red,
-  inset: 1mm,
-  [
-    This chapter presents the results of the study, focusing on the properties of molecular crystals modeled using machine learning potentials.
-    The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons.
-  ],
-)
+In this chapter we test the MACE calculators on small, known systems,
+about which literature is abundant and a direct comparison of results is possible.
+We analyze the geometrical and vibrational features of the water molecule and the water dimer after optimization with each calculator.
+The binding energy of the dimer is calculated and compared with reference @dft methods.
+This setting already allows to quantify the benefits of a fine-tuned @mlp like MACE-ICE13-1 compared with MACE foundation models.
 
-Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
+// Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
 
-Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
+// Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
 
 == The water molecule <sec-molecule>
 
@@ -1358,6 +1355,16 @@ See @fig:binding-energy-mukhopadhyay2018-fig5 for a representation of typical va
   ),
 )
 
+= Results II: crystal structures
+#box(
+  stroke: red + 2pt,
+  inset: 1mm,
+  [
+    This chapter presents the results of the study, focusing on the properties of molecular crystals modeled using machine learning potentials.
+    The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons.
+  ],
+)
+
 == Lattice energy
 
 The work in this section is based on @dellapiaDMCICE13AmbientHigh2022.
@@ -1630,6 +1637,7 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
 
 A further study was performed to analyze the performance of the calculator compared with reference data on deuterated water. @strasslePhononDispersionIce2004
 In this scenario, the fidelity is estimated to be worse than the previous case.
+The same considerations on the quality of the results hold as above.
 
 #large_box(
   grid(
