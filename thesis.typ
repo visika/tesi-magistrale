@@ -1755,6 +1755,9 @@ Fine-tuning a MACE model is composed of three steps.
 
 = Conclusions
 
+The use of #glspl("mlp") allows rapid prototyping through a fast and efficient simulation of representative structures, with a very convenient accuracy/cost ratio.
+The combination of foundation models with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this new approach very versatile, and a precious addition in the toolbox of the material scientists.
+
 #box(
   stroke: blue + 2pt,
   inset: 1mm,
