@@ -1109,6 +1109,7 @@ Resources on the water dimer are abundant, on both the theory and experiment sid
 @schutzWaterDimerInteraction1997
 @klopperComputationalDeterminationEquilibrium2000
 @hobzaReliableTheoreticalTreatment1999
+Harmonic approximation reference values @kalesckyLocalVibrationalModes2012 were used for comparisons in @sec:dimer-vibrations.
 
 === Geometry optimization
 
@@ -1204,7 +1205,7 @@ The overall results exhibit a better accuracy of the MACE-MP-0 large and MACE-IC
 holding first and second place with lowest discrepancies with respect to reference most of the time,
 while the small and medium MACE-MP-0 models lag behind.
 
-=== Vibrations analysis
+=== Vibrations analysis <sec:dimer-vibrations>
 
 Similarly to the procedure adopted for the monomer,
 normal modes of the water dimer were analyzed to assess the dynamical stability of the optimized geometry.
