@@ -769,7 +769,7 @@ We studied the relaxation of the geometry of a single water molecule, also refer
 static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
 #figure(
-  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 90%),
+  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 70%),
   caption: [
     Render of the geometry of the water molecule,
     optimized using MACE-ICE13-1.
