@@ -539,15 +539,44 @@ $
   1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
   Phi(arrow(w)_i^0 - arrow(r)_j^0) dot arrow(epsilon)
 $ <eq:dynamical-matrix>
+
+The square of the frequencies of the normal modes of the system is obtained as the eigenvalues of the eigenvalue equation:
+
 $
-  omega^2 arrow(epsilon) = D(arrow(q)) dot epsilon
+  omega^2 arrow(epsilon) = D(arrow(q)) dot arrow(epsilon)
 $
+
+=== The harmonic approximation
+// Da §4 relazione termodinamica computazionale
+
+The harmonic contribution of phonons to the Helmholtz energy is represented by the equation:
+
+$
+  &F_"harm" (V,T) = \
+  =&
+  1 / Omega integral_Omega sum_(s=1)^3 (planck.reduce omega_(arrow(q),s)) / 2 dif q
+  + k_B T 1 / Omega integral_Omega sum_(s=1)^3 ln(1-exp(-(planck.reduce omega_(arrow(q),s))/(k_B T))) dif q
+$
+
+In the high temperature limit, defined by $(planck.reduce omega_(arrow(omega), s))/(k_B T) << 1$, the harmonic term reduces to the classical expression:
+
+$
+  F_"harm"^c = (k_B T) / Omega integral_Omega sum_(s=1)^3 ln((planck.reduce omega_(arrow(q),s))/(k_B T)) dif q
+$
+
+For computation efficiency purposes, the integrals above are approximated with a sum running on points sampled in the Brillouin zone, denoted by BZ in the sum:
+
+$
+  1 / Omega integral dif q approx 1 / (N_(arrow(q))) sum_(arrow(q) in "BZ")
+$
+
 $
   F(V,T) = U_0(V) + k_B T sum_(s=1)^3 sum_(arrow(q)) ln (
   planck.reduce omega_(arrow(q),s)(V)) / ( k_B T
   )
 $
-=== The small displacement method
+
+=== The small displacement method <sec:small-displacement-method>
 
 Let us consider the crystal in the ground state and displace one particle from its equilibrium position.
 Let the displacement be along the $x$ axis, $arrow(u) := (u, 0, 0)$.
