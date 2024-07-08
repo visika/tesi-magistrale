@@ -132,6 +132,7 @@
     (key: "dft", short: "DFT", long: "Density Functional Theory"),
     (key: "vdw", short: "vdW", long: "van der Waals"),
     (key: "mae", short: "MAE", long: "Mean Absolute Error"),
+    (key: "ml", short: "ML", long: "Machine Learning"),
     (key: "mlp", short: "MLP", long: "Machine Learning Potential"),
     (key: "pi", short: "PI", long: "Path Integral"),
     (key: "pbe", short: "PBE", long: "Perdew-Burke-Ernzerhof"),
@@ -1732,12 +1733,31 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 
 == MACE
 
+MACE is an equivariant message-passing graph tensor network where each layer encodes many-body information of atomic geometry.
+At each layer, many-body messages are formed using a linear combination of a tensor product basis. @batatiaDesignSpaceEquivariant2022 @darbyTensorReducedAtomicDensity2023
+This is constructed by taking tensor products of a sum of two-body permutation-invariant polynomials, expanded in a spherical basis.
+*The final output is the energy contribution of each atom to the total potential energy.*
+
+References @batatiaMACEHigherOrder2022
+
+@kovacsEvaluationMACEForce2023 shows that MACE generally outperforms alternatives for a wide range of systems, including liquid water.
+In those simulations, the many-body equivariant MACE model is an improvement with respect to the three-body atom-centered symmetry function-based feed-forward neural network model (BPNN), the three-body invariant message passing model REANN and the two-body equivariant message passing model NequIP.
+
+The MACE architecture is implemented in PyTorch and employs the e3nn library.
+
+MACE-MP-0 is a general-purpose @ml model, trained on a public database of 150k inorganic crystals, that is capable of running stable molecular dynamics on molecules and materials. @batatiaFoundationModelAtomistic2023
+The model can be applied out of the box and as a starting or "foundation model" for any atomistic system of interest and is thus a step towards democratising the revolution of @ml force fields by lowering the barriers to entry. @batatiaFoundationModelAtomistic2023
+
 === Fine-tuning a custom model
 
-// TODO Cita kaur2024
+In this thesis, we studied and followed the procedure to create a custom made MACE model.
+Current developments are undergoing in the field, experimenting on the various techniques to fine-tune custom MACE models. @kaurDataefficientFinetuningFoundational2024
+Fine-tuning a MACE model implies starting from a so called "foundation model" of MACE, e.g. MACE-MP-0, and execute further training of the model on new data.
+That data is comprised of desired geometries (preferably under specific thermodynamic conditions), and attached potential energies, forces and stresses of the system, computed with the experimenter's calculator of choice.
+The fine-tuning thus is the procedure that allows MACE to accurately reproduce the charachteristic behaviour of the chosen calculator through a new training procedure, resulting in a more informed @mlp model.
+For the present purposes, we chose a toy model to represent ice Ih at a pressure of 1.01325 bar and a temperature of 100.0 K.
 
-Fine-tuning a MACE model is composed of three steps.
-// TODO Spiega meglio cosa è e a cosa serve il fine-tuning
+Fine-tuning a MACE model is composed of three steps, detailed as follows:
 
 1. *Sample the phase space* to obtain representatives of the system under the thermodynamic conditions we are interesed in.
   This was obtained employing NPT dynamics as provided by @ase to generate 10000 images with variety.
@@ -1754,7 +1774,7 @@ Fine-tuning a MACE model is composed of three steps.
   ])
   The training and test sets are the input data for the training of the neural network that underlies MACE.
   The training spans 2000 epochs, at the end of which the compiled model is obtained, along with statistics.
-  Plot showing neural network loss and error on energy versus epochs are available in @fig-finetune-epochs.
+  Plots showing neural network loss and error on energy versus epochs are available in @fig-finetune-epochs.
 
 #figure(
   [

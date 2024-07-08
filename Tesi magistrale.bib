@@ -79,9 +79,10 @@
   file = {/home/mariano/Zotero/storage/W9BT2K54/Batatia et al. - 2023 - A foundation model for atomistic materials chemist.pdf}
 }
 
-@article{batatiaMACEHigherOrder,
+@article{batatiaMACEHigherOrder2022,
   title = {{{MACE}}: {{Higher Order Equivariant Message Passing Neural Networks}} for {{Fast}} and {{Accurate Force Fields}}},
   author = {Batatia, Ilyes and Kov\'acs, D\'avid P\'eter and Simm, Gregor N C and Ortner, Christoph and Cs\'anyi, G\'abor},
+  date = {2022},
   abstract = {Creating fast and accurate force fields is a long-standing challenge in computational chemistry and materials science. Recently, several equivariant message passing neural networks (MPNNs) have been shown to outperform models built using other approaches in terms of accuracy. However, most MPNNs suffer from high computational cost and poor scalability. We propose that these limitations arise because MPNNs only pass two-body messages leading to a direct relationship between the number of layers and the expressivity of the network. In this work, we introduce MACE, a new equivariant MPNN model that uses higher body order messages. In particular, we show that using four-body messages reduces the required number of message passing iterations to just two, resulting in a fast and highly parallelizable model, reaching or exceeding state-of-the-art accuracy on the rMD17, 3BPA, and AcAc benchmark tasks. We also demonstrate that using higher order messages leads to an improved steepness of the learning curves.},
   langid = {english},
   file = {/home/mariano/Zotero/storage/EEWVCLJH/Batatia et al. - MACE Higher Order Equivariant Message Passing Neu.pdf}
@@ -271,6 +272,23 @@
   abstract = {The thermal conductivities of H2O and D2O vapors were measured in a modified thick hot wire cell between 358 and 386 K at pressures ranging from 100 to 1000 Torr. Analysis of the data indicates that molecular association to form a dimeric species is the main source of enhancement of the thermal conductivity of both vapors. The enthalpy and entropy of association of the H2O dimer are -3.59 kcal\,mol-1 and -18.59 cal\,deg-1\,mol-1, respectively. The enthalpy and entropy of association of the D2O dimer are -3.66 kcal\,mol-1 and -18.67 cal\,deg-1\,mol-1, respectively. The measured enthalpy of association of the H2O dimer is in agreement with recently reported ab\hphantom{,}initio molecular orbital calculations on the H2O dimer. The entropies of association of the H2O and D2O dimers are calculated theoretically and are found to be in agreement with the measured values.},
   langid = {english},
   file = {/home/mariano/Zotero/storage/R6P8Z3JV/Curtiss et al. - 1979 - Studies of molecular association in H2O and D2O va.pdf}
+}
+
+@article{darbyTensorReducedAtomicDensity2023,
+  title = {Tensor-{{Reduced Atomic Density Representations}}},
+  author = {Darby, James P. and Kov\'acs, D\'avid P. and Batatia, Ilyes and Caro, Miguel A. and Hart, Gus L. W. and Ortner, Christoph and Cs\'anyi, G\'abor},
+  date = {2023-07-13},
+  journaltitle = {Physical Review Letters},
+  shortjournal = {Phys. Rev. Lett.},
+  volume = {131},
+  number = {2},
+  pages = {028001},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevLett.131.028001},
+  url = {https://link.aps.org/doi/10.1103/PhysRevLett.131.028001},
+  urldate = {2024-07-08},
+  abstract = {Density-based representations of atomic environments that are invariant under Euclidean symmetries have become a widely used tool in the machine learning of interatomic potentials, broader data-driven atomistic modeling, and the visualization and analysis of material datasets. The standard mechanism used to incorporate chemical element information is to create separate densities for each element and form tensor products between them. This leads to a steep scaling in the size of the representation as the number of elements increases. Graph neural networks, which do not explicitly use density representations, escape this scaling by mapping the chemical element information into a fixed dimensional space in a learnable way. By exploiting symmetry, we recast this approach as tensor factorization of the standard neighbour-density-based descriptors and, using a new notation, identify connections to existing compression algorithms. In doing so, we form compact tensor-reduced representation of the local atomic environment whose size does not depend on the number of chemical elements, is systematically convergable, and therefore remains applicable to a wide range of data analysis and regression tasks.},
+  file = {/home/mariano/Zotero/storage/63VYB4IF/Darby et al. - 2023 - Tensor-Reduced Atomic Density Representations.pdf;/home/mariano/Zotero/storage/2VDMR4R9/PhysRevLett.131.html}
 }
 
 @article{dellapiaDMCICE13AmbientHigh2022,
@@ -679,6 +697,24 @@
   abstract = {The equilibrium geometry and dissociation energy of the water dimer have been determined as accurately as technically possible. Various quantum chemical methods and high-quality basis sets have been applied---that is, at the level of a nearly complete basis---and both the intermolecular separation and the deformation of the donor and acceptor molecules have been optimized at the level of CCSD(T) theory (coupled-cluster theory with singles and doubles excitations plus a perturbation correction for connected triples). It is found at the CCSD(T) level that the monomer deformation in the dimer amounts to 86\% of the deformation computed at the MP2 level (second-order M\o ller-Plesset perturbation theory) and that the core/valence electron correlation effects at the CCSD(T) level amount to 80\% of the same effects at the MP2 level. The equilibrium O{$\cdot\cdot\cdot$}O distance is determined as Re=291.2\textpm 0.5 pm and the equilibrium dissociation energy as De=21.0\textpm 0.2 kJ mol-1, with respect to dissociation into two isolated water molecules at equilibrium. Accounting for zero-point vibrational energy, the theoretical prediction for the dissociation energy becomes D0=13.8\textpm 0.4 kJ mol-1, a result which is open to direct experimental verification.},
   langid = {english},
   file = {/home/mariano/Zotero/storage/R3NJRAIN/Klopper et al. - 2000 - Computational determination of equilibrium geometr.pdf}
+}
+
+@article{kovacsEvaluationMACEForce2023,
+  title = {Evaluation of the {{MACE}} Force Field Architecture: {{From}} Medicinal Chemistry to Materials Science},
+  shorttitle = {Evaluation of the {{MACE}} Force Field Architecture},
+  author = {Kov\'acs, D\'avid P\'eter and Batatia, Ilyes and Arany, Eszter S\'ara and Cs\'anyi, G\'abor},
+  date = {2023-07-31},
+  journaltitle = {The Journal of Chemical Physics},
+  shortjournal = {The Journal of Chemical Physics},
+  volume = {159},
+  number = {4},
+  pages = {044118},
+  issn = {0021-9606},
+  doi = {10.1063/5.0155322},
+  url = {https://doi.org/10.1063/5.0155322},
+  urldate = {2024-07-08},
+  abstract = {The MACE architecture represents the state of the art in the field of machine learning force fields for a variety of in-domain, extrapolation, and low-data regime tasks. In this paper, we further evaluate MACE by fitting models for published benchmark datasets. We show that MACE generally outperforms alternatives for a wide range of systems, from amorphous carbon, universal materials modeling, and general small molecule organic chemistry to large molecules and liquid water. We demonstrate the capabilities of the model on tasks ranging from constrained geometry optimization to molecular dynamics simulations and find excellent performance across all tested domains. We show that MACE is very data efficient and can reproduce experimental molecular vibrational spectra when trained on as few as 50 randomly selected reference configurations. We further demonstrate that the strictly local atom-centered model is sufficient for such tasks even in the case of large molecules and weakly interacting molecular assemblies.},
+  file = {/home/mariano/Zotero/storage/9NC5R3UC/Kovács et al. - 2023 - Evaluation of the MACE force field architecture From medicinal chemistry to materials science.pdf;/home/mariano/Zotero/storage/BMHJZ2A8/Evaluation-of-the-MACE-force-field-architecture.html}
 }
 
 @article{kuhneStaticDynamicalProperties2009,
