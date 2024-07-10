@@ -103,12 +103,25 @@
 
 #pagebreak()
 
-#outline()
+#[#show outline.entry.where(level: 1): it => {
+    v(12pt, weak: true)
+    strong(it)
+  }
+  #outline()
+]
 
-#outline(
-  title: [List of Figures],
-  target: figure.where(kind: image),
-)
+#[ciao].text.slice(0, 3)
+
+#[
+  // Vorrei troncare le entry troppo lunghe
+  #show outline.entry: it => {
+    it
+  }
+  #outline(
+    title: [List of Figures],
+    target: figure.where(kind: image),
+  )
+]
 
 #outline(
   title: [List of Tables],
@@ -154,6 +167,12 @@
       long: "coupled cluster theory with singlets, doublets, and perturbative triplets",
     ),
     (key: "cbs", short: "CBS", long: "complete basis set"),
+    (
+      key: "hdnnp",
+      short: "HDNNP",
+      long: "high-dimensional neural network potential",
+    ),
+    (key: "mpnn", short: "MPNN", long: "message passing neural network"),
   ),
   show-all: true,
 )
@@ -331,6 +350,19 @@ Molecular crystals are a class of materials of great technological importance.
 L'acqua, i legami etc etc... Quantum Monte Carlo, DFT, quali sono i problemi.
 
 == Motivation
+
+Ab initio–based methods, such as ab initio molecular dynamics (AIMD), struggle in terms of the accessible time and length scales, while traditional force ﬁeld approaches are complicated to develop and often not accurate enough to provide reliable answers for complex interface problems.
+In recent years, #glspl("mlp") have become a promising alternative, bypassing expensive ab initio calculations and extending length and time scales in molecular simulations. @bjorneholmWaterInterfaces2016
+
+Since their introduction about 25 years ago, machine learning (ML) potentials have become an important tool in the ﬁeld of atomistic simulations. After the initial decade, in which neural networks were successfully used to construct potentials for rather small molecular systems, the development of #glspl("hdnnp") in 2007 opened the way for the application of ML potentials in simulations of large systems containing thousands of atoms. @behlerFourGenerationsHighDimensional2021
+
+#figure(
+  image("thesis/imgs/images_large_cr0c00868_0001.jpeg", width: 80%),
+  caption: [
+    From @behlerFourGenerationsHighDimensional2021[Figure 1].
+    Pyramid of potentials for atomistic simulations illustrated for the example of water and aqueous systems. Using high-level wave function-based methods as represented by Ψ only the geometries of small systems such as water clusters in vacuum are accessible, while @dft is the standard method to determine simple properties such as #glspl("rdf") of liquid water in ab initio molecular dynamics simulations. Very large-scale simulations of complex systems such as electrolytes or solid−liquid interfaces, or the determination of complex thermodynamic properties, can only be carried out using atomistic potentials such as forceﬁelds. Also #glspl("mlp") allow the study of these systems.
+  ],
+)
 
 DFT potentials are hard to make and it is hard to account for all the contributions.
 They consume much time and resources.
@@ -1738,7 +1770,8 @@ At each layer, many-body messages are formed using a linear combination of a ten
 This is constructed by taking tensor products of a sum of two-body permutation-invariant polynomials, expanded in a spherical basis.
 *The final output is the energy contribution of each atom to the total potential energy.*
 
-References @batatiaMACEHigherOrder2022
+The MACE model follows the general framework of #glspl("mpnn")
+Equivariant @batatiaMACEHigherOrder2022
 
 @kovacsEvaluationMACEForce2023 shows that MACE generally outperforms alternatives for a wide range of systems, including liquid water.
 In those simulations, the many-body equivariant MACE model is an improvement with respect to the three-body atom-centered symmetry function-based feed-forward neural network model (BPNN), the three-body invariant message passing model REANN and the two-body equivariant message passing model NequIP.
