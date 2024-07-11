@@ -173,6 +173,7 @@
       long: "high-dimensional neural network potential",
     ),
     (key: "mpnn", short: "MPNN", long: "message passing neural network"),
+    (key: "gnn", short: "GNN", long: "graph neural network"),
   ),
   show-all: true,
 )
@@ -1770,8 +1771,64 @@ At each layer, many-body messages are formed using a linear combination of a ten
 This is constructed by taking tensor products of a sum of two-body permutation-invariant polynomials, expanded in a spherical basis.
 *The final output is the energy contribution of each atom to the total potential energy.*
 
-The MACE model follows the general framework of #glspl("mpnn")
-Equivariant @batatiaMACEHigherOrder2022
+=== MPNN Interatomic Potentials <sec:mpnn>
+#glspl("mpnn") are a type of @gnn that parametrizes a mapping from a labeled graph to a target space, either a graph or a vector space. @batatiaMACEHigherOrder2022
+When applied to parametrize properties of atomistic structures (materials or molecules), the graph is embedded in 3-dimensional (3D) Euclidean space, where each node represents an atom, and edges connect nodes if the corresponding atoms are within a given distance of each other.
+The state of each node $i$ in layer $t$ of the @mpnn is represented by a tuple
+$
+  sigma_i^((t)) = (arrow(r)_i, z_i, arrow(h)_i^((t))),
+$
+where $arrow(r)_i in RR^3$ is the position of atom $i$; $z_i$ is the chemical element; $arrow(h)_i^((t))$ are its learnable features.
+A forward pass of the network consists of multiple _message construction, update_ and _readout_ steps.
+During message construction, a message $arrow(m)_i^((t))$ is created for each node by pooling over its neighbours:
+$
+  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (
+    sigma_i^((t)), sigma_j^((t))
+  ),
+$
+where $M_t$ is a learnable message function and $plus.circle.big_(j in cal(N) (i))$ is a learnable, permutation invariant pooling operation over the neighbours of atom $i$ (e.g., a sum).
+In the update step, the message $arrow(m)_i^((t))$ is transformed into new features
+$
+  arrow(h)_i^((t+1)) = U_t (sigma_i^((t)), arrow(m)_i^((t))),
+$
+where $U_t$ is a learnable update function.
+After $T$ message construction and update steps, the learnable readouts functions $cal(R)_t$ map the node states $sigma_i^((t))$ to the target, in this case the site energy of atom $i$,
+$
+  E_i = sum_(t=1)^T cal(R)_t (sigma_i^((t))).
+$
+
+=== Equivariant Graph Neural Networks
+In _equivariant_ #glspl("gnn"), internal features $arrow(h)_i^((t))$ transform in a specified way under some group action. @batatiaMACEHigherOrder2022
+When modelling the potential energy of an atomic structure, the group of interest is $O(3)$, specifying rotations and reflections of the particles; translation invariance is triviallyl incorporated through the use of relative distances.
+A @gnn is called $O(3)$ equivariant if it has internal features that transform under the rotation $Q in O(3)$ as
+$
+  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((
+    t
+  )) (arrow(r)_1, dots, arrow(r)_N),
+$
+where $D^L(Q) in RR^((2L + 1) times (2L + 1))$ is a Wigner D-matrix of order $L$.
+A feature labelled with $L=0$ describes an invariant scalar.
+Features labelled with $L>0$ describe equivariant features, formally corresponding to equivariant vectors, matrices or higher order tensors.
+The features of _invariant_ models, such as SchNet and DimeNet, transform according to $D(Q) = bb(1)$, the identity matrix.
+Models such as NequIP, equivariant transformer, PaiNN, or SEGNNs, in addition to invariant scalars, employ equivariant internal features that transform like vectors or tensors.
+
+=== The MACE Architecture
+
+The MACE model follows the general framework of #glspl("mpnn") outlined in @sec:mpnn.
+The key innovation is a new message construction mechanism.
+The messages $arrow(m)_i^((t))$ are expanded in a hierarchical body order expansion,
+$
+  arrow(m)_i^((t))
+  &= sum_j arrow(u)_1 (sigma_i^((t)); sigma_j^((t))) \
+  &+ sum_(j_1, j_2) arrow(u)_2 (
+    sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
+  )
+  + dots
+  + sum_(j_1, dots, j_nu) arrow(u)_nu (
+    sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
+  ),
+$
+where the $arrow(u)$ functions are learnable, the sums run over the neighbours of $i$, and $nu$ is a hyper-parameter corresponding to the maximum correlation order, the body order minus 1, of the message function with respect to the states.
 
 @kovacsEvaluationMACEForce2023 shows that MACE generally outperforms alternatives for a wide range of systems, including liquid water.
 In those simulations, the many-body equivariant MACE model is an improvement with respect to the three-body atom-centered symmetry function-based feed-forward neural network model (BPNN), the three-body invariant message passing model REANN and the two-body equivariant message passing model NequIP.
