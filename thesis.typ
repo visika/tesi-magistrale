@@ -175,6 +175,11 @@
     ),
     (key: "mpnn", short: "MPNN", long: "message passing neural network"),
     (key: "gnn", short: "GNN", long: "graph neural network"),
+    (
+      key: "ibisco",
+      short: "IBiSCo",
+      long: "Infrastructure for BIg data and Scientific Computing",
+    ),
   ),
   show-all: true,
 )
@@ -1969,10 +1974,47 @@ Further analysis can also be made on the study of the diffusion coefficient and 
 = Tools
 Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
 
+== Ibisco
+Simulations were performed on the Ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
+
+#box(
+  stroke: 2pt + red,
+  inset: 1mm,
+  [
+    The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
+
+    The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
+    in the upper level the application level, which allows users to submit their tasks.
+
+    The intermediate level of the architecture consists of the set of CUDA and MPI libraries which are capable of making the two levels communicate with each other.
+
+    === The hardware level
+    The cluster comprises 36 nodes and 2 switches, placed in 4 racks of the Data Center.
+    They perform two functions: calculation and storage.
+    To support the calculation there are 128 GPUs, distributed among 32 nodes (4 GPUs per node).
+    To support storage, 320 TB are available distributed among 4 nodes (80 TB per node).
+
+    To ensure access to resources and low-latency broadband communication between nodes, the InfiniBand technology is used to provide a high-performance network.
+
+    === The Compute Node Architecture
+    The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 GPUs, 2 Ethernet ports at 10Gb/s each, 2 InfiniBand ports at 100Gb/s each, 2 Intel Gen 2 Xeon Gold CPUs, and 2 SATA 480 GB SSDs.
+    Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
+    Each GPU is equipped with 34 GB RAM memory.
+    The nodes are divided into 3 differently sized sub-clusters.
+  ],
+)
+
 == ASE
 
-Introducing @ase.
+The Atomic Simulation Environment (ASE) is a set of tools and Python modules for setting up, manipulating, running, visualizing and analyzing atomistic simulations.
+
+@ase provides interfaces to different codes through `Calculators` which are used together with the central `Atoms` object and the many available algorithms in @ase.
+
 The `Atoms` object contains the positions of the atoms and the properties of the cell.
+
+@ase allows geometry optimization, computing of the potential energy of the system, molecular dynamics.
+
+The MACE code was executed through the calculators interface of @ase.
 
 == MACE
 
@@ -2218,7 +2260,8 @@ The combination of foundation models with the ability to fine-tune models to bet
 
 = Acknowledgments
 I would like to express my gratitude to Flaviano Della Pia for his invaluable assistance in learning the new tools and for providing me with insightful advice and practical tutorials. I am also indebted to Andrea Zen for his meticulous guidance and prompt advice. Finally, I would like to thank Dario Alfè for imparting me with the fundamentals of knowledge in this field and for steering my thesis in the right direction.
-// This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
+
+This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 
 #show heading.where(level: 1): it => [
   #[] <empty-page>
