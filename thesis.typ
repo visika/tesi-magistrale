@@ -342,6 +342,16 @@
   ],
 )
 
+#box(
+  stroke: 2pt + red,
+  inset: 1mm,
+  [
+    There is a great need for a better understanding of complex aqueous systems, in particular those involving solid–liquid interfaces, to promote progress in ﬁelds as diverse as heterogeneous catalysis, material design, biotechnology, and energy conversion or storage (1, 2). @schranMachineLearningPotentials2021
+
+    Ab initio–based methods, such as ab initio molecular dynamics (AIMD), struggle in terms of the accessible time and length scales, while traditional force ﬁeld approaches are complicated to develop and often not accurate enough to provide reliable answers for complex interface problems. In recent years, machine learning potentials (MLPs) have become a promising alternative, bypassing expensive ab initio calculations and extending length and time scales in molecular simulations. @schranMachineLearningPotentials2021
+  ],
+)
+
 // TODO Descrivi cristalli molecolari e compara l'acqua come esempio caratterizzante
 
 Qual è il problema e cosa si va a fare.
