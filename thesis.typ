@@ -1770,6 +1770,7 @@ MACE is an equivariant message-passing graph tensor network where each layer enc
 At each layer, many-body messages are formed using a linear combination of a tensor product basis. @batatiaDesignSpaceEquivariant2022 @darbyTensorReducedAtomicDensity2023
 This is constructed by taking tensor products of a sum of two-body permutation-invariant polynomials, expanded in a spherical basis.
 *The final output is the energy contribution of each atom to the total potential energy.*
+The MACE architecture is implemented in PyTorch and employs the e3nn library.
 
 === MPNN Interatomic Potentials <sec:mpnn>
 #glspl("mpnn") are a type of @gnn that parametrizes a mapping from a labeled graph to a target space, either a graph or a vector space. @batatiaMACEHigherOrder2022
@@ -1827,13 +1828,87 @@ $
   + sum_(j_1, dots, j_nu) arrow(u)_nu (
     sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
   ),
-$
+$ <eq:batatiaMACEHigherOrder2022-7>
 where the $arrow(u)$ functions are learnable, the sums run over the neighbours of $i$, and $nu$ is a hyper-parameter corresponding to the maximum correlation order, the body order minus 1, of the message function with respect to the states.
+
+==== Message Construction
+At each iteration, MACE first embeds the edges using a learnable radial basis $R_(k l_1 l_2 l_3)^((t))$, a set of spherical harmonics $Y_(l_1)^(m_1)$, and a learnable embedding of the previous node features $h_(j, tilde(k) l_2 m_2)^((t))$ using weights $W_(k tilde(k) l_2)^((t))$. @batatiaMACEHigherOrder2022
+The $A_i^((t))$ features are obtained by pooling over the neighbours $cal(N)(i)$ to obtain permutation invariant 2-body features whilst, crucially, retaining full directional information, and thus, full information about the atomic environment:
+$
+  A_(i, k l_3 m_3)^((t))
+  = sum_(l_1 m_1, l_2 m_2) C_(l_1 m_1, l_2 m_2)^(l_3 m_3) dot \
+  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (
+    hat(r)_(j i)
+  )
+  sum_(tilde(k)) W_(k tilde(k) l_2)^((t)) h_(j, tilde(k) l_2 m_2)^((t)),
+$ <eq:batatiaMACEHigherOrder2022-8>
+where $C_(l_1 m_1, l_2 m_2)^(l_3 m_3)$ are the standard Clebsh-Gordan coefficients ensuring that $A_(i, k l_3 m_3)^((t))$ maintain the correct equivariance; $r_(j i)$ is the (scalar) interatomic distance, and $hat(r)_(j i)$ is the corresponding unit vector.
+$R_(k l_1 l_2 l_3)^((t))$ is obtained by feeding a set of radial features that embed the radial distance $r_(j i)$ using Bessel functions multiplied by a smooth polynomial cutoff to a multi-layer perceptron.
+In the first layer, the node features $h_j^((t))$ correspond to the (invariant) chemical element $z_j$.
+Therefore, @eq:batatiaMACEHigherOrder2022-8 can be further simplified:
+$
+  A_(i, k l_1 m_1)^((1))
+  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (
+    hat(r)_(j i)
+  ) W_(k z_j)^((1)).
+$ <eq:batatiaMACEHigherOrder2022-9>
+This simplified operation is much cheaper, making the computational cost of the first layer low.
+
+The _key_ operation of MACE is the efficient construction of higher order features from the $A_i^((t))$-features.
+This is achieved by first forming tensor products of the features, and then symmetrising:
+$
+  B_(i, eta_nu k L M)^((t))
+  = sum_(arrow(l m)) cal(C)_(eta_nu, arrow(l m))^(L M)
+  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((
+    t
+  )) A_(i, tilde(k) l_xi m_xi)^((t)),
+  quad arrow(l m) = (l_1 m_1, dots, l_nu m_nu)
+$ <eq:batatiaMACEHigherOrder2022-10>
+where the coupling coefficients $cal(C)_(eta_nu)^(L M)$ corresponding to the generalized Clebsh-Gordan coefficients ensuring that $B_(i, eta_nu k L M)^((t))$ are $L$-equivariant, the weights $w_(k tilde(k) l_xi)^((t))$ are mixing the channels $(k)$ of $A_i^((t))$, and $nu$ is a given correlation order.
+$cal(C)_(eta_nu, arrow(l m))^(L M)$ is very sparse and can be pre-computed such that @eq:batatiaMACEHigherOrder2022-10 can be evaluated efficiently.
+The additional index $eta_nu$ simply enumerates all possible couplings of $l_1, dots, l_nu$ features that yield the selected equivariance specified by the $L$ index.
+The $B_i^((t))$-features are constructed up to some maximum $nu$.
+This variable in @eq:batatiaMACEHigherOrder2022-10 is the order of the tensor product, and hence, can be identified as the order of the many-body expansion terms in @eq:batatiaMACEHigherOrder2022-7.
+The computationally expensive multi-dimensional sums over all triplets, quadruplets, etc..., are thus circumvented and absorbed into @eq:batatiaMACEHigherOrder2022-9 and @eq:batatiaMACEHigherOrder2022-8.
+
+The message $m_i^((t))$ can now be written as a linear expansion
+$
+  m_(i,k L M)^((t))
+  = sum_nu sum_(eta_nu) W_(z_i k L, eta_nu)^((t)) B_(i, eta_nu k L M)^((t)),
+$ <eq:batatiaMACEHigherOrder2022-11>
+where $W_(z_i k L, eta_nu)^((t))$ is a learnable weight matrix that depends on the chemical element $z_i$ of the receiving atom and message symmetry $L$.
+Thus, MACE implicitly constructs each term $u$ in @eq:batatiaMACEHigherOrder2022-7 by a linear combination of $B_(i, eta_nu k L M)^((t))$ features of the corresponding body order.
+
+Under mild conditions on the two-body bases $A_i^((t))$, the higher order features $B_(i, eta_nu k L M)^((t))$ can be interpreted as a _complete basis_ of many-body interactions, which can be computed at a cost comparable to pairwise interactions.
+Because of this, the expansion @eq:batatiaMACEHigherOrder2022-11 is _systematic_.
+It can in principle be converged to represent any smooth $(nu + 1)$-body equivariant mapping in the limit of infinitely many features. @dussonAtomicClusterExpansion2022
+
+==== Update
+In MACE, the update is a linear function of the message and the residual connection: @batatiaMACEHigherOrder2022
+$
+  h_(i, k L M)^((t + 1))
+  = U_t^(k L) (sigma_i^((t)), m_i^((t)))
+  = sum_(tilde(k)) W_(k L, tilde(k))^((t)) m_(i, tilde(k) L M)
+  + sum_(tilde(k)) W_(z_i k L, tilde(k))^((t)) h_(i, tilde(k) L M)^((t)).
+$
+
+==== Readout
+In the readout phase, the invariant part of the node features is mapped to a hierarchical decomposition of site energies via readout functions: @batatiaMACEHigherOrder2022
+$
+  E_i = E_i^((0)) + E_i^((1)) + dots + E_i^((T)), quad "where" \
+  E_i^((t)) = cal(R)_t (h_i^((t)))
+  = cases(
+    sum_(tilde(k)) W_("readout", tilde(k))^((t)) h_(i, tilde(k) 00)^((t)) & "if" t < T,
+    "MLP"_"readout"^((t)) ({h_(i, k 00)^((t))}_k) & "if" t = T
+  )
+$
+The readout only depends on the invariant features $h_(i, k 00)^((t))$ to ensure that the site energy contributions $E_i^((t))$ are invariant as well.
+To maintain body ordering, MACE uses linear readout functions for all layers except the last, where it uses a one-layer multi-layer perceptron.
+
+=== Performance of MACE
 
 @kovacsEvaluationMACEForce2023 shows that MACE generally outperforms alternatives for a wide range of systems, including liquid water.
 In those simulations, the many-body equivariant MACE model is an improvement with respect to the three-body atom-centered symmetry function-based feed-forward neural network model (BPNN), the three-body invariant message passing model REANN and the two-body equivariant message passing model NequIP.
-
-The MACE architecture is implemented in PyTorch and employs the e3nn library.
 
 MACE-MP-0 is a general-purpose @ml model, trained on a public database of 150k inorganic crystals, that is capable of running stable molecular dynamics on molecules and materials. @batatiaFoundationModelAtomistic2023
 The model can be applied out of the box and as a starting or "foundation model" for any atomistic system of interest and is thus a step towards democratising the revolution of @ml force fields by lowering the barriers to entry. @batatiaFoundationModelAtomistic2023
