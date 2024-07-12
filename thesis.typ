@@ -576,21 +576,162 @@ The following chapters will introduce the theoretical foundations and the tools 
 
 = Theory
 
-== Phonons
-The _dynamical matrix_:
+#text(blue)[
+  == Three dimensional harmonic crystalline solids
+  The crystal can be described by a collection of independent harmonic oscillators with potential energy:
+  $
+    U = U_0 + sum_(i=1)^(3N) 1 / 2 M omega_i^2 q_i^2,
+  $ <eq:termcomp-7.1>
+  where $M$ is the mass of the particles, $q_i$ a set of _normal coordinates_, and $U_0$ the energy of the system in its ground state.
+  This approximation is known as the _harmonic approximation_.
+  The Newton's equations of motion for the normal coordinates are:
+  $
+    M dv(q_i, t, 2) = - pdv(U, q_i) - M omega_i^2 q_i.
+  $
+
+  Consider a three dimensional system made of particles arranged on a _periodic lattice_, at equilibrium positions ${va(r^0)} := va(r_1^0), dots, va(r_N^0), dots$.
+  This _Bravais lattice_ is completely defined by a set of three _lattice vectors_, $va(a_1), va(a_2), va(a_3)$, and every point on the lattice can be obtained as:
+  $
+    va(r_j^0) = n va(a_1) + m va(a_2) + l va(a_3),
+  $
+  where $j$ is a shorthand for the three integers $n, m, l$.
+  We also define the _reciprocal lattice vectors_:
+  $
+    va(b_1) := 2 pi (va(a_2) times va(a_3)) / V, quad
+    va(b_2) := 2 pi (va(a_3) times va(a_1)) / V, quad
+    va(b_3) := 2 pi (va(a_1) times va(a_2)) / V,
+  $
+  where $V := (va(a_1) times va(a_2)) dot va(a_3)$ is the volume of the _primitive cell_.
+  This is the smallest unit of volume that can be periodically repeated to fill the whole space, and clearly it can be constructed in multiple (infinite) ways.
+  A convenient construction is the _Wigner-Seitz_ primitive cell, which is the locus of points in space closer to a particular lattice point than to any other lattice point;
+]
+this procedure is the application of Voronoi decomposition to a crystal lattice.
+#text(blue)[
+  The reciprocal lattice vectors span the _reciprocal space_, which is also a periodic lattice with points at positions:
+  $
+    va(g) := n' va(b_1) + m' va(b_2) + l' va(b_3),
+  $
+  with $n', m', l'$ integer numbers.
+  The Wigner-Seitz cell in reciprocal space is called the _first Brillouin zone_.
+  The reciprocal vectors and the lattice vectors satisfy the orthogonality relations:
+  $
+    va(b_i) dot va(a_j) = 2 pi delta_(i j).
+  $
+  Each lattice site does not need to be occupied by just one particle; indeed, the generalization to crystals with more than one particle per lattice site is straightforward.
+
+  Let $U_({va(r^0)}) ({va(r)})$ be the potential energy function, defined by the interacting particles when they are in their equilibrium positions ${va(r^0)}$.
+  With this we mean that if we displace the particles by amounts $va(u_i) := va(r_i) - va(r_i^0)$, we assume that these displacements are not changing the functional form of the potential, but only the computed value changes.
+  This assumption can only be valid if the displacements ${va(u)}$ are small.
+  An extreme case where this cannot possibly hold is when the atoms move so much that the crystal assumes a different crystal structure, or it melts.
+  For zero displacements, when all particles are in their equilibrium positions, the potential energy can be computed from knowledge of the lattice vectors only, i.e., one only needs information about the primitive cell.
+  If instead the particles are displaced from their equilibrium positions, then we need the positions of all of them.
+  For small enough displacements ${va(u)}$ the potential energy can be expanded around its minimum, where all particles are in their equilibrium positions ${va(r^0)}$:
+  $
+    U({va(r)})
+    = U_0
+    + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + O(
+      u^3
+    ),
+  $
+  where $U_0 := U({va(r^0)})$, and the linear term is absent because we are expanding around the minimum of the potential.
+  The _force constants matrix_ $Phi$ is defined as:
+  $
+    Phi (va(r_i^0) - va(r_j^0)) := (
+      pdv(U({va(r)}), va(r_i), va(r_j))
+    )_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
+    = mat(
+      phi_(i j)^(x x), phi_(i j)^(x y), phi_(i j)^(x z);
+      phi_(i j)^(y x), phi_(i j)^(y y), phi_(i j)^(y z);
+      phi_(i j)^(z x), phi_(i j)^(z y), phi_(i j)^(z z);
+    ) \
+    phi_(i j)^(alpha beta) = pdv(U({va(r)}), alpha_i, beta_i),
+  $ <eq:force-constants-matrix>
+  where $alpha_i$ and $beta_j$ run over the three cartesian components of $va(r_i^0)$ and $va(r_j^0)$.
+  If the displacements are not too large and the $O(u^3)$ terms can be ignored, the force acting on particle at position $va(r_i^0)$ due to the displacements $va(u_j)$ of all particles in the system, including $va(u_i)$, is:
+  $
+    va(f_i) = -sum_j Phi(va(r_i^0) - va(r_j^0)) dot va(u_j).
+  $
+
+  The dependence of the force constants matrix on the difference $va(r_i^0) - va(r_j^0)$ rather than on $va(r_i^0)$ and $va(r_j^0)$ separately is due to translational invariance.
+  The force constants matrix satisfies other important properties:
+  + $Phi(va(r_i^0) - va(r_j^0)) = Phi(va(r_j^0) - va(r_i^0))$, which is implied by the fact that the double derivative in @eq:force-constants-matrix is invariant upon changing the order of differentiation.
+  + $sum_j Phi(va(r_j^0)) = 0$. This property can be understood by imagining to displace the whole crystal rigidly by some vector $va(c)$.
+    Clearly, such a displacement cannot affect the forces acting on the particles, because the relative differences between them are unaffected by the translation, and so we must have $va(f_i) = -sum_j Phi(va(r_i^0) - va(r_j^0)) dot va(u_j) = -sum_j Phi(va(r_i^0) - va(r_j^0)) dot (va(u_j) + va(c))$.
+    Therefore, $sum_j Phi(va(r_i^0) - va(r_j^0)) dot va(c) = 0$.
+    Since this is independent on the particular choice of $va(r_i^0)$ and $va(c)$, we must have $sum_j Phi(va(r_j^0)) = 0$.
+
+  We can obtain the normal modes of the system and show that the potential energy is given by the sum of squares of the normal modes.
+  To obtain the dispersion relation, consider the Newton's equation of motion for a particle at one particular lattice position, $va(r_i^0)$:
+  $
+    M dv(va(u_i), t, 2) = va(f_i).
+  $ <eq:termcomp-7.54>
+  The motion of the particle around its equilibrium position can be described by the form:
+  $
+    va(u_i)(t) prop va(epsilon) e^(i (va(q) dot va(r_i^0) - omega t)),
+  $ <eq:termcomp-7.55>
+  where $va(epsilon)$ is a _polarization vector_, which defines the direction of oscillation of the particle, and $va(q)$ is a _wave vector_.
+  The physical motion of the particles is obtained by taking the real part of @eq:termcomp-7.55.
+  Substituting @eq:termcomp-7.55 into @eq:termcomp-7.54 we obtain:
+  $
+    M omega^2 va(epsilon)
+    = sum_j e^(i va(q) dot (
+      va(r_j^0) - va(r_i^0)
+    )) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
+  $ <eq:termcomp-7.56>
+  The sum over $j$ runs over all lattice sites, and so it is independent on our choice of $va(r_i^0)$.
+  We can therefore choose $va(r_i^0) = va(0)$ and replace the difference $va(r_j^0) - va(r_i^0)$ simply with $va(r_j^0)$.
+]
+
+=== Phonons
+If we introduce
+the _dynamical matrix_:
 $
   D(arrow(q)) :=
-  1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
-  Phi(arrow(w)_i^0 - arrow(r)_j^0) dot arrow(epsilon)
+  1 / M sum_j e^(i arrow(q) dot arrow(r)_j^0) Phi(arrow(r)_j^0)
 $ <eq:dynamical-matrix>
-
-The square of the frequencies of the normal modes of the system is obtained as the eigenvalues of the eigenvalue equation:
-
+we can rewrite @eq:termcomp-7.56 as:
 $
   omega^2 arrow(epsilon) = D(arrow(q)) dot arrow(epsilon)
+$ <eq:dynamical-matrix-eigenvalue-problem>
+The transformation in @eq:dynamical-matrix is also known as a _lattice Fourier transform_.
+Note that it is sufficient to define the dynamical matrix in the first Brillouin zone, because any vector in reciprocal space can be written as the sum of a vector in the Brillouin zone plus a reciprocal lattice vector.
+We have:
 $
+  e^(i (va(q) + va(g)) dot va(r_j^0))
+  = e^(i va(q) dot va(r_j^0)) e^(i va(g) dot va(r_j^0))
+  = e^(i va(q) dot va(r_j^0)),
+$
+because:
+$
+  va(g) dot va(r_j^0) = (n n' + m m' + l l') 2 pi,
+$
+and so the dynamical matrix has the same periodicity of the reciprocal lattice.
 
-=== The harmonic approximation
+#text(blue)[
+  The property $sum_j Phi(va(r_j^0)) = 0$ implies $D(va(q)) = va(0)$; therefore, the dispersion relation gives zero frequencies at zero wavevector.
+  This _sum rule_ is very useful as a practical sanity check of the consistency of the calculations.
+
+  To solve @eq:dynamical-matrix-eigenvalue-problem we need to solve an eigenvalue problem.
+  We need to find a reference frame in which the matrix $D(va(q))$ is diagonal.
+  The elements of the diagonal, $omega_(va(q), s)^2$, with $s in {1,2,3}$ representing the _branch number_, are the _eigenvalues_, and the three vectors $va(epsilon_(va(q), s))$, the polarizations of the normal modes, are the _eigenvectors_ that define the reference frame.
+
+  Each normal mode represents a collective oscillation of the particles in the system with frequency $omega_(va(q), s)$.
+  These collective oscillations are called _phonons_.
+
+  The potential energy can be written in the form in @eq:termcomp-7.1 and so the partition function has the form of either @eq:termcomp-7.7 or @eq:termcomp-7.10, depending on if the system is treated classically or quantum-mechanically:
+  $
+    Z = e^(-beta U_0) product_(i=1)^(3N) (k_B T) / (planck.reduce omega_i)
+  $ <eq:termcomp-7.7>
+  $
+    Z = e^(-beta U_0) product_(i=1)^(3N) Z_i \
+    Z_i = sum_(n=0)^infinity e^(-E_n^i / (k_B T))
+    = sum_(n=0)^infinity e^(- (n + 1 / 2) (planck.reduce omega_i) / (k_B T))
+    = (e^(-1 / 2 (planck.reduce omega_i) / (k_B T))) / (1 - e^(- (planck.reduce omega_i) / (k_B T)))
+  $ <eq:termcomp-7.10>
+
+]
+
+=== The Helmholtz energy
 // Da §4 relazione termodinamica computazionale
 
 The harmonic contribution of phonons to the Helmholtz energy is represented by the equation:
@@ -615,10 +756,31 @@ $
 $
 
 $
-  F(V,T) = U_0(V) + k_B T sum_(s=1)^3 sum_(arrow(q)) ln (
+  F (V,T)
+  &= U_0(V) \
+  &+ sum_(s=1)^3 sum_(va(q)) [
+    (hbar omega_(va(q),s) (V)) / 2
+    + k_B T ln(
+      1 - exp(
+        - (hbar omega_(va(q), s) (V)) / (k_B T)
+      )
+    )
+  ]
+$ <eq:termcomp-7.63>
+
+$
+  F_"classical" (V,T) = U_0(V) + k_B T sum_(s=1)^3 sum_(arrow(q)) ln (
   planck.reduce omega_(arrow(q),s)(V)) / ( k_B T
   )
-$
+$ <eq:termcomp-7.64>
+
+#text(blue)[
+  The sum over $va(q)$ runs over all vectors in the Brillouin zone, which are infinite for a Bravais lattice that contains an infinite number of sites.
+  Indeed, the Helmholtz energy of a crystal with an infinite number of particles would also be infinite.
+  The physical quantity of interest is therefore the Helmholtz energy per particle; in practice, this is obtained by computing the sums @eq:termcomp-7.63 and @eq:termcomp-7.64 using a finite grid of $N_(va(q))$ points in the Brillouin zone and dividing the total Helmholtz energy by $N_(va(q))$.
+  Both the ground state energy and the frequencies explicitly depend on the volume $V$.
+  The relationship linking the frequencies with volume and temperature is responsible for the different temperature dependence of the Helmholtz energy at different volumes; these terms cause the phenomenon of thermal expansion in solids.
+]
 
 === The small displacement method <sec:small-displacement-method>
 
