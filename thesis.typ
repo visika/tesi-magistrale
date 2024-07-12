@@ -969,6 +969,43 @@ $
 This expression gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
 
 === Thermostats
+#text(blue)[
+  For a sufficiently large system, averages computed in the microcanonical ensemble, with fixed $(N,V,E)$, are not much different from those computed in the canonical ensemble, with fixed $(N,V,T)$.
+  However, it may be desirable to be able to generate @md trajectories that span the canonical ensemble, for example because one may want to control the temperature exactly.
+  Moreover, some system may not be ergodic, with the harmonic system being an egregious example.
+  This means that given an initial set of positions and momenta, $({arrow(r)^0}, {arrow(p)^0})$, solving the Newton's equation of motion generates a trajectory that does not visit every neighbourhood of configurational space.
+  In such a situation time averages are biased, and do not provide good approximations for ensemble averages.
+
+  One way to overcome this problem is to couple the simulated system with an external heat bath, provided that all degrees of freedom are interacting with the bath.
+  Several techniques have been developed, but not all of them are capable of overcoming the ergodicity problem.
+  One that does is the thermostat developed by Andersen, @andersenMolecularDynamicsSimulations1980 which is based on the concept of stochastic collisions.
+  We know that is a perfect gas at some temperature $T$ the velocities are distributed according to the Maxwell distribution
+  $
+    f(v) dif v
+    = (m / (2 pi k_B T))^(3 / 2) 4 pi v^2 exp(-(m v^2)/(2k_B T)) dif v.
+  $
+  Therefore, one way to generate the canonical ensemble is to perform a @md simulation by repeatedly drawing velocities from a Maxwell distribution.
+  This periodic velocity re-initialization procedure also redistributes energy between different modes, and so it is an effective way to overcome the ergodicity problem.
+  It can be shown that the frequency of these velocity re-initializations does not affect the ability to sample the canonical ensemble; however, drawing the velocities too often will result in the system moving very slowly from one region of configuration space to another; drawing them too seldom results in slow transfer of energy between different modes, which would only overcome the ergodicity problem slowly.
+  Finding the appropriate time interval between velocities randomizations is then a matter of finding the right compromise to maximize efficiency.
+]
+
+In *Andersen dynamics*, constant temperature is imposed by stochastic collisions with a heath bath.
+With a (small) probability the collisions act occasionally on velocity components of randomly selected particles.
+Upon a collision the new velocity is drawn from the Maxwell-Boltzmann distribution at the corresponding temperature.
+The system is then integrated numerically at constant energy according to the Newtonian laws of motion.
+The collision probability is defined as the average number of collisions per atom and timestep.
+The algorithm generates a canonical distribution. @daanfrenkelUnderstandingMolecularSimulation2002[§6.1.1]
+However, due to the random decorrelation of velocities, the dynamics are unphysical and cannot represent dynamical properties like e.g. diffusion or viscosity.
+Another disadvantage is that the collisions are stochastic in nature, so repeating the simulation will not give exactly the same trajectory.
+Typical values for the collision probability are in the order of $10^(-4) div 10^(-1)$.
+
+In *Nosé-Hoover dynamics*, an extra term is added to the Hamiltonian representing the coupling to the heat bath.
+From a pragmatic point of view one can regard Nosé-Hoover dynamics as adding a friction term to Newton's second law, but dynamically changing the friction coefficient to move the system towards the desired temperature.
+Typically the "friction coefficient" will fluctuate around zero.
+
+During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
+The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
 == Neural networks
 
