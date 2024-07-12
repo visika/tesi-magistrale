@@ -3,6 +3,7 @@
 #import "@preview/hydra:0.4.0": hydra
 #import "@preview/fletcher:0.4.5" as fletcher: diagram, node, edge
 #import "@preview/tablem:0.1.0": tablem
+#import "@preview/physica:0.9.3": *
 #show: make-glossary
 
 // For glossarium links
