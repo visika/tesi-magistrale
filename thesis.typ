@@ -111,8 +111,6 @@
   #outline()
 ]
 
-#[ciao].text.slice(0, 3)
-
 #[
   // Vorrei troncare le entry troppo lunghe
   #show outline.entry: it => {
