@@ -105,6 +105,22 @@
   file = {/home/mariano/Zotero/storage/EEWVCLJH/Batatia et al. - MACE Higher Order Equivariant Message Passing Neu.pdf}
 }
 
+@online{battagliaRelationalInductiveBiases2018,
+  title = {Relational Inductive Biases, Deep Learning, and Graph Networks},
+  author = {Battaglia, Peter W. and Hamrick, Jessica B. and Bapst, Victor and Sanchez-Gonzalez, Alvaro and Zambaldi, Vinicius and Malinowski, Mateusz and Tacchetti, Andrea and Raposo, David and Santoro, Adam and Faulkner, Ryan and Gulcehre, Caglar and Song, Francis and Ballard, Andrew and Gilmer, Justin and Dahl, George and Vaswani, Ashish and Allen, Kelsey and Nash, Charles and Langston, Victoria and Dyer, Chris and Heess, Nicolas and Wierstra, Daan and Kohli, Pushmeet and Botvinick, Matt and Vinyals, Oriol and Li, Yujia and Pascanu, Razvan},
+  date = {2018-10-17},
+  eprint = {1806.01261},
+  eprinttype = {arXiv},
+  eprintclass = {cs, stat},
+  doi = {10.48550/arXiv.1806.01261},
+  url = {http://arxiv.org/abs/1806.01261},
+  urldate = {2024-07-13},
+  abstract = {Artificial intelligence (AI) has undergone a renaissance recently, making major progress in key domains such as vision, language, control, and decision-making. This has been due, in part, to cheap data and cheap compute resources, which have fit the natural strengths of deep learning. However, many defining characteristics of human intelligence, which developed under much different pressures, remain out of reach for current approaches. In particular, generalizing beyond one's experiences--a hallmark of human intelligence from infancy--remains a formidable challenge for modern AI. The following is part position paper, part review, and part unification. We argue that combinatorial generalization must be a top priority for AI to achieve human-like abilities, and that structured representations and computations are key to realizing this objective. Just as biology uses nature and nurture cooperatively, we reject the false choice between "hand-engineering" and "end-to-end" learning, and instead advocate for an approach which benefits from their complementary strengths. We explore how using relational inductive biases within deep learning architectures can facilitate learning about entities, relations, and rules for composing them. We present a new building block for the AI toolkit with a strong relational inductive bias--the graph network--which generalizes and extends various approaches for neural networks that operate on graphs, and provides a straightforward interface for manipulating structured knowledge and producing structured behaviors. We discuss how graph networks can support relational reasoning and combinatorial generalization, laying the foundation for more sophisticated, interpretable, and flexible patterns of reasoning. As a companion to this paper, we have released an open-source software library for building graph networks, with demonstrations of how to use them in practice.},
+  pubstate = {prepublished},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/home/mariano/Zotero/storage/CLISIB7Z/Battaglia et al. - 2018 - Relational inductive biases, deep learning, and graph networks.pdf;/home/mariano/Zotero/storage/G39V66TF/1806.html}
+}
+
 @article{behlerConstructingHighDimensional2015,
   title = {Constructing High-dimensional Neural Network Potentials: {{A}} Tutorial Review},
   shorttitle = {Constructing High-dimensional Neural Network Potentials},
@@ -615,6 +631,22 @@
   abstract = {Kohn-Sham density functional theory (DFT) has become established as an indispensable tool for investigating aqueous systems of all kinds, including those important in chemistry, surface science, biology, and the earth sciences. Nevertheless, many widely used approximations for the exchange-correlation (XC) functional describe the properties of pure water systems with an accuracy that is not fully satisfactory. The explicit inclusion of dispersion interactions generally improves the description, but there remain large disagreements between the predictions of different dispersion-inclusive methods. We present here a review of DFT work on water clusters, ice structures, and liquid water, with the aim of elucidating how the strengths and weaknesses of different XC approximations manifest themselves across this variety of water systems. Our review highlights the crucial role of dispersion in describing the delicate balance between compact and extended structures of many different water systems, including the liquid. By referring to a wide range of published work, we argue that the correct description of exchange-overlap interactions is also extremely important, so that the choice of semi-local or hybrid functional employed in dispersion-inclusive methods is crucial. The origins and consequences of beyond-2-body errors of approximate XC functionals are noted, and we also discuss the substantial differences between different representations of dispersion. We propose a simple numerical scoring system that rates the performance of different XC functionals in describing water systems, and we suggest possible future developments.},
   langid = {english},
   file = {/home/mariano/Zotero/storage/2TA6CEYF/Gillan et al. - 2016 - Perspective How good is DFT for water.pdf}
+}
+
+@inproceedings{gilmerNeuralMessagePassing2017,
+  title = {Neural {{Message Passing}} for {{Quantum Chemistry}}},
+  booktitle = {Proceedings of the 34th {{International Conference}} on {{Machine Learning}}},
+  author = {Gilmer, Justin and Schoenholz, Samuel S. and Riley, Patrick F. and Vinyals, Oriol and Dahl, George E.},
+  date = {2017-07-17},
+  pages = {1263--1272},
+  publisher = {PMLR},
+  issn = {2640-3498},
+  url = {https://proceedings.mlr.press/v70/gilmer17a.html},
+  urldate = {2024-07-13},
+  abstract = {Supervised learning on molecules has incredible potential to be useful in chemistry, drug discovery, and materials science. Luckily, several promising and closely related neural network models invariant to molecular symmetries have already been described in the literature. These models learn a message passing algorithm and aggregation procedure to compute a function of their entire input graph. At this point, the next step is to find a particularly effective variant of this general approach and apply it to chemical prediction benchmarks until we either solve them or reach the limits of the approach. In this paper, we reformulate existing models into a single common framework we call Message Passing Neural Networks (MPNNs) and explore additional novel variations within this framework. Using MPNNs we demonstrate state of the art results on an important molecular property prediction benchmark; these results are strong enough that we believe future work should focus on datasets with larger molecules or more accurate ground truth labels.},
+  eventtitle = {International {{Conference}} on {{Machine Learning}}},
+  langid = {english},
+  file = {/home/mariano/Zotero/storage/BBSVCS7J/Gilmer et al. - 2017 - Neural Message Passing for Quantum Chemistry.pdf;/home/mariano/Zotero/storage/UQZ37AY2/Gilmer et al. - 2017 - Neural Message Passing for Quantum Chemistry.pdf}
 }
 
 @article{grimmeConsistentAccurateInitio2010,
@@ -1208,6 +1240,38 @@
   urldate = {2024-02-08},
   abstract = {Water's phase diagram displays enormous complexity with currently 17 experimentally confirmed polymorphs of ice and several more predicted computationally. For almost 120 years, it has been a stomping ground for scientific discovery, and ice research has often been a trailblazer for investigations into a wide range of materials-related phenomena. Here, the experimental progress of the last couple of years is reviewed, and open questions as well as future challenges are discussed. The specific topics include (i) the polytypism and stacking disorder of ice I, (ii) the mechanism of the pressure amorphization of ice I, (iii) the emptying of gas-filled clathrate hydrates to give new low-density ice polymorphs, (iv) the effects of acid/base doping on hydrogen-ordering phase transitions as well as (v) the formation of solid solutions between salts and the ice polymorphs, and the effect this has on the appearance of the phase diagram. In addition to continuing efforts to push the boundaries in terms of the extremes of pressure and temperature, the exploration of the ``chemical'' dimensions of ice research appears to now be a newly emerging trend. It is without question that ice research has entered a very exciting era.},
   file = {/home/mariano/Zotero/storage/GLAJCFIN/Salzmann - 2019 - Advances in the experimental exploration of water’.pdf;/home/mariano/Zotero/storage/76MF37E3/Advances-in-the-experimental-exploration-of-water.html}
+}
+
+@inproceedings{sanchez-gonzalezLearningSimulateComplex2020,
+  title = {Learning to {{Simulate Complex Physics}} with {{Graph Networks}}},
+  booktitle = {Proceedings of the 37th {{International Conference}} on {{Machine Learning}}},
+  author = {Sanchez-Gonzalez, Alvaro and Godwin, Jonathan and Pfaff, Tobias and Ying, Rex and Leskovec, Jure and Battaglia, Peter},
+  date = {2020-11-21},
+  pages = {8459--8468},
+  publisher = {PMLR},
+  issn = {2640-3498},
+  url = {https://proceedings.mlr.press/v119/sanchez-gonzalez20a.html},
+  urldate = {2024-07-13},
+  abstract = {Here we present a machine learning framework and model implementation that can learn to simulate a wide variety of challenging physical domains, involving fluids, rigid solids, and deformable materials interacting with one another. Our framework---which we term "Graph Network-based Simulators" (GNS)---represents the state of a physical system with particles, expressed as nodes in a graph, and computes dynamics via learned message-passing. Our results show that our model can generalize from single-timestep predictions with thousands of particles during training, to different initial conditions, thousands of timesteps, and at least an order of magnitude more particles at test time. Our model was robust to hyperparameter choices across various evaluation metrics: the main determinants of long-term performance were the number of message-passing steps, and mitigating the accumulation of error by corrupting the training data with noise. Our GNS framework advances the state-of-the-art in learned physical simulation, and holds promise for solving a wide range of complex forward and inverse problems.},
+  eventtitle = {International {{Conference}} on {{Machine Learning}}},
+  langid = {english},
+  file = {/home/mariano/Zotero/storage/CWRFBTHB/Sanchez-Gonzalez et al. - 2020 - Learning to Simulate Complex Physics with Graph Networks.pdf;/home/mariano/Zotero/storage/R4I6GJPT/Sanchez-Gonzalez et al. - 2020 - Learning to Simulate Complex Physics with Graph Networks.pdf}
+}
+
+@article{sanchez-lengelingGentleIntroductionGraph2021,
+  title = {A {{Gentle Introduction}} to {{Graph Neural Networks}}},
+  author = {Sanchez-Lengeling, Benjamin and Reif, Emily and Pearce, Adam and Wiltschko, Alex},
+  date = {2021-08-17},
+  journaltitle = {Distill},
+  shortjournal = {Distill},
+  volume = {6},
+  number = {8},
+  pages = {10.23915/distill.00033},
+  issn = {2476-0757},
+  doi = {10.23915/distill.00033},
+  url = {https://distill.pub/2021/gnn-intro},
+  urldate = {2024-07-13},
+  file = {/home/mariano/Zotero/storage/YS7LPTQX/gnn-intro.html}
 }
 
 @article{schranMachineLearningPotentials2021,

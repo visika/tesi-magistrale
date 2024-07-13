@@ -171,8 +171,8 @@
       short: "HDNNP",
       long: "high-dimensional neural network potential",
     ),
-    (key: "mpnn", short: "MPNN", long: "message passing neural network"),
-    (key: "gnn", short: "GNN", long: "graph neural network"),
+    (key: "mpnn", short: "MPNN", long: "Message Passing Neural Network"),
+    (key: "gnn", short: "GNN", long: "Graph Neural Network"),
     (
       key: "ibisco",
       short: "IBiSCo",
@@ -375,7 +375,10 @@ Since their introduction about 25 years ago, machine learning (ML) potentials ha
   image("thesis/imgs/images_large_cr0c00868_0001.jpeg", width: 80%),
   caption: [
     From @behlerFourGenerationsHighDimensional2021[Figure 1].
-    Pyramid of potentials for atomistic simulations illustrated for the example of water and aqueous systems. Using high-level wave function-based methods as represented by Ψ only the geometries of small systems such as water clusters in vacuum are accessible, while @dft is the standard method to determine simple properties such as #glspl("rdf") of liquid water in ab initio molecular dynamics simulations. Very large-scale simulations of complex systems such as electrolytes or solid−liquid interfaces, or the determination of complex thermodynamic properties, can only be carried out using atomistic potentials such as forceﬁelds. Also #glspl("mlp") allow the study of these systems.
+    Pyramid of potentials for atomistic simulations illustrated for the example of water and aqueous systems.
+    Using high-level wave function-based methods as represented by Ψ only the geometries of small systems such as water clusters in vacuum are accessible, while DFT is the standard method to determine simple properties such as RDFs of liquid water in ab initio molecular dynamics simulations.
+    Very large-scale simulations of complex systems such as electrolytes or solid−liquid interfaces, or the determination of complex thermodynamic properties, can only be carried out using atomistic potentials such as forceﬁelds.
+    Also MLPs allow the study of these systems.
   ],
 )
 
@@ -1002,7 +1005,7 @@ The collision probability is defined as the average number of collisions per ato
 The algorithm generates a canonical distribution. @daanfrenkelUnderstandingMolecularSimulation2002[§6.1.1]
 However, due to the random decorrelation of velocities, the dynamics are unphysical and cannot represent dynamical properties like e.g. diffusion or viscosity.
 Another disadvantage is that the collisions are stochastic in nature, so repeating the simulation will not give exactly the same trajectory.
-Typical values for the collision probability are in the order of $10^(-4) div 10^(-1)$.
+Typical values for the collision probability are in the order of $10^(-4) ÷ 10^(-1)$.
 
 In *Nosé-Hoover dynamics*, an extra term is added to the Hamiltonian representing the coupling to the heat bath.
 From a pragmatic point of view one can regard Nosé-Hoover dynamics as adding a friction term to Newton's second law, but dynamically changing the friction coefficient to move the system towards the desired temperature.
@@ -1011,7 +1014,85 @@ Typically the "friction coefficient" will fluctuate around zero.
 During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
-== Neural networks
+== Graph Neural Networks
+#text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
+
+#figure(
+  image("thesis/imgs/distill.pub.gnn-intro.fig1.png"),
+  caption: [
+    Taken from @sanchez-lengelingGentleIntroductionGraph2021.
+    Diagram representing of how a node accumulates information from nodes around it through the layers of the network.
+    // Hover over a node in the diagram below to see how it accumulates information from nodes around it through the layers of the network.
+  ],
+)
+
+#text(blue)[A set of objects, and the connections between them, are naturally expressed as a graph.]
+#text(blue)[#glspl("gnn") see practical applications in physics simulations @sanchez-gonzalezLearningSimulateComplex2020] and are the foundation of the main calculator employed in this work, MACE, as detailed in @sec:mace.
+
+#text(blue)[A graph represents the relations (_edges_) between a collection of entities (_nodes_).]
+
+#large_figure(
+  grid(
+    columns: 3,
+    gutter: 10pt,
+    figure(
+      image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-V.png"),
+      caption: [*V* -- Vertex (or node) attributes e.g., node identity, number of neighbors.],
+      numbering: none,
+    ),
+    figure(
+      image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-E.png"),
+      caption: [*E* -- Edge (or link) attributes and directions e.g., edge identity, edge weight.],
+      numbering: none,
+    ),
+    figure(
+      image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-U.png"),
+      caption: [*U* -- Global (or master node) attributes e.g., number of nodes, longest path.],
+      numbering: none,
+    ),
+  ),
+  caption: [
+    Three types of attributes we might find in a graph.
+    Figures from @sanchez-lengelingGentleIntroductionGraph2021.
+  ],
+)
+
+#text(blue)[
+  To further describe each node, edge or the entire graph, we can store information in each of these pieces of the graph.
+  We can additionally specialize graphs by associating directionality to edges (_directed_, _undirected_).
+
+  Graphs are very flexible data structures], and for this reason they were used by MACE to embed atomistic properties of physical systems.
+#text(blue)[
+  It’s a very convenient and common abstraction to describe this 3D object as a graph, e.g. where nodes are atoms and edges are covalent bonds.
+]
+#text(blue)[
+  A way of visualizing the connectivity of a graph is through its adjacency matrix.
+  One labels the nodes, in this case each of 14 non-H atoms in a caffeine molecule, and fill a matrix of $n_"nodes" times n_"nodes"$ with an entry if two nodes share an edge.
+]
+
+#figure(
+  image("thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png"),
+  caption: [
+    Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+    (Left) 3D representation of the Caffeine molecule. (Center) Adjacency matrix of the bonds in the molecule. (Right) Graph representation of the molecule.
+  ],
+)
+
+*Definition*:
+#text(blue)[
+  A GNN is an optimizable transformation on all attributes of the graph (nodes, edges, global-context) that preserves graph symmetries (permutation invariances).
+]
+
+#text(blue)[
+  In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
+  #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
+]
+
+#figure(
+  image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
+  caption: [A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation. Image taken from @gilmerNeuralMessagePassing2017.],
+)
+
 
 = Results I: model assessment
 
@@ -1558,7 +1639,7 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
     ..dimer_zpe.slice(1).flatten()
   ),
   caption: [
-    #glspl("zpe") of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012. Energies are in units of eV.
+    ZPE of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012. Energies are in units of eV.
   ],
 )
 
@@ -1857,7 +1938,7 @@ The comparison of the results with the different supercells is shown in @fig:pho
           |4|7h 32m| cpu|
         ],
       ),
-      caption: [Execution times with Phonons by @ase.],
+      caption: [Execution times with Phonons by ASE.],
     ),
   ),
 )
@@ -1962,7 +2043,7 @@ Further analysis can also be made on the study of the diffusion coefficient and 
     image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-mp-0_NVT_T=297.15_t=5ps.svg"),
     image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_nbins=40.svg"),
   ),
-  caption: [Comparison of the #glspl("rdf") obtained from @md simulations of liquid water using MACE-MP-0 and MACE-ICE13-1.],
+  caption: [Comparison of the RDFs obtained from MD simulations of liquid water using MACE-MP-0 and MACE-ICE13-1.],
 )
 
 #figure(
@@ -2014,7 +2095,7 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 
 The MACE code was executed through the calculators interface of @ase.
 
-== MACE
+== MACE <sec:mace>
 
 MACE is an equivariant message-passing graph tensor network where each layer encodes many-body information of atomic geometry.
 At each layer, many-body messages are formed using a linear combination of a tensor product basis. @batatiaDesignSpaceEquivariant2022 @darbyTensorReducedAtomicDensity2023
@@ -2240,7 +2321,7 @@ Fine-tuning a MACE model is composed of three steps, detailed as follows:
     image("tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg"),
   ),
   caption: [
-    Loss (left) and @mae of the energy (right) over epochs plots for the fine-tuning of a new model on ice Ih, with MACE-MP-0 small as foundation model.
+    Loss (left) and MAE of the energy (right) over epochs plots for the fine-tuning of a new model on ice Ih, with MACE-MP-0 small as foundation model.
   ],
 ) <fig-finetune-epochs>
 
