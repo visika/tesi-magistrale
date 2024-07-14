@@ -178,7 +178,7 @@
       short: "IBiSCo",
       long: "Infrastructure for BIg data and Scientific Computing",
     ),
-    (key: "cnn", short: "CNN", long: "Convolutional Neural Network")
+    (key: "cnn", short: "CNN", long: "Convolutional Neural Network"),
   ),
   show-all: true,
 )
@@ -404,30 +404,20 @@ Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, acc
 In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
 By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions; noticing that in the crystal there are no trans-rotational contributions; considering as negligible the pressure times volume term, $p V$; we have that
 $
-  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (
-    E_"el"^s + E_"vib"^s
-  ),
+  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (E_"el"^s + E_"vib"^s),
 $ <eq-zen_si_14>
 where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
 By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
 Thus, @eq-zen_si_14 simplifies to
 $
-  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (
-    T
-  ) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (
-    T
-  ) + 7 / 2 R T quad & "for linear molecules",
+  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (T) + 7 / 2 R T quad & "for linear molecules",
 $
 where the term $Delta E_"vib" (T)$ contains both the thermal and the quantum nuclear contributions.
 Notice from <eq-zen_2018_1> that $Delta E_"el" = E_"el"^g - E_"el"^s$ is precisely the opposite of the lattice energy $E_"latt"$; thus:
 $
-  & Delta_"T&QN" (T) = Delta E_"vib" (
-    T
-  ) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"T&QN" (T) = Delta E_"vib" (
-    T
-  ) + 7 / 2 R T quad & "for linear molecules".
+  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 7 / 2 R T quad & "for linear molecules".
 $ <eq-zen_si_16>
 
 Vibrations in the solid molecular crystals can usually be separated into intra-molecular and inter-molecular vibrations, $E_"vib"^s = E_"vib"^(s,"intra") + E_"vib"^(s,"inter")$, and the stiffest intra-molecular modes are decoupled from the intermolecular modes.
@@ -452,9 +442,7 @@ where the first term in the right hand side accounts for the @zpe contribution a
 
 This yields
 $
-  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (
-    T
-  ) = integral epsilon(omega, T) g(omega) dif omega,
+  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (T) = integral epsilon(omega, T) g(omega) dif omega,
 $ <eq-zen_si_19>
 where $omega_i$ are the frequencies of the isolated molecule,
 which are $3M-6$ ($M$ is the number of atoms in the molecule) for a non-linear molecule,
@@ -504,11 +492,7 @@ $
 $
 with the most important two-body term given by
 $
-  E^((
-    2
-  )) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (
-    r_(A B)
-  ).
+  E^((2)) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (r_(A B)).
 $
 
 Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
@@ -637,16 +621,12 @@ this procedure is the application of Voronoi decomposition to a crystal lattice.
   $
     U({va(r)})
     = U_0
-    + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + O(
-      u^3
-    ),
+    + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + O(u^3),
   $
   where $U_0 := U({va(r^0)})$, and the linear term is absent because we are expanding around the minimum of the potential.
   The _force constants matrix_ $Phi$ is defined as:
   $
-    Phi (va(r_i^0) - va(r_j^0)) := (
-      pdv(U({va(r)}), va(r_i), va(r_j))
-    )_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
+    Phi (va(r_i^0) - va(r_j^0)) := (pdv(U({va(r)}), va(r_i), va(r_j)))_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
     = mat(
       phi_(i j)^(x x), phi_(i j)^(x y), phi_(i j)^(x z);
       phi_(i j)^(y x), phi_(i j)^(y y), phi_(i j)^(y z);
@@ -682,9 +662,7 @@ this procedure is the application of Voronoi decomposition to a crystal lattice.
   Substituting @eq:termcomp-7.55 into @eq:termcomp-7.54 we obtain:
   $
     M omega^2 va(epsilon)
-    = sum_j e^(i va(q) dot (
-      va(r_j^0) - va(r_i^0)
-    )) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
+    = sum_j e^(i va(q) dot (va(r_j^0) - va(r_i^0))) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
   $ <eq:termcomp-7.56>
   The sum over $j$ runs over all lattice sites, and so it is independent on our choice of $va(r_i^0)$.
   We can therefore choose $va(r_i^0) = va(0)$ and replace the difference $va(r_j^0) - va(r_i^0)$ simply with $va(r_j^0)$.
@@ -853,9 +831,7 @@ which requires knowledge of every element of the force constants matrix.
 We can rewrite @eq:dynamical-matrix as:
 $
   D(arrow(q))
-  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (
-    arrow(r)_j^0 + arrow(L)
-  )) Phi(arrow(r)_j^0 + arrow(L)) \
+  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (arrow(r)_j^0 + arrow(L))) Phi(arrow(r)_j^0 + arrow(L)) \
   &= 1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
   sum_arrow(L) e^(i arrow(q) dot arrow(L))
   Phi(arrow(r)_j^0 + arrow(L))
@@ -913,24 +889,18 @@ $
 The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion. @alfeNotesStatisticalComputational2023
 It is a discretization of Newton's equations of motion:
 $
-  arrow(f)_i = M dot.double(arrow(r))_i = - (partial U(
-    {arrow(r)}
-  )) / (partial arrow(r)_i)
+  arrow(f)_i = M dot.double(arrow(r))_i = - (partial U({arrow(r)})) / (partial arrow(r)_i)
 $ <eq:verlet-newton>
 Let us consider the Taylor expansion of the position of particle $i$ at time $t$, $arrow(r)_i (t)$, computed with forward and backward differences:
 $
   arrow(r)_i (t + delta t)
-  = arrow(r)_i (t) + dot(arrow(r))_i (
-    t
-  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+  = arrow(r)_i (t) + dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
   )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4)
 $
 $
   arrow(r)_i (t - delta t)
-  = arrow(r)_i (t) - dot(arrow(r))_i (
-    t
-  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+  = arrow(r)_i (t) - dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
   )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4)
 $
@@ -942,18 +912,14 @@ $
 Consider the expression of $dot.double(arrow(r))_i$ in terms of $arrow(f)_i$ from @eq:verlet-newton, $dot.double(arrow(r))_i (t) = 1/M arrow(f)_i (t)$; substituting, we obtain:
 $
   arrow(r)_i (t + delta t)
-  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (
-    delta t
-  )^2 + O((delta t)^4)
+  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (delta t)^2 + O((delta t)^4)
 $ <eq:verlet-algorithm>
 @eq:verlet-algorithm is known ad the Verlet algorithm.
 @verletComputerExperimentsClassical1967[Eq. (4)]
 
 We can re-express the equation in terms of the velocities
 $
-  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (
-    t - delta t
-  )) / (2 delta t)
+  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (t - delta t)) / (2 delta t)
 $
 $
   - arrow(r)_i (t - delta t)
@@ -1088,91 +1054,112 @@ The Berendsen thermostat was considered, but later discarded#footnote[See the "F
   In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
   #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
 
-#figure(
-  image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
-  caption: [A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation. Image taken from @gilmerNeuralMessagePassing2017.],
-)
+  #figure(
+    image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
+    caption: [A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation. Image taken from @gilmerNeuralMessagePassing2017.],
+  )
 
   The GNN uses a differentiable model of choice (e.g. a multilayer perceptron (MLP)) on each component of a graph; this is a GNN layer.
   For each node vector, one applies the model and gets back a learned node-vector.
   One does the same for each edge, learning a per-edge embedding, and also for the global-context vector, learning a single embedding for the entire graph.
 
-#figure(image("thesis/imgs/distill.pub.gnn-intro.single-layer.png"), caption: [
-  A single layer of a simple GNN. A graph is the input, and each component (V, E, U) gets updated by a MLP to produce a new graph.
-  Each function subscript indicates a separate function for a different graph attribute at the n-th layer of a GNN model.
-])
+  #figure(
+    image("thesis/imgs/distill.pub.gnn-intro.single-layer.png"),
+    caption: [
+      A single layer of a simple GNN. A graph is the input, and each component (V, E, U) gets updated by a MLP to produce a new graph.
+      Each function subscript indicates a separate function for a different graph attribute at the n-th layer of a GNN model.
+    ],
+  )
 
-As is common with neural network modules or layers, one can stack these GNN layers together.
+  As is common with neural network modules or layers, one can stack these GNN layers together.
 
-Because a GNN does not update the connectivity of the input graph, one can describe the output graph of a GNN with the same adjacency list and the same number of feature vectors as the input graph.
-But, the output graph has updated embeddings, since the GNN has updated each of the node, edge and global-context representations.
+  Because a GNN does not update the connectivity of the input graph, one can describe the output graph of a GNN with the same adjacency list and the same number of feature vectors as the input graph.
+  But, the output graph has updated embeddings, since the GNN has updated each of the node, edge and global-context representations.
 
-=== GNN Predictions by Pooling Information
-How does a GNN make predictions in any of its tasks described above?
-Prediction tasks can belong to binary classification, multi-class classification or regression cases.
-In the following example, the binary classification will be considerer for brevity, but this framework extends to the other cases.
-If the task is to make predictions on nodes, and the graphs already contains node information, the approach is straightforward---for each node embedding, apply a linear classifier.
+  === GNN Predictions by Pooling Information
+  How does a GNN make predictions in any of its tasks described above?
+  Prediction tasks can belong to binary classification, multi-class classification or regression cases.
+  In the following example, the binary classification will be considerer for brevity, but this framework extends to the other cases.
+  If the task is to make predictions on nodes, and the graphs already contains node information, the approach is straightforward---for each node embedding, apply a linear classifier.
 
-#figure(image("thesis/imgs/distill.pub.gnn-intro.linear-classifier.png"))
+  #figure(image("thesis/imgs/distill.pub.gnn-intro.linear-classifier.png"))
 
-However, it is not always so simple.
-For instance, one might have information in the graph stored in edges, and no information in nodes,but still need to make predictions on nodes.
-One needs a way to collect information from edges and give them to nodes for prediction.
-One can do this by _pooling_.
-Pooling proceeds in two steps:
+  However, it is not always so simple.
+  For instance, one might have information in the graph stored in edges, and no information in nodes,but still need to make predictions on nodes.
+  One needs a way to collect information from edges and give them to nodes for prediction.
+  One can do this by _pooling_.
+  Pooling proceeds in two steps:
 
-+ For each item to be pooled, _gather_ each of their embeddings and concatenate them into a matrix.
-+ The gathered embeddings are then _aggregated_, usually via a sum operation.
+  + For each item to be pooled, _gather_ each of their embeddings and concatenate them into a matrix.
+  + The gathered embeddings are then _aggregated_, usually via a sum operation.
 
-@sanchez-lengelingGentleIntroductionGraph2021 represents the _pooling_ operation by the letter $rho$, and denotes that we are gathering information from edges to nodes as $p_(E_n arrow V_n)$.
+  @sanchez-lengelingGentleIntroductionGraph2021 represents the _pooling_ operation by the letter $rho$, and denotes that we are gathering information from edges to nodes as $p_(E_n arrow V_n)$.
 
-#figure(image("thesis/imgs/distill.pub.gnn-intro.aggregate-information-from-adjacent-edges.png"), caption: [The edges connected to the black node are gathered and aggregated to produce an embedding for that target node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.])
+  #figure(
+    image("thesis/imgs/distill.pub.gnn-intro.aggregate-information-from-adjacent-edges.png"),
+    caption: [The edges connected to the black node are gathered and aggregated to produce an embedding for that target node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
+  )
 
-So if we only have edge-level features, and are trying to predict node information, we can use pooling to route (or pass) information to where it needs to go, the model looks like this:
-#figure(image("thesis/imgs/prediction_edges_nodes.e6796b8e.png"), caption: [Figure from @sanchez-lengelingGentleIntroductionGraph2021.])
-The same reasoning goes for the prediction of edge-level information and global properties, gathering available node and/or edge information together and aggregating them to get the desired predictions.
-This technique is similar to _Global Average Pooling_ layers in #glspl("cnn").
-#figure(image("thesis/imgs/prediction_nodes_edges_global.7a535eb8.png"), caption: [
-  This is a common scenario for predictiong molecular properties.
-  Figure from @sanchez-lengelingGentleIntroductionGraph2021.
-])
-The classification model $cal(C)$ can easily be replaced with any differentiable model, or adapted to multi-class classification using a generalized linear model.
-#figure(image("thesis/imgs/Overall.e3af58ab.png"), caption: [
-  An end-to-end prediction task with a GNN model.
-  Figure from @sanchez-lengelingGentleIntroductionGraph2021.
-])
+  So if we only have edge-level features, and are trying to predict node information, we can use pooling to route (or pass) information to where it needs to go, the model looks like this:
+  #figure(
+    image("thesis/imgs/prediction_edges_nodes.e6796b8e.png"),
+    caption: [Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
+  )
+  The same reasoning goes for the prediction of edge-level information and global properties, gathering available node and/or edge information together and aggregating them to get the desired predictions.
+  This technique is similar to _Global Average Pooling_ layers in #glspl("cnn").
+  #figure(
+    image("thesis/imgs/prediction_nodes_edges_global.7a535eb8.png"),
+    caption: [
+      This is a common scenario for predictiong molecular properties.
+      Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+    ],
+  )
+  The classification model $cal(C)$ can easily be replaced with any differentiable model, or adapted to multi-class classification using a generalized linear model.
+  #figure(
+    image("thesis/imgs/Overall.e3af58ab.png"),
+    caption: [
+      An end-to-end prediction task with a GNN model.
+      Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+    ],
+  )
 
-=== Passing messages between parts of the graph
-One could make more sophisticated predictions by using pooling within the @gnn layer, in order to make the learned embeddings aware of graph connectivity.
-We can do this using _message passing_ @gilmerNeuralMessagePassing2017, where neighbouring nodes or edges exchange information and influence each other's update embeddings.
+  === Passing messages between parts of the graph
+  One could make more sophisticated predictions by using pooling within the @gnn layer, in order to make the learned embeddings aware of graph connectivity.
+  We can do this using _message passing_ @gilmerNeuralMessagePassing2017, where neighbouring nodes or edges exchange information and influence each other's update embeddings.
 
-Message passing works in three steps:
+  Message passing works in three steps:
 
-+ For each node in the graph, _gather_ all the neighbouring node embeddings (or messages).
-  // which is the $g$ function described above.
-  // <Non vedo nessuna funzione g nell'articolo>
-+ Aggregate all messages via an aggregate function (like sum).
-+ All pooled messages are passed through an _update function_, usually a learned neural network.
+  + For each node in the graph, _gather_ all the neighbouring node embeddings (or messages).
+    // which is the $g$ function described above.
+    // <Non vedo nessuna funzione g nell'articolo>
+  + Aggregate all messages via an aggregate function (like sum).
+  + All pooled messages are passed through an _update function_, usually a learned neural network.
 
-Just as pooling can be applied to either nodes or edges, message passing can occur between either nodes or edges.
+  Just as pooling can be applied to either nodes or edges, message passing can occur between either nodes or edges.
 
-These steps are key for leveraging the connectivity of graphs.
-One can build more elaborate variants of message passing in @gnn layers that yield @gnn models of increasing expressiveness and power.
+  These steps are key for leveraging the connectivity of graphs.
+  One can build more elaborate variants of message passing in @gnn layers that yield @gnn models of increasing expressiveness and power.
 
-#figure(image("thesis/imgs/distill.pub.gnn-intro.message-passing-update.png"), caption: [Pooling, update and storage of the adjacent embedding for the highlighted node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.])
+  #figure(
+    image("thesis/imgs/distill.pub.gnn-intro.message-passing-update.png"),
+    caption: [Pooling, update and storage of the adjacent embedding for the highlighted node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
+  )
 
-This sequence of operations, when applied once, is the simplest type of message-passing @gnn layer.
-This is reminiscent of standard convolution: in essence, message passing and convolution are operations to aggregate and process the information of an element's neighbours in order to update the element's value.
-In graphs, the element is a node, and in images, the element is a pixel.
-However, the number of neighbouring nodes in a graph can be variable, unlike in an image where each pixel has a set number of neighbouring elements.
+  This sequence of operations, when applied once, is the simplest type of message-passing @gnn layer.
+  This is reminiscent of standard convolution: in essence, message passing and convolution are operations to aggregate and process the information of an element's neighbours in order to update the element's value.
+  In graphs, the element is a node, and in images, the element is a pixel.
+  However, the number of neighbouring nodes in a graph can be variable, unlike in an image where each pixel has a set number of neighbouring elements.
 
-By stacking messge passing @gnn layers together, a node can eventually incorporate information from across the entire graph: after three layers, a node has information about the nodes three steps away from it.
+  By stacking messge passing @gnn layers together, a node can eventually incorporate information from across the entire graph: after three layers, a node has information about the nodes three steps away from it.
 
-The updated architecture diagram to include this new source of information for nodes is the following:
-#figure(image("thesis/imgs/arch_gcn.40871750.png"), caption: [
-  Schematic for a GCN architecture, which updates node representations of a graph by pooling neighbouring nodes at a distance of one degree.
-  Figure from @sanchez-lengelingGentleIntroductionGraph2021.
-])
+  The updated architecture diagram to include this new source of information for nodes is the following:
+  #figure(
+    image("thesis/imgs/arch_gcn.40871750.png"),
+    caption: [
+      Schematic for a GCN architecture, which updates node representations of a graph by pooling neighbouring nodes at a distance of one degree.
+      Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+    ],
+  )
 ]
 
 The notions exposed above are a sufficient introduction to understand the basic functioning of the MACE calculator, described in detail in @sec:mace, that was used for the work in this thesis, the results of which are available in the next chapters, @sec:results-1 and @sec:results-2.
@@ -2197,9 +2184,7 @@ where $arrow(r)_i in RR^3$ is the position of atom $i$; $z_i$ is the chemical el
 A forward pass of the network consists of multiple _message construction, update_ and _readout_ steps.
 During message construction, a message $arrow(m)_i^((t))$ is created for each node by pooling over its neighbours:
 $
-  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (
-    sigma_i^((t)), sigma_j^((t))
-  ),
+  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (sigma_i^((t)), sigma_j^((t))),
 $
 where $M_t$ is a learnable message function and $plus.circle.big_(j in cal(N) (i))$ is a learnable, permutation invariant pooling operation over the neighbours of atom $i$ (e.g., a sum).
 In the update step, the message $arrow(m)_i^((t))$ is transformed into new features
@@ -2217,9 +2202,7 @@ In _equivariant_ #glspl("gnn"), internal features $arrow(h)_i^((t))$ transform i
 When modelling the potential energy of an atomic structure, the group of interest is $O(3)$, specifying rotations and reflections of the particles; translation invariance is trivially incorporated through the use of relative distances.
 A @gnn is called $O(3)$ equivariant if it has internal features that transform under the rotation $Q in O(3)$ as
 $
-  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((
-    t
-  )) (arrow(r)_1, dots, arrow(r)_N),
+  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((t)) (arrow(r)_1, dots, arrow(r)_N),
 $
 where $D^L(Q) in RR^((2L + 1) times (2L + 1))$ is a Wigner D-matrix of order $L$.
 A feature labelled with $L=0$ describes an invariant scalar.
@@ -2235,13 +2218,9 @@ The messages $arrow(m)_i^((t))$ are expanded in a hierarchical body order expans
 $
   arrow(m)_i^((t))
   &= sum_j arrow(u)_1 (sigma_i^((t)); sigma_j^((t))) \
-  &+ sum_(j_1, j_2) arrow(u)_2 (
-    sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
-  )
+  &+ sum_(j_1, j_2) arrow(u)_2 (sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t)))
   + dots
-  + sum_(j_1, dots, j_nu) arrow(u)_nu (
-    sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
-  ),
+  + sum_(j_1, dots, j_nu) arrow(u)_nu (sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))),
 $ <eq:batatiaMACEHigherOrder2022-7>
 where the $arrow(u)$ functions are learnable, the sums run over the neighbours of $i$, and $nu$ is a hyper-parameter corresponding to the maximum correlation order, the body order minus 1, of the message function with respect to the states.
 
@@ -2251,9 +2230,7 @@ The $A_i^((t))$ features are obtained by pooling over the neighbours $cal(N)(i)$
 $
   A_(i, k l_3 m_3)^((t))
   = sum_(l_1 m_1, l_2 m_2) C_(l_1 m_1, l_2 m_2)^(l_3 m_3) dot \
-  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (
-    hat(r)_(j i)
-  )
+  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (hat(r)_(j i))
   sum_(tilde(k)) W_(k tilde(k) l_2)^((t)) h_(j, tilde(k) l_2 m_2)^((t)),
 $ <eq:batatiaMACEHigherOrder2022-8>
 where $C_(l_1 m_1, l_2 m_2)^(l_3 m_3)$ are the standard Clebsh-Gordan coefficients ensuring that $A_(i, k l_3 m_3)^((t))$ maintain the correct equivariance; $r_(j i)$ is the (scalar) interatomic distance, and $hat(r)_(j i)$ is the corresponding unit vector.
@@ -2262,9 +2239,7 @@ In the first layer, the node features $h_j^((t))$ correspond to the (invariant) 
 Therefore, @eq:batatiaMACEHigherOrder2022-8 can be further simplified:
 $
   A_(i, k l_1 m_1)^((1))
-  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (
-    hat(r)_(j i)
-  ) W_(k z_j)^((1)).
+  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (hat(r)_(j i)) W_(k z_j)^((1)).
 $ <eq:batatiaMACEHigherOrder2022-9>
 This simplified operation is much cheaper, making the computational cost of the first layer low.
 
@@ -2273,9 +2248,7 @@ This is achieved by first forming tensor products of the features, and then symm
 $
   B_(i, eta_nu k L M)^((t))
   = sum_(arrow(l m)) cal(C)_(eta_nu, arrow(l m))^(L M)
-  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((
-    t
-  )) A_(i, tilde(k) l_xi m_xi)^((t)),
+  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((t)) A_(i, tilde(k) l_xi m_xi)^((t)),
   quad arrow(l m) = (l_1 m_1, dots, l_nu m_nu)
 $ <eq:batatiaMACEHigherOrder2022-10>
 where the coupling coefficients $cal(C)_(eta_nu)^(L M)$ corresponding to the generalized Clebsh-Gordan coefficients ensuring that $B_(i, eta_nu k L M)^((t))$ are $L$-equivariant, the weights $w_(k tilde(k) l_xi)^((t))$ are mixing the channels $(k)$ of $A_i^((t))$, and $nu$ is a given correlation order.
