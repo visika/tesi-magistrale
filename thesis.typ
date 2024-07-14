@@ -1175,8 +1175,9 @@ The updated architecture diagram to include this new source of information for n
 ])
 ]
 
+The notions exposed above are a sufficient introduction to understand the basic functioning of the MACE calculator, described in detail in @sec:mace, that was used for the work in this thesis, the results of which are available in the next chapters, @sec:results-1 and @sec:results-2.
 
-= Results I: model assessment
+= Results I: model assessment <sec:results-1>
 
 In this chapter we test the MACE calculators on small, known systems,
 about which literature is abundant and a direct comparison of results is possible.
@@ -1784,7 +1785,7 @@ See @fig:binding-energy-mukhopadhyay2018-fig5 for a representation of typical va
   ),
 )
 
-= Results II: crystal structures
+= Results II: crystal structures <sec:results-2>
 #box(
   stroke: red + 2pt,
   inset: 1mm,
