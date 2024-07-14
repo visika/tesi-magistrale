@@ -1120,6 +1120,7 @@ For instance, one might have information in the graph stored in edges, and no in
 One needs a way to collect information from edges and give them to nodes for prediction.
 One can do this by _pooling_.
 Pooling proceeds in two steps:
+
 + For each item to be pooled, _gather_ each of their embeddings and concatenate them into a matrix.
 + The gathered embeddings are then _aggregated_, usually via a sum operation.
 
@@ -1141,7 +1142,37 @@ The classification model $cal(C)$ can easily be replaced with any differentiable
   Figure from @sanchez-lengelingGentleIntroductionGraph2021.
 ])
 
+=== Passing messages between parts of the graph
+One could make more sophisticated predictions by using pooling within the @gnn layer, in order to make the learned embeddings aware of graph connectivity.
+We can do this using _message passing_ @gilmerNeuralMessagePassing2017, where neighbouring nodes or edges exchange information and influence each other's update embeddings.
 
+Message passing works in three steps:
+
++ For each node in the graph, _gather_ all the neighbouring node embeddings (or messages).
+  // which is the $g$ function described above.
+  // <Non vedo nessuna funzione g nell'articolo>
++ Aggregate all messages via an aggregate function (like sum).
++ All pooled messages are passed through an _update function_, usually a learned neural network.
+
+Just as pooling can be applied to either nodes or edges, message passing can occur between either nodes or edges.
+
+These steps are key for leveraging the connectivity of graphs.
+One can build more elaborate variants of message passing in @gnn layers that yield @gnn models of increasing expressiveness and power.
+
+#figure(image("thesis/imgs/distill.pub.gnn-intro.message-passing-update.png"), caption: [Pooling, update and storage of the adjacent embedding for the highlighted node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.])
+
+This sequence of operations, when applied once, is the simplest type of message-passing @gnn layer.
+This is reminiscent of standard convolution: in essence, message passing and convolution are operations to aggregate and process the information of an element's neighbours in order to update the element's value.
+In graphs, the element is a node, and in images, the element is a pixel.
+However, the number of neighbouring nodes in a graph can be variable, unlike in an image where each pixel has a set number of neighbouring elements.
+
+By stacking messge passing @gnn layers together, a node can eventually incorporate information from across the entire graph: after three layers, a node has information about the nodes three steps away from it.
+
+The updated architecture diagram to include this new source of information for nodes is the following:
+#figure(image("thesis/imgs/arch_gcn.40871750.png"), caption: [
+  Schematic for a GCN architecture, which updates node representations of a graph by pooling neighbouring nodes at a distance of one degree.
+  Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+])
 ]
 
 
