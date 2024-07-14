@@ -178,6 +178,7 @@
       short: "IBiSCo",
       long: "Infrastructure for BIg data and Scientific Computing",
     ),
+    (key: "cnn", short: "CNN", long: "Convolutional Neural Network")
   ),
   show-all: true,
 )
@@ -1086,12 +1087,62 @@ The Berendsen thermostat was considered, but later discarded#footnote[See the "F
 #text(blue)[
   In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
   #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
-]
 
 #figure(
   image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
   caption: [A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation. Image taken from @gilmerNeuralMessagePassing2017.],
 )
+
+  The GNN uses a differentiable model of choice (e.g. a multilayer perceptron (MLP)) on each component of a graph; this is a GNN layer.
+  For each node vector, one applies the model and gets back a learned node-vector.
+  One does the same for each edge, learning a per-edge embedding, and also for the global-context vector, learning a single embedding for the entire graph.
+
+#figure(image("thesis/imgs/distill.pub.gnn-intro.single-layer.png"), caption: [
+  A single layer of a simple GNN. A graph is the input, and each component (V, E, U) gets updated by a MLP to produce a new graph.
+  Each function subscript indicates a separate function for a different graph attribute at the n-th layer of a GNN model.
+])
+
+As is common with neural network modules or layers, one can stack these GNN layers together.
+
+Because a GNN does not update the connectivity of the input graph, one can describe the output graph of a GNN with the same adjacency list and the same number of feature vectors as the input graph.
+But, the output graph has updated embeddings, since the GNN has updated each of the node, edge and global-context representations.
+
+=== GNN Predictions by Pooling Information
+How does a GNN make predictions in any of its tasks described above?
+Prediction tasks can belong to binary classification, multi-class classification or regression cases.
+In the following example, the binary classification will be considerer for brevity, but this framework extends to the other cases.
+If the task is to make predictions on nodes, and the graphs already contains node information, the approach is straightforward---for each node embedding, apply a linear classifier.
+
+#figure(image("thesis/imgs/distill.pub.gnn-intro.linear-classifier.png"))
+
+However, it is not always so simple.
+For instance, one might have information in the graph stored in edges, and no information in nodes,but still need to make predictions on nodes.
+One needs a way to collect information from edges and give them to nodes for prediction.
+One can do this by _pooling_.
+Pooling proceeds in two steps:
++ For each item to be pooled, _gather_ each of their embeddings and concatenate them into a matrix.
++ The gathered embeddings are then _aggregated_, usually via a sum operation.
+
+@sanchez-lengelingGentleIntroductionGraph2021 represents the _pooling_ operation by the letter $rho$, and denotes that we are gathering information from edges to nodes as $p_(E_n arrow V_n)$.
+
+#figure(image("thesis/imgs/distill.pub.gnn-intro.aggregate-information-from-adjacent-edges.png"), caption: [The edges connected to the black node are gathered and aggregated to produce an embedding for that target node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.])
+
+So if we only have edge-level features, and are trying to predict node information, we can use pooling to route (or pass) information to where it needs to go, the model looks like this:
+#figure(image("thesis/imgs/prediction_edges_nodes.e6796b8e.png"), caption: [Figure from @sanchez-lengelingGentleIntroductionGraph2021.])
+The same reasoning goes for the prediction of edge-level information and global properties, gathering available node and/or edge information together and aggregating them to get the desired predictions.
+This technique is similar to _Global Average Pooling_ layers in #glspl("cnn").
+#figure(image("thesis/imgs/prediction_nodes_edges_global.7a535eb8.png"), caption: [
+  This is a common scenario for predictiong molecular properties.
+  Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+])
+The classification model $cal(C)$ can easily be replaced with any differentiable model, or adapted to multi-class classification using a generalized linear model.
+#figure(image("thesis/imgs/Overall.e3af58ab.png"), caption: [
+  An end-to-end prediction task with a GNN model.
+  Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+])
+
+
+]
 
 
 = Results I: model assessment
