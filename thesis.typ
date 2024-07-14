@@ -2182,7 +2182,7 @@ $
 
 === Equivariant Graph Neural Networks
 In _equivariant_ #glspl("gnn"), internal features $arrow(h)_i^((t))$ transform in a specified way under some group action. @batatiaMACEHigherOrder2022
-When modelling the potential energy of an atomic structure, the group of interest is $O(3)$, specifying rotations and reflections of the particles; translation invariance is triviallyl incorporated through the use of relative distances.
+When modelling the potential energy of an atomic structure, the group of interest is $O(3)$, specifying rotations and reflections of the particles; translation invariance is trivially incorporated through the use of relative distances.
 A @gnn is called $O(3)$ equivariant if it has internal features that transform under the rotation $Q in O(3)$ as
 $
   arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((
