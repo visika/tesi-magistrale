@@ -1006,16 +1006,19 @@ The Berendsen thermostat was considered, but later discarded#footnote[See the "F
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-V.png"),
       caption: [*V* -- Vertex (or node) attributes e.g., node identity, number of neighbors.],
       numbering: none,
+      outlined: false
     ),
     figure(
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-E.png"),
       caption: [*E* -- Edge (or link) attributes and directions e.g., edge identity, edge weight.],
       numbering: none,
+      outlined: false
     ),
     figure(
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-U.png"),
       caption: [*U* -- Global (or master node) attributes e.g., number of nodes, longest path.],
       numbering: none,
+      outlined: false
     ),
   ),
   caption: [
