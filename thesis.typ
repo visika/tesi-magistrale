@@ -981,7 +981,7 @@ Typically the "friction coefficient" will fluctuate around zero.
 During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
-== Graph Neural Networks
+== Graph Neural Networks <sec:gnn>
 #text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
 
 #figure(
@@ -2173,8 +2173,11 @@ This is constructed by taking tensor products of a sum of two-body permutation-i
 *The final output is the energy contribution of each atom to the total potential energy.*
 The MACE architecture is implemented in PyTorch and employs the e3nn library.
 
+In the following sections the technical details of the internals of MACE will be exposed.
+A brief introduction to the topics that follow, #glspl("mpnn") and #glspl("gnn"), is detailed in @sec:gnn.
+
 === MPNN Interatomic Potentials <sec:mpnn>
-#glspl("mpnn") are a type of @gnn that parametrizes a mapping from a labeled graph to a target space, either a graph or a vector space. @batatiaMACEHigherOrder2022
+#glspl("mpnn", long: true) are a type of #gls("gnn", long: true) that parametrizes a mapping from a labeled graph to a target space, either a graph or a vector space. @batatiaMACEHigherOrder2022
 When applied to parametrize properties of atomistic structures (materials or molecules), the graph is embedded in 3-dimensional (3D) Euclidean space, where each node represents an atom, and edges connect nodes if the corresponding atoms are within a given distance of each other.
 The state of each node $i$ in layer $t$ of the @mpnn is represented by a tuple
 $
