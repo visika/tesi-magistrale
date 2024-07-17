@@ -386,154 +386,6 @@ Since their introduction about 25 years ago, machine learning (ML) potentials ha
 DFT potentials are hard to make and it is hard to account for all the contributions.
 They consume much time and resources.
 
-The main quantity to consider to assess the stability of a crystal is its lattice energy, $E_"latt"$, which is the energy per molecule gained upon assuming the crystal form with respect to the gas state.
-It can be computed as:
-$
-  E_"latt" = E_"crys" - E_"gas",
-$ <eq-zen_2018_1>
-with $E_"crys"$ as the energy per molecule in the crystal state and $E_"gas"$ as the energy of the isolated molecule.
-
-Typically, the computation of $E_"latt"$ is performed at zero temperature and considering only the electronic contribution, i.e., quantum nuclear effects are neglected. @beranPredictingMolecularCrystal2016
-The lattice energy is not directly assessable experimentally, but it can be indirectly obtained from experimental measures of the sublimation enthalpy, $Delta_"sub" H(T)$, at a given temperature $T$, by including a (theoretically evaluated) energy contribution, $Delta_"T&QN" (T)$, accounting for thermal and quantum nuclear effects:
-$
-  Delta_"sub" H(T) = -E_"latt" + Delta_"T&QN" (T).
-$
-The evaluation of $Delta_"T&QN" (T)$ can be challenging, especially for large molecules where anharmonic contributions are important. @reillyUnderstandingRoleVibrations2013
-Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, accurate theoretical evaluations of $E_"latt"$ are of help for comparison.
-
-In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
-By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions; noticing that in the crystal there are no trans-rotational contributions; considering as negligible the pressure times volume term, $p V$; we have that
-$
-  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (E_"el"^s + E_"vib"^s),
-$ <eq-zen_si_14>
-where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
-By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
-Thus, @eq-zen_si_14 simplifies to
-$
-  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (T) + 7 / 2 R T quad & "for linear molecules",
-$
-where the term $Delta E_"vib" (T)$ contains both the thermal and the quantum nuclear contributions.
-Notice from <eq-zen_2018_1> that $Delta E_"el" = E_"el"^g - E_"el"^s$ is precisely the opposite of the lattice energy $E_"latt"$; thus:
-$
-  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 7 / 2 R T quad & "for linear molecules".
-$ <eq-zen_si_16>
-
-Vibrations in the solid molecular crystals can usually be separated into intra-molecular and inter-molecular vibrations, $E_"vib"^s = E_"vib"^(s,"intra") + E_"vib"^(s,"inter")$, and the stiffest intra-molecular modes are decoupled from the intermolecular modes.
-Intra-molecular vibrations have similar modes and frequencies than the gas-phase molecule;
-thus we can conveniently write:
-$
-  Delta E_"vib" = Delta E_"vib"^"relax" - E_"vib"^(s,"inter")
-$
-where $Delta E_"vib"^"relax" := E_"vib"^g - E_"vib"^(s,"intra")$ is the change in (intra-molecular) vibrational energy given when molecules are packed in the crystal form.
-
-At this point, a first approach can be to do a drastic approximation (which is anyway often found in the literature), that is to assume that intra-molecular frequencies in the solid are exactly the same as in the gas phase (i.e. $Delta E_"vib"^"relax" approx 0$), then to take the high temperature limit for the inter-molecular vibrations (i.e. $E_"vib"^(s,"intra") approx 6 R T$) and to neglect any zero-point motion, yielding $Delta E_"vib" (T) approx - 6 R T$ (Dulong-Petit law).
-In non-linear molecules, that would imply that $Delta_"T&QN" approx -2 R T$, that is $4.96 "kJ/mol"$ at room temperature, $T=298.15K$, and zero at $T=0K$. This is a poor approximation. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
-This approximation is particularly bad for water ice. @zenFastAccurateQuantum2018[SI §12.B] @whalleyEnergiesPhasesIce1984
-
-A more reliable approach is to calculate the vibrational energies for the solid and gas phase in the harmonic limit, considering for each frequency $omega$ a contribution
-$
-  epsilon(omega,T) = (planck.reduce omega) / 2 + (planck.reduce omega) / (
-  exp((planck.reduce omega) / (k_B T)) - 1
-  ),
-$
-where the first term in the right hand side accounts for the @zpe contribution and the second for the thermal one.
-
-This yields
-$
-  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (T) = integral epsilon(omega, T) g(omega) dif omega,
-$ <eq-zen_si_19>
-where $omega_i$ are the frequencies of the isolated molecule,
-which are $3M-6$ ($M$ is the number of atoms in the molecule) for a non-linear molecule,
-and $3M-5$ for a linear molecule;
-$g(omega)$ is the phonon density of states in the solid. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012 @reillyUnderstandingRoleVibrations2013
-
-Notice that whenever we employ @eq-zen_si_19 to evaluate $Delta_"T&QN"$ in @eq-zen_si_16, we are subject to errors not only coming from the harmonic approximation, but also from the limitations of the computational approaches (typically @dft) used for the evaluations of the frequencies and the phonon spectrum.
-Different choices of the exchange-correlation functional in @dft can lead to differences in terms of $Delta_("T&QN")$ quite larger than $1 "kJ/mol"$.
-In particular, inaccuracies on the evaluation of high frequency modes mostly affects the @zpe contribution, while low frequencies modes affect mostly the thermal contribution.
-
-=== Dispersion interactions
-
-Dispersion interactions are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
-The representation of dispersion interactions in @dft is not possible within local or semilocal functionals because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
-
-The @xdm model describes the dispersion energy of two neutral fragments as the electrostatic interaction of the dipoles formed by electrons and their associated exchange holes.
-The dispersion energy is added to the @dft energy
-$
-  E = E_"DFT" + E_"disp",
-$ <eq-otero_2012_1>
-where $E_"disp"$ contains the usual $R^(-6)$ leading term as well as two additional higher order atomic-pairwise terms
-$
-  E_"disp" = -1 / 2 sum_(i j) sum_(n = 6,8,10) (C_(n,i j)) / (
-  R^n_("vdw", i j) + R^n_(i j)
-  ).
-$ <eq-otero_2012_2>
-The fundamental objects in this equation are the inter-atomic interaction coefficients $C_(n, i j)$ that in the @xdm model are calculated exclusively from first-principles quantities using second-order perturbation theory.
-
-All the objects above are parameter-free, except for the damping expression in <eq-otero_2012_2>.
-The interatomic van der Waals radii ($R_("vdw", i j)$) control the distance at which the pairwise dispersion interactions are switched off.
-
-Because the dispersion coefﬁcients are calculated rather than ﬁtted,
-@eq-otero_2012_1 works under the assumption that the @dft functional presents a completely dispersionless behavior.
-This requirement is not met by most @gga functionals,
-which are sometimes too repulsive and sometimes spuriously binding,
-depending on the reduced-density-gradient tail behavior of the exchange enhancement factors.
-
-==== DFT-D3
-// TODO DFT-D sempre da otero
-The total DFT-D3 energy is given by @grimmeConsistentAccurateInitio2010
-$
-  E_"DFT-D3" = E_"KS-DFT" - E_"disp",
-$
-where $E_"KS-DFT"$ is the usual self-consistent KS energy as obtained from the chosen DF and $E_"disp"$ is the dispersion correction as a sum of two- and three-body energies,
-$
-  E_"disp" = E^((2)) + E^((3)),
-$
-with the most important two-body term given by
-$
-  E^((2)) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (r_(A B)).
-$
-
-Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
-
-=== The role of anharmonic contributions
-// TODO
-@rossiAnharmonicQuantumFluctuations2016
-
-The harmonic treatment ignores effects due to anharmonic thermal motion and cell expansion. @reillyUnderstandingRoleVibrations2013
-
-In the harmonic approximation, supercell phonon calculations show signiﬁcant deviations from the widely used Dulong-Petit law, as noted elsewhere. @reillyUnderstandingRoleVibrations2013
-
-Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
-
-Exact exchange, which is rarely considered in @dft studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
-
-Hybrid functionals are often not used in the study of cohesive properties of molecular crystals,
-@al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
-largely due to their additional computational cost, which particularly in a plane-wave basis can reach more than an order of magnitude larger than the corresponding semi-local functional. @reillyUnderstandingRoleVibrations2013
-
-#box(
-  stroke: 2pt + red,
-  inset: 1mm,
-  [The pharmaceutical industry spends considerable resources on high-throughput crystallization experiments to screen for polymorphs, // TODO citazione a S. L. Morissette et al., High-throughput crystallization: Polymorphs, salts, co-crystals and solvates of pharmaceutical solids. Adv. Drug Deliv. Rev. 56, 275–300 (2004).
-    into which the target structure may decay.
-    However, crystallization experiments do not probe thermodynamic stability, and conclusive studies of the impact of temperature changes after crystallization on the stability of polymorphs (i.e. their monotropic or enantiotropic nature) // TODO cite E. H. Lee, A practical guide to pharmaceutical polymorph screening & selection. Asian J. Pharm. Sci. 9, 163–175 (2014)
-    are often prevented by limited sample quantities.
-    Hence, there is the appeal of theoretical @csp // TODO cite 14 S. L. Price, Predicting crystal structures of organic compounds. Chem. Soc. Rev. 43,2098–2111 (2014).
-    based on the thermodynamic stability, which promises to complement crystallization experiments // TODO cite 15 J. Nyman, S. M. Reutzel-Edens, Crystal structure prediction is changing from basic science to applied technology. Faraday Discuss. 211, 459–476 (2018).
-    by exhaustively searching for competing polymorphs.
-    @kapilCompleteDescriptionThermodynamic2022
-  ],
-)
-
-#box(
-  stroke: blue + 2pt,
-  inset: 1mm,
-  [
-    The size and sign of nuclear quantum effects, anharmonicity, and cell expansion and flexibility, depend entirely on the compound and the polymorphs at hand, highlighting that rigorous @qti is indispensable for predicting phase stabilities and that molecular crystals are typically stabilized by a nontrivial interplay of different physical effects, whose individual importance is belied by the subtle resultant free energy differences. @kapilCompleteDescriptionThermodynamic2022
-  ],
-)
 
 === Machine Learning potentials
 
@@ -980,6 +832,157 @@ Typically the "friction coefficient" will fluctuate around zero.
 
 During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
+
+== Thermodynamics of the stability of crystals
+
+The main quantity to consider to assess the stability of a crystal is its lattice energy, $E_"latt"$, which is the energy per molecule gained upon assuming the crystal form with respect to the gas state.
+It can be computed as:
+$
+  E_"latt" = E_"crys" - E_"gas",
+$ <eq-zen_2018_1>
+with $E_"crys"$ as the energy per molecule in the crystal state and $E_"gas"$ as the energy of the isolated molecule.
+
+Typically, the computation of $E_"latt"$ is performed at zero temperature and considering only the electronic contribution, i.e., quantum nuclear effects are neglected. @beranPredictingMolecularCrystal2016
+The lattice energy is not directly assessable experimentally, but it can be indirectly obtained from experimental measures of the sublimation enthalpy, $Delta_"sub" H(T)$, at a given temperature $T$, by including a (theoretically evaluated) energy contribution, $Delta_"T&QN" (T)$, accounting for thermal and quantum nuclear effects:
+$
+  Delta_"sub" H(T) = -E_"latt" + Delta_"T&QN" (T).
+$
+The evaluation of $Delta_"T&QN" (T)$ can be challenging, especially for large molecules where anharmonic contributions are important. @reillyUnderstandingRoleVibrations2013
+Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, accurate theoretical evaluations of $E_"latt"$ are of help for comparison.
+
+In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
+By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions; noticing that in the crystal there are no trans-rotational contributions; considering as negligible the pressure times volume term, $p V$; we have that
+$
+  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (E_"el"^s + E_"vib"^s),
+$ <eq-zen_si_14>
+where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
+By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
+Thus, @eq-zen_si_14 simplifies to
+$
+  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (T) + 7 / 2 R T quad & "for linear molecules",
+$
+where the term $Delta E_"vib" (T)$ contains both the thermal and the quantum nuclear contributions.
+Notice from <eq-zen_2018_1> that $Delta E_"el" = E_"el"^g - E_"el"^s$ is precisely the opposite of the lattice energy $E_"latt"$; thus:
+$
+  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 7 / 2 R T quad & "for linear molecules".
+$ <eq-zen_si_16>
+
+Vibrations in the solid molecular crystals can usually be separated into intra-molecular and inter-molecular vibrations, $E_"vib"^s = E_"vib"^(s,"intra") + E_"vib"^(s,"inter")$, and the stiffest intra-molecular modes are decoupled from the intermolecular modes.
+Intra-molecular vibrations have similar modes and frequencies than the gas-phase molecule;
+thus we can conveniently write:
+$
+  Delta E_"vib" = Delta E_"vib"^"relax" - E_"vib"^(s,"inter")
+$
+where $Delta E_"vib"^"relax" := E_"vib"^g - E_"vib"^(s,"intra")$ is the change in (intra-molecular) vibrational energy given when molecules are packed in the crystal form.
+
+At this point, a first approach can be to do a drastic approximation (which is anyway often found in the literature), that is to assume that intra-molecular frequencies in the solid are exactly the same as in the gas phase (i.e. $Delta E_"vib"^"relax" approx 0$), then to take the high temperature limit for the inter-molecular vibrations (i.e. $E_"vib"^(s,"intra") approx 6 R T$) and to neglect any zero-point motion, yielding $Delta E_"vib" (T) approx - 6 R T$ (Dulong-Petit law).
+In non-linear molecules, that would imply that $Delta_"T&QN" approx -2 R T$, that is $4.96 "kJ/mol"$ at room temperature, $T=298.15K$, and zero at $T=0K$. This is a poor approximation. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+This approximation is particularly bad for water ice. @zenFastAccurateQuantum2018[SI §12.B] @whalleyEnergiesPhasesIce1984
+
+A more reliable approach is to calculate the vibrational energies for the solid and gas phase in the harmonic limit, considering for each frequency $omega$ a contribution
+$
+  epsilon(omega,T) = (planck.reduce omega) / 2 + (planck.reduce omega) / (
+  exp((planck.reduce omega) / (k_B T)) - 1
+  ),
+$
+where the first term in the right hand side accounts for the @zpe contribution and the second for the thermal one.
+
+This yields
+$
+  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (T) = integral epsilon(omega, T) g(omega) dif omega,
+$ <eq-zen_si_19>
+where $omega_i$ are the frequencies of the isolated molecule,
+which are $3M-6$ ($M$ is the number of atoms in the molecule) for a non-linear molecule,
+and $3M-5$ for a linear molecule;
+$g(omega)$ is the phonon density of states in the solid. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012 @reillyUnderstandingRoleVibrations2013
+
+Notice that whenever we employ @eq-zen_si_19 to evaluate $Delta_"T&QN"$ in @eq-zen_si_16, we are subject to errors not only coming from the harmonic approximation, but also from the limitations of the computational approaches (typically @dft) used for the evaluations of the frequencies and the phonon spectrum.
+Different choices of the exchange-correlation functional in @dft can lead to differences in terms of $Delta_("T&QN")$ quite larger than $1 "kJ/mol"$.
+In particular, inaccuracies on the evaluation of high frequency modes mostly affects the @zpe contribution, while low frequencies modes affect mostly the thermal contribution.
+
+=== Dispersion interactions
+
+Dispersion interactions are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
+The representation of dispersion interactions in @dft is not possible within local or semilocal functionals because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+
+The @xdm model describes the dispersion energy of two neutral fragments as the electrostatic interaction of the dipoles formed by electrons and their associated exchange holes.
+The dispersion energy is added to the @dft energy
+$
+  E = E_"DFT" + E_"disp",
+$ <eq-otero_2012_1>
+where $E_"disp"$ contains the usual $R^(-6)$ leading term as well as two additional higher order atomic-pairwise terms
+$
+  E_"disp" = -1 / 2 sum_(i j) sum_(n = 6,8,10) (C_(n,i j)) / (
+  R^n_("vdw", i j) + R^n_(i j)
+  ).
+$ <eq-otero_2012_2>
+The fundamental objects in this equation are the inter-atomic interaction coefficients $C_(n, i j)$ that in the @xdm model are calculated exclusively from first-principles quantities using second-order perturbation theory.
+
+All the objects above are parameter-free, except for the damping expression in <eq-otero_2012_2>.
+The interatomic van der Waals radii ($R_("vdw", i j)$) control the distance at which the pairwise dispersion interactions are switched off.
+
+Because the dispersion coefﬁcients are calculated rather than ﬁtted,
+@eq-otero_2012_1 works under the assumption that the @dft functional presents a completely dispersionless behavior.
+This requirement is not met by most @gga functionals,
+which are sometimes too repulsive and sometimes spuriously binding,
+depending on the reduced-density-gradient tail behavior of the exchange enhancement factors.
+
+==== DFT-D3
+// TODO DFT-D sempre da otero
+The total DFT-D3 energy is given by @grimmeConsistentAccurateInitio2010
+$
+  E_"DFT-D3" = E_"KS-DFT" - E_"disp",
+$
+where $E_"KS-DFT"$ is the usual self-consistent KS energy as obtained from the chosen DF and $E_"disp"$ is the dispersion correction as a sum of two- and three-body energies,
+$
+  E_"disp" = E^((2)) + E^((3)),
+$
+with the most important two-body term given by
+$
+  E^((2)) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (r_(A B)).
+$
+
+Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
+
+=== The role of anharmonic contributions
+// TODO
+@rossiAnharmonicQuantumFluctuations2016
+
+The harmonic treatment ignores effects due to anharmonic thermal motion and cell expansion. @reillyUnderstandingRoleVibrations2013
+
+In the harmonic approximation, supercell phonon calculations show signiﬁcant deviations from the widely used Dulong-Petit law, as noted elsewhere. @reillyUnderstandingRoleVibrations2013
+
+Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
+
+Exact exchange, which is rarely considered in @dft studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
+
+Hybrid functionals are often not used in the study of cohesive properties of molecular crystals,
+@al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+largely due to their additional computational cost, which particularly in a plane-wave basis can reach more than an order of magnitude larger than the corresponding semi-local functional. @reillyUnderstandingRoleVibrations2013
+
+#box(
+  stroke: 2pt + red,
+  inset: 1mm,
+  [The pharmaceutical industry spends considerable resources on high-throughput crystallization experiments to screen for polymorphs, // TODO citazione a S. L. Morissette et al., High-throughput crystallization: Polymorphs, salts, co-crystals and solvates of pharmaceutical solids. Adv. Drug Deliv. Rev. 56, 275–300 (2004).
+    into which the target structure may decay.
+    However, crystallization experiments do not probe thermodynamic stability, and conclusive studies of the impact of temperature changes after crystallization on the stability of polymorphs (i.e. their monotropic or enantiotropic nature) // TODO cite E. H. Lee, A practical guide to pharmaceutical polymorph screening & selection. Asian J. Pharm. Sci. 9, 163–175 (2014)
+    are often prevented by limited sample quantities.
+    Hence, there is the appeal of theoretical @csp // TODO cite 14 S. L. Price, Predicting crystal structures of organic compounds. Chem. Soc. Rev. 43,2098–2111 (2014).
+    based on the thermodynamic stability, which promises to complement crystallization experiments // TODO cite 15 J. Nyman, S. M. Reutzel-Edens, Crystal structure prediction is changing from basic science to applied technology. Faraday Discuss. 211, 459–476 (2018).
+    by exhaustively searching for competing polymorphs.
+    @kapilCompleteDescriptionThermodynamic2022
+  ],
+)
+
+#box(
+  stroke: blue + 2pt,
+  inset: 1mm,
+  [
+    The size and sign of nuclear quantum effects, anharmonicity, and cell expansion and flexibility, depend entirely on the compound and the polymorphs at hand, highlighting that rigorous @qti is indispensable for predicting phase stabilities and that molecular crystals are typically stabilized by a nontrivial interplay of different physical effects, whose individual importance is belied by the subtle resultant free energy differences. @kapilCompleteDescriptionThermodynamic2022
+  ],
+)
 
 == Graph Neural Networks <sec:gnn>
 #text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
