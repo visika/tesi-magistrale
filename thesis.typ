@@ -179,6 +179,8 @@
       long: "Infrastructure for BIg data and Scientific Computing",
     ),
     (key: "cnn", short: "CNN", long: "Convolutional Neural Network"),
+    (key: "adaline", short: "Adaline", long: "ADAptive LInear Neuron"),
+    (key: "nn", short: "NN", long: "Neural Network"),
   ),
   show-all: true,
 )
@@ -983,6 +985,153 @@ largely due to their additional computational cost, which particularly in a plan
     The size and sign of nuclear quantum effects, anharmonicity, and cell expansion and flexibility, depend entirely on the compound and the polymorphs at hand, highlighting that rigorous @qti is indispensable for predicting phase stabilities and that molecular crystals are typically stabilized by a nontrivial interplay of different physical effects, whose individual importance is belied by the subtle resultant free energy differences. @kapilCompleteDescriptionThermodynamic2022
   ],
 )
+
+== Machine Learning
+#text(blue)[
+Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
+There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
+It is our interest to study the *supervised learning* type.
+The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
+Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
+Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
+Thus, we can also think of supervised learning as "label learning".
+A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
+]
+In the detailed description of MACE in @sec:mace, we will see that the data inputs are atom positions, atomic number; while the label will be the energy, a continuous value learned through regression.
+#text(blue)[
+  In regression analysis, we are given a number of predictor (*explanatory*) variables and a continuous response variable (*outcome*), and we try to find a relationship between those variables that allows us to predict an outcome.
+  In the field of machine learning, the predictor variables are commonly called "features", and the response variables are usually referred to as "target variables".
+]
+
+#text(blue)[
+  Artificial neurons represent the building blocks of the multilayer artificial #glspl("nn").
+  The basic concept behind artificial #glspl("nn") was built upon hypotheses and models of how the human brain works to solve complex problem tasks.
+  NNs are more popular today than ever thanks to the many breakthroughs that have been made in the previous decade, which resulted in what we now call deep learning algorithms and architectures—NNs that are composed of many layers.
+
+  === Single layer neural network
+  Before we dig deeper into a particular multilayer @nn architecture, let’s briefly reiterate some of the concepts of single-layer NNs, namely, the @adaline algorithm.
+
+  #figure(image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"), caption: [
+    The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
+  ])
+
+  The Adaline algorithm performs binary classification, and uses the gradient descent optimization algorithm to learn the weight coefficients of the model.
+  In every epoch (pass over the training dataset), we update the weight vector $va(w)$ and bias unit $b$ using the following update rule:
+  $
+    va(w) :=
+    va(w) + Delta va(w), quad
+    b := b + Delta b,
+  $
+  where $Delta w_j = - eta pdv(L, w_j)$ for each weight $w_j$ in the weight vector $va(w)$ and $Delta b = - eta pdv(L, b)$ for the bias unit.
+  In other words, we computed the gradient based on the whole training dataset and updated the weights of the model by taking a step in the opposite direction of the loss gradient $grad L (va(w))$.
+  In order to find the optimal weights of the model, we optimize an objective function that we define as the mean of squared errors (MSE) loss function $L(va(w))$.
+  Furthermore, we multiply the gradient by a factor, the learning rate $eta$, which we have to choose carefully to balance the speed of learning against the risk of overshooting the global minimum of the loss function.
+  In gradient descent optimization, we update all weights simultaneously after each epoch, and we define the partial derivative for each weight $w_j$ in the weight vector, $va(w)$, as follows:
+  $
+    pdv(L, w_j) =
+    pdv(, w_j) 1/n sum_i (y^((i)) - a^((i)))^2 = - 2/n sum_i (y^((i)) - a^((i))) x_j^((i)).
+  $
+  Here, $y^((i))$ is the target class label of a particular sample $x^((i))$, and $a^((i))$ is the activation of the neuron, which is a linear function in the special case of Adaline.
+  Furthermore, one can define the activation function $sigma(dot)$ as follows:
+  $
+    sigma(dot) = z = a.
+  $
+  Here, the net input, $z$, is a linear combination of the weights that are connecting the input layer to the output layer:
+  $
+    z =
+    sum_j w_j x_j + b = va(w)^TT va(x) + b.
+  $
+  While the activation $sigma(dot)$ is used to compute the gradient update, a threshold function is implemented to squash the continuous-valued output into binary class labels for prediction:
+  $
+    hat(y) = cases(
+      1 & "if" z >= 0,
+      0 & "otherwise"
+    )
+  $
+  A frequent technique used to accelerate the model training is the so-called *stochastic gradient descent (SGD)* optimization.
+  SGD approximates the loss from a single training example (online learning) or a small subset of training examples (mini-batch learning).
+  Apart from faster learning---due to the more frequent weight updates compared to gradient descent---its noisy nature is also regarded as beneficial when training multilayer NNs with nonlinear activation functions, which do not have a convex loss function.
+  Here, the added noise can help to escape local loss minima.
+
+  === The multilayer neural network architecture
+  Here we will explain how to connect multiple single neurons to a multilayer feedforward @nn; this special type of _fully connected_ network is also called Multi-Layer Perceptron (MLP).
+
+  #figure(
+    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_02.png"),
+    caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.]
+  ) <fig:multi-layer-perceptron>
+
+  Next to the data input, the MLP depicted in @fig:multi-layer-perceptron has one hidden layer and one output layer.
+  The units in the hidden layer are fully connected to the input features, and the output layer is fully connected to the hidden layer.
+  If such a network has more than one hidden layer, we alco call it a *deep NN*.
+  The number of layers and units in a NN can be tought of as additional hyper-parameters that we want to optimize for a given problem.
+
+  We denote the $i$th activation unit in the $l$th layer as $a_i^((l))$.
+  We use the "in" superscript for the input features, the "h" superscript for the hidden layer, and the "out" superscript for the output layer.
+  The $va(b)$'s denote bias units; those are vectors with the number of elements being equal to the number of nodes in the layer they correspond to.
+
+  Each node in layer $l$ is connected to all nodes in layer $l + 1$ via a weight coefficient.
+  The connection between the $k$th unit in layer $l$ to the $j$th unit in layer $l + 1$ will be written as $w_(j,k)^((l))$.
+  We denote the weight matrix that connects the input to the hidden layer as $W^(("h"))$, and we write the matrix that connects the hidden layer to the output layer as $W^(("out"))$.
+
+  The usage of multiple units in the output layer allow for native multi-class classification, via a generalization of the one-versus-all (OvA) technique.
+  This is similar to the one-hot representation of categorical variables.
+
+  To calculate the output of a MLP model, we employ the process of *forward propagation*.
+  The MLP learning procedure can be summarized in three steps:
+
+  + Starting at the input layer, forward propagate the patterns of the training data through the network to generate an output.
+  + Based on the network's output, calculate the loss that we want to minimize using a loss functions of choice.
+  + Backpropagate the loss, find its derivative with respect to each weight and bias unit in the network, and update the model.
+
+  Finally, after we repeat these three steps for multiple epochs and learn the weight and bias parameters of the MLP, we use forward propagation to calculate the network output.
+
+  Since each unit in the hidden layer is connected to all units in the input layer, we first calculate the activation unit of the hidden layer $a_1^((h))$ as follows:
+  $
+    z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((h)) + dots + x_m^(("in"))w_(1,m)^((h)), \
+    a_1^((h)) &= sigma(z_1^((h))).
+  $
+  Here, $z_1^((h))$ is the net input and $sigma(dot)$ is the activation function, which has to be differentiable to learn the weights that connect the neurons using a gradient-based approach.
+  To be able to solve complex problems, the MLP model needs nonlinear activation functions, for example, the sigmoid (logistic) activation function:
+  $
+    sigma(z) = 1/(1 + e^(-z))
+  $
+
+  #figure(
+    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_03.png"),
+    caption: [
+      The sigmoid activation function.
+      Figure from @raschkaMachineLearningPyTorch2022.
+    ]
+  )
+
+  The MLP is a typical example of a feedforward artificial NN.
+  The term *feedforward* refers to the fact that each layer serves as the input to the next layer without loops, in contrast to recurrent NNs.
+
+  The activation is usually written in a more compact, vectorized form, using the concepts of linear algebra:
+  $
+    va(z)^((h)) &= va(x)^(("in")) W^((h)TT) + va(b)^((h)), \
+    va(a)^((h)) &= sigma(va(z)^((h))).
+  $
+  Here, $va(z)^((h))$ is a $1 times m$ dimensional feature vector;
+  $W^((h))$ is a $d times m$ dimensional weight matrix, where $d$ is the number of units in the hidden layer;
+  the bias vector $va(b)^((h))$ consists of $d$ bias units (one bias unit per node).
+
+  Generalizing the computation to all $n$ samples in the training dataset:
+  $
+    Z^((h)) = X^(("in")) W^((h)TT) + va(b)^((h))
+  $
+  Here, $X^(("in"))$ is a $n times m$ matrix, and the matrix multiplication will result in a $n times d$ dimensional net input matrix, $Z^((h))$.
+  Finally, we apply the activation function $sigma(dot)$ to each value in the net input matrix to get the $n times d$ dimensional activation matrix in the next layer:
+  $
+    A^((h)) = sigma(Z^((h)))
+  $
+  Similarly for the output layer we get:
+  $
+    Z^(("out")) = A^((h)) W^(("out") TT) + va(b)^(("out")), quad
+    A^(("out")) = sigma(Z^(("out"))).
+  $
+]
 
 == Graph Neural Networks <sec:gnn>
 #text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
