@@ -1131,6 +1131,60 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
     Z^(("out")) = A^((h)) W^(("out") TT) + va(b)^(("out")), quad
     A^(("out")) = sigma(Z^(("out"))).
   $
+
+  === Training an artificial neural network
+
+  We use an MSE loss (as in Adaline) to train the multilayer NN as it makes the derivation of the gradients a bit easier to follow.
+  If we predict the class label of an input data with class label 2, using this MLP, the activation of the third layer and the target may look like this:
+  $
+    a^(("out")) =
+    vec(0.1, 0.9, dots.v, 0.3), quad
+    y = vec(0, 1, dots.v, 0).
+  $
+
+  Thus, our MSE loss either has to sum or average over the $t$ activation units in our network in addition to averaging over the $n$ examples in the dataset or mini-batch:
+  $
+    L(W, va(b)) =
+    1/n sum_1^n 1/t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
+  $
+
+  The goal is to minimize the loss function $L(W)$.
+  We need to calculate the partial derivative of the parameters $W$ with respect to each weight for every layer in the network:
+  $
+    pdv(L, w_(j,l)^((i)))
+  $
+  
+  Note that $W$ consists of multiple matrices.
+  In an MLP with one hidden layer, we have the weight matrix, $W^((h))$, which connects the input to the hidden layer, and $W^(("out"))$, which connects the hidden layer to the output layer.
+
+  Backpropagation is a very efficient and one of the most widely used algorithms for training artificial NNs.
+  In essence, we can think of backpropagation as a very computationally efficient approach to compute the partial derivatives of a complex, non-convex loss function in multilayer NNs.
+  The goal is to use those derivatives to learn the weight coefficients for parameterizing such a multilayer artificial NN.
+  The error surface of an NN loss function is not convex or smooth with respect to the parameters.
+  There are many bumps in this high-dimensional loss surface (local minima) that we have to overcome in order to find the global minimum of the loss function.
+  Given the function $F(x) = f(g(h(u(v(x)))))$, we can use the chain rule to compute the derivative:
+  $
+    dv(F,x) =
+    dv(,x) f(g(h(u(v(x))))) =
+    dv(f,g) dv(g,h) dv(h,u) dv(u,v) dv(v,x).
+  $
+  In the context of computer algebra, a set of techniques, known as *automatic differentiation*, has been developed to solve such problems very efficiently.
+  
+  Automatic differentiation comes with two modes, the forward and reverse modes; backpropagation is simply a special case of reverse-mode automatic differentiation.
+  The key point is that applying the chain rule in forward mode could be quite expensive since we would have to multiply large matrices for each layer (Jacobians) that we would eventually multiply by a vector to obtain the output.
+
+  The trick of reverse mode is that we traverse the chain rule from right to left.
+  We multiply a matrix by a vector, which yields another vector that is multiplied by the next matrix, and so on.
+  Matrix-vector multiplication is computationally much cheaper than matrix-matrix multiplication, which is why backpropagation is one of the most popular algorithms used in NN training.
+
+  #figure(
+    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_13.png"),
+    caption: [
+      Computing the partial derivatives of the loss with respect to the first hiddel layer weight.
+      Averaging over the mini-batch is omitted.
+      Figure from @raschkaMachineLearningPyTorch2022.
+    ]
+  )
 ]
 
 == Graph Neural Networks <sec:gnn>
