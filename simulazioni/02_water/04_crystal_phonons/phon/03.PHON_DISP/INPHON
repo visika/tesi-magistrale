@@ -1,0 +1,8 @@
+# Generated with Python
+
+# number of ions types and masses
+NTYPES = 2
+
+# generate superlattice
+LSUPER = .TRUE.
+NDIM = 2 2 2

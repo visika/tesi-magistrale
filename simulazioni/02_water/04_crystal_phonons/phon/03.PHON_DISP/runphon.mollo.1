@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+#
+# ---------------------------------------------------------------
+#   batch file to run over several diplaced atoms
+# ---------------------------------------------------------------
+
+echo "Start runphon"
+
+if test -f POSCAR.phon; then
+  echo "POSCAR.phon exist remove before starting batchfile"
+  exit 1
+fi
+cp POSCAR POSCAR.phon
+#
+#  loop over all exited ions
+#
+
+echo "[I] Start forces script"
+python forces.py
+
+j=216
+
+# restore POSCAR file
+mv POSCAR.phon POSCAR
+
+# Il file FORCES è fatto con la prima riga l'indice totale $j,
+# seguito dal contenuto dei file DYNMAT.$i
+
+echo "$j" >FORCES
+i=1
+while test "$i" -le "$j"; do
+  cat DYNMAT."$i" >>FORCES
+  i=$((i + 1))
+done
+
