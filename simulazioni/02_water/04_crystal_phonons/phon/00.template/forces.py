@@ -20,7 +20,8 @@ def __(datetime):
     # Ase serve per leggere il file delle posizioni degli atomi
     from ase.io import read
     # MACE è il calcolatore scelto
-    from mace.calculators import mace_mp
+    # from mace.calculators import mace_mp
+    from mace.calculators.mace import MACECalculator
     # subprocess serve a eseguire phon
     import subprocess
     # glob serve a leggere l'elenco dei file DYNMAT
@@ -39,9 +40,9 @@ def __(datetime):
     print("Import finished after", datetime.now() - _t)
     return (
         Bar,
+        MACECalculator,
         copyfile,
         glob,
-        mace_mp,
         mo,
         natsorted,
         np,
@@ -52,7 +53,7 @@ def __(datetime):
 
 
 @app.cell
-def __(copyfile, mace_mp, read, subprocess):
+def __(MACECalculator, copyfile, read, subprocess):
     # Generazione della supercella
     supercell = 2
 
@@ -86,7 +87,12 @@ def __(copyfile, mace_mp, read, subprocess):
         _f.writelines(_contents)
 
     atoms = read("POSCAR")
-    calc = mace_mp("medium", default_dtype="float64", device="cuda")
+    # calc = mace_mp("medium", default_dtype="float64", device="cuda")
+    calc = MACECalculator(
+        "/ibiscostorage/VirtualMatterLab/MACE-ICE13/MACE-ICE13-1.model",
+        default_dtype="float64",
+        device="cuda",
+    )
     atoms.calc = calc
 
     # Una volta che ASE ha ottenuto la geometria desiderata,
