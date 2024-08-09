@@ -1,0 +1,36 @@
+Starging at Tue Aug 6 02:20:56 CEST 2024
+:: initializing oneAPI environment ...
+   BASH version = 4.2.46(2)-release
+:: dev-utilities -- latest
+:: tbb -- latest
+:: compiler -- latest
+:: dpl -- latest
+:: mkl -- latest
+:: ipp -- latest
+:: mpi -- latest
+:: ccl -- latest
+:: vtune -- latest
+:: dpcpp-ct -- latest
+:: dal -- latest
+:: intelpython -- latest
+:: ippcp -- latest
+:: debugger -- latest
+:: inspector -- latest
+:: clck -- latest
+:: itac -- latest
+:: oneAPI environment initialized ::
+     using /nfsexports/SOFTWARE/intel/oneapi/mpi/2021.1.1/bin/mpirun
+Using Python 3.11.8
+Python path: /lustre/home/mmollo/.cache/pypoetry/virtualenvs/tesi-magistrale-jxuYGkd5-py3.11/bin/python
+Default dtype float64 does not match model dtype float32, converting models to float64.
+Optimization started at 2024-08-06 02:22:05.045434
+Optimization finished after 0:00:19.569827
+Displacements started at 2024-08-06 02:22:24.615664
+Displacements finished after 0:00:00.290571
+Forces calculation started at 2024-08-06 02:22:24.906257
+Forces calculation finished after 0:00:58.904676
+Force constants calculation started at 2024-08-06 02:23:23.810988
+Force constants calculation finished after 0:00:00.695897
+Goodbye from Python!
+Tue Aug  6 02:23:27 CEST 2024
+FINISHED!!!
