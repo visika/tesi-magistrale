@@ -92,7 +92,7 @@
   complex intermolecular interactions with a significantly reduced computational
   cost compared to traditional ab-initio methods.
 
-  We will study the capabilities of trained Machine Learning potentials to
+  We will study the capabilities of trained #glspl("mlp") to
   accurately predict lattice energies, polymorphic behaviours, and response to
   external conditions like temperature and pressure. We will also study dynamic
   properties such as phonon spectra to complete the insight into the physical and
