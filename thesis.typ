@@ -85,10 +85,7 @@
   Molecular crystals play an important role in the field of materials science,
   particularly in drug development, electronics, and renewable energy sectors.
 
-  In this work we will study the properties of molecular crystals, using recently
-  developed Machine Learning potentials to model their behaviour and
-  characteristics. We will be primarily focusing on water as the initial subject,
-  followed by a study of a selection of other molecular crystals.
+  In this work, we will use recently developed #glspl("mlp") to model the behaviour and characteristics of molecular crystals, using water as the object of study, given the vast coverage in literature.
 
   Traditional approaches often grapple with the trade-off between computational
   expense and accuracy. The application of Machine Learning potentials captures
