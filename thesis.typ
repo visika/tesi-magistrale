@@ -27,7 +27,7 @@
 #[ // Title page
   #set align(center)
 
-  #text(1.5em, [*UNIVERSITÀ DEGLI STUDI DI NAPOLI* \ *"FEDERICO II"*])
+  #text(1.5em, [*UNIVERSITÀ DEGLI STUDI DI NAPOLI \ "FEDERICO II"*])
 
   #v(3mm)
 
