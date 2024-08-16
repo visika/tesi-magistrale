@@ -79,7 +79,7 @@
   footer: none,
 )
 
-#par(justify: true)[
+#par(justify: true, first-line-indent: 0pt)[
   = Abstract
 
   Molecular crystals play an important role in the field of materials science,
