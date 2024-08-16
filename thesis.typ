@@ -2592,6 +2592,11 @@ Fine-tuning a MACE model is composed of three steps, detailed as follows:
 
 = Conclusions
 
+In this thesis work we learned how to use and implement in our computations the MACE calculator.
+This allowed fast and accurate prototyping of different molecules configurations, phonon dispersions and ice polymorphs lattice energies, with orders of magnitude shorter execution times with respect to DFT methods.
+It is noteworthy that test simulations could be executed effortlessly on a high-end laptop CPU, for a tight feedback loop between script creation and debugging.
+The results obtained using MACE show a satisfiying agreement with the base models onto which it is trained, with the exception of the phonon dispersions, which show a slight over-estimation of the energies, while the shape of the graphs remain accurate.
+
 The use of #glspl("mlp") allows rapid prototyping through a fast and efficient simulation of representative structures, with a very convenient accuracy/cost ratio.
 The combination of foundation models with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this new approach very versatile, and a precious addition in the toolbox of the material scientists.
 
