@@ -10,7 +10,7 @@
 #show link: set text(fill: blue.darken(60%))
 
 #let title = "Properties of molecular crystals using machine learning potentials"
-#set document(title: title)
+#set document(title: title, author: "Mariano Mollo")
 #set text(font: "New Computer Modern", size: 12pt)
 
 // Justify paragraphs but not code blocks
