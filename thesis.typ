@@ -57,7 +57,7 @@
   #grid(
     columns: 2,
     align: (left, right),
-    column-gutter: 8cm,
+    column-gutter: 1fr,
     row-gutter: 2.5mm,
     [*Relatori*], [*Candidato*],
     [Prof. Dario Alfè], [Mariano Mollo],
