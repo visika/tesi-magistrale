@@ -300,17 +300,9 @@
 
 = Introduction
 
-#box(
-  stroke: 2pt + green,
-  inset: 1mm,
-  [
-    The structure and properties of molecular crystals have long been of great interest,
-    not just for fundamental reasons of understanding molecular aggregation but also due to their numerous applications.
-    As the preferred form of active pharmaceutical ingredients for oral administration, the dissolution and morphology of drug-molecule crystals are very important for bio-availability and processing. @blagdenCrystalEngineeringActive2007
-    For these reasons alone the prediction of molecular crystal structures is of the utmost importance. @priceComputationalPredictionPharmaceutical2004
-    In addition, molecular crystals can also have a wide range of optical, electronic, and mechanical properties, @reddyMechanicalPropertiesMolecular2010 which in some cases can be tuned based on environmental variables @martinsTemperaturePressureInducedProton2009 or composition. @karkiImprovingMechanicalProperties2009 @reillyUnderstandingRoleVibrations2013
-  ],
-)
+Molecular crystals represent a significant area of study within materials science due to their diverse applications in fields such as pharmaceuticals, electronics, and renewable energy.
+In drug development, for instance, the properties of molecular crystals directly influence the effectiveness and delivery of medications, as exemplified in @fig:paracetamol-tableting. @blagdenCrystalEngineeringActive2007
+Beyond pharmaceuticals, these materials are key to advancing technologies involving semiconductors and energy storage systems, given their tunable electronic and optical properties. @reddyMechanicalPropertiesMolecular2010 @martinsTemperaturePressureInducedProton2009 @karkiImprovingMechanicalProperties2009 @reillyUnderstandingRoleVibrations2013
 
 #figure(
   image("thesis/imgs/karki2009_graphical_abstact.jpg", width: 50%),
@@ -318,58 +310,12 @@
     Poor mechanical properties of paracetamol are improved through the strategy of cocrystal formation.
     Graphical Abstract taken from @karkiImprovingMechanicalProperties2009.
   ],
-)
+) <fig:paracetamol-tableting>
 
-#box(
-  stroke: 2pt + green,
-  inset: 1mm,
-  [
-    While many studies have focused on the role of dispersion, 25, 29, 30 few have critically assessed the shortcomings of semi-local functionals in detail.
-    For example, the de-localisation or selfinteraction errors in DFT31 can often have a signiﬁcant effect on hydrogen-bonded systems. @reillyUnderstandingRoleVibrations2013
-  ],
-)
-
-#box(
-  stroke: 2pt + red,
-  inset: 1mm,
-  [
-    // TODO Riprendi introduzione dall'articolo introduttivo di MACE
-    *From MACE*:
-    Machine-learned force fields have transformed the atomistic modelling of materials by enabling simulations of _ab initio_ quality on unprecedented time and length scales.
-    However, they are currently limited by:
-    1. the significant computational and human effort that must go into development and validation of potentials for each particular system of interest; and
-    2. a general lack of transferability from one chemical system to the next.
-    Here, using the state-of-the-art MACE architecture we introduce a single general-purpose ML model, trained on a public database of 150k inorganic crystals, that is capable of running stable molecular dynamics on molecules and materials.
-    We demonstrate the power of the MACE-MP-0 model --- and its qualitative and at times quantitative accuracy --- on a diverse set problems in the physical sciences, including the properties of solids, liquids, gases, and chemical reactions.
-    The model can be applied out of the box and as a starting or "foundation model" for any atomistic system of interest and is thus a step towards democatising the revolution of ML force fields by lowering the barriers to entry.
-    @batatiaFoundationModelAtomistic2023
-  ],
-)
-
-#box(
-  stroke: 2pt + red,
-  inset: 1mm,
-  [
-    There is a great need for a better understanding of complex aqueous systems, in particular those involving solid–liquid interfaces, to promote progress in ﬁelds as diverse as heterogeneous catalysis, material design, biotechnology, and energy conversion or storage (1, 2). @schranMachineLearningPotentials2021
-
-    Ab initio–based methods, such as ab initio molecular dynamics (AIMD), struggle in terms of the accessible time and length scales, while traditional force ﬁeld approaches are complicated to develop and often not accurate enough to provide reliable answers for complex interface problems. In recent years, machine learning potentials (MLPs) have become a promising alternative, bypassing expensive ab initio calculations and extending length and time scales in molecular simulations. @schranMachineLearningPotentials2021
-  ],
-)
-
-// TODO Descrivi cristalli molecolari e compara l'acqua come esempio caratterizzante
-
-Qual è il problema e cosa si va a fare.
-
-Molecular crystals are a class of materials of great technological importance.
-
-L'acqua, i legami etc etc... Quantum Monte Carlo, DFT, quali sono i problemi.
-
-== Motivation
-
-Ab initio–based methods, such as ab initio molecular dynamics (AIMD), struggle in terms of the accessible time and length scales, while traditional force ﬁeld approaches are complicated to develop and often not accurate enough to provide reliable answers for complex interface problems.
-In recent years, #glspl("mlp") have become a promising alternative, bypassing expensive ab initio calculations and extending length and time scales in molecular simulations. @bjorneholmWaterInterfaces2016
-
-Since their introduction about 25 years ago, machine learning (ML) potentials have become an important tool in the ﬁeld of atomistic simulations. After the initial decade, in which neural networks were successfully used to construct potentials for rather small molecular systems, the development of #glspl("hdnnp") in 2007 opened the way for the application of ML potentials in simulations of large systems containing thousands of atoms. @behlerFourGenerationsHighDimensional2021
+Despite the critical importance @priceComputationalPredictionPharmaceutical2004 of understanding and predicting the properties of molecular crystals, traditional computational approaches face challenges in balancing accuracy with computational expense.
+Methods such as @dft offer accurate insights into molecular interactions but are prohibitively expensive for large-scale simulations.
+Conversely, classical force field methods scale well but often lack the precision needed for complex systems.
+This trade-off has driven the exploration of alternative methods that combine the best of both worlds.
 
 #figure(
   image("thesis/imgs/images_large_cr0c00868_0001.jpeg", width: 80%),
@@ -382,40 +328,38 @@ Since their introduction about 25 years ago, machine learning (ML) potentials ha
   ],
 )
 
-DFT potentials are hard to make and it is hard to account for all the contributions.
-They consume much time and resources.
+Recently, #glspl("mlp") have emerges as a promising solution.
+These approaches leverage advanced neural network architectures to model the potential energy surfaces of molecular systems with a level of accuracy comparable to ab initio methods but at a fraction of the computational cost.
+By training on existing quantum mechanical data, #glspl("mlp") can predict intermolecular interactions and dynamic behaviours with high fidelity, making them suitable for studying complex systems like molecular crystals.
+@batatiaFoundationModelAtomistic2023
+@schranMachineLearningPotentials2021
+@bjorneholmWaterInterfaces2016
+@kapilCompleteDescriptionThermodynamic2022
 
+Since their introduction about 25 years ago, machine learning (ML) potentials have become an important tool in the ﬁeld of atomistic simulations.
+After the initial decade, in which neural networks were successfully used to construct potentials for rather small molecular systems, the development of #glspl("hdnnp") in 2007 opened the way for the application of ML potentials in simulations of large systems containing thousands of atoms.
+@behlerFourGenerationsHighDimensional2021
 
-=== Machine Learning potentials
+It has been estimated that mixed ab-initio and @mlp calculations require between three and ten times less the core hours of purely physical functionals. @kapilCompleteDescriptionThermodynamic2022
 
-The facile generation of machine-learning potentials for a diverse set of polymorphic compounds—benzene, glycine, and succinic acid—and predictions of thermodynamic stabilities in qualitative and quantitative agreement with experiments highlight that predictive thermodynamic studies of industrially relevant molecular materials are no longer a daunting task. @kapilCompleteDescriptionThermodynamic2022
-
-#box(
-  stroke: 2pt + red,
-  inset: 1mm,
-  [
-    Modern #glspl("mlp") // TODO cite 31 V. L. Deringer, M. A. Caro, G. Csányi, Machine learning interatomic potentials as emerging tools for materials science. Adv. Mater. 31, e1902765 (2019).
-    permit accurately reproducing ab initio #glspl("pes") and dramatically reduce the cost of performing simulations approaching ab initio accuracy. // TODO cite 32 J. Lan et al., Simulating the ghost: Quantum dynamics of the solvated electron. Nat. Commun. 12, 766 (2021). Nat. Commun.12
-    @kapilCompleteDescriptionThermodynamic2022
+#figure(
+  image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
+  caption: [
+  A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation.
+  Image taken from @gilmerNeuralMessagePassing2017.
   ],
 )
 
-@kapilCompleteDescriptionThermodynamic2022 puts the cost of calculations into perspective,
-highlighting that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely physical functionals.
-
-== Research question
-
-=== Ice polymorphs
-
-Previous works combine @pi approaches with #glspl("mlp") for ice polymorphs
-// TODO kapil 29 : V. Kapil, E. Engel, M. Rossi, M. Ceriotti, Assessment of approximate methods for anharmonic free energies. J. Chem. Theory Comput. 15, 5845–5857 (2019).
+This thesis investigates the capabilities of #glspl("mlp"), with a specific focus on modeling the properties of water as a molecular crystal.
+Water serves as an ideal test case due to its well-documented polymorphic behaviours and the wealth of literature available for benchmarking.
+@schranMachineLearningPotentials2021
 @chengInitioThermodynamicsLiquid2019
+The research primarily explores the accuracy of #glspl("mlp") in predicting molecular structural stabilities, lattice energies of different ice polymorphs, and dynamical properties of crystals, such as phonon spectra.
 
-#set quote(block: true)
+// TODO kapil 29 : V. Kapil, E. Engel, M. Rossi, M. Ceriotti, Assessment of approximate methods for anharmonic free energies. J. Chem. Theory Comput. 15, 5845–5857 (2019).
 
-Taking into account the disruptive innovation brought in the molecular dynamics field by machine learning force fields, this thesis will try to answer the following question:
-#quote[what is the performance of machine learning force fields in the simulation of water?]
 The following chapters will introduce the theoretical foundations and the tools needed to pursue this question.
+// TODO Dettaglia i capitoli
 
 = Theory
 
@@ -1259,11 +1203,6 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 #text(blue)[
   In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
   #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
-
-  #figure(
-    image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
-    caption: [A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation. Image taken from @gilmerNeuralMessagePassing2017.],
-  )
 
   The GNN uses a differentiable model of choice (e.g. a multilayer perceptron (MLP)) on each component of a graph; this is a GNN layer.
   For each node vector, one applies the model and gets back a learned node-vector.
