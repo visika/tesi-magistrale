@@ -2592,20 +2592,12 @@ Fine-tuning a MACE model is composed of three steps, detailed as follows:
 
 = Conclusions
 
-In this thesis work we learned how to use and implement in our computations the MACE calculator.
+In this thesis work we learned how to use and implement in our computations the MACE @mlp calculator.
 This allowed fast and accurate prototyping of different molecules configurations, phonon dispersions and ice polymorphs lattice energies, with orders of magnitude shorter execution times with respect to DFT methods.
 It is noteworthy that test simulations could be executed effortlessly on a high-end laptop CPU, for a tight feedback loop between script creation and debugging.
 The results obtained using MACE show a satisfiying agreement with the base models onto which it is trained, with the exception of the phonon dispersions, which show a slight over-estimation of the energies, while the shape of the graphs remain accurate.
-
-The use of #glspl("mlp") allows rapid prototyping through a fast and efficient simulation of representative structures, with a very convenient accuracy/cost ratio.
-The combination of foundation models with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this new approach very versatile, and a precious addition in the toolbox of the material scientists.
-
-#box(
-  stroke: blue + 2pt,
-  inset: 1mm,
-  [The accuracy of the new approaches sets the stage for future studies of kinetic effects as wess as full $p-T$ phase diagrams in a reliable and computationally efficient manner. @kapilCompleteDescriptionThermodynamic2022
-  ],
-)
+Overall #glspl("mlp") demonstrate a convenient accuracy/cost ratio;
+the combination of this charactheristic with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this approach very versatile, and a precious addition in the toolbox of the material scientists.
 
 = Acknowledgments
 I would like to express my gratitude to Flaviano Della Pia for his invaluable assistance in learning the new tools and for providing me with insightful advice and practical tutorials. I am also indebted to Andrea Zen for his meticulous guidance and prompt advice. Finally, I would like to thank Dario Alfè for imparting me with the fundamentals of knowledge in this field and for steering my thesis in the right direction.
