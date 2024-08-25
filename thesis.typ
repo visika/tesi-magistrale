@@ -2315,20 +2315,15 @@ Further analysis can also be made on the study of the diffusion coefficient and 
 )
 
 = Tools
-Ibisco, MACE @Batatia2022mace @Batatia2022Design, ASE.
-
 == Ibisco
-Simulations were performed on the Ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
-
-#box(
-  stroke: 2pt + red,
-  inset: 1mm,
-  [
+Simulations were performed on the @ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
+// #box(
+//   stroke: 2pt + red,
+//   inset: 1mm,
+//   [
     The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
-
     The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
     in the upper level the application level, which allows users to submit their tasks.
-
     The intermediate level of the architecture consists of the set of CUDA and MPI libraries which are capable of making the two levels communicate with each other.
 
     === The hardware level
@@ -2336,7 +2331,6 @@ Simulations were performed on the Ibisco cluster provided by the Federico II Uni
     They perform two functions: calculation and storage.
     To support the calculation there are 128 GPUs, distributed among 32 nodes (4 GPUs per node).
     To support storage, 320 TB are available distributed among 4 nodes (80 TB per node).
-
     To ensure access to resources and low-latency broadband communication between nodes, the InfiniBand technology is used to provide a high-performance network.
 
     === The Compute Node Architecture
@@ -2344,24 +2338,23 @@ Simulations were performed on the Ibisco cluster provided by the Federico II Uni
     Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
     Each GPU is equipped with 34 GB RAM memory.
     The nodes are divided into 3 differently sized sub-clusters.
-  ],
-)
+//   ],
+// )
 
 == ASE
 
-The Atomic Simulation Environment (ASE) is a set of tools and Python modules for setting up, manipulating, running, visualizing and analyzing atomistic simulations.
-
+The #gls("ase", long: true) is a set of tools and Python modules for setting up, manipulating, running, visualizing and analyzing atomistic simulations.
 @ase provides interfaces to different codes through `Calculators` which are used together with the central `Atoms` object and the many available algorithms in @ase.
-
 The `Atoms` object contains the positions of the atoms and the properties of the cell.
-
 @ase allows geometry optimization, computing of the potential energy of the system, molecular dynamics.
-
 The MACE code was executed through the calculators interface of @ase.
 
 == MACE <sec:mace>
 
-MACE is an equivariant message-passing graph tensor network where each layer encodes many-body information of atomic geometry.
+MACE
+@Batatia2022mace
+@Batatia2022Design
+is an equivariant message-passing graph tensor network where each layer encodes many-body information of atomic geometry.
 At each layer, many-body messages are formed using a linear combination of a tensor product basis. @batatiaDesignSpaceEquivariant2022 @darbyTensorReducedAtomicDensity2023
 This is constructed by taking tensor products of a sum of two-body permutation-invariant polynomials, expanded in a spherical basis.
 *The final output is the energy contribution of each atom to the total potential energy.*
@@ -2497,7 +2490,7 @@ In those simulations, the many-body equivariant MACE model is an improvement wit
 MACE-MP-0 is a general-purpose @ml model, trained on a public database of 150k inorganic crystals, that is capable of running stable molecular dynamics on molecules and materials. @batatiaFoundationModelAtomistic2023
 The model can be applied out of the box and as a starting or "foundation model" for any atomistic system of interest and is thus a step towards democratising the revolution of @ml force fields by lowering the barriers to entry. @batatiaFoundationModelAtomistic2023
 
-=== Fine-tuning a custom model
+=== Fine-tuning a custom model <sec:fine-tuning>
 
 In this thesis, we studied and followed the procedure to create a custom made MACE model.
 Current developments are undergoing in the field, experimenting on the various techniques to fine-tune custom MACE models. @kaurDataefficientFinetuningFoundational2024
