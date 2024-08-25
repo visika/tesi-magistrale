@@ -565,6 +565,7 @@ $ <eq:termcomp-7.64>
 ]
 
 === The small displacement method <sec:small-displacement-method>
+// Vedi anche §3.4.2 Della Pia, §7.1.3 Alfè
 
 Let us consider the crystal in the ground state and displace one particle from its equilibrium position.
 Let the displacement be along the $x$ axis, $arrow(u) := (u, 0, 0)$.
