@@ -664,23 +664,70 @@ $Phi_"SC" (arrow(r)_i^0) tilde.eq Phi(arrow(r)_i^0)$.
 In this limit, the Fourier interpolation is accurate everywhere.
 
 == DFT
-Kohn-Sham equations:
+#gls("dft", long: true) is a formulation of quantum mechanics, used to compute energies and forces, structural and electronic properties of materials in solid-state physics.
+It is the underlying method used by VASP, employed in this thesis during the fine-tuning of MACE models, described in @sec:fine-tuning.
+
+Given the hamiltonian of a time-independent many-body Schrödinger equation for a system of $N$ electrons, $hat(H) = hat(T) + hat(V)_"ee" + hat(V)_"ext"$, and the electron density:
 $
+  rho(va(r)) = N integral_V dif^3 va(r_2) dots dif^3 va(r_N) |Psi(va(r), va(r_2), dots, va(r_N))|^2;
+$
+the potential energy due to the external potential is a _functional_ of the electron density, which we indicate with the notation $V_"ext" [rho]$:
+$
+  V_"ext" [rho] = N integral_V dif^3 va(r) rho(va(r)) v(va(r)).
+$
+
+The Hohenberg-Kohn theorems @hohenbergInhomogeneousElectronGas1964 state that $V_"ext" [rho_0]$, where $rho_0$ is the ground state density, is a _unique_ functional of $rho_0$.
+$rho_0$ determines $Psi_0$, the ground state wavefunction of the system, and thus all the physical properties of the system;
+we say they are _functionals_ of the ground state density.
+In particular, the ground state energy, $E_0$, is a functional of $rho_0$, as well as the kinetic and electron-electron interaction contributions:
+$
+  E_0 = E[rho_0] = T[rho_0] + V_"ee" [rho_0] + V_"ext" [rho_0].
+$
+
+The Kohn-Sham method @kohnSelfConsistentEquationsIncluding1965 provides a working procedure to find the ground state density, defining the Kohn-Sham potential, $v_"KS" [rho] (va(r)) := v(va(r)) + integral_V (rho(va(r'))) / (|va(r) - va(r')|) dif^3 va(r') + (delta E_"xc" [rho]) / (delta rho)$, that leads to the Kohn-Sham self-consistent equations:
+$
+  // Eq. (8.39) Alfè, (3.39) Della Pia
+  hat(h)_"KS" [rho] (va(r)) psi_n (va(r)) =
   [-1 / 2 nabla^2 + v_"KS" [rho] (arrow(r))] psi_n (arrow(r))
   = epsilon_n psi_n (arrow(r))
+$ <eq:kohn-sham-equations>
+
+The equations are coupled through the effective potential $v_"KS" [rho]$, as $rho(va(r))$ depends on all the $psi_n (va(r))$.
+
+Since the orbitals $psi_n$ are ortho-normal, the ground state electron density of the system is obtained from the solution of @eq:kohn-sham-equations[Equations] as:
 $
-The aim is to find the lowest $N/2$ eigenstates of the Hamiltonian.
-These are of the type:
+  // Eq. (3.41) Della Pia, (8.23) Alfè
+  rho_0 (va(r)) = sum_(n=1)^N |psi_n (va(r))|^2.
+$ <eq:ground-state-density>
+
+The extremes of the functional are obtained for any ensemble of $N$ eigenstates of $hat(h)_"KS" [rho]$, and the ground state is obtained by finding the lowest $N$ eigenstates (or the lowest $N/2$ eigenstates, taking into account the spin degeneracy).
+One can introduce a set of $L$ basis functions, ${phi_m}_(m = 1, dots, L)$, to construct the matrix $epsilon_(i j) = braket(phi_i, hat(h)_"KS" [rho], phi_j)$, and diagonalize it.
+The eigenvectors are of the type:
 $
+  // Eq. (8.40) Alfè, (3.42) Della Pia
   psi_n = sum_(i=1)^L c_i^n phi_i
 $
-The energy can be obtained from:
+If the basis set ${phi_m}$ is complete, the solution is exact.
+However, usually this means including an infinite number of elements, which cannot be done in practice;
+therefore, the solution to the @ks equations is only approximate.
+By increasing the number of basis functions, one can drive the calculations to convergence, where the energy and other properties are obtained within some predefined threshold.
+The usual variational principle applies, and so, by including more and more elements in the basis set, the ground state energy decreases monotonically.
+The rate of decrease of the energy can be used to judge the level of convergence.
+
+Since the @ks potential depends on $rho$, @eq:kohn-sham-equations[Equations] have to be solved self-consistently.
+This is typically done by iteration, in which one starts with some initial guess for the electron density $rho_1$, constructs $v_"KS" [rho_1]$ and solves @eq:kohn-sham-equations[Equations].
+With those solutions construct $rho_2$ using @eq:ground-state-density or more advanced algorithms, and solve @eq:kohn-sham-equations[Equations] again, using the newly constructed $v_"KS" [rho_2]$.
+The algorithm runs until the difference between $rho_(j+1)$ and $rho_j$ is below some acceptable threshold.
+
+Multiplying @eq:kohn-sham-equations[Equations] by $psi_n^star (va(r))$, integrating over $va(r)$, summing over $n$, the total energy can be obtained from:
 $
+  // Eq. (8.41) Alfè
   E = 2 sum_(n=1)^(N / 2) epsilon_n - 1 / 2 integral_V (rho (
     arrow(r)'
   ) rho(arrow(r))) / (|arrow(r) - arrow(r)'|) dif^3 arrow(r)' dif^3 arrow(r)
-  - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc"
+  - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc".
 $
+
 == Molecular dynamics
 === The Verlet algorithm
 The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion. @alfeNotesStatisticalComputational2023
