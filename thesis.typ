@@ -938,43 +938,43 @@ $
 
 Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
 
-=== The role of anharmonic contributions
-// TODO
-@rossiAnharmonicQuantumFluctuations2016
+// === The role of anharmonic contributions
+// // TODO
+// @rossiAnharmonicQuantumFluctuations2016
 
-The harmonic treatment ignores effects due to anharmonic thermal motion and cell expansion. @reillyUnderstandingRoleVibrations2013
+// The harmonic treatment ignores effects due to anharmonic thermal motion and cell expansion. @reillyUnderstandingRoleVibrations2013
 
-In the harmonic approximation, supercell phonon calculations show signiﬁcant deviations from the widely used Dulong-Petit law, as noted elsewhere. @reillyUnderstandingRoleVibrations2013
+// In the harmonic approximation, supercell phonon calculations show signiﬁcant deviations from the widely used Dulong-Petit law, as noted elsewhere. @reillyUnderstandingRoleVibrations2013
 
-Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
+// Assessing predictions of lattice energies requires careful consideration of vibrational, many-body dispersion and exact-exchange contributions. @reillyUnderstandingRoleVibrations2013
 
-Exact exchange, which is rarely considered in @dft studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
+// Exact exchange, which is rarely considered in @dft studies of molecular crystals, is shown to have a signiﬁcant contribution to lattice energies, systematically improving agreement between theory and experiment. @reillyUnderstandingRoleVibrations2013
 
-Hybrid functionals are often not used in the study of cohesive properties of molecular crystals,
-@al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
-largely due to their additional computational cost, which particularly in a plane-wave basis can reach more than an order of magnitude larger than the corresponding semi-local functional. @reillyUnderstandingRoleVibrations2013
+// Hybrid functionals are often not used in the study of cohesive properties of molecular crystals,
+// @al-saidiAssessmentVdWTSMethod2012, @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+// largely due to their additional computational cost, which particularly in a plane-wave basis can reach more than an order of magnitude larger than the corresponding semi-local functional. @reillyUnderstandingRoleVibrations2013
 
-#box(
-  stroke: 2pt + red,
-  inset: 1mm,
-  [The pharmaceutical industry spends considerable resources on high-throughput crystallization experiments to screen for polymorphs, // TODO citazione a S. L. Morissette et al., High-throughput crystallization: Polymorphs, salts, co-crystals and solvates of pharmaceutical solids. Adv. Drug Deliv. Rev. 56, 275–300 (2004).
-    into which the target structure may decay.
-    However, crystallization experiments do not probe thermodynamic stability, and conclusive studies of the impact of temperature changes after crystallization on the stability of polymorphs (i.e. their monotropic or enantiotropic nature) // TODO cite E. H. Lee, A practical guide to pharmaceutical polymorph screening & selection. Asian J. Pharm. Sci. 9, 163–175 (2014)
-    are often prevented by limited sample quantities.
-    Hence, there is the appeal of theoretical @csp // TODO cite 14 S. L. Price, Predicting crystal structures of organic compounds. Chem. Soc. Rev. 43,2098–2111 (2014).
-    based on the thermodynamic stability, which promises to complement crystallization experiments // TODO cite 15 J. Nyman, S. M. Reutzel-Edens, Crystal structure prediction is changing from basic science to applied technology. Faraday Discuss. 211, 459–476 (2018).
-    by exhaustively searching for competing polymorphs.
-    @kapilCompleteDescriptionThermodynamic2022
-  ],
-)
+// #box(
+//   stroke: 2pt + red,
+//   inset: 1mm,
+//   [The pharmaceutical industry spends considerable resources on high-throughput crystallization experiments to screen for polymorphs, // TODO citazione a S. L. Morissette et al., High-throughput crystallization: Polymorphs, salts, co-crystals and solvates of pharmaceutical solids. Adv. Drug Deliv. Rev. 56, 275–300 (2004).
+//     into which the target structure may decay.
+//     However, crystallization experiments do not probe thermodynamic stability, and conclusive studies of the impact of temperature changes after crystallization on the stability of polymorphs (i.e. their monotropic or enantiotropic nature) // TODO cite E. H. Lee, A practical guide to pharmaceutical polymorph screening & selection. Asian J. Pharm. Sci. 9, 163–175 (2014)
+//     are often prevented by limited sample quantities.
+//     Hence, there is the appeal of theoretical @csp // TODO cite 14 S. L. Price, Predicting crystal structures of organic compounds. Chem. Soc. Rev. 43,2098–2111 (2014).
+//     based on the thermodynamic stability, which promises to complement crystallization experiments // TODO cite 15 J. Nyman, S. M. Reutzel-Edens, Crystal structure prediction is changing from basic science to applied technology. Faraday Discuss. 211, 459–476 (2018).
+//     by exhaustively searching for competing polymorphs.
+//     @kapilCompleteDescriptionThermodynamic2022
+//   ],
+// )
 
-#box(
-  stroke: blue + 2pt,
-  inset: 1mm,
-  [
-    The size and sign of nuclear quantum effects, anharmonicity, and cell expansion and flexibility, depend entirely on the compound and the polymorphs at hand, highlighting that rigorous @qti is indispensable for predicting phase stabilities and that molecular crystals are typically stabilized by a nontrivial interplay of different physical effects, whose individual importance is belied by the subtle resultant free energy differences. @kapilCompleteDescriptionThermodynamic2022
-  ],
-)
+// #box(
+//   stroke: blue + 2pt,
+//   inset: 1mm,
+//   [
+//     The size and sign of nuclear quantum effects, anharmonicity, and cell expansion and flexibility, depend entirely on the compound and the polymorphs at hand, highlighting that rigorous @qti is indispensable for predicting phase stabilities and that molecular crystals are typically stabilized by a nontrivial interplay of different physical effects, whose individual importance is belied by the subtle resultant free energy differences. @kapilCompleteDescriptionThermodynamic2022
+//   ],
+// )
 
 == Machine Learning
 #text(blue)[
