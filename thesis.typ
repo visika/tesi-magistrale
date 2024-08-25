@@ -88,7 +88,7 @@
   In this work, we will use recently developed #glspl("mlp") to model the behaviour and characteristics of molecular crystals, using water as the object of study, given the vast coverage in literature.
 
   Traditional approaches often grapple with the trade-off between computational
-  expense and accuracy. The application of Machine Learning potentials captures
+  expense and accuracy. The application of #glspl("mlp") captures
   complex intermolecular interactions with a significantly reduced computational
   cost compared to traditional ab-initio methods.
 
