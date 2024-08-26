@@ -2139,8 +2139,29 @@ The number of q-points in each path including end points is chosen as 101.
 )
 
 The bandstructure calculations result in a approximate reproduction of reference data, as can be observed comparing @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta.
-Frequencies are significantly higher than reference; the source of this discrepancy is not clear, and might be due to improper volume optimization of our geometry or a built-in issue of the calculator; indeed, a compression of the material results in higher overall frequencies.
-This issue has yet to be investigated at the time of writing.
+Frequencies are significantly higher than reference; the source of this discrepancy is not clear;
+varying volumes of the cell were tested and did not change the result;
+another source of the issue could be a built-in deviation of the calculator.
+This issue has yet to be fully investigated at the time of writing.
+
+#large_box(
+grid(
+  columns: 2,
+  // column-gutter: 1fr,
+  align: horizon,
+  [
+    Calculation of phonons dispersion along the band path was also performed using the PHON code @alfePHONProgramCalculate2009 for consistency of calculations.
+    The obtained results are in accordance with reference and previous calculations, maintaining the charachteristic over-estimation of the phonon frequencies we saw before.
+  ],
+  figure(
+    image("simulazioni/02_water/04_crystal_phonons/phon/12.PHON_MACE-ICE13-1_S3/bandplot.svg"),
+    caption: [
+      Phonons bandstructure of ice Ih, computed with PHON using MACE-ICE13-1.
+    ]
+  )
+)
+)
+
 Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
 A visual qualitative analysis of the band structure produced with MACE-MP-0 exposes several different behaviours, particularly at zone boundary points;
 most notably, see the disalignment of bands around point $M$, and at point $A$.
@@ -2176,7 +2197,7 @@ The comparison of the results with the different supercells is shown in @fig:pho
   grid(
     columns: 2,
     gutter: 5pt,
-    align: horizon,
+    align: top,
     figure(
       tablem(
         ignore-second-row: false,
@@ -2188,9 +2209,10 @@ The comparison of the results with the different supercells is shown in @fig:pho
           |4|cpu|5m 23s|1h 47m 7s|
         ],
       ),
-      caption: [Execution times with phonopy.],
+      caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
     ),
-    figure(
+    [
+    #figure(
       tablem(
         ignore-second-row: false,
         [
@@ -2201,7 +2223,18 @@ The comparison of the results with the different supercells is shown in @fig:pho
         ],
       ),
       caption: [Execution times with Phonons by ASE.],
-    ),
+    )
+
+    #figure(
+      table(columns: 4,
+      [supercell], [forces time], [dispersions time], [device],
+      [3],         [3m 22s],      [22s],              [cuda]
+      ),
+      caption: [
+        Execution times with PHON. @alfePHONProgramCalculate2009
+      ]
+    )
+    ],
   ),
 )
 
