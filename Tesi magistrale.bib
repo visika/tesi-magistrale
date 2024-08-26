@@ -45,6 +45,26 @@
   file = {/home/mariano/Zotero/storage/ZLK64VEL/Raschka et al. - 2022 - Machine Learning with PyTorch and Scikit-Learn De.pdf}
 }
 
+@article{alfePHONProgramCalculate2009,
+  title = {{{PHON}}: {{A}} Program to Calculate Phonons Using the Small Displacement Method},
+  shorttitle = {{{PHON}}},
+  author = {Alf\`e, Dario},
+  date = {2009-12-01},
+  journaltitle = {Computer Physics Communications},
+  shortjournal = {Computer Physics Communications},
+  series = {40 {{YEARS OF CPC}}: {{A}} Celebratory Issue Focused on Quality Software for High Performance, Grid and Novel Computing Architectures},
+  volume = {180},
+  number = {12},
+  pages = {2622--2633},
+  issn = {0010-4655},
+  doi = {10.1016/j.cpc.2009.03.010},
+  url = {https://www.sciencedirect.com/science/article/pii/S0010465509001064},
+  urldate = {2023-09-09},
+  abstract = {The program phon calculates force constant matrices and phonon frequencies in crystals. From the frequencies it also calculates various thermodynamic quantities, like the Helmholtz free energy, the entropy, the specific heat and the internal energy of the harmonic crystal. The procedure is based on the small displacement method, and can be used in combination with any program capable to calculate forces on the atoms of the crystal. In order to examine the usability of the method, I present here two examples: metallic Al and insulating MgO. The phonons of these two materials are calculated using density functional theory. The small displacement method results are compared with those obtained using the linear response method. In the case of Al the method provides accurate phonon frequencies everywhere in the Brillouin Zone (BZ). In the case of MgO the longitudinal branch of the optical phonons near the centre of the BZ is incorrectly described as degenerate with the two transverse branches, because the non-analytical part of the dynamical matrix is ignored here; however, thermodynamic properties like the Helmholtz free are essentially unaffected. Program summary Program title: PHON Catalogue identifier: AEDP\_v1\_0 Program summary URL: http://cpc.cs.qub.ac.uk/summaries/AEDP\_v1\_0.html Program obtainable from: CPC Program Library, Queen's University, Belfast, N. Ireland Licensing provisions: Standard CPC licence, http://cpc.cs.qub.ac.uk/licence/licence.html No. of lines in distributed program, including test data, etc.: 19\,580 No. of bytes in distributed program, including test data, etc.: 612\,193 Distribution format: tar.gz Programming language: Fortran 90 Computer: Any Unix, Linux Operating system: Unix RAM: Depends on super-cell size, but usually negligible Classification: 7.8 External routines: Subprograms ZHEEV and DSYEV (Lapack); needs BLAS. A tutorial is provided with the distribution which requires the installation of the quantum-espresso package (http://www.quantum-espresso.org) Nature of problem: Stable crystals at low temperature can be well described by expanding the potential energy around the atomic equilibrium positions. The movements of the atoms around their equilibrium positions can then be described using harmonic theory, and is characterised by global vibrations called phonons, which can be identified by vectors in the Brillouin zone of the crystal, and there are 3 phonon branches for each atom in the primitive cell. The problem is to calculate the frequencies of these phonons for any arbitrary choice of q-vector in the Brillouin zone. Solution method: The small displacement method: each atom in the primitive cell is displaced by a small amount, and the forces induced on all the other atoms in the crystal are calculated and used to construct the force constant matrix. Supercells of {$\sim$}100 atoms are usually large enough to describe the force constant matrix up to the range where its elements have fallen to negligibly small values. The force constant matrix is then used to compute the dynamical matrix at any chosen q-vector in the Brillouin zone, and the diagonalisation of the dynamical matrix provides the squares of the phonon frequencies. The PHON code needs external programs to calculate these forces, and it can be used with any program capable of calculating forces in crystals. The most useful applications are obtained with codes based on density functional theory, but there is no restriction on what can be used. Running time: Negligible, typically a few seconds (or at most a few minutes) on a PC. It can take longer if very dense meshes of q-points are needed, for example, to compute very accurate phonon density of states.},
+  keywords = {Direct method,Free energies,Harmonic approximation,Phonons,Small displacement},
+  file = {/home/mariano/Zotero/storage/Z5D3EEUF/Alfè - 2009 - PHON A program to calculate phonons using the sma.pdf;/home/mariano/Zotero/storage/UUDU8NPZ/Alfè - 2009 - PHON A program to calculate phonons using the sma.html}
+}
+
 @article{verletComputerExperimentsClassical1967,
   title = {Computer "{{Experiments}}" on {{Classical Fluids}}. {{I}}. {{Thermodynamical Properties}} of {{Lennard-Jones Molecules}}},
   author = {Verlet, Loup},
@@ -1601,4 +1621,21 @@
   date = {2022},
   langid = {english},
   file = {/home/mariano/Zotero/storage/BFYLXI8R/LastName - Dynamic Graph Neural Networks Applications to Glassy Systems.pdf}
+}
+
+@article{togoFirstprinciplesPhononCalculations2023,
+  title = {First-Principles {{Phonon Calculations}} with {{Phonopy}} and {{Phono3py}}},
+  author = {Togo, Atsushi},
+  date = {2023-01-15},
+  journaltitle = {Journal of the Physical Society of Japan},
+  shortjournal = {J. Phys. Soc. Jpn.},
+  volume = {92},
+  number = {1},
+  pages = {012001},
+  issn = {0031-9015, 1347-4073},
+  doi = {10.7566/JPSJ.92.012001},
+  url = {https://journals.jps.jp/doi/10.7566/JPSJ.92.012001},
+  urldate = {2024-08-26},
+  langid = {english},
+  file = {/home/mariano/Zotero/storage/7ZZTBDEW/Togo - 2023 - First-principles Phonon Calculations with Phonopy and Phono3py.pdf}
 }
