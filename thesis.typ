@@ -2313,7 +2313,7 @@ Further analysis can also be made on the study of the diffusion coefficient and 
 )
 
 = Tools
-== Ibisco
+== Hardware: Ibisco
 Simulations were performed on the @ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
 // #box(
 //   stroke: 2pt + red,
@@ -2339,7 +2339,7 @@ Simulations were performed on the @ibisco cluster provided by the Federico II Un
 //   ],
 // )
 
-== ASE
+== Framework: ASE
 
 The #gls("ase", long: true) is a set of tools and Python modules for setting up, manipulating, running, visualizing and analyzing atomistic simulations.
 @ase provides interfaces to different codes through `Calculators` which are used together with the central `Atoms` object and the many available algorithms in @ase.
@@ -2347,7 +2347,28 @@ The `Atoms` object contains the positions of the atoms and the properties of the
 @ase allows geometry optimization, computing of the potential energy of the system, molecular dynamics.
 The MACE code was executed through the calculators interface of @ase.
 
-== MACE <sec:mace>
+=== Structure optimization
+
+The optimization algorithms can be roughly divided into local optimization algorithms which find a nearby local minimum and global optimization algorithms that try to find the global minimum (a much harder task).
+Most optimization algorithms available in @ase accept the same base parameters:
+- The atoms object to relax
+- A log file
+- An attached trajectory object
+Basic optimizers optimize only internal atomic positions.
+Cell volume and shape can also be optimized in combination with Filter tools.
+
+The local optimization algorithms available in @ase follow the convergence criterion, which asks that the force on all individual atoms should be less than _fmax_:
+$
+  max_a |va(F_a)| < f_"max".
+$
+
+The BFGS algorithm uses two quantities to decide where to move the atoms on each step:
+- the forces on each atom, as returned by the associated calculator;
+- the Hessian matrix, i.e. the matrix of second derivatives $pdv(E, x_i, x_j)$ of the total energy with respect to nuclear coordinates.
+If the atoms are close to the minimum, such that the potential energy surface is locally quadratic, the Hessian and forces accurately determine the required step to reach the optimal structure.
+The Hessian is very expensive to calculate a priori, so instead the algorithm estimates it by means of an initial guess which is adjusted along the way depending on the information obtained on each step of the structure optimization.
+
+== Calculator: MACE <sec:mace>
 
 MACE
 @Batatia2022mace
