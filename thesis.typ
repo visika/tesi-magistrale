@@ -2063,12 +2063,10 @@ MACE-ICE13-1 shows a great adherence to its reference potential, revPBE-D3, posi
 
 == Crystal phonons
 
-The current implementation of phonons calculation in @ase
-#footnote[https://wiki.fysik.dtu.dk/ase/ase/phonons.html]
-is outclassed by Phonopy. #footnote[See https://gitlab.com/ase/ase-workshop-discussion/-/issues/7#note_245747917 and https://gitlab.com/ase/ase/-/issues/1235]
-
 Normal modes of vibration are calculated using the so-called *small displacement method*.
 This method is increasingly more accurate with bigger and bigger supercells.
+
+For details on the tools used for phonons calculations, see @sec:tools-phonons.
 
 The first thing to do is to build a supercell.
 The Ih ice structure was analyzed;
@@ -2570,6 +2568,13 @@ Fine-tuning a MACE model is composed of three steps, detailed as follows:
     Loss (left) and MAE of the energy (right) over epochs plots for the fine-tuning of a new model on ice Ih, with MACE-MP-0 small as foundation model.
   ],
 ) <fig-finetune-epochs>
+
+== Phonons calculations <sec:tools-phonons>
+
+For phonons dispersion calculations, three main tools were tested:
+- @ase built-in Phonons class. The current implementation of phonons calculation in @ase #footnote[https://wiki.fysik.dtu.dk/ase/ase/phonons.html] is outclassed by Phonopy, partly because the former does not take account of symmetries. #footnote[See https://gitlab.com/ase/ase-workshop-discussion/-/issues/7#note_245747917 and https://gitlab.com/ase/ase/-/issues/1235]
+- Phonopy @togoFirstprinciplesPhononCalculations2023 is not native to @ase, so it needed a conversion interface for the atoms positions and forces, that was found online.#footnote[https://gitlab.com/drFaustroll/lavello/-/blob/01296fa0b4530f07cfb97a02358bdfa289f8199f/phonons.py]
+- PHON @alfePHONProgramCalculate2009 is not native to @ase, and it also needed a conversion interface for the atoms positions and forces; that was not found, so a conversion interface between PHON and ASE was written for our specific purposes.#footnote[https://github.com/visika/tesi-magistrale/blob/32d5e30b73990daacb712e37872c22b89586f570/simulazioni/02_water/04_crystal_phonons/phon/00.template/forces.py]
 
 = Conclusions
 
