@@ -360,9 +360,12 @@ The research primarily explores the accuracy of #glspl("mlp") in predicting mole
 // TODO kapil 29 : V. Kapil, E. Engel, M. Rossi, M. Ceriotti, Assessment of approximate methods for anharmonic free energies. J. Chem. Theory Comput. 15, 5845–5857 (2019).
 
 The following chapters will introduce the theoretical foundations and the tools needed to pursue this question.
-// TODO Dettaglia i capitoli
+@sec:theory briefly describes the theoretical foundation underlying the physical priciples and the algorithms on which #glspl("mlp") like MACE are built onto.
+@sec:results-1 and @sec:results-2 show the results obtained through the test of the new MACE calculator on known atomic configurations and discuss its performances.
+@sec:tools details the tools employed to run the computer simulation experiments;
+the algorithms section, @sec:mace, mirrors and details the practical implementation of the objects first outlined in @sec:gnn.
 
-= Theory
+= Theory <sec:theory>
 
 #text(blue)[
   == Three dimensional harmonic crystalline solids
@@ -2345,7 +2348,7 @@ Further analysis can also be made on the study of the diffusion coefficient and 
   image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png"),
 )
 
-= Tools
+= Tools <sec:tools>
 == Hardware: Ibisco
 Simulations were performed on the @ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
 // #box(
