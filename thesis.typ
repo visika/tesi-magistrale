@@ -46,7 +46,7 @@
 
   #v(20mm)
 
-  _Laurea Magistrale in Fisica_
+  _Laurea Magistrale Sperimentale in Fisica_
 
   #v(5mm)
 
