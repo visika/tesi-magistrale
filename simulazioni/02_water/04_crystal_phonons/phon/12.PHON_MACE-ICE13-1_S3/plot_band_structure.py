@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.7.19"
+__generated_with = "0.8.3"
 app = marimo.App(width="medium")
 
 
@@ -33,7 +33,8 @@ def __(freq1, labels_gupta, mo, plt, ticks):
     _ax = plt.gca()
     _ax.set_xticks(ticks, labels=labels_gupta)
     plt.grid(axis="x")
-    # plt.savefig("freq1_s=3.svg")
+    plt.ylabel("Frequency (THz)")
+    # plt.savefig("bandplot.svg")
     mo.mpl.interactive(plt.gcf())
     return
 
