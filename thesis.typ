@@ -85,18 +85,15 @@
   Molecular crystals play an important role in the field of materials science,
   particularly in drug development, electronics, and renewable energy sectors.
 
-  In this work, we will use recently developed #glspl("mlp") to model the behaviour and characteristics of molecular crystals, using water as the object of study, given the vast coverage in literature.
-
+  In this work, we will use recently developed #glspl("mlp") to model the structure and dynamics of molecular crystals along with their thermodynamic stability, using water as a showcase system.
+  Water is ubiquitous in nature and of fundamental relevance to physics, biology, geology, materials science and engineering.
+  Its numerous anomalies, arising from the delicate interplay of hydrogen bonding and dispersion forces, make it a hard test for computational approaches.
+  
   Traditional approaches often grapple with the trade-off between computational
   expense and accuracy. The application of #glspl("mlp") captures
-  complex intermolecular interactions with a significantly reduced computational
-  cost compared to traditional ab-initio methods.
+  complex intermolecular interactions with the accuracy of ab initio approaches but at a much cheaper computational cost.
 
-  We will study the capabilities of trained #glspl("mlp") to
-  accurately predict lattice energies, polymorphic behaviours, and response to
-  external conditions like temperature and pressure. We will also study dynamic
-  properties such as phonon spectra to complete the insight into the physical and
-  chemical behaviours of molecular crystals.
+  In this work, we will test different @mlp models for the prediction of properties of molecular crystals, including lattice energy, phonons dispersion, and finite temperature dynamics.
 ]
 
 #pagebreak()
@@ -302,6 +299,7 @@
 = Introduction
 
 Molecular crystals represent a significant area of study within materials science due to their diverse applications in fields such as pharmaceuticals, electronics, and renewable energy.
+Computational approaches play an important role in molecular crystals research, as their application can aid experiments toward prediction of stable phases with targeted properties.
 In drug development, for instance, the properties of molecular crystals directly influence the effectiveness and delivery of medications, as exemplified in @fig:paracetamol-tableting. @blagdenCrystalEngineeringActive2007
 Beyond pharmaceuticals, these materials are key to advancing technologies involving semiconductors and energy storage systems, given their tunable electronic and optical properties. @reddyMechanicalPropertiesMolecular2010 @martinsTemperaturePressureInducedProton2009 @karkiImprovingMechanicalProperties2009 @reillyUnderstandingRoleVibrations2013
 
@@ -313,7 +311,7 @@ Beyond pharmaceuticals, these materials are key to advancing technologies involv
   ],
 ) <fig:paracetamol-tableting>
 
-Despite the critical importance @priceComputationalPredictionPharmaceutical2004 of understanding and predicting the properties of molecular crystals, traditional computational approaches face challenges in balancing accuracy with computational expense.
+Despite the critical importance @priceComputationalPredictionPharmaceutical2004 of understanding and predicting the properties of molecular crystals, traditional computational approaches face challenges in balancing accuracy with computational cost.
 Methods such as @dft offer accurate insights into molecular interactions but are prohibitively expensive for large-scale simulations.
 Conversely, classical force field methods scale well but often lack the precision needed for complex systems.
 This trade-off has driven the exploration of alternative methods that combine the best of both worlds.
@@ -329,7 +327,7 @@ This trade-off has driven the exploration of alternative methods that combine th
   ],
 )
 
-Recently, #glspl("mlp") have emerges as a promising solution.
+Recently, #glspl("mlp") have emerged as a promising solution.
 These approaches leverage advanced neural network architectures to model the potential energy surfaces of molecular systems with a level of accuracy comparable to ab initio methods but at a fraction of the computational cost.
 By training on existing quantum mechanical data, #glspl("mlp") can predict intermolecular interactions and dynamic behaviours with high fidelity, making them suitable for studying complex systems like molecular crystals.
 @batatiaFoundationModelAtomistic2023
@@ -337,11 +335,10 @@ By training on existing quantum mechanical data, #glspl("mlp") can predict inter
 @bjorneholmWaterInterfaces2016
 @kapilCompleteDescriptionThermodynamic2022
 
-Since their introduction about 25 years ago, machine learning (ML) potentials have become an important tool in the ﬁeld of atomistic simulations.
+Since their introduction about 25 years ago, #glspl("mlp") have become an important tool in the ﬁeld of atomistic simulations.
 After the initial decade, in which neural networks were successfully used to construct potentials for rather small molecular systems, the development of #glspl("hdnnp") in 2007 opened the way for the application of ML potentials in simulations of large systems containing thousands of atoms.
 @behlerFourGenerationsHighDimensional2021
-
-It has been estimated that mixed ab-initio and @mlp calculations require between three and ten times less the core hours of purely physical functionals. @kapilCompleteDescriptionThermodynamic2022
+It has been estimated that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely ab initio methods. @kapilCompleteDescriptionThermodynamic2022
 
 #figure(
   image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
@@ -352,15 +349,17 @@ It has been estimated that mixed ab-initio and @mlp calculations require between
 )
 
 This thesis investigates the capabilities of #glspl("mlp"), with a specific focus on modeling the properties of water as a molecular crystal.
-Water serves as an ideal test case due to its well-documented polymorphic behaviours and the wealth of literature available for benchmarking.
-@schranMachineLearningPotentials2021
-@chengInitioThermodynamicsLiquid2019
+Water is ubiquitous in nature and, as stated above, of fundamental relevance to physics, biology, geology, materials science, and engineering, that serves as an ideal test case due to its well-documented polymorphic behaviours and the wealth of literature available for benchmarking. @schranMachineLearningPotentials2021 @chengInitioThermodynamicsLiquid2019
+Studying its numerous anomalies---arising from the delicate interplay of hydrogen bonding and dispersion forces---is a challenge for computational approaches, and allows us to discover new physics and advance various scientific applications.
 The research primarily explores the accuracy of #glspl("mlp") in predicting molecular structural stabilities, lattice energies of different ice polymorphs, and dynamical properties of crystals, such as phonon spectra.
 
 // TODO kapil 29 : V. Kapil, E. Engel, M. Rossi, M. Ceriotti, Assessment of approximate methods for anharmonic free energies. J. Chem. Theory Comput. 15, 5845–5857 (2019).
 
+Despite significant advancements, state-of-the-art #glspl("mlp") still suffer from several limitations, such as the large amount of data needed for training and the limited number of chemical species that can be included in the model.
+However, extremely recent @mlp architectures, such as MACE, have made overcoming these limitations possible, leading to the development of foundational models for chemistry and materials science. @batatiaFoundationModelAtomistic2023 @dengCHGNetPretrainedUniversal2023 @liKohnShamEquationsRegularizer2021 @cheonDatasetRandomRelaxations2023
+
 The following chapters will introduce the theoretical foundations and the tools needed to pursue this question.
-@sec:theory briefly describes the theoretical foundation underlying the physical priciples and the algorithms on which #glspl("mlp") like MACE are built onto.
+@sec:theory briefly describes the physical priciples and the algorithms on which #glspl("mlp") like MACE are built onto.
 @sec:results-1 and @sec:results-2 show the results obtained through the test of the new MACE calculator on known atomic configurations and discuss its performances.
 @sec:tools details the tools employed to run the computer simulation experiments;
 the algorithms section, @sec:mace, mirrors and details the practical implementation of the objects first outlined in @sec:gnn.
