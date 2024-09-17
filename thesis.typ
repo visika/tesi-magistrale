@@ -687,8 +687,10 @@ $Phi_"SC" (arrow(r)_i^0) tilde.eq Phi(arrow(r)_i^0)$.
 In this limit, the Fourier interpolation is accurate everywhere.
 
 == #dft-title <sec:dft>
-#gls("dft", long: true) is a formulation of quantum mechanics, used to compute energies and forces, structural and electronic properties of materials in solid-state physics.
-It is the underlying method used by VASP, employed in this thesis during the fine-tuning of MACE models, described in @sec:fine-tuning.
+#gls("dft", long: true) is in principle an exact formulation of the many-body electron problem, in terms of the ground state density of the electrons rather than the ground state wavefunction.
+One of its numerous applications is the determination of structural and electronic properties of materials in solid-state physics.
+In this thesis, the @dft calculations are performed with the #gls("vasp", long: true). @kresseInitioMolecularDynamics1993 @kresseEfficiencyInitioTotal1996 @kresseEfficientIterativeSchemes1996
+Here, we briefly describe the underlying theory of @dft.
 
 Given the Hamiltonian of a time-independent many-body Schrödinger equation for a system of $N$ electrons, $hat(H) = hat(T) + hat(V)_"ee" + hat(V)_"ext"$, and the electron density:
 $
