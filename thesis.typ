@@ -690,7 +690,7 @@ In this limit, the Fourier interpolation is accurate everywhere.
 #gls("dft", long: true) is a formulation of quantum mechanics, used to compute energies and forces, structural and electronic properties of materials in solid-state physics.
 It is the underlying method used by VASP, employed in this thesis during the fine-tuning of MACE models, described in @sec:fine-tuning.
 
-Given the hamiltonian of a time-independent many-body Schrödinger equation for a system of $N$ electrons, $hat(H) = hat(T) + hat(V)_"ee" + hat(V)_"ext"$, and the electron density:
+Given the Hamiltonian of a time-independent many-body Schrödinger equation for a system of $N$ electrons, $hat(H) = hat(T) + hat(V)_"ee" + hat(V)_"ext"$, and the electron density:
 $
   rho(va(r)) = N integral_V dif^3 va(r_2) dots dif^3 va(r_N) |Psi(va(r), va(r_2), dots, va(r_N))|^2;
 $
