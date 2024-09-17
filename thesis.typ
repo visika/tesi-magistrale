@@ -366,8 +366,38 @@ the algorithms section, @sec:mace, mirrors and details the practical implementat
 
 = Theory <sec:theory>
 
+In this chapter, we explore the theoretical background and methodologies that underpin the analysis of molecular crystals using #glspl("mlp", long: true).
+The study of molecular crystals involves various computational and physical models that allow us to predict their structure, dynamics, and thermodynamic stability.
+The chapter is orgnanized into several key areas:
+
+#let threed-harmonic-solids-title = "Three dimensional harmonic crystalline solids"
+#let dft-title = "Density Functional Theory"
+#let md-title = "Molecular Dynamics"
+#let thermodynamics-crystal-stability-title = "Thermodynamics of crystal stability"
+#let machine-learning-title = "Machine Learning"
+#let gnn-title = "Graph Neural Networks"
+
+- #strong(threed-harmonic-solids-title), @sec:3d-harmonic-solids:
+  We introduce the harmonic approximation for crystalline solids and explain its relevance to modelling vibrational properties through normal modes, focusing on phonons and their contribution to the Helmholtz energy.
+- #strong(dft-title), @sec:dft:
+  @dft serves as the core quantum mechanical approach used to compute the electronic properties and structural optimizations of materials.
+  Here, we describe its formulation and the Kohn-Sham method for solving the many-body Schrödinger equation.
+- #strong(md-title), @sec:md:
+  This section covers the simulation of atomic and molecular motion using classical mechanics.
+  We explain the Verlet algorithm, thermostats for temperature control, and how these methods help model the dynamic behaviour of molecular systems at finite temperatures.
+- #strong(thermodynamics-crystal-stability-title), @sec:thermodynamics-crystal-stability:
+  We detail the calculation of lattice energy, which measures the stability of crystals, and discuss the important role of dispersion interactions, including methods like DFT-D3, in capturing non-covalent forces in crystalline systems.
+- #strong(machine-learning-title), @sec:machine-learning:
+  Machine Learning techniques, particularly neural networks, are introduced as modern tools for predicting molecular properties with reduced computational cost.
+  We explore single-layer and multi-layer neural network architectures and their training processes.
+- #strong(gnn-title), @sec:gnn:
+  As an advanced form of neural networks, #glspl("gnn") are discussed, with emphasis on how they enable message-passing architectures for modelling molecular systems.
+  We describe how #glspl("gnn") can be employed to capture atomic interactions in a computationally efficient manner.
+
+Each section provides the necessary theoretical foundation for understanding the subsequent results and discussions, with a focus on applying these methods to study the properties of molecular crystals and, specifically, ice polymorphs.
+
 #text(blue)[
-  == Three dimensional harmonic crystalline solids
+  == #threed-harmonic-solids-title <sec:3d-harmonic-solids>
   The crystal can be described by a collection of independent harmonic oscillators with potential energy:
   $
     U = U_0 + sum_(i=1)^(3N) 1 / 2 M omega_i^2 q_i^2,
@@ -665,7 +695,7 @@ as we increase the size of the supercell, the supercell force constants matrix a
 $Phi_"SC" (arrow(r)_i^0) tilde.eq Phi(arrow(r)_i^0)$.
 In this limit, the Fourier interpolation is accurate everywhere.
 
-== DFT
+== #dft-title <sec:dft>
 #gls("dft", long: true) is a formulation of quantum mechanics, used to compute energies and forces, structural and electronic properties of materials in solid-state physics.
 It is the underlying method used by VASP, employed in this thesis during the fine-tuning of MACE models, described in @sec:fine-tuning.
 
@@ -730,7 +760,7 @@ $
   - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc".
 $
 
-== Molecular dynamics
+== #md-title <sec:md>
 === The Verlet algorithm
 The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion. @alfeNotesStatisticalComputational2023
 It is a discretization of Newton's equations of motion:
@@ -827,7 +857,7 @@ Typically the "friction coefficient" will fluctuate around zero.
 During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
-== Thermodynamics of the stability of crystals
+== #thermodynamics-crystal-stability-title <sec:thermodynamics-crystal-stability>
 
 The main quantity to consider to assess the stability of a crystal is its lattice energy, $E_"latt"$, which is the energy per molecule gained upon assuming the crystal form with respect to the gas state.
 It can be computed as:
@@ -978,7 +1008,7 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
 //   ],
 // )
 
-== Machine Learning
+== #machine-learning-title <sec:machine-learning>
 #text(blue)[
 Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
 There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
@@ -1179,7 +1209,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   )
 ]
 
-== Graph Neural Networks <sec:gnn>
+== #gnn-title <sec:gnn>
 #text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
 
 #figure(
