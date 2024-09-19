@@ -855,8 +855,24 @@ They cannot deal with long range interactions, such as #gls("vdw", long: true) o
 
 In the particular case of London dispersive interactions, which arise from the coupling of dynamically induced dipoles, appearing when a spontaneous charge fluctuation in one region of space induces the appearance of a charge fluctuation in a different region of space, information coming only from the static value of the density is not sufficient, but one also needs to relate to how the charge density changes with time in response to external pertubations.
 
+== #md-title <sec:md>
+
+#gls("md", long: true) is a method that allows us to sample the phase space of a isolated system of $N$ interacting classical particles, obeying the Newton's equations of motion,
+
+$ // Eq. 7.89 Alfè
+  va(f_i) = M dot.double(va(r))_i
+  = - pdv(U({va(r)}), va(r_i)),
 $ <eq:verlet-newton>
-Let us consider the Taylor expansion of the position of particle $i$ at time $t$, $arrow(r)_i (t)$, computed with forward and backward differences:
+
+under certain chosen conditions, and estimate an observable expectation value (which should be an ensemble average) through the means of a time average.
+
+Integrating @eq:verlet-newton over time, one obtains a trajectory, ${va(r)(t)}$, represented by a collection of positions of all positions of all particles in the system as a function of time.
+Since the forces are conservative, the total energy of the system (kinetic plus potential) is constant and the trajectory samples the microcanonical ensemble.
+If, after a sufficiently long time, the trajectory passes within an arbitrary distance from _any_ state of the ensemble and with equal probability, then the system is said to be _ergodic_ and time averages are equivalent to ensemble averages.
+Ergodicity is not always satisfied, and so care must be exercised when assessing the suitability of this method for sampling the phase space.
+In particular, a harmonic system is a clear example of a system that is not ergodic, as energy cannot be transferred between different normal modes.
+In the following section, we discuss how to generate a trajectory in a numerical simulation, through discretization of Newton's equations of motion, @eq:verlet-newton.
+
 $
   arrow(r)_i (t + delta t)
   = arrow(r)_i (t) + dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
