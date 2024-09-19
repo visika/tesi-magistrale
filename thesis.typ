@@ -175,7 +175,8 @@
     (key: "cnn", short: "CNN", long: "Convolutional Neural Network"),
     (key: "adaline", short: "Adaline", long: "ADAptive LInear Neuron"),
     (key: "nn", short: "NN", long: "Neural Network"),
-    (key: "ks", short: "KS", long: "Kohn-Sham")
+    (key: "ks", short: "KS", long: "Kohn-Sham"),
+    (key: "lda", short: "LDA", long: "Local Density Approximation")
   ),
   show-all: true,
 )
