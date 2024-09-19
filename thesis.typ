@@ -967,6 +967,40 @@ $
 $
 $M_c$ is not known in advance, but it is fixed, and depends only on the system and on our choice of $delta t$; so, the statistical error on the average value of $A$ can be reduced as much as wanted by increasing the number of samples $M$.
 
+=== Reblocking
+// §7.3 Alfè, §4.2.1 Della Pia
+
+The _reblocking_ procedure is a common approach to obtain $M_c$.
+Suppose we split our simulation into $N$ blocks of length $M/N$ and consider the averages:
+$
+  expval(A)_i^N = 1/(M/N) sum_(n = M/N i + 1)^(M/N (i+1)) A(n delta t), quad i = 0,1,dots,N-1.
+$
+The average of $A$ over the whole simulation is obviously unaffected by this reblocking procedure:
+$
+  expval(A) = 1/M sum_(n=1)^M A(n delta t) = 1/N sum_(i=0)^(N-1) expval(A)_i^N.
+$
+Now consider the root mean square fluctuations of the averages $expval(A)_i^N$:
+$
+  sigma(expval(A)^N) = [1/N sum_(i=0)^(N-1) (expval(A)_i^N)^2 - expval(A)^2]^(1/2).
+$
+If the evaluations of $A$ are all statistically independent from each other, then the standard deviation on the average can be obtained as:
+$
+  sigma_N (expval(A)) = (sigma(expval(A)^N)) / sqrt(N),
+$ <eq:reblocking-sigma-N>
+independently on the value of $N$, as long as $N$ is large enough to have a sufficient number of samples.
+(In the extreme case of just one sample, i.e. $N=1$, it would be impossible to compute any root mean square fluctuation.)
+By contrast, if the evaluations of $A$ are correlated we have:
+$
+  sigma_N (expval(A)) < sigma(expval(A)).
+$ <eq:reblocking-inequality>
+If we progressively increase the length $M/N$ of each block, at some point the averages $expval(A)_i^N$ become statistically independent.
+When this happens, the inequality in @eq:reblocking-inequality becomes an equality.
+Therefore, by computing $sigma_N (expval(A))$ using @eq:reblocking-sigma-N for a set of block lenghts we have a procedure to estimate $M_c$ and $sigma(expval(A))$.
+Starting with $N=M$, i.e. block lenght equal to one, and working our way up reducing $N$, we find that $sigma_N (expval(A))$ increases, and at some point it reaches a plateau.
+The value of $sigma_N (expval(A))$ on the plateau provides an estimate of $sigma(expval(A))$, and the block lenght corresponding to the onset of the plateau provides an estimate for the correlation length, $M_c$.
+
+For too small values of $N$, we will observe strong oscillations in the value of $sigma_N (expval(A))$, because we are using too few evaluations of $expval(A)_i^N$ to obtain a good estimation of the error, i.e. there is no sufficient statistics.
+
 === Thermostats
 #text(blue)[
   For a sufficiently large system, averages computed in the microcanonical ensemble, with fixed $(N,V,E)$, are not much different from those computed in the canonical ensemble, with fixed $(N,V,T)$.
