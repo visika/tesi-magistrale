@@ -873,18 +873,25 @@ Ergodicity is not always satisfied, and so care must be exercised when assessing
 In particular, a harmonic system is a clear example of a system that is not ergodic, as energy cannot be transferred between different normal modes.
 In the following section, we discuss how to generate a trajectory in a numerical simulation, through discretization of Newton's equations of motion, @eq:verlet-newton.
 
+=== The Verlet algorithm
+The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion, @eq:verlet-newton, through their discretization. @alfeNotesStatisticalComputational2023
+Let us consider the Taylor expansion of the position of particle $i$ at time $t$, $va(r_i) (t)$, computed with forward and backward differences:
+
 $
   arrow(r)_i (t + delta t)
   = arrow(r)_i (t) + dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
-  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4)
+  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4),
 $
+
 $
   arrow(r)_i (t - delta t)
   = arrow(r)_i (t) - dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
-  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4)
+  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4),
 $
+
+where $delta t$ is a small time interval.
 Summing the two equations side by side, we obtain:
 $
   arrow(r)_i (t + delta t) + arrow(r)_i (t - delta t)
@@ -897,8 +904,7 @@ $
 $ <eq:verlet-algorithm>
 @eq:verlet-algorithm is known ad the Verlet algorithm.
 @verletComputerExperimentsClassical1967[Eq. (4)]
-
-We can re-express the equation in terms of the velocities
+We can re-express the equation in terms of the velocities:
 $
   arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (t - delta t)) / (2 delta t)
 $
@@ -914,12 +920,25 @@ $
   + 1 / M arrow(f)_i (t) (delta t)^2
   + O((delta t)^4)
 $
-$
+$ // Eq. 7.95 Alfè
   arrow(r)_i (t + delta t)
   = arrow(r)_i (t)
   + arrow(v)_i (t) delta t
   + 1 / (2M) arrow(f)_i (t) (delta t)^2
-  + O((delta t)^4)
+  + O((delta t)^4),
+$
+which gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
+This expression is particularly useful at the beginning of the simulation, where only the initial positions are available, and shows that to begin a simulation we also need to provide the initial velocities.
+
+Because of the equipartition theorem, the temperature of the system can be obtained from the ensemble average of the kinetic energy, given by:
+$
+  expval(E_k) = (3N)/2 k_B T,
+$
+where $expval(E_k)$ is the time average of the instantaneous kinetic energy, $E_k (t)$, given by:
+$
+  E_k (t) = sum_i 1/2 M v_i^2 (t).
+$
+
 $
 This expression gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
 
