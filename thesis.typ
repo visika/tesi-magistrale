@@ -693,26 +693,97 @@ One of its numerous applications is the determination of structural and electron
 In this thesis, the @dft calculations are performed with the #gls("vasp", long: true). @kresseInitioMolecularDynamics1993 @kresseEfficiencyInitioTotal1996 @kresseEfficientIterativeSchemes1996
 Here, we briefly describe the underlying theory of @dft.
 
-Given the Hamiltonian of a time-independent many-body Schrödinger equation for a system of $N$ electrons, $hat(H) = hat(T) + hat(V)_"ee" + hat(V)_"ext"$, and the electron density:
+Given the wavefunction $Psi (va(r_1), dots, va(r_N))$ and the Hamiltonian $hat(H)$ of the time-independent many-body Schrödinger equation for a system of $N$ electrons, not including spin variables, $hat(H) Psi (va(r_1), dots, va(r_N)) = E Psi (va(r_1), dots, va(r_N))$, the Hamiltonian is given by the sum of the kinetic, external potential, and electron-electron operators, $hat(H) = hat(T) + hat(V)_"ext" + hat(V)_"ee"$, defined by:
 $
-  rho(va(r)) = N integral_V dif^3 va(r_2) dots dif^3 va(r_N) |Psi(va(r), va(r_2), dots, va(r_N))|^2;
+  hat(T) Psi (va(r_1), dots, va(r_N))
+  := - 1/2 sum_(i=1)^N laplacian_i Psi (va(r_1), dots, va(r_N)),
 $
-the potential energy due to the external potential is a _functional_ of the electron density, which we indicate with the notation $V_"ext" [rho]$:
 $
-  V_"ext" [rho] = N integral_V dif^3 va(r) rho(va(r)) v(va(r)).
+  hat(V)_"ext" Psi (va(r_1), dots, va(r_N))
+  := sum_(i=1)^N v(va(r_i)) Psi (va(r_1), dots, va(r_N)),
+$
+with $v(va(r_i))$ the value of the external potential felt by electron $i$ at position $va(r_i)$, and
+$
+  hat(V)_"ee" Psi (va(r_1), dots, va(r_N))
+  := sum_(i,j=1 \ i<j) 1/(|va(r_i) - va(r_j)|) Psi (va(r_1), dots, va(r_N)).
 $
 
-The Hohenberg-Kohn theorems @hohenbergInhomogeneousElectronGas1964 state that $V_"ext" [rho_0]$, where $rho_0$ is the ground state density, is a _unique_ functional of $rho_0$.
-$rho_0$ determines $Psi_0$, the ground state wavefunction of the system, and thus all the physical properties of the system;
-we say they are _functionals_ of the ground state density.
-In particular, the ground state energy, $E_0$, is a functional of $rho_0$, as well as the kinetic and electron-electron interaction contributions:
+If the wavefunction $Psi$ is normalized over the volume of the system $V$,
 $
+  integral_V dif^3 va(r_1) dots dif^3 va(r_N)
+  Psi^star (va(r_1), dots, va(r_N)) Psi (va(r_1), dots, va(r_N))
+  = 1,
+$
+then the energy $E$ is obtained from:
+$
+  E =
+  integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N)) hat(H) Psi (va(r_1), dots, va(r_N))
+$
+
+Computing the electron density gives:
+$
+  rho(va(r)) = N integral_V dif^3 va(r_2) dots dif^3 va(r_N) |Psi(va(r), va(r_2), dots, va(r_N))|^2.
+$ <eq:electron-density>
+
+The total potential energy due to the external potential is a _functional_ of the electron density, which we indicate with the notation $V_"ext" [rho]$:
+$
+  V_"ext" &=
+  integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N))
+  sum_(i=1)^N v(va(r_i))
+  Psi (va(r_1), dots, va(r_N)) \
+  &= sum_(i=1)^N integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N)) v(va(r_i)) Psi (va(r_1), dots, va(r_N)).
+$
+
+Since the electrons are all identical, these integrals are also all identical, each one equal to:
+$
+  integral_V dif^3 va(r) dif^3 va(r_2) dots dif^3 va(r_N)
+  Psi^star (va(r_1), dots, va(r_N)) v(va(r)) Psi (va(r_1), dots, va(r_N)).
+$
+
+Since we have $N$ of them, we obtain:
+// Alfè, eq. (8.11)
+$
+  V_"ext"
+  = N integral_V dif^3 va(r) dif^3 va(r_2) dots dif^3 va(r_N)
+  Psi^star (va(r_1), dots, va(r_N)) v(va(r)) Psi (va(r_1), dots, va(r_N))
+$
+
+This shows, comparing with @eq:electron-density, that the potential energy due to the external potential is a _functional_ of the electron density:
+$
+  V_"ext" [rho] = integral_V dif^3 va(r) rho(va(r)) v(va(r)).
+$
+
+=== The Hohenberg-Kohn theorems
+
+In the Schrödinger approach, both $Psi$ and $rho_0 (va(r))$ are functionals of $v(va(r))$.
+The *Hohenberg-Kohn theorems* @hohenbergInhomogeneousElectronGas1964 state that $V_"ext" [rho_0]$, where $rho_0$ is the ground state density, and $Psi_0$, the ground state wavefunction of the system, and thus all the physical properties of the system, are _unique_ functionals of $rho_0$.
+
+In particular, without giving formal proof here, we say that the ground state energy, $E_0$, is a functional of $rho_0$, as well as the kinetic and electron-electron interaction contributions:
+$ // Alfè, eq. (8.17)
   E_0 = E[rho_0] = T[rho_0] + V_"ee" [rho_0] + V_"ext" [rho_0].
 $
+The functional $ F[rho] := T[rho] + V_"ee" [rho] $ does not depend on the external potential, and therefore it is a _universal_ functional of the density.
 
-The Kohn-Sham method @kohnSelfConsistentEquationsIncluding1965 provides a working procedure to find the ground state density, defining the Kohn-Sham potential, $v_"KS" [rho] (va(r)) := v(va(r)) + integral_V (rho(va(r'))) / (|va(r) - va(r')|) dif^3 va(r') + (delta E_"xc" [rho]) / (delta rho)$, that leads to the Kohn-Sham self-consistent equations:
+=== The Kohn-Sham method
+
+Unfortunately, the explicit dependence of the $F[rho]$ functional with respect to $rho(va(r))$ is unknown;
+so, an exact solution is not possible.
+
+Kohn and Sham extracted from the universal functional $F[rho]$ the classical Coulombian energy, defining the functional:
+$ // Della Pia, eq. 3.32
+  G[rho] := F[rho] - 1/2 integral (rho(va(r)) rho(va(r')))/(|va(r) - va(r')|) dif^3 va(r) dif^3 va(r'),
 $
-  // Eq. (8.39) Alfè, (3.39) Della Pia
+where $rho(va(r))$ is a generic electronic density.
+The functional $G[rho]$ contains, according to the previous considerations, the quantum contributions of the Coulomb interaction and the kinetic energy of the interacting system of electrons.
+Subsequently, for comparison with non-interacting systems of electrons, they defined the exchange-correlation energy functional as:
+$ // Della Pia, eq. 3.33
+  E_"xc" [rho] := G[rho] - T_s [rho],
+$
+where $T_s [rho]$ is the kinetic energy functional of the unique non-interacting system of electrons having the same ground state electronic density as the system under consideration.
+Hence, $E_"xc" [rho]$ contains the quantum contributions of the Coulomb interaction and the remaining contribution of the kinetic energy of the interacting electrons.
+
+The *Kohn-Sham method* @kohnSelfConsistentEquationsIncluding1965 provides a working procedure to find the ground state density, defining the Kohn-Sham potential, $v_"KS" [rho] (va(r)) := v(va(r)) + integral_V (rho(va(r'))) / (|va(r) - va(r')|) dif^3 va(r') + (delta E_"xc" [rho]) / (delta rho)$, that leads to the Kohn-Sham self-consistent equations:
+$ // Eq. (8.39) Alfè, (3.39) Della Pia
   hat(h)_"KS" [rho] (va(r)) psi_n (va(r)) =
   [-1 / 2 nabla^2 + v_"KS" [rho] (arrow(r))] psi_n (arrow(r))
   = epsilon_n psi_n (arrow(r))
@@ -746,20 +817,44 @@ With those solutions construct $rho_2$ using @eq:ground-state-density or more ad
 The algorithm runs until the difference between $rho_(j+1)$ and $rho_j$ is below some acceptable threshold.
 
 Multiplying @eq:kohn-sham-equations[Equations] by $psi_n^star (va(r))$, integrating over $va(r)$, summing over $n$, the total energy can be obtained from:
-$
-  // Eq. (8.41) Alfè
+$ // Eq. (8.41) Alfè
   E = 2 sum_(n=1)^(N / 2) epsilon_n - 1 / 2 integral_V (rho (
     arrow(r)'
   ) rho(arrow(r))) / (|arrow(r) - arrow(r)'|) dif^3 arrow(r)' dif^3 arrow(r)
-  - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc".
+  - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc" [rho].
 $
 
-== #md-title <sec:md>
-=== The Verlet algorithm
-The Verlet algorithm is a technique to generate the trajectory of interacting particles obeying the Newton's equations of motion. @alfeNotesStatisticalComputational2023
-It is a discretization of Newton's equations of motion:
+=== The local density approximation
+
+The explicit definition of the exchange-correlation energy is unknown.
+We need to approximate the exchange-correlation functional in the Kohn-Sham equations.
+The simplest definition of $E_"xc" [rho]$ is based on the assumption that the density in a given point in space, $va(r)$, is a smooth function around this point.
+This is strictly true for a homogeneous electron gas, for which the potential $v_"xc" (va(r))$ can be seen to depend on the local density;
+however, for an inhomogeneous electron gas it becomes a #gls("lda", long: true), which is equivalent to cut $E_"xc"$ at the first order of a functional Taylor expansion: @alfeCrystalStructureThermodynamic
+
+$ // Eq. 8.42 Alfè, Eq. 3.46 Della Pia
+  E_"xc"^"LDA" [rho] := integral_V epsilon_"xc" [rho(va(r))] rho(va(r)) dif^3 va(r)
+$ <eq:lda>
+
+where $epsilon_"xc" (rho(va(r)))$ represents the exchange-correlation energy per particle of a homogeneous electron gas of density $rho(va(r))$.
+In @eq:lda, the functional dependence has been substituted by a function dependence on the density, because $v_"xc" (va(r))$ has been assumed to depend only on the value of the density at the point $va(r)$:
+
 $
-  arrow(f)_i = M dot.double(arrow(r))_i = - (partial U({arrow(r)})) / (partial arrow(r)_i)
+  v_"xc"^"LDA" (va(r)) = dv(, rho) [epsilon_"xc" (rho(va(r))) rho(va(r))].
+$
+
+Although @lda is based on the assumption that the real density of the interacting electron system is a slowly varying function in space, it performs satisfactory well for many materials.
+
+One limitation of @lda is that it is blind to derivatives of the charge density.
+Improvements have been proposed by developing functionals that depend not just on $rho$ but also on $grad rho$.
+The functionals based on this idea are known as #glspl("gga", long: true).
+They are often an improvement over the @lda, but there are cases where the @lda still performs better than @gga functionals.
+
+A more serious limitation of the @lda, or indeed of any approximation based on a sum of _local_ contributions (including @gga functionals), i.e. terms that only depend on the value of the density at the point where they are calculated, is related to their _short-sightness_.
+They cannot deal with long range interactions, such as #gls("vdw", long: true) or any other electrostatic interaction that is not already encoded in the Coulomb term.
+
+In the particular case of London dispersive interactions, which arise from the coupling of dynamically induced dipoles, appearing when a spontaneous charge fluctuation in one region of space induces the appearance of a charge fluctuation in a different region of space, information coming only from the static value of the density is not sufficient, but one also needs to relate to how the charge density changes with time in response to external pertubations.
+
 $ <eq:verlet-newton>
 Let us consider the Taylor expansion of the position of particle $i$ at time $t$, $arrow(r)_i (t)$, computed with forward and backward differences:
 $
