@@ -1714,7 +1714,7 @@ $
   max_a |arrow(F)_a| < f_"max"
 $
 
-For the present purposes, `fmax=1e-8` yielded satisfactory results for the different calculator models tested.
+For the present purposes, `fmax=1e-8` $"eV/"angstrom$ yielded satisfactory results for the different calculator models tested.
 
 The second parameter is the number of steps after which to stop the optimization procedure.
 If the steps employed to optimize the geometry, given the desired fmax, are larger than the steps parameter, the procedure is halted and the geometry is considered as not converged.
