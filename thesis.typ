@@ -1081,14 +1081,16 @@ This check is also important in thermodynamic integration simulations with all c
 
 == #thermodynamics-crystal-stability-title <sec:thermodynamics-crystal-stability>
 
-The main quantity to consider to assess the stability of a crystal is its lattice energy, $E_"latt"$, which is the energy per molecule gained upon assuming the crystal form with respect to the gas state.
+The main quantity to consider to assess the stability of a crystal is the lattice free energy, which is defined as the free energy per molecule gained upon assuming the crystal form with respect to the gas state.
+This is a very expensive quantity to estimate because it is a finite temperature property.
+For this reason, we often approximate finite temperature free energy differences with zero temperature lattice energy, $E_"latt"$, which is analogously defined as the energy per molecule gained upon assuming the crystal form with respect to the gas state.
 It can be computed as:
 $
   E_"latt" = E_"crys" - E_"gas",
 $ <eq-zen_2018_1>
-with $E_"crys"$ as the energy per molecule in the crystal state and $E_"gas"$ as the energy of the isolated molecule.
+with $E_"crys"$ as the total electronic energy per molecule in the crystal state and $E_"gas"$ as the energy of the isolated molecule.
 
-Typically, the computation of $E_"latt"$ is performed at zero temperature and considering only the electronic contribution, i.e., quantum nuclear effects are neglected. @beranPredictingMolecularCrystal2016
+Typically, the computation of $E_"latt"$ is performed at zero temperature and considering only the electronic contribution; i.e., zero-point motion and quantum nuclear effects are neglected. @beranPredictingMolecularCrystal2016
 The lattice energy is not directly assessable experimentally, but it can be indirectly obtained from experimental measures of the sublimation enthalpy, $Delta_"sub" H(T)$, at a given temperature $T$, by including a (theoretically evaluated) energy contribution, $Delta_"T&QN" (T)$, accounting for thermal and quantum nuclear effects:
 $
   Delta_"sub" H(T) = -E_"latt" + Delta_"T&QN" (T).
