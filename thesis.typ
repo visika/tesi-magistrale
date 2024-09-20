@@ -1740,7 +1740,7 @@ A value of `steps=1000` is largely above the actual number of steps required for
 
 === Molecular vibrations and assessment of the dynamical stability
 
-The nuclei of molecules, far from occupying fixed positions with respect to each other, are in continual state of vibration, even at 0°K.
+The nuclei of molecules, far from occupying fixed positions with respect to each other, are in continual state of vibration.
 An important feature of these vibrations is that they can be described by a limited number of basic vibrations known as the normal modes.
 A normal mode is a vibration in which all the nuclei oscillate with the same frequency and the same phase.
 The water molecule has three normal modes and every possible vibration of the molecule can be described as a superposition of these three modes.
