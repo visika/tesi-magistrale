@@ -1644,7 +1644,7 @@ static local *minimization of the potential energy* and *analysis of vibrational
 
 To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in literature.
 
-The first value concerns the charachteristic $#ce("HOH")$ *bend angle* of the molecule;
+The first value concerns the characteristic $#ce("HOH")$ *bend angle* of the molecule;
 the accurate description of this physical value is a required test to ensure the validity of the models.
 As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020.
 
