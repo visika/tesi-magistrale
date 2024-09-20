@@ -2150,7 +2150,7 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
   ],
 ) <table:dimer-frequencies-sum-absolute-errors>
 
-=== ZPE
+=== Zero Point Energy
 #let dimer_zpe = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/zpe.csv")
 #figure(
   table(
