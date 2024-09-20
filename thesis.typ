@@ -1888,7 +1888,7 @@ Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure conver
 //   caption: "Convergence of the large model with dispersion with respect to fmax",
 // )
 
-Adding the dispersion correction to the models in this step produces insignificant differences in the results, so their graphs are omitted for brevity.
+Adding the dispersion correction to the models in this step produces negligible differences in the results, so their graphs are omitted for brevity.
 
 ==== MACE-ICE13-1
 
