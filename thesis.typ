@@ -2571,9 +2571,9 @@ The same considerations on the quality of the results hold as above.
   ),
 )
 
-== MD
+== Molecular Dynamics
 
-=== RDF
+=== Radial Distribution Function
 
 Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
 ] were performed under varying external conditions.
