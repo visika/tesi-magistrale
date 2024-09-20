@@ -1038,6 +1038,47 @@ Typically the "friction coefficient" will fluctuate around zero.
 During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
+=== Mean square displacement
+// §7.3.3 Alfè, §4.2.3 Della Pia
+In a molecular dynamics simulation, a convenient quantity that can be used to monitor the state of the system is the _mean square displacement_, defined as:
+$
+  m(t) := 1/N sum_(i=1)^N |va(r_i)(t + t_0) - va(r_i)(t_0)|^2,
+$ <eq:mean-square-displacement>
+where $t_0$ is some initial reference time.
+In a system with no diffusing behaviour, such as a solid, $m(t)$ is expected to rise first, and then reach a constant, which is related to the maximum displacement of the particles from their equilibrium positions.
+By contrast, in a fluid $m(t)$ is expected to rise with time.
+If the motion of the particles is random, which is a good approximation for a system in thermal equilibrium, then $m(t)$ increases linearly with time, and its slope is related to the _diffusion coefficient_.
+
+To understand where the linear behaviour of $m(t)$ comes from, consider a random walk, for simplicity of a one-dimensional system.
+Let us associate a variable $z_i$ to the $i^"th"$ step in the walk, which can be either $+1$ or $-1$, depending if the step is taken by going to the right or to the left.
+Let us also define the variable $s_N := sum_(i=1)^N z_i$, which is the length of the walk after $N$ steps.
+The average value of $s_N$ is zero, as:
+$
+  expval(s_N) = expval(sum_(i=1)^N z_i) = sum_(i=1)^N expval(z_i) = 0.
+$
+The average of $s_N^2$, however, is not zero:
+$
+  expval(s_N^2)
+  = expval(sum_(i=1)^N z_i sum_(j=1)^N z_j)
+  = sum_(i,j=1)^N expval(z_i z_j)
+  = sum_(i=1)^N underbrace(expval(z_i^2), 1) + sum_(i,j=1 \ i != j)^N underbrace(expval(z_i z_j), expval(z_i) expval(z_j) = 0)
+  = N,
+$
+as $expval(z_i^2) = 1$, and $expval(z_i z_j) = expval(z_i) expval(z_j) = 0 dot 0 = 0$, since the $i^"th"$ and the $j^"th"$ steps are uncorrelated.
+This shows that in a random walk of step size 1 the mean square displacement from the origin of the walk is equal to the number of steps, and so it is linearly proportional to time, if the number of steps per unit time is constant.
+In systems with continuous displacements, this translates into a linear dependence on time of the mean square displacement $m(t)$ defined above.
+
+Over a simulation of total length $T$, one clearly only has access to $m(t)$ with $0 <= t <= T$, and to improve on statistics it is useful to compute @eq:mean-square-displacement by averaging over time origins $t_0$:
+$
+  m(t)
+  = 1 / (T - t) sum_(t_0=0)^(T-t) 1/N sum_(i=1)^N |va(r_i)(t+t_0) - va(r_i)(t_0)|^2.
+$
+We see that for $t=0$ it is possible to average on the whole length of the simulation, but, as $t$ increases, the available length over which one can average is reduced to $T-t$, and so the statistical error on $m(t)$ increases with $t$.
+For $t=T$ there is only one available configuration.
+
+The mean square displacement becomes particularly useful in @md simulations at high temperature, i.e. in proximity of the melting temperature, to check if the system is in the solid or liquid phase.
+This check is also important in thermodynamic integration simulations with all contributions included ($lambda = 1$), where the potential is in the complete form, $U$, and there is no explicit harmonic contribution that makes atoms oscillate around their equilibrium positions.
+
 == #thermodynamics-crystal-stability-title <sec:thermodynamics-crystal-stability>
 
 The main quantity to consider to assess the stability of a crystal is its lattice energy, $E_"latt"$, which is the energy per molecule gained upon assuming the crystal form with respect to the gas state.
