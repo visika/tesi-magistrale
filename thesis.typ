@@ -2652,8 +2652,8 @@ Simulations were performed on the @ibisco cluster provided by the Federico II Un
 The #gls("ase", long: true) @larsenAtomicSimulationEnvironment2017 is a set of tools and Python modules for setting up, manipulating, running, visualizing and analyzing atomistic simulations.
 @ase provides interfaces to different codes through `Calculators` which are used together with the central `Atoms` object and the many available algorithms in @ase.
 The `Atoms` object contains the positions of the atoms and the properties of the cell.
-@ase allows geometry optimization, computing of the potential energy of the system, molecular dynamics.
-The MACE code was executed through the calculators interface of @ase.
+Among the many applications of @ase, it allows for geometry optimization, static calculations of potential energy and forces, as well as molecular dynamics simulations.
+Calculations with the MACE #glspl("mlp") were performed through the calculators interface of @ase.
 
 === Structure optimization
 
