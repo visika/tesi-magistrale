@@ -2665,7 +2665,7 @@ Most optimization algorithms available in @ase accept the same base parameters:
 Basic optimizers optimize only internal atomic positions.
 Cell volume and shape can also be optimized in combination with Filter tools.
 
-The local optimization algorithms available in @ase follow the convergence criterion, which asks that the force on all individual atoms should be less than _fmax_:
+The local optimization algorithms available in @ase follow the convergence criterion, which asks that the force on all individual atoms should be less than $f_"max"$:
 $
   max_a |va(F_a)| < f_"max".
 $
