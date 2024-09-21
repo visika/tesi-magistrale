@@ -1152,15 +1152,19 @@ In particular, inaccuracies on the evaluation of high frequency modes mostly aff
 
 === Dispersion interactions
 
+For many systems it is important to take dispersion interactions into account for reliable prediction.
 Dispersion interactions are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
 The representation of dispersion interactions in @dft is not possible within local or semilocal functionals because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
 
+In @dft, this is typically done either by applying an a posteriori correction to a certain @dft functional prediction, $E_"DFT"$, or by including non-local terms in the exchange-correlation functional.
+In the first of the two cases, the final energy is computed as
+$ E = E_"DFT" + E_"disp", $ <eq-otero_2012_1>
+where $E_"disp"$ is a function of the electron-electron distance with parameters that are fitted for the specific functional the correction is applied to. (For instance, the D3 parameters for @pbe will be different from the D3 parameters of revPBE.)
+
+Several alternatives for the correction $E_"disp"$ are available (D2, D3, XDM, D4, TS, MBD, ...), but in principle we do not know which one yields the most reliable prediction for a specific system.
+
 The @xdm model describes the dispersion energy of two neutral fragments as the electrostatic interaction of the dipoles formed by electrons and their associated exchange holes.
-The dispersion energy is added to the @dft energy
-$
-  E = E_"DFT" + E_"disp",
-$ <eq-otero_2012_1>
-where $E_"disp"$ contains the usual $R^(-6)$ leading term as well as two additional higher order atomic-pairwise terms
+Here, $E_"disp"$ contains the usual $R^(-6)$ leading term as well as two additional higher order atomic-pairwise terms
 $
   E_"disp" = -1 / 2 sum_(i j) sum_(n = 6,8,10) (C_(n,i j)) / (
   R^n_("vdw", i j) + R^n_(i j)
