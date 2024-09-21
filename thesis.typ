@@ -1162,6 +1162,9 @@ $ E = E_"DFT" + E_"disp", $ <eq-otero_2012_1>
 where $E_"disp"$ is a function of the electron-electron distance with parameters that are fitted for the specific functional the correction is applied to. (For instance, the D3 parameters for @pbe will be different from the D3 parameters of revPBE.)
 
 Several alternatives for the correction $E_"disp"$ are available (D2, D3, XDM, D4, TS, MBD, ...), but in principle we do not know which one yields the most reliable prediction for a specific system.
+As illustrative examples of methods to take dispersion into account, the XDM and D3 corrections are detailed below, as they are employed in the reference implementations cited for this thesis.
+
+==== Exchange-hole Dipole Moment
 
 The @xdm model describes the dispersion energy of two neutral fragments as the electrostatic interaction of the dipoles formed by electrons and their associated exchange holes.
 Here, $E_"disp"$ contains the usual $R^(-6)$ leading term as well as two additional higher order atomic-pairwise terms
