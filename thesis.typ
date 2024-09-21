@@ -2811,31 +2811,31 @@ To maintain body ordering, MACE uses linear readout functions for all layers exc
 
 === Performance of MACE
 
-@kovacsEvaluationMACEForce2023 shows that MACE generally outperforms alternatives for a wide range of systems, including liquid water.
+It has been @kovacsEvaluationMACEForce2023 that shows that MACE generally outperforms alternatives for a wide range of systems, including liquid water.
 In those simulations, the many-body equivariant MACE model is an improvement with respect to the three-body atom-centered symmetry function-based feed-forward neural network model (BPNN), the three-body invariant message passing model REANN and the two-body equivariant message passing model NequIP.
 
 MACE-MP-0 is a general-purpose @ml model, trained on a public database of 150k inorganic crystals, that is capable of running stable molecular dynamics on molecules and materials. @batatiaFoundationModelAtomistic2023
-The model can be applied out of the box and as a starting or "foundation model" for any atomistic system of interest and is thus a step towards democratising the revolution of @ml force fields by lowering the barriers to entry. @batatiaFoundationModelAtomistic2023
+The model can be applied out of the box and as a starting or "foundation model" for almost any atomistic system of interest and is thus a step towards democratising the revolution of @ml force fields by lowering the barriers to entry. @batatiaFoundationModelAtomistic2023
 
 === Fine-tuning a custom model <sec:fine-tuning>
 
 In this thesis, we studied and followed the procedure to create a custom made MACE model.
 Current developments are undergoing in the field, experimenting on the various techniques to fine-tune custom MACE models. @kaurDataefficientFinetuningFoundational2024
 Fine-tuning a MACE model implies starting from a so called "foundation model" of MACE, e.g. MACE-MP-0, and execute further training of the model on new data.
-That data is comprised of desired geometries (preferably under specific thermodynamic conditions), and attached potential energies, forces and stresses of the system, computed with the experimenter's calculator of choice.
-The fine-tuning thus is the procedure that allows MACE to accurately reproduce the charachteristic behaviour of the chosen calculator through a new training procedure, resulting in a more informed @mlp model.
+That data is comprised of desired geometries (preferably under specific thermodynamic conditions), and attached potential energies, forces and stresses of the system, computed with the @pes of choice, such as the one of a specific @dft functional.
+The fine-tuning thus is the procedure that allows MACE to accurately reproduce the charachteristic behaviour of the chosen @pes through a new training procedure, resulting in a fine-tuned @mlp model.
 For the present purposes, we chose a toy model to represent ice Ih at a pressure of 1.01325 bar and a temperature of 100.0 K.
 
 Fine-tuning a MACE model is composed of three steps, detailed as follows:
 
 1. *Sample the phase space* to obtain representatives of the system under the thermodynamic conditions we are interesed in.
-  This was obtained employing NPT dynamics as provided by @ase to generate 10000 images with variety.
+  This was obtained employing NPT dynamics as provided by @ase to generate $tilde 100 "ps"$ of dynamics, from which uncorrelated structures can be extracted.
   Of this total, 50 representatives were randomly chosen from the images after thermalization.
   See @fig-finetune-sample-temperature for the thermalization pattern.
   // TODO menziona scelta tra termostato di Berensden e Parrinello, con citazioni.
 2. *Compute the reference* values for the energies, forces and stresses.
   For this step we executed single point self-consistent calculations on each representative of the samples,
-  using a @paw @pbe @dft pseudo-potential through @vasp.
+  using a @paw revPBE-D3 @dft functional through @vasp.
   The output files are then converted, joined and shuffled to compose the training and test sets for the machine learning procedure.
 3. *Fine tune* the foundation model on the new dataset; in our case MACE-MP-0 was chosen.
   #footnote([
