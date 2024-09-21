@@ -1631,10 +1631,6 @@ In particular, we test three versions of the foundation model MACE-MP-0, namely 
 The three models differ in the number of layers used in the MACE architecture, hence the total number of parameter built into the model.
 Moreover, a fine-tuned @mlp for ice polymorphs @kaurDataefficientFinetuningFoundational2024, MACE-ICE13-1, is also put to the test and compared with the MACE foundation models.
 
-// Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
-
-// Terza parte: simulazione per qualche sistema in cui l'approccio analitico non funziona bene
-
 == The water molecule <sec-molecule>
 
 The first task is the optimization of the geometry and calculation of vibrational properties of the water molecule.
