@@ -2912,7 +2912,7 @@ This allowed fast and accurate prototyping of different molecules configurations
 It is noteworthy that test simulations could be executed effortlessly on a high-end laptop CPU, for a tight feedback loop between script creation and debugging.
 The results obtained using MACE show a satisfiying agreement with the base models onto which it is trained, with the exception of the phonon dispersions, which show a slight over-estimation of the energies, while the shape of the graphs remain accurate.
 Overall #glspl("mlp") demonstrate a convenient accuracy/cost ratio;
-the combination of this charactheristic with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this approach very versatile, and a precious addition in the toolbox of the material scientists.
+the combination of this characteristic with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this approach very versatile, and a precious addition in the toolbox of material scientists.
 
 = Acknowledgments
 I would like to express my gratitude to Flaviano Della Pia for his invaluable assistance in learning the new tools and for providing me with insightful advice and practical tutorials. I am also indebted to Andrea Zen for his meticulous guidance and prompt advice. Finally, I would like to thank Dario Alfè for imparting me with the fundamentals of knowledge in this field and for steering my thesis in the right direction.
