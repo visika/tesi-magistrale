@@ -2577,14 +2577,23 @@ The same considerations on the quality of the results hold as above.
 )
 
 == Molecular Dynamics
+Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
+] were performed under varying external conditions.
+The thermostat couples the system to an external heath bath at a fixed temperature.
 
 === Radial Distribution Function
 
-Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
-] were performed under varying external conditions.
-A thermostat couples the system to an external heath bath.
+A fundamental property is the #gls("rdf", long: true), which describes how particle density varies as a function of distance from a reference particle.
+@rdf is crucial for understanding structural properties in both solids and liquids.
+This is a key property that needs to be reproduced accurately if the model is to be trusted for reliable predictions.
+Any model that fails to capture the correct @rdf may lead to unreliable results for both structural and dynamic properties.
+
+In this work, we utilize constant NVT simulations, with the system being thermally regulated using the Langevin thermostat.
+The detailed simulation settings include the specification of the temperature of the heat bath, according to the reference data taken from experiment, the definition of the time step of the simulation and of the number of steps to simulate, related to the total physical time elapsed in the simulated system, which ensures thermal equilibrium throughout the simulation.
+We demonstrate that the MACE-ICE13-1 model correctly reproduces the @rdf for liquid water within error, as shown in @fig:rdf and @fig:rdf-macemp0-maceice131.
+
 The @rdf of the thermalized states is shown in @fig:rdf, compared with reference data @skinnerBenchmarkOxygenoxygenPairdistribution2013 from X-ray diffraction experiment.
-The simulated phisical time shall not be less than 100ps, to allow recombination of bonds in the liquid.
+To guarantee thermal equilibrium and total recombination of atom positions and bonds in the liquid, the simulated phisical time shall not be less than 100ps.
 Constant NPT simulations should be more appropriate for the computation of physical properties, but they are missing at the present time.
 Further analysis can also be made on the study of the diffusion coefficient and the density of the system.
 
@@ -2593,6 +2602,8 @@ Further analysis can also be made on the study of the diffusion coefficient and 
   caption: [Radial distribution function of oxygens in liquid water.],
 ) <fig:rdf>
 
+While the MACE-ICE13-1 model performs well in reproducing structural properties, further improvements could be made by enhancing the model's accuracy in predicting dynamic properties such as diffusion coefficients.
+
 #large_figure(
   grid(
     columns: 2,
@@ -2600,7 +2611,7 @@ Further analysis can also be made on the study of the diffusion coefficient and 
     image("simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_nbins=40.svg"),
   ),
   caption: [Comparison of the RDFs obtained from MD simulations of liquid water using MACE-MP-0 and MACE-ICE13-1.],
-)
+) <fig:rdf-macemp0-maceice131>
 
 #figure(
   image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png"),
