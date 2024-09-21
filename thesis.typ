@@ -1627,7 +1627,9 @@ In this chapter we test the MACE calculators on small, known systems,
 about which literature is abundant and a direct comparison of results is possible.
 We analyze the geometrical and vibrational features of the water molecule and the water dimer after optimization with each calculator.
 The binding energy of the dimer is calculated and compared with reference @dft methods.
-This setting already allows to quantify the benefits of a fine-tuned @mlp like MACE-ICE13-1 compared with MACE foundation models.
+In particular, we test three versions of the foundation model MACE-MP-0, namely _small_, _medium_ and _large_.
+The three models differ in the number of layers used in the MACE architecture, hence the total number of parameter built into the model.
+Moreover, a fine-tuned @mlp for ice polymorphs @kaurDataefficientFinetuningFoundational2024, MACE-ICE13-1, is also put to the test and compared with the MACE foundation models.
 
 // Seconda parte: simulazione per qualche sistema standard in cui l'approccio analitico funziona bene
 
