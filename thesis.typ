@@ -2733,7 +2733,7 @@ The MACE model follows the general framework of #glspl("mpnn") outlined in @sec:
 The key innovation is a new message construction mechanism.
 The messages $arrow(m)_i^((t))$ are expanded in a hierarchical body order expansion,
 $
-  arrow(m)_i^((t))
+  va(m_i^((t)))
   &= sum_j arrow(u)_1 (sigma_i^((t)); sigma_j^((t))) \
   &+ sum_(j_1, j_2) arrow(u)_2 (sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t)))
   + dots
