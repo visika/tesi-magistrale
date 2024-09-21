@@ -2614,7 +2614,10 @@ While the MACE-ICE13-1 model performs well in reproducing structural properties,
 ) <fig:rdf-macemp0-maceice131>
 
 #figure(
-  image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png"),
+  image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png", width: 80%),
+  caption: [
+    Example of temperature trend through a MD simulation of water with MACE-ICE13-1.
+  ]
 )
 
 = Tools <sec:tools>
