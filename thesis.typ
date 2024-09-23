@@ -329,7 +329,7 @@ This trade-off has driven the exploration of alternative methods that combine th
 )
 
 Recently, #glspl("mlp") have emerged as a promising solution.
-These approaches leverage advanced neural network architectures to model the potential energy surfaces of molecular systems with a level of accuracy comparable to ab initio methods but at a fraction of the computational cost.
+These approaches leverage on advanced neural network architectures to model the potential energy surfaces of molecular systems with a level of accuracy comparable to ab initio methods but at a fraction of the computational cost.
 By training on existing quantum mechanical data, #glspl("mlp") can predict intermolecular interactions and dynamic behaviours with high fidelity, making them suitable for studying complex systems like molecular crystals.
 @batatiaFoundationModelAtomistic2023
 @schranMachineLearningPotentials2021
