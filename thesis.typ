@@ -339,7 +339,7 @@ By training on existing quantum mechanical data, #glspl("mlp") can predict inter
 Since their introduction about 25 years ago, #glspl("mlp") have become an important tool in the ﬁeld of atomistic simulations.
 After the initial decade, in which neural networks were successfully used to construct potentials for rather small molecular systems, the development of #glspl("hdnnp") in 2007 opened the way for the application of ML potentials in simulations of large systems containing thousands of atoms.
 @behlerFourGenerationsHighDimensional2021
-Depending on the specific task it has been estimated that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely ab initio methods @kapilCompleteDescriptionThermodynamic2022, while state of the art #glspl("mpnn", long: true) achieve speedups of up to $10^5$ times less the compute time on the prediction of physical properties of molecules (see @fig:mpnn-speedup).
+Depending on the specific task it has been estimated that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely ab initio methods @kapilCompleteDescriptionThermodynamic2022[p. 5], while state of the art #glspl("mpnn", long: true) achieve speedups of up to $10^5$ times less the compute time on the prediction of physical properties of molecules (see @fig:mpnn-speedup).
 
 #figure(
   image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
