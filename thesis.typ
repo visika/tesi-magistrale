@@ -1064,7 +1064,17 @@ This periodic velocity re-initialization procedure also redistributes energy bet
 It can be shown that the frequency of these velocity re-initializations does not affect the ability to sample the canonical ensemble; however, drawing the velocities too often will result in the system moving very slowly from one region of configuration space to another; drawing them too seldom results in slow transfer of energy between different modes, which would only overcome the ergodicity problem slowly.
 Finding the appropriate time interval between velocities randomizations is then a matter of finding the right compromise to maximize efficiency.
 
-In *Andersen dynamics*, constant temperature is imposed by stochastic collisions with a heath bath.
+// https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
+In *Langevin dynamics*#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin], a (small) friction term and a fluctuating force are added to Newton's second law, @eq:verlet-newton, which is then integrated numerically.
+The temperature of the heat bath and magnitude of the friction is specified by the experimenter, the amplitude of the fluctuating force is then calculated to give that temperature.
+This procedure has some physical justification: in a real metal the atoms are (weakly) coupled to the electron gas, and the electron gas therefore acts like a heat bath for the atoms.
+If heat is produced locally, the atoms locally get a temperature that is higher than the temperature of the electrons, heat is transferred to the electrons and then rapidly transported away by them.
+A Langevin equation is probably a reasonable model for this process.
+
+A disadvantage of using Langevin dynamics is that if significant heat is produced in the simulation, then the temperature will stabilize at a value higher than the specified temperature of the heat bath, since a temperature difference between the system and the heat bath is necessary to get a finite heat flow.
+Another disadvantage is that the fluctuating force is stochastic in nature, so repeating the simulation will not give exactly the same trajectory, if not using exactly the same starting configuration and random number generator.
+
+In *Andersen dynamics*#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen], constant temperature is imposed by stochastic collisions with a heat bath.
 With a (small) probability the collisions act occasionally on velocity components of randomly selected particles.
 Upon a collision the new velocity is drawn from the Maxwell-Boltzmann distribution at the corresponding temperature.
 The system is then integrated numerically at constant energy according to the Newtonian laws of motion.
@@ -1078,7 +1088,7 @@ In *Nosé-Hoover dynamics*, an extra term is added to the Hamiltonian representi
 From a pragmatic point of view one can regard Nosé-Hoover dynamics as adding a friction term to Newton's second law, but dynamically changing the friction coefficient to move the system towards the desired temperature.
 Typically the "friction coefficient" will fluctuate around zero.
 
-During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
+During simulations in the present work, the Langevin thermostat was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
 === Mean square displacement
@@ -2622,7 +2632,7 @@ The same considerations on the quality of the results hold as above.
 == Molecular Dynamics
 Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
 ] were performed under varying external conditions.
-The thermostat couples the system to an external heath bath at a fixed temperature.
+The thermostat couples the system to an external heat bath at a fixed temperature.
 
 === Radial Distribution Function
 
