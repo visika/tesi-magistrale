@@ -1071,7 +1071,7 @@ The system is then integrated numerically at constant energy according to the Ne
 The collision probability is defined as the average number of collisions per atom and timestep.
 The algorithm generates a canonical distribution. @daanfrenkelUnderstandingMolecularSimulation2002[§6.1.1]
 However, due to the random decorrelation of velocities, the dynamics are unphysical and cannot represent dynamical properties like e.g. diffusion or viscosity.
-Another disadvantage is that the collisions are stochastic in nature, so repeating the simulation will not give exactly the same trajectory.
+Another disadvantage is that the collisions are stochastic in nature, so repeating the simulation will not give exactly the same trajectory, if not using exactly the same starting configuration and random number generator.
 Typical values for the collision probability are in the order of $10^(-4) ÷ 10^(-1)$.
 
 In *Nosé-Hoover dynamics*, an extra term is added to the Hamiltonian representing the coupling to the heat bath.
