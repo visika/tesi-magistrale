@@ -1678,7 +1678,7 @@ The notions exposed above are a sufficient introduction to understand the basic 
 = Results I: model assessment <sec:results-1>
 
 In this chapter we test the MACE calculators on small, known systems,
-about which literature is abundant and a direct comparison of results is possible.
+about which the literature is abundant and a direct comparison of results is possible.
 We analyze the geometrical and vibrational features of the water molecule and the water dimer after optimization with each calculator.
 The binding energy of the dimer is calculated and compared with reference @dft methods.
 In particular, we test three versions of the foundation model MACE-MP-0, namely _small_, _medium_ and _large_.
