@@ -535,14 +535,19 @@ These collective oscillations are called _phonons_.
 
 The potential energy can be written in the form in @eq:termcomp-7.1 and so the partition function has the form of either @eq:termcomp-7.7 or @eq:termcomp-7.10, depending on if the system is treated classically or quantum-mechanically:
 $
-  Z = e^(-beta U_0) product_(i=1)^(3N) (k_B T) / (planck.reduce omega_i)
+  Z = e^(-beta U_0) product_(i=1)^(3N) (k_B T) / (planck.reduce omega_i), quad "in the classical limit",
 $ <eq:termcomp-7.7>
+and
 $
-  Z = e^(-beta U_0) product_(i=1)^(3N) Z_i \
+  Z = e^(-beta U_0) product_(i=1)^(3N) Z_i, quad "in the quantum description",
+$ <eq:termcomp-7.10>
+
+with each term in the product having the form:
+$
   Z_i = sum_(n=0)^infinity e^(-E_n^i / (k_B T))
   = sum_(n=0)^infinity e^(- (n + 1 / 2) (planck.reduce omega_i) / (k_B T))
-  = (e^(-1 / 2 (planck.reduce omega_i) / (k_B T))) / (1 - e^(- (planck.reduce omega_i) / (k_B T)))
-$ <eq:termcomp-7.10>
+  = (e^(-1 / 2 (planck.reduce omega_i) / (k_B T))) / (1 - e^(- (planck.reduce omega_i) / (k_B T))).
+$
 
 === The Helmholtz energy
 // Da §4 relazione termodinamica computazionale
