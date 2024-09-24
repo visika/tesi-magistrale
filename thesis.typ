@@ -924,26 +924,26 @@ $
   arrow(r)_i (t + delta t)
   = arrow(r)_i (t) + dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
-  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4),
+  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + cal(O)((delta t)^4),
 $
 
 $
   arrow(r)_i (t - delta t)
   = arrow(r)_i (t) - dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
-  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4),
+  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + cal(O)((delta t)^4),
 $
 
 where $delta t$ is a small time interval.
 Summing the two equations side by side, we obtain:
 $
   arrow(r)_i (t + delta t) + arrow(r)_i (t - delta t)
-  = 2 arrow(r)_i + dot.double(arrow(r))_i (t) (delta t)^2 + O((delta t)^4)
+  = 2 arrow(r)_i + dot.double(arrow(r))_i (t) (delta t)^2 + cal(O)((delta t)^4)
 $
 Consider the expression of $dot.double(arrow(r))_i$ in terms of $arrow(f)_i$ from @eq:verlet-newton, $dot.double(arrow(r))_i (t) = 1/M arrow(f)_i (t)$; substituting, we obtain:
 $
   arrow(r)_i (t + delta t)
-  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (delta t)^2 + O((delta t)^4)
+  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (delta t)^2 + cal(O)((delta t)^4)
 $ <eq:verlet-algorithm>
 @eq:verlet-algorithm is known ad the Verlet algorithm.
 @verletComputerExperimentsClassical1967[Eq. (4)]
@@ -961,14 +961,14 @@ $
   = 2 arrow(r)_i (t)
   + 2 arrow(v)_i (t) delta t
   + 1 / M arrow(f)_i (t) (delta t)^2
-  + O((delta t)^4)
+  + cal(O)((delta t)^4)
 $
 $ // Eq. 7.95 Alfè
   arrow(r)_i (t + delta t)
   = arrow(r)_i (t)
   + arrow(v)_i (t) delta t
   + 1 / (2M) arrow(f)_i (t) (delta t)^2
-  + O((delta t)^4),
+  + cal(O)((delta t)^4),
 $
 which gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
 This expression is particularly useful at the beginning of the simulation, where only the initial positions are available, and shows that to begin a simulation we also need to provide the initial velocities.
