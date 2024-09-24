@@ -448,7 +448,7 @@ For small enough displacements ${va(u)}$ the potential energy can be expanded ar
 $
   U({va(r)})
   = U_0
-  + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + O(u^3),
+  + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + cal(O)(u^3),
 $
 where $U_0 := U({va(r^0)})$, and the linear term is absent because we are expanding around the minimum of the potential.
 The _force constants matrix_ $Phi$ is defined as:
@@ -462,7 +462,7 @@ $
   phi_(i j)^(alpha beta) = pdv(U({va(r)}), alpha_i, beta_i),
 $ <eq:force-constants-matrix>
 where $alpha_i$ and $beta_j$ run over the three cartesian components of $va(r_i^0)$ and $va(r_j^0)$.
-If the displacements are not too large and the $O(u^3)$ terms can be ignored, the force acting on particle at position $va(r_i^0)$ due to the displacements $va(u_j)$ of all particles in the system, including $va(u_i)$, is:
+If the displacements are not too large and the $cal(O)(u^3)$ terms can be ignored, the force acting on particle at position $va(r_i^0)$ due to the displacements $va(u_j)$ of all particles in the system, including $va(u_i)$, is:
 $
   va(f_i) = -sum_j Phi(va(r_i^0) - va(r_j^0)) dot va(u_j).
 $
