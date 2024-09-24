@@ -263,6 +263,10 @@
 ]
 
 #show heading.where(level: 2): it => upper(it)
+#show heading.where(level: 3): it => [
+  #it
+  #v(4mm)
+]
 
 #show outline.entry.where(level: 1): it => {
   // reverse the results of the label queries to find the last <empty-page> label for the targeted page
