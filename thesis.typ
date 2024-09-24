@@ -1054,7 +1054,7 @@ In such a situation time averages are biased, and do not provide good approximat
 One way to overcome this problem is to couple the simulated system with an external heat bath, provided that all degrees of freedom are interacting with the bath.
 Several techniques have been developed, but not all of them are capable of overcoming the ergodicity problem.
 One that does is the thermostat developed by Andersen, @andersenMolecularDynamicsSimulations1980 which is based on the concept of stochastic collisions.
-We know that is a perfect gas at some temperature $T$ the velocities are distributed according to the Maxwell distribution
+We know that in a perfect gas at some temperature $T$ the velocities are distributed according to the Maxwell distribution
 $
   f(v) dif v
   = (m / (2 pi k_B T))^(3 / 2) 4 pi v^2 exp(-(m v^2)/(2k_B T)) dif v.
