@@ -396,6 +396,7 @@ The chapter is orgnanized into several key areas:
   We describe how #glspl("gnn") can be employed to capture atomic interactions in a computationally efficient manner.
 
 Each section provides the necessary theoretical foundation for understanding the subsequent results and discussions, with a focus on applying these methods to study the properties of molecular crystals and, specifically, ice polymorphs.
+The content found from @sec:3d-harmonic-solids to @sec:md, is significantly based upon the lecture notes on Statistical and Computational Physics, by D. Alfè, studied during my masters degree. @alfeNotesStatisticalComputational2023
 
 == #threed-harmonic-solids-title <sec:3d-harmonic-solids>
 The crystal can be described by a collection of independent harmonic oscillators with potential energy:
