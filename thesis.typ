@@ -573,21 +573,25 @@ $
   1 / Omega integral dif q approx 1 / (N_(arrow(q))) sum_(arrow(q) in "BZ")
 $
 
+Using this approximation, the Helmholtz energy per atom becomes:
+
 $
   F (V,T)
   &= U_0(V) \
-  &+ sum_(s=1)^3 sum_(va(q)) [
+  &+ 1/(N_va(q)) sum_(s=1)^3 sum_(va(q)) [
     (hbar omega_(va(q),s) (V)) / 2
     + k_B T ln(
       1 - exp(
         - (hbar omega_(va(q), s) (V)) / (k_B T)
       )
     )
-  ]
+  ],
 $ <eq:termcomp-7.63>
+with $U_0$ the energy per atom of the system in its ground state.
+In the classical limit, the expression becomes:
 
 $
-  F_"classical" (V,T) = U_0(V) + k_B T sum_(s=1)^3 sum_(arrow(q)) ln (
+  F_"classical" (V,T) = U_0(V) + (k_B T)/(N_va(q)) sum_(s=1)^3 sum_(arrow(q)) ln (
   planck.reduce omega_(arrow(q),s)(V)) / ( k_B T
   )
 $ <eq:termcomp-7.64>
