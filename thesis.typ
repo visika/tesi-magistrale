@@ -407,7 +407,7 @@ where $M$ is the mass of the particles, $q_i$ a set of _normal coordinates_, and
 This approximation is known as the _harmonic approximation_.
 The Newton's equations of motion for the normal coordinates are:
 $
-  M dv(q_i, t, 2) = - pdv(U, q_i) - M omega_i^2 q_i.
+  M dv(q_i, t, 2) = - pdv(U, q_i) = - M omega_i^2 q_i.
 $
 
 Consider a three dimensional system made of particles arranged on a _periodic lattice_, at equilibrium positions ${va(r^0)} := va(r_1^0), dots, va(r_N^0), dots$.
