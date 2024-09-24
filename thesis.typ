@@ -552,7 +552,7 @@ $
 === The Helmholtz energy
 // Da §4 relazione termodinamica computazionale
 
-The harmonic contribution of phonons to the Helmholtz energy is represented by the equation:
+The harmonic contribution of phonons to the Helmholtz energy per atom is represented by the equation:
 
 $
   &F_"harm" (V,T) = \
