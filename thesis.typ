@@ -696,7 +696,7 @@ Increasing the size of the supercell, the Brillouin zone is populated with more 
 inbetween those points we obtain a _Fourier interpolation_,
 which becomes more and more accurate as we increase the size of the supercell.
 Eventually, the supercell is so large that the force constants matrix is negligible at its edges;
-when this happens, the only term contributing in the sum in @eq:force-constants-matrix-supercell is that with $arrow(L) = arrow(0)$;
+when this happens, the only term contributing appreciably in the sum in @eq:force-constants-matrix-supercell is that with $arrow(L) = arrow(0)$;
 as we increase the size of the supercell, the supercell force constants matrix asymptotically approaches the force constants matrix,
 $Phi_"SC" (arrow(r)_i^0) tilde.eq Phi(arrow(r)_i^0)$.
 In this limit, the Fourier interpolation is accurate everywhere.
