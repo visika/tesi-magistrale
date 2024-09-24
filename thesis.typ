@@ -598,7 +598,7 @@ $ <eq:termcomp-7.64>
 
 The sum over $va(q)$ runs over all vectors in the Brillouin zone, which are infinite for a Bravais lattice that contains an infinite number of sites.
 Indeed, the Helmholtz energy of a crystal with an infinite number of particles would also be infinite.
-The physical quantity of interest is therefore the Helmholtz energy per particle; in practice, this is obtained by computing the sums @eq:termcomp-7.63 and @eq:termcomp-7.64 using a finite grid of $N_(va(q))$ points in the Brillouin zone and dividing the total Helmholtz energy by $N_(va(q))$.
+The physical quantity of interest is indeed the Helmholtz energy per particle; this is the reason why the sums in @eq:termcomp-7.63 and @eq:termcomp-7.64, using a finite grid of $N_(va(q))$ points in the Brillouin zone and dividing the total Helmholtz energy by $N_(va(q))$, yield finite values.
 Both the ground state energy and the frequencies explicitly depend on the volume $V$.
 The relationship linking the frequencies with volume and temperature is responsible for the different temperature dependence of the Helmholtz energy at different volumes; these terms cause the phenomenon of thermal expansion in solids.
 
