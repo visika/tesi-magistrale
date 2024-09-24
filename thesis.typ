@@ -1232,7 +1232,7 @@ All the objects above are parameter-free, except for the damping expression in @
 The interatomic van der Waals radii ($R_("vdw", i j)$) are a set of parametric values that control the distance at which the pairwise dispersion interactions are switched off.
 The value of the parameters is obtained by fitting to a training set both in gas-phase and under periodic-boundary conditions. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012[Equations 8, 9]
 
-Because the dispersion coefﬁcients are calculated rather than ﬁtted,
+Because the dispersion coefficients are calculated rather than ﬁtted,
 @eq-otero_2012_1 works under the assumption that the @dft functional presents a completely dispersionless behavior.
 This requirement is not met by most @gga functionals,
 which are sometimes too repulsive and sometimes spuriously binding,
