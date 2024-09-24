@@ -1228,7 +1228,7 @@ $
 $ <eq-otero_2012_2>
 The fundamental objects in this equation are the inter-atomic interaction coefficients $C_(n, i j)$ that in the @xdm model are calculated entirely from first-principles quantities using second-order perturbation theory.
 
-All the objects above are parameter-free, except for the damping expression in <eq-otero_2012_2>.
+All the objects above are parameter-free, except for the damping expression in @eq-otero_2012_2.
 The interatomic van der Waals radii ($R_("vdw", i j)$) control the distance at which the pairwise dispersion interactions are switched off.
 
 Because the dispersion coefﬁcients are calculated rather than ﬁtted,
