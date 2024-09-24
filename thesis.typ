@@ -808,14 +808,35 @@ The equations are coupled through the effective potential $v_"KS" [rho]$, as $rh
 Since the orbitals $psi_n$ are ortho-normal, the ground state electron density of the system is obtained from the solution of @eq:kohn-sham-equations[Equations] as:
 $
   // Eq. (3.41) Della Pia, (8.23) Alfè
+  // logseq://graph/softseq?block-id=66f33133-67b5-46ea-abe5-ee9003827258
   rho_0 (va(r)) = sum_(n=1)^N |psi_n (va(r))|^2.
 $ <eq:ground-state-density>
 
-The extremes of the functional are obtained for any ensemble of $N$ eigenstates of $hat(h)_"KS" [rho]$, and the ground state is obtained by finding the lowest $N$ eigenstates (or the lowest $N/2$ eigenstates, taking into account the spin degeneracy).
+// logseq://graph/softseq?block-id=66f33215-091e-46ec-bd3c-1ce9a47d0558
+It is useful to recast the variation of the density in terms of variations of the single particle wavefunctions $psi_n$.
+Such a variation has to be performed while keeping the wavefunctions ortho-normal, which gives a set of $M^2$ constraints:
+$ // Termcomp eq. 8.28
+  integral_V dif^3 va(r) psi_i^star (va(r)) psi_j (va(r)) = delta_(i j).
+$
+To do that, we define the functional:
+$ // Termcomp eq. 8.29
+  Omega [ { psi_n }, {epsilon_(i j)} ]
+  := E[rho]
+  - sum_(i,j=1)^(N/2) 2 epsilon_(i j)
+  ( integral_V dif^3 va(r) psi_i^star (va(r)) psi_j(va(r)) - delta_(i j) ),
+$
+where the terms $epsilon_(i j)$ are the Lagrange multipliers associated to the constraints, and we impose the condition:
+$ // Termcomp eq. 8.30
+  delta Omega [{psi_n}, {epsilon_(i j)}] = 0.
+$
+
+// logseq://graph/softseq?block-id=66f328eb-1dc2-4e46-85f3-68f32ad31ce7
+The @ks equations show that the extremes of the functional $Omega$ are obtained for any ensemble of $N/2$ eigenstates of $hat(h)_"KS" [rho]$ ($N$ eigenstates, if we ignore the spin degeneracy), and the ground state is obtained by ﬁnding its minimum of the total energy with respect to any choice of $N/2$ state.
+In practice, to approximate the interacting system one always takes the lowest $N/2$ @ks states, although this may not necessarily be the correct choice (see @sec:v-representability).
+
 One can introduce a set of $L$ basis functions, ${phi_m}_(m = 1, dots, L)$, to construct the matrix $epsilon_(i j) = braket(phi_i, hat(h)_"KS" [rho], phi_j)$, and diagonalize it.
 The eigenvectors are of the type:
-$
-  // Eq. (8.40) Alfè, (3.42) Della Pia
+$ // Eq. (8.40) Alfè, (3.42) Della Pia
   psi_n = sum_(i=1)^L c_i^n phi_i
 $
 If the basis set ${phi_m}$ is complete, the solution is exact.
@@ -825,6 +846,7 @@ By increasing the number of basis functions, one can drive the calculations to c
 The usual variational principle applies, and so, by including more and more elements in the basis set, the ground state energy decreases monotonically.
 The rate of decrease of the energy can be used to judge the level of convergence.
 
+// logseq://graph/softseq?block-id=66f33452-dd0c-4443-86c6-5e64dba07f2c
 Since the @ks potential depends on $rho$, @eq:kohn-sham-equations[Equations] have to be solved self-consistently.
 This is typically done by iteration, in which one starts with some initial guess for the electron density $rho_1$, constructs $v_"KS" [rho_1]$ and solves @eq:kohn-sham-equations[Equations].
 With those solutions construct $rho_2$ using @eq:ground-state-density or more advanced algorithms, and solve @eq:kohn-sham-equations[Equations] again, using the newly constructed $v_"KS" [rho_2]$.
@@ -836,7 +858,14 @@ $ // Eq. (8.41) Alfè
     arrow(r)'
   ) rho(arrow(r))) / (|arrow(r) - arrow(r)'|) dif^3 arrow(r)' dif^3 arrow(r)
   - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc" [rho].
-$
+$ <eq:termcomp-8.41>
+
+=== v-representability <sec:v-representability>
+// Da Lecture Notes di Alfè, p. 150
+The condition that guarantees that the first $N/2$ states give the minimum energy in @eq:termcomp-8.41 is known as _v-representability_, that is the ground state density of the interacting system is the same as the ground state density of _some_ non-interacting system.
+This also implies that the total energy, @eq:termcomp-8.41, would be exact if one had the exact form of the exchange-correlation functional, $E_"xc"$.
+It is possible, however, that the ground state density of a system is not _v-representable_, i.e. there is no non-interacting system whose ground state density is the same as that of the interacting system.
+In this case we need to go back to the variational principle, and the $N/2$ states in the non-interacting system that minimize the energy may not be the first $N/2$. @parrDensityFunctionalTheoryAtoms1994
 
 === The local density approximation
 
