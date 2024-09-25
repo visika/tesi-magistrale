@@ -1152,11 +1152,12 @@ The evaluation of $Delta_"T&QN" (T)$ can be challenging, especially for large mo
 Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, accurate theoretical evaluations of $E_"latt"$ are of help for comparison.
 
 In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
-By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions; noticing that in the crystal there are no trans-rotational contributions; considering as negligible the pressure times volume term, $p V$; we have that
+By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions, and noticing that in the crystal there are no trans-rotational contributions, we have that
 $
   Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (E_"el"^s + E_"vib"^s),
 $ <eq-zen_si_14>
 where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
+We will also consider as negligible the pressure times volume term, $p V$.
 By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
 Thus, @eq-zen_si_14 simplifies to
 $
