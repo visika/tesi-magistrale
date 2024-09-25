@@ -1702,7 +1702,7 @@ static local *minimization of the potential energy* and *analysis of vibrational
 
 === Geometry optimization
 
-To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in literature.
+To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in the literature.
 The bond lengths and the bond angle of the water molecule are known with remarkable accuracy from the vibration-rotation spectra of normal and isotopic water vapour. @eisenbergStructurePropertiesWater2005[§1.1 (c)]
 
 The first value concerns the characteristic $#ce("HOH")$ *bend angle* of the molecule;
