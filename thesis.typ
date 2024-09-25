@@ -1890,7 +1890,7 @@ they are the frequencies with which the molecule would vibrate if its vibrations
 The $x$s are the _anharmonic constants_ and describe the effect on the vibrational frequencies of the departure from purely harmonic form of the vibrations.
 @table:molecule-omega and @table:molecule-omega-errors
 contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data determined by Benedict _et al._ (1956) @eisenbergStructurePropertiesWater2005[Table 1.4].
-The value of the anharmonic frequencies is also reported for completeness in @table:molecule-vibrational-constants-anharmonic.
+The value of the anharmonic frequencies is reported for completeness in @table:molecule-vibrational-constants-anharmonic.
 
 #large_box(
   grid(
