@@ -1693,7 +1693,7 @@ We studied the relaxation of the geometry of a single water molecule, also refer
 static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
 #figure(
-  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 70%),
+  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 60%),
   caption: [
     Render of the geometry of the water molecule,
     optimized using MACE-ICE13-1.
@@ -1728,7 +1728,7 @@ The second value is the $#ce("OH")$ *bond length*.
 #figure(
   image(
     "simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg",
-    width: 90%,
+    width: 70%,
   ),
   caption: [Convergence of the $#ce("HOH")$ angle with respect to the `fmax` parameter.],
 )
