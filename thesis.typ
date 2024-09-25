@@ -88,7 +88,7 @@
   In this work, we will use recently developed #glspl("mlp") to model the structure and dynamics of molecular crystals along with their thermodynamic stability, using water as a showcase system.
   Water is ubiquitous in nature and of fundamental relevance to physics, biology, geology, materials science and engineering.
   Its numerous anomalies, arising from the delicate interplay of hydrogen bonding and dispersion forces, make it a hard test for computational approaches.
-  
+
   Traditional approaches often grapple with the trade-off between computational
   expense and accuracy. The application of #glspl("mlp") captures
   complex intermolecular interactions with the accuracy of ab initio approaches but at a much cheaper computational cost.
@@ -348,8 +348,8 @@ Depending on the specific task it has been estimated that mixed ab initio and @m
 #figure(
   image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
   caption: [
-  A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation.
-  Image taken from @gilmerNeuralMessagePassing2017.
+    A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation.
+    Image taken from @gilmerNeuralMessagePassing2017.
   ],
 ) <fig:mpnn-speedup>
 
@@ -452,12 +452,16 @@ For small enough displacements ${va(u)}$ the potential energy can be expanded ar
 $
   U({va(r)})
   = U_0
-  + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + cal(O)(u^3),
+  + 1 / 2 sum_(i,j) va(u_i) dot Phi (
+    va(r_i^0) - va(r_j^0)
+  ) dot va(u_j) + cal(O)(u^3),
 $
 where $U_0 := U({va(r^0)})$, and the linear term is absent because we are expanding around the minimum of the potential.
 The _force constants matrix_ $Phi$ is defined as:
 $
-  Phi (va(r_i^0) - va(r_j^0)) := (pdv(U({va(r)}), va(r_i), va(r_j)))_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
+  Phi (va(r_i^0) - va(r_j^0)) := (
+    pdv(U({va(r)}), va(r_i), va(r_j))
+  )_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
   = mat(
     phi_(i j)^(x x), phi_(i j)^(x y), phi_(i j)^(x z);
     phi_(i j)^(y x), phi_(i j)^(y y), phi_(i j)^(y z);
@@ -493,7 +497,9 @@ The physical motion of the particles is obtained by taking the real part of @eq:
 Substituting @eq:termcomp-7.55 into @eq:termcomp-7.54 we obtain:
 $
   M omega^2 va(epsilon)
-  = sum_j e^(i va(q) dot (va(r_j^0) - va(r_i^0))) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
+  = sum_j e^(i va(q) dot (
+    va(r_j^0) - va(r_i^0)
+  )) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
 $ <eq:termcomp-7.56>
 The sum over $j$ runs over all lattice sites, and so it is independent on our choice of $va(r_i^0)$.
 We can therefore choose $va(r_i^0) = va(0)$ and replace the difference $va(r_j^0) - va(r_i^0)$ simply with $va(r_j^0)$.
@@ -578,7 +584,7 @@ Using this approximation, the Helmholtz energy per atom becomes:
 $
   F (V,T)
   &= U_0(V) \
-  &+ 1/(N_va(q)) sum_(s=1)^3 sum_(va(q)) [
+  &+ 1 / (N_va(q)) sum_(s=1)^3 sum_(va(q)) [
     (hbar omega_(va(q),s) (V)) / 2
     + k_B T ln(
       1 - exp(
@@ -591,7 +597,9 @@ with $U_0$ the energy per atom of the system in its ground state.
 In the classical limit, the expression becomes:
 
 $
-  F_"classical" (V,T) = U_0(V) + (k_B T)/(N_va(q)) sum_(s=1)^3 sum_(arrow(q)) ln (
+  F_"classical" (V,T) = U_0(
+    V
+  ) + (k_B T) / (N_va(q)) sum_(s=1)^3 sum_(arrow(q)) ln (
   planck.reduce omega_(arrow(q),s)(V)) / ( k_B T
   )
 $ <eq:termcomp-7.64>
@@ -666,7 +674,9 @@ which requires knowledge of every element of the force constants matrix.
 We can rewrite @eq:dynamical-matrix as:
 $
   D(arrow(q))
-  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (arrow(r)_j^0 + arrow(L))) Phi(arrow(r)_j^0 + arrow(L)) \
+  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (
+    arrow(r)_j^0 + arrow(L)
+  )) Phi(arrow(r)_j^0 + arrow(L)) \
   &= 1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
   sum_arrow(L) e^(i arrow(q) dot arrow(L))
   Phi(arrow(r)_j^0 + arrow(L))
@@ -710,7 +720,7 @@ Here, we briefly describe the underlying theory of @dft.
 Given the wavefunction $Psi (va(r_1), dots, va(r_N))$ and the Hamiltonian $hat(H)$ of the time-independent many-body Schrödinger equation for a system of $N$ electrons, not including spin variables, $hat(H) Psi (va(r_1), dots, va(r_N)) = E Psi (va(r_1), dots, va(r_N))$, the Hamiltonian is given by the sum of the kinetic, external potential, and electron-electron operators, $hat(H) = hat(T) + hat(V)_"ext" + hat(V)_"ee"$, defined by:
 $
   hat(T) Psi (va(r_1), dots, va(r_N))
-  := - 1/2 sum_(i=1)^N laplacian_i Psi (va(r_1), dots, va(r_N)),
+  := - 1 / 2 sum_(i=1)^N laplacian_i Psi (va(r_1), dots, va(r_N)),
 $
 $
   hat(V)_"ext" Psi (va(r_1), dots, va(r_N))
@@ -719,7 +729,7 @@ $
 with $v(va(r_i))$ the value of the external potential felt by electron $i$ at position $va(r_i)$, and
 $
   hat(V)_"ee" Psi (va(r_1), dots, va(r_N))
-  := sum_(i,j=1 \ i<j) 1/(|va(r_i) - va(r_j)|) Psi (va(r_1), dots, va(r_N)).
+  := sum_(i,j=1 \ i<j) 1 / (|va(r_i) - va(r_j)|) Psi (va(r_1), dots, va(r_N)).
 $
 
 If the wavefunction $Psi$ is normalized over the volume of the system $V$,
@@ -731,7 +741,9 @@ $
 then the energy $E$ is obtained from:
 $
   E =
-  integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N)) hat(H) Psi (va(r_1), dots, va(r_N))
+  integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (
+    va(r_1), dots, va(r_N)
+  ) hat(H) Psi (va(r_1), dots, va(r_N))
 $
 
 Computing the electron density gives:
@@ -745,7 +757,9 @@ $
   integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N))
   sum_(i=1)^N v(va(r_i))
   Psi (va(r_1), dots, va(r_N)) \
-  &= sum_(i=1)^N integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N)) v(va(r_i)) Psi (va(r_1), dots, va(r_N)).
+  &= sum_(i=1)^N integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (
+    va(r_1), dots, va(r_N)
+  ) v(va(r_i)) Psi (va(r_1), dots, va(r_N)).
 $
 
 Since the electrons are all identical, these integrals are also all identical, each one equal to:
@@ -922,14 +936,18 @@ Let us consider the Taylor expansion of the position of particle $i$ at time $t$
 
 $
   arrow(r)_i (t + delta t)
-  = arrow(r)_i (t) + dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+  = arrow(r)_i (t) + dot(arrow(r))_i (
+    t
+  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
   )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + cal(O)((delta t)^4),
 $
 
 $
   arrow(r)_i (t - delta t)
-  = arrow(r)_i (t) - dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+  = arrow(r)_i (t) - dot(arrow(r))_i (
+    t
+  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
   )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + cal(O)((delta t)^4),
 $
@@ -943,13 +961,17 @@ $
 Consider the expression of $dot.double(arrow(r))_i$ in terms of $arrow(f)_i$ from @eq:verlet-newton, $dot.double(arrow(r))_i (t) = 1/M arrow(f)_i (t)$; substituting, we obtain:
 $
   arrow(r)_i (t + delta t)
-  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (delta t)^2 + cal(O)((delta t)^4)
+  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (
+    delta t
+  )^2 + cal(O)((delta t)^4)
 $ <eq:verlet-algorithm>
 @eq:verlet-algorithm is known ad the Verlet algorithm.
 @verletComputerExperimentsClassical1967[Eq. (4)]
 We can re-express the equation in terms of the velocities:
 $
-  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (t - delta t)) / (2 delta t)
+  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (
+    t - delta t
+  )) / (2 delta t)
 $
 $
   - arrow(r)_i (t - delta t)
@@ -975,27 +997,27 @@ This expression is particularly useful at the beginning of the simulation, where
 
 Because of the equipartition theorem, the temperature of the system can be obtained from the ensemble average of the kinetic energy, given by:
 $
-  expval(E_k) = (3N)/2 k_B T,
+  expval(E_k) = (3N) / 2 k_B T,
 $
 where $expval(E_k)$ is the time average of the instantaneous kinetic energy, $E_k (t)$, given by:
 $
-  E_k (t) = sum_i 1/2 M v_i^2 (t).
+  E_k (t) = sum_i 1 / 2 M v_i^2 (t).
 $
 
 === Ensemble averages
 
 If the system is ergodic, ensemble averages of any physical quantity $A$ can be computed as time averages over a molecular dynamics simulation, and can be approximated as:
 $
-  expval(A) tilde.eq 1/M sum_(n=1)^M A(n delta t),
+  expval(A) tilde.eq 1 / M sum_(n=1)^M A(n delta t),
 $
 where $A(n delta t)$ is the value of $A$ evaluated with the particles at positions ${va(r)(n delta t)}$.
 The root mean square of the fluctuations of $A$ is:
 $
-  sigma(A) = [ expval(A^2) - expval(A)^2 ]^(1/2),
+  sigma(A) = [expval(A^2) - expval(A)^2]^(1 / 2),
 $
 with
 $
-  expval(A^2) = 1/M sum_(n=1)^M [A(n delta t)]^2.
+  expval(A^2) = 1 / M sum_(n=1)^M [A(n delta t)]^2.
 $
 
 If all $M$ samples of $A$ were statistically independent from each other, then the standard deviation of $expval(A)$ would be obtained as:
@@ -1016,15 +1038,21 @@ $M_c$ is not known in advance, but it is fixed, and depends only on the system a
 The _reblocking_ procedure is a common approach to obtain $M_c$.
 Suppose we split our simulation into $N$ blocks of length $M/N$ and consider the averages:
 $
-  expval(A)_i^N = 1/(M/N) sum_(n = M/N i + 1)^(M/N (i+1)) A(n delta t), quad i = 0,1,dots,N-1.
+  expval(A)_i^N = 1 / (M / N) sum_(n = M / N i + 1)^(M / N (i+1)) A(
+    n delta t
+  ), quad i = 0,1,dots,N-1.
 $
 The average of $A$ over the whole simulation is obviously unaffected by this reblocking procedure:
 $
-  expval(A) = 1/M sum_(n=1)^M A(n delta t) = 1/N sum_(i=0)^(N-1) expval(A)_i^N.
+  expval(A) = 1 / M sum_(n=1)^M A(
+    n delta t
+  ) = 1 / N sum_(i=0)^(N-1) expval(A)_i^N.
 $
 Now consider the root mean square fluctuations of the averages $expval(A)_i^N$:
 $
-  sigma(expval(A)^N) = [1/N sum_(i=0)^(N-1) (expval(A)_i^N)^2 - expval(A)^2]^(1/2).
+  sigma(expval(A)^N) = [
+    1 / N sum_(i=0)^(N-1) (expval(A)_i^N)^2 - expval(A)^2
+  ]^(1 / 2).
 $
 If the evaluations of $A$ are all statistically independent from each other, then the standard deviation on the average can be obtained as:
 $
@@ -1095,7 +1123,7 @@ The Berendsen thermostat was considered, but later discarded#footnote[See the "F
 // §7.3.3 Alfè, §4.2.3 Della Pia
 In a molecular dynamics simulation, a convenient quantity that can be used to monitor the state of the system is the _mean square displacement_, defined as:
 $
-  m(t) := 1/N sum_(i=1)^N |va(r_i)(t + t_0) - va(r_i)(t_0)|^2,
+  m(t) := 1 / N sum_(i=1)^N |va(r_i)(t + t_0) - va(r_i)(t_0)|^2,
 $ <eq:mean-square-displacement>
 where $t_0$ is some initial reference time.
 In a system with no diffusing behaviour, such as a solid, $m(t)$ is expected to rise first, and then reach a constant, which is related to the maximum displacement of the particles from their equilibrium positions.
@@ -1124,7 +1152,9 @@ In systems with continuous displacements, this translates into a linear dependen
 Over a simulation of total length $T$, one clearly only has access to $m(t)$ with $0 <= t <= T$, and to improve on statistics it is useful to compute @eq:mean-square-displacement by averaging over time origins $t_0$:
 $
   m(t)
-  = 1 / (T - t) sum_(t_0=0)^(T-t) 1/N sum_(i=1)^N |va(r_i)(t+t_0) - va(r_i)(t_0)|^2.
+  = 1 / (T - t) sum_(t_0=0)^(T-t) 1 / N sum_(i=1)^N |va(r_i)(t+t_0) - va(r_i)(
+    t_0
+  )|^2.
 $
 We see that for $t=0$ it is possible to average on the whole length of the simulation, but, as $t$ increases, the available length over which one can average is reduced to $T-t$, and so the statistical error on $m(t)$ increases with $t$.
 For $t=T$ there is only one available configuration.
@@ -1154,21 +1184,31 @@ Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, acc
 In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
 By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions, and noticing that in the crystal there are no trans-rotational contributions, we have that
 $
-  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (E_"el"^s + E_"vib"^s),
+  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (
+    E_"el"^s + E_"vib"^s
+  ),
 $ <eq-zen_si_14>
 where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
 We will also consider as negligible the pressure times volume term, $p V$.
 By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
 Thus, @eq-zen_si_14 simplifies to
 $
-  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (T) + 7 / 2 R T quad & "for linear molecules",
+  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (
+    T
+  ) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (
+    T
+  ) + 7 / 2 R T quad & "for linear molecules",
 $
 where the term $Delta E_"vib" (T)$ contains both the thermal and the quantum nuclear contributions.
 Notice from <eq-zen_2018_1> that $Delta E_"el" = E_"el"^g - E_"el"^s$ is precisely the opposite of the lattice energy $E_"latt"$; thus:
 $
-  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 7 / 2 R T quad & "for linear molecules".
+  & Delta_"T&QN" (T) = Delta E_"vib" (
+    T
+  ) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"T&QN" (T) = Delta E_"vib" (
+    T
+  ) + 7 / 2 R T quad & "for linear molecules".
 $ <eq-zen_si_16>
 
 Vibrations in the solid molecular crystals can usually be separated into intra-molecular and inter-molecular vibrations, $E_"vib"^s = E_"vib"^(s,"intra") + E_"vib"^(s,"inter")$, and the stiffest intra-molecular modes are decoupled from the intermolecular modes.
@@ -1193,7 +1233,9 @@ where the first term in the right hand side accounts for the @zpe contribution a
 
 This yields
 $
-  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (T) = integral epsilon(omega, T) g(omega) dif omega,
+  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (
+    T
+  ) = integral epsilon(omega, T) g(omega) dif omega,
 $ <eq-zen_si_19>
 where $omega_i$ are the frequencies of the isolated molecule,
 which are $3M-6$ ($M$ is the number of atoms in the molecule) for a non-linear molecule,
@@ -1251,7 +1293,11 @@ $
 $
 with the most important two-body term given by
 $
-  E^((2)) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (r_(A B)).
+  E^((
+    2
+  )) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (
+    r_(A B)
+  ).
 $
 
 Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
@@ -1296,14 +1342,14 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
 
 == #machine-learning-title <sec:machine-learning>
 #text(blue)[
-Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
-There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
-It is our interest to study the *supervised learning* type.
-The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
-Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
-Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
-Thus, we can also think of supervised learning as "label learning".
-A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
+  Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
+  There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
+  It is our interest to study the *supervised learning* type.
+  The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
+  Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
+  Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
+  Thus, we can also think of supervised learning as "label learning".
+  A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
 ]
 In the detailed description of MACE in @sec:mace, we will see that the data inputs are atom positions, atomic number; while the label will be the energy, a continuous value learned through regression.
 #text(blue)[
@@ -1319,9 +1365,12 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   === Single layer neural network
   Before we dig deeper into a particular multilayer @nn architecture, let’s briefly reiterate some of the concepts of single-layer NNs, namely, the @adaline algorithm.
 
-  #figure(image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"), caption: [
-    The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
-  ])
+  #figure(
+    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"),
+    caption: [
+      The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
+    ],
+  )
 
   The Adaline algorithm performs binary classification, and uses the gradient descent optimization algorithm to learn the weight coefficients of the model.
   In every epoch (pass over the training dataset), we update the weight vector $va(w)$ and bias unit $b$ using the following update rule:
@@ -1337,7 +1386,9 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   In gradient descent optimization, we update all weights simultaneously after each epoch, and we define the partial derivative for each weight $w_j$ in the weight vector, $va(w)$, as follows:
   $
     pdv(L, w_j) =
-    pdv(, w_j) 1/n sum_i (y^((i)) - a^((i)))^2 = - 2/n sum_i (y^((i)) - a^((i))) x_j^((i)).
+    pdv(, w_j) 1 / n sum_i (y^((i)) - a^((i)))^2 = - 2 / n sum_i (
+      y^((i)) - a^((i))
+    ) x_j^((i)).
   $
   Here, $y^((i))$ is the target class label of a particular sample $x^((i))$, and $a^((i))$ is the activation of the neuron, which is a linear function in the special case of Adaline.
   Furthermore, one can define the activation function $sigma(dot)$ as follows:
@@ -1366,7 +1417,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 
   #figure(
     image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_02.png"),
-    caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.]
+    caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.],
   ) <fig:multi-layer-perceptron>
 
   Next to the data input, the MLP depicted in @fig:multi-layer-perceptron has one hidden layer and one output layer.
@@ -1396,13 +1447,15 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 
   Since each unit in the hidden layer is connected to all units in the input layer, we first calculate the activation unit of the hidden layer $a_1^((h))$ as follows:
   $
-    z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((h)) + dots + x_m^(("in"))w_(1,m)^((h)), \
+    z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((
+      h
+    )) + dots + x_m^(("in"))w_(1,m)^((h)), \
     a_1^((h)) &= sigma(z_1^((h))).
   $
   Here, $z_1^((h))$ is the net input and $sigma(dot)$ is the activation function, which has to be differentiable to learn the weights that connect the neurons using a gradient-based approach.
   To be able to solve complex problems, the MLP model needs nonlinear activation functions, for example, the sigmoid (logistic) activation function:
   $
-    sigma(z) = 1/(1 + e^(-z))
+    sigma(z) = 1 / (1 + e^(-z))
   $
 
   #figure(
@@ -1410,7 +1463,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
     caption: [
       The sigmoid activation function.
       Figure from @raschkaMachineLearningPyTorch2022.
-    ]
+    ],
   )
 
   The MLP is a typical example of a feedforward artificial NN.
@@ -1453,7 +1506,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   Thus, our MSE loss either has to sum or average over the $t$ activation units in our network in addition to averaging over the $n$ examples in the dataset or mini-batch:
   $
     L(W, va(b)) =
-    1/n sum_1^n 1/t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
+    1 / n sum_1^n 1 / t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
   $
 
   The goal is to minimize the loss function $L(W)$.
@@ -1461,7 +1514,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   $
     pdv(L, w_(j,l)^((i)))
   $
-  
+
   Note that $W$ consists of multiple matrices.
   In an MLP with one hidden layer, we have the weight matrix, $W^((h))$, which connects the input to the hidden layer, and $W^(("out"))$, which connects the hidden layer to the output layer.
 
@@ -1477,7 +1530,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
     dv(f,g) dv(g,h) dv(h,u) dv(u,v) dv(v,x).
   $
   In the context of computer algebra, a set of techniques, known as *automatic differentiation*, has been developed to solve such problems very efficiently.
-  
+
   Automatic differentiation comes with two modes, the forward and reverse modes; backpropagation is simply a special case of reverse-mode automatic differentiation.
   The key point is that applying the chain rule in forward mode could be quite expensive since we would have to multiply large matrices for each layer (Jacobians) that we would eventually multiply by a vector to obtain the output.
 
@@ -1491,7 +1544,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       Computing the partial derivatives of the loss with respect to the first hiddel layer weight.
       Averaging over the mini-batch is omitted.
       Figure from @raschkaMachineLearningPyTorch2022.
-    ]
+    ],
   )
 ]
 
@@ -1520,19 +1573,19 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-V.png"),
       caption: [*V* -- Vertex (or node) attributes e.g., node identity, number of neighbors.],
       numbering: none,
-      outlined: false
+      outlined: false,
     ),
     figure(
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-E.png"),
       caption: [*E* -- Edge (or link) attributes and directions e.g., edge identity, edge weight.],
       numbering: none,
-      outlined: false
+      outlined: false,
     ),
     figure(
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-U.png"),
       caption: [*U* -- Global (or master node) attributes e.g., number of nodes, longest path.],
       numbering: none,
-      outlined: false
+      outlined: false,
     ),
   ),
   caption: [
@@ -2484,7 +2537,7 @@ another source of the issue could be a built-in deviation of the calculator.
 This issue has yet to be fully investigated at the time of writing.
 
 #large_box(
-grid(
+  grid(
   columns: 2,
   // column-gutter: 1fr,
   align: horizon,
@@ -2498,7 +2551,7 @@ grid(
       Phonons bandstructure of ice Ih, computed with PHON using MACE-ICE13-1.
     ]
   )
-)
+),
 )
 
 Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
@@ -2551,28 +2604,29 @@ The comparison of the results with the different supercells is shown in @fig:pho
       caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
     ),
     [
-    #figure(
-      tablem(
-        ignore-second-row: false,
-        [
-          |supercell|time|device|
-          |2|1m 30s|cuda|
-          |4|fail (out of memory)|cuda|
-          |4|7h 32m| cpu|
-        ],
-      ),
-      caption: [Execution times with Phonons by ASE.],
-    )
+      #figure(
+        tablem(
+          ignore-second-row: false,
+          [
+            |supercell|time|device|
+            |2|1m 30s|cuda|
+            |4|fail (out of memory)|cuda|
+            |4|7h 32m| cpu|
+          ],
+        ),
+        caption: [Execution times with Phonons by ASE.],
+      )
 
-    #figure(
-      table(columns: 4,
-      [supercell], [forces time], [dispersions time], [device],
-      [3],         [3m 22s],      [22s],              [cuda]
-      ),
-      caption: [
-        Execution times with PHON. @alfePHONProgramCalculate2009
-      ]
-    )
+      #figure(
+        table(
+          columns: 4,
+          [supercell], [forces time], [dispersions time], [device],
+          [3], [3m 22s], [22s], [cuda],
+        ),
+        caption: [
+          Execution times with PHON. @alfePHONProgramCalculate2009
+        ],
+      )
     ],
   ),
 )
@@ -2695,7 +2749,7 @@ While the MACE-ICE13-1 model performs well in reproducing structural properties,
   image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png", width: 80%),
   caption: [
     Example of temperature trend through a MD simulation of water with MACE-ICE13-1.
-  ]
+  ],
 )
 
 = Tools <sec:tools>
@@ -2705,23 +2759,23 @@ Simulations were performed on the @ibisco cluster provided by the Federico II Un
 //   stroke: 2pt + red,
 //   inset: 1mm,
 //   [
-    The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
-    The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
-    in the upper level the application level, which allows users to submit their tasks.
-    The intermediate level of the architecture consists of the set of CUDA and MPI libraries which are capable of making the two levels communicate with each other.
+The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
+The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
+in the upper level the application level, which allows users to submit their tasks.
+The intermediate level of the architecture consists of the set of CUDA and MPI libraries which are capable of making the two levels communicate with each other.
 
-    === The hardware level
-    The cluster comprises 36 nodes and 2 switches, placed in 4 racks of the Data Center.
-    They perform two functions: calculation and storage.
-    To support the calculation there are 128 GPUs, distributed among 32 nodes (4 GPUs per node).
-    To support storage, 320 TB are available distributed among 4 nodes (80 TB per node).
-    To ensure access to resources and low-latency broadband communication between nodes, the InfiniBand technology is used to provide a high-performance network.
+=== The hardware level
+The cluster comprises 36 nodes and 2 switches, placed in 4 racks of the Data Center.
+They perform two functions: calculation and storage.
+To support the calculation there are 128 GPUs, distributed among 32 nodes (4 GPUs per node).
+To support storage, 320 TB are available distributed among 4 nodes (80 TB per node).
+To ensure access to resources and low-latency broadband communication between nodes, the InfiniBand technology is used to provide a high-performance network.
 
-    === The Compute Node Architecture
-    The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 GPUs, 2 Ethernet ports at 10Gb/s each, 2 InfiniBand ports at 100Gb/s each, 2 Intel Gen 2 Xeon Gold CPUs, and 2 SATA 480 GB SSDs.
-    Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
-    Each GPU is equipped with 34 GB RAM memory.
-    The nodes are divided into 3 differently sized sub-clusters.
+=== The Compute Node Architecture
+The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 GPUs, 2 Ethernet ports at 10Gb/s each, 2 InfiniBand ports at 100Gb/s each, 2 Intel Gen 2 Xeon Gold CPUs, and 2 SATA 480 GB SSDs.
+Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
+Each GPU is equipped with 34 GB RAM memory.
+The nodes are divided into 3 differently sized sub-clusters.
 //   ],
 // )
 
@@ -2779,7 +2833,9 @@ where $arrow(r)_i in RR^3$ is the position of atom $i$; $z_i$ is the chemical el
 A forward pass of the network consists of multiple _message construction, update_ and _readout_ steps.
 During message construction, a message $arrow(m)_i^((t))$ is created for each node by pooling over its neighbours:
 $
-  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (sigma_i^((t)), sigma_j^((t))),
+  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (
+    sigma_i^((t)), sigma_j^((t))
+  ),
 $
 where $M_t$ is a learnable message function and $plus.circle.big_(j in cal(N) (i))$ is a learnable, permutation invariant pooling operation over the neighbours of atom $i$ (e.g., a sum).
 In the update step, the message $arrow(m)_i^((t))$ is transformed into new features
@@ -2797,7 +2853,9 @@ In _equivariant_ #glspl("gnn"), internal features $arrow(h)_i^((t))$ transform i
 When modelling the potential energy of an atomic structure, the group of interest is $O(3)$, specifying rotations and reflections of the particles; translation invariance is trivially incorporated through the use of relative distances.
 A @gnn is called $O(3)$ equivariant if it has internal features that transform under the rotation $Q in O(3)$ as
 $
-  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((t)) (arrow(r)_1, dots, arrow(r)_N),
+  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((
+    t
+  )) (arrow(r)_1, dots, arrow(r)_N),
 $
 where $D^L(Q) in RR^((2L + 1) times (2L + 1))$ is a Wigner D-matrix of order $L$.
 A feature labelled with $L=0$ describes an invariant scalar.
@@ -2813,9 +2871,13 @@ The messages $arrow(m)_i^((t))$ are expanded in a hierarchical body order expans
 $
   va(m_i^((t)))
   &= sum_j arrow(u)_1 (sigma_i^((t)); sigma_j^((t))) \
-  &+ sum_(j_1, j_2) arrow(u)_2 (sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t)))
+  &+ sum_(j_1, j_2) arrow(u)_2 (
+    sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
+  )
   + dots
-  + sum_(j_1, dots, j_nu) arrow(u)_nu (sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))),
+  + sum_(j_1, dots, j_nu) arrow(u)_nu (
+    sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
+  ),
 $ <eq:batatiaMACEHigherOrder2022-7>
 where the $arrow(u)$ functions are learnable, the sums run over the neighbours of $i$, and $nu$ is a hyper-parameter corresponding to the maximum correlation order, the body order minus 1, of the message function with respect to the states.
 
@@ -2825,7 +2887,9 @@ The $A_i^((t))$ features are obtained by pooling over the neighbours $cal(N)(i)$
 $
   A_(i, k l_3 m_3)^((t))
   = sum_(l_1 m_1, l_2 m_2) C_(l_1 m_1, l_2 m_2)^(l_3 m_3) dot \
-  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (hat(r)_(j i))
+  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (
+    hat(r)_(j i)
+  )
   sum_(tilde(k)) W_(k tilde(k) l_2)^((t)) h_(j, tilde(k) l_2 m_2)^((t)),
 $ <eq:batatiaMACEHigherOrder2022-8>
 where $C_(l_1 m_1, l_2 m_2)^(l_3 m_3)$ are the standard Clebsh-Gordan coefficients ensuring that $A_(i, k l_3 m_3)^((t))$ maintain the correct equivariance; $r_(j i)$ is the (scalar) interatomic distance, and $hat(r)_(j i)$ is the corresponding unit vector.
@@ -2834,7 +2898,9 @@ In the first layer, the node features $h_j^((t))$ correspond to the (invariant) 
 Therefore, @eq:batatiaMACEHigherOrder2022-8 can be further simplified:
 $
   A_(i, k l_1 m_1)^((1))
-  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (hat(r)_(j i)) W_(k z_j)^((1)).
+  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (
+    hat(r)_(j i)
+  ) W_(k z_j)^((1)).
 $ <eq:batatiaMACEHigherOrder2022-9>
 This simplified operation is much cheaper, making the computational cost of the first layer low.
 
@@ -2843,7 +2909,9 @@ This is achieved by first forming tensor products of the features, and then symm
 $
   B_(i, eta_nu k L M)^((t))
   = sum_(arrow(l m)) cal(C)_(eta_nu, arrow(l m))^(L M)
-  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((t)) A_(i, tilde(k) l_xi m_xi)^((t)),
+  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((
+    t
+  )) A_(i, tilde(k) l_xi m_xi)^((t)),
   quad arrow(l m) = (l_1 m_1, dots, l_nu m_nu)
 $ <eq:batatiaMACEHigherOrder2022-10>
 where the coupling coefficients $cal(C)_(eta_nu)^(L M)$ corresponding to the generalized Clebsh-Gordan coefficients ensuring that $B_(i, eta_nu k L M)^((t))$ are $L$-equivariant, the weights $w_(k tilde(k) l_xi)^((t))$ are mixing the channels $(k)$ of $A_i^((t))$, and $nu$ is a given correlation order.
