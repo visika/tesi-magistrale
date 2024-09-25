@@ -176,7 +176,7 @@
     (key: "adaline", short: "Adaline", long: "ADAptive LInear Neuron"),
     (key: "nn", short: "NN", long: "Neural Network"),
     (key: "ks", short: "KS", long: "Kohn-Sham"),
-    (key: "lda", short: "LDA", long: "Local Density Approximation")
+    (key: "lda", short: "LDA", long: "Local Density Approximation"),
   ),
   show-all: true,
 )
