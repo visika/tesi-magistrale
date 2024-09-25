@@ -1703,13 +1703,14 @@ static local *minimization of the potential energy* and *analysis of vibrational
 === Geometry optimization
 
 To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in literature.
+The bond lengths and the bond angle of the water molecule are known with remarkable accuracy from the vibration-rotation spectra of normal and isotopic water vapour. @eisenbergStructurePropertiesWater2005[§1.1 (c)]
 
 The first value concerns the characteristic $#ce("HOH")$ *bend angle* of the molecule;
 the accurate description of this physical value is a required test to ensure the validity of the models.
-As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020.
+As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergStructurePropertiesWater2005[Table 1.3, data from Benedict _et al._ (1956) and Herzberg (1950)] @PhysicalChemistryWater2020.
 
 The second value is the $#ce("OH")$ *bond length*.
-@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
+@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergStructurePropertiesWater2005[Table 1.2, data from Benedict _et al._ (1956)] @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
 
 #let monomer_angles_table = csv("simulazioni/02_water/01_molecule/angles.csv")
 #figure(
