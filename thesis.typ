@@ -1826,13 +1826,14 @@ $
   G(v_1, v_2, v_3)
   = sum_(i=1)^3 omega_i (v_i + 1 / 2)
   + sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2)
-$
+$ <eq:molecule-energy-above-vibrationless-equilibrium-state>
 where the sums are over normal modes.
 The $omega$s in this equation are often called the _harmonic frequencies_;
 they are the frequencies with which the molecule would vibrate if its vibrations were perfectly harmonic.
 The $x$s are the _anharmonic constants_ and describe the effect on the vibrational frequencies of the departure from purely harmonic form of the vibrations.
 @table:molecule-omega and @table:molecule-omega-errors
-contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data.
+contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data determined by Benedict _et al._ (1956) @eisenbergStructurePropertiesWater2005[Table 1.4].
+The value of the anharmonic frequencies is also reported for completeness in @table:molecule-vibrational-constants-anharmonic.
 
 #large_box(
   grid(
@@ -1875,6 +1876,27 @@ contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model 
     ],
   ),
 )
+
+#figure(
+  table(
+    columns: 2,
+    table.header(
+      [Molecule],
+      $ce("H2O")$,
+    ),
+
+    $x_11$, $-42.576$,
+    $x_22$, $-16.813$,
+    $x_33$, $-47.566$,
+    $x_12$, $-15.933$,
+    $x_13$, $-165.824$,
+    $x_23$, $-20.332$,
+  ),
+  caption: [
+    Anharmonic vibrational constants of $ce("H2O")$ for @eq:molecule-energy-above-vibrationless-equilibrium-state.
+    Units are in $"cm"^(-1)$.
+  ],
+) <table:molecule-vibrational-constants-anharmonic>
 
 Studying the vibrational properties of the geometry obtained at the end of the optimization procedure also allows us to assess if the final geometry is a stable or unstable configuration.
 The vibrational modes are calculated from a finite difference approximation of the Hessian matrix, displacing atoms according to a parameter named `delta`, measured in $angstrom$.
