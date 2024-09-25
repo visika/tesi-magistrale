@@ -2034,7 +2034,6 @@ Adding the dispersion correction to the models in this step produces negligible 
 
 The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
 dispersion.
-
 Convergence of results for the MACE-ICE13-1 model is achieved for displacements below $10^(-4) angstrom$.
 The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corresponds to negligible energy, as can be observed in the representative output in @code-monomer-vibrations-mace-ice13-1-output and therefore does not pose a issue.
 
