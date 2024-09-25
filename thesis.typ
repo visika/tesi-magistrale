@@ -1950,7 +1950,7 @@ The value of the anharmonic frequencies is reported for completeness in @table:m
     $x_23$, $-20.332$,
   ),
   caption: [
-    Anharmonic vibrational constants of $ce("H2O")$ for @eq:molecule-energy-above-vibrationless-equilibrium-state.
+    Anharmonic vibrational constants of $ce("H2O")$ for @eq:molecule-energy-above-vibrationless-equilibrium-state, taken from @eisenbergStructurePropertiesWater2005[Table 1.4].
     Units are in $"cm"^(-1)$.
   ],
 ) <table:molecule-vibrational-constants-anharmonic>
