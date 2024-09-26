@@ -2007,14 +2007,28 @@ Adding the dispersion correction to the models in this step produces negligible 
     columns: 5,
     align: horizon,
     table.header($f_"max"$, $10^(-1)$, $10^(-2)$, $10^(-3)$, $10^(-4)$),
-    [small], [$17.7i$ \ $delta = 10^(-3)$], [$2 ÷ 6$ \ $delta = 10^(-2)$], [$0.4i$ \ $delta = 10^(-3)$], [$0.4i$ \ $delta = 10^(-3)$],
-    [medium], [$1.4i ÷ 3.8$ \ $delta = 10^(-3)$], [$3.8 ÷ 5i$ \ $delta = 10^(-2)$], [$0.3 ÷ 1.1$ \ $delta = 10^(-3)$], [$0.2 ÷ 0.4$ \ $delta = 10^(-3)$],
-    [large], [$3.4 ÷ 11.1$ \ $delta = 10^(-2)$], [$2÷4$ \ $delta = 10^(-2)$], [$0.2 ÷ 1.8$ \ $delta = 10^(-2)$], [$0.4i ÷ 0.6$ \ $delta = 10^(-2)$]
+    [small],
+    [$17.7i$ \ $delta = 10^(-3)$],
+    [$2 ÷ 6$ \ $delta = 10^(-2)$],
+    [$0.4i$ \ $delta = 10^(-3)$],
+    [$0.4i$ \ $delta = 10^(-3)$],
+
+    [medium],
+    [$1.4i ÷ 3.8$ \ $delta = 10^(-3)$],
+    [$3.8 ÷ 5i$ \ $delta = 10^(-2)$],
+    [$0.3 ÷ 1.1$ \ $delta = 10^(-3)$],
+    [$0.2 ÷ 0.4$ \ $delta = 10^(-3)$],
+
+    [large],
+    [$3.4 ÷ 11.1$ \ $delta = 10^(-2)$],
+    [$2÷4$ \ $delta = 10^(-2)$],
+    [$0.2 ÷ 1.8$ \ $delta = 10^(-2)$],
+    [$0.4i ÷ 0.6$ \ $delta = 10^(-2)$],
   ),
   caption: [
     Table showing the range of values obtained for the energies of vibrations outside the first three normal modes, expressed in $"meV"$, for each MACE-MP-0 model on the rows, and for each chosen $f_"max"$ on the columns, expressed in $"eV/"angstrom$.
     Inside each cell, on the second row is also shown the corresponding least restrictive value of the displacement $delta$, expressed in $angstrom$, that guarantees convergence of results for each configuration.
-  ]
+  ],
 ) <table:vibrations-range-of-values>
 
 #large_figure(
@@ -2129,14 +2143,14 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
 @eq:molecule-energy-above-vibrationless-equilibrium-state also yields an expression for the zero-point energy of vibration @eisenbergStructurePropertiesWater2005[Eq. 1.4]:
 $
   "ZPE" &:= G(0,0,0) \
-  &= 1/2 (omega_1 + omega_2 + omega_3) +
-  1/4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23).
+  &= 1 / 2 (omega_1 + omega_2 + omega_3) +
+  1 / 4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23).
 $ <eq:zpe>
 When the reference harmonic and anharmonic constants of @table:molecule-omega and @table:molecule-vibrational-constants-anharmonic are inserted in this equation, the zero-point energy of $ce("H2O")$ is found to be $4634.32 " cm"^(-1)$, or $0.575 "eV"$.
 It has already been pointed out that the @zpe cannot be expressed in terms of the $omega_i$ only, and this implies that different scaling factors must be used for obtaining improved #glspl("zpe") or fundamental vibrations from harmonic frequencies, by comparing to experimental values. @baroneVibrationalZeropointEnergies2004[§II] @grevConcerningZeropointVibrational1991
 Conscious of the fact that our calculations are done in the harmonic approximation#footnote[#gls("ase", long: false) Vibrations class computes ZPE using @eq:zpe-harmonic; see https://wiki.fysik.dtu.dk/ase/_modules/ase/vibrations/data.html#VibrationsData.get_zero_point_energy], we ought not compare our results with the full @zpe, but with the following harmonic component: @baroneVibrationalZeropointEnergies2004[Eq. 5]
 $
-  "ZPE"_H := 1/2 sum_i omega_i.
+  "ZPE"_H := 1 / 2 sum_i omega_i.
 $ <eq:zpe-harmonic>
 The experimental value for this quantity is $"ZPE"_H^"Expt." = 56.4 "kJ/mol" approx 0.585 "eV"$. @baroneVibrationalZeropointEnergies2004[Table 1]
 The harmonic @zpe computed using #glspl("mlp") is compared with this value in @table:zpe.
