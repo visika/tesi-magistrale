@@ -1974,7 +1974,7 @@ converged configurations.
 
 // logseq://graph/softseq?block-id=6651c91e-359a-4b31-9a4f-9dbb3ff5da83
 The stability of configurations is dependent in a discriminant way on the `delta` and `fmax` parameters.
-The analysis confirms that the value of `fmax=1e-4` ($"eV/"angstrom$) yields unstable configurations, while `fmax=1e-8` ($"eV/"angstrom$) is appropriate to obtain stable configurations.
+The analysis confirms that the value of $f_"max" = 10^(-4) "eV/"angstrom$ yields unstable configurations, while $f_"max" = 10^(-8) "eV/"angstrom$ is appropriate to obtain stable configurations.
 Such a value of the force threshold could be considered extreme, especially compared to typical values of $f_"max" = 0.01 "eV/"angstrom$ commonly used in @dft calculations.
 When seeking the force threshold, we should ultimately be guided by the following considerations:
 
