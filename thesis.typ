@@ -1252,16 +1252,20 @@ In particular, inaccuracies on the evaluation of high frequency modes mostly aff
 
 === Dispersion interactions
 
-For many systems it is important to take dispersion interactions into account for reliable prediction.
-Dispersion interactions are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
-The representation of dispersion interactions in @dft is not possible within local or semilocal functionals because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+Dispersion interactions, sometimes called van der Waals interactions, are crucial for describing the weak, long-range interactions between electrons.
+For many systems it is important to take dispersion interactions into account for reliable prediction,
+as they are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
+The representation of dispersion interactions is not possible within common approximations in @dft, like local or semi-local functionals such as PBE, because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
 
+This motivates the use of additive non-local corrections.
 In @dft, this is typically done either by applying an a posteriori correction to a certain @dft functional prediction, $E_"DFT"$, or by including non-local terms in the exchange-correlation functional.
 In the first of the two cases, the final energy is computed as
 $ E = E_"DFT" + E_"disp", $ <eq-otero_2012_1>
 where $E_"disp"$ is a function of the electron-electron distance with parameters that are fitted for the specific functional the correction is applied to. (For instance, the D3 parameters for @pbe will be different from the D3 parameters of revPBE.)
+Inclusion of a dispersion correction to @dft is necessary to describe the dynamics of liquid water, the geometries and binding energies of layered solids, and stability of metal-organic frameworks, among many other examples. @batatiaFoundationModelAtomistic2023[§4]
 
 Several alternatives for the correction $E_"disp"$ are available (D2, D3, XDM, D4, TS, MBD, ...), but in principle we do not know which one yields the most reliable prediction for a specific system.
+Additive dispersion corrections typically employ a physical model for dispersion interactions with empirical parameters optimized to cut off the correction at interatomic distances where approximate @dft is reliable.
 As illustrative examples of methods to take dispersion into account, the XDM and D3 corrections are detailed below, as they are employed in the reference implementations cited for this thesis.
 
 ==== Exchange-hole Dipole Moment
@@ -1286,7 +1290,11 @@ which are sometimes too repulsive and sometimes spuriously binding,
 depending on the reduced-density-gradient tail behavior of the exchange enhancement factors.
 
 ==== DFT-D3
-// TODO DFT-D sempre da otero
+DFT-D3 is an interatomic potential which uses tabulated values of atomic polarizabilities to describe two-body and, optionally, three-body Axilrod-Teller dispersion interactions.
+As MACE-MP-0 is trained to @pbe energies, forces, and stresses, it inherits @pbe's lack of long-range dispersion interactions.
+An optional, additive DFT-D3 dispersion correction can be applied to MACE-MP-0.
+The same parameters used in PBE-D3(BJ), i.e., DFT-D3 with a Becke-Johnson damping function @grimmeEffectDampingFunction2011, are used in the D3 correction to MACE-MP-0. @batatiaFoundationModelAtomistic2023[§4]
+
 The total DFT-D3 energy is given by @grimmeConsistentAccurateInitio2010
 $
   E_"DFT-D3" = E_"KS-DFT" - E_"disp",
