@@ -1985,12 +1985,12 @@ When seeking the force threshold, we should ultimately be guided by the followin
   with #glspl("mlp") this can be an issue, especially if using single-precision GPU evaluation;
 - on the other hand, a well implemented @mlp can be regularized to a smooth surface and may behave "better" than the underlying @dft calculations under tighter thresholds.
 
-The MACE models produce smooth energy profiles @batatiaMACEHigherOrder2022[§5.3.2], which lends support to the hypothesis that smaller thresholds yield better results.
-
 Moreover, the displacement `delta` shall be smaller than $10^(-4) angstrom$ to ensure convergence of calculations of frequencies within precision of $10^(-2) " cm"^(-1)$,
 and smaller than $10^(-3) angstrom$ for a convergence of the frequencies within $10^(-1) " cm"^(-1)$, which is well within the acceptable range.
 Again, this is a extremely small value.
 The default $delta = 0.01 angstrom$ is a pretty conservative displacement by solid-state standards, and the tight value obtained here could be explained by the fact that the $ce("H -")$ stretch bonds encountered here are very strong and smaller values of delta are better for the present calculations.
+
+The MACE models produce smooth energy profiles @batatiaMACEHigherOrder2022[§5.3.2], which lends support to the hypothesis that smaller thresholds yield better results.
 
 #large_figure(
   grid(
