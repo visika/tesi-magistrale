@@ -2054,6 +2054,24 @@ The MACE models produce smooth energy profiles @batatiaMACEHigherOrder2022[§5.3
 
 Adding the dispersion correction to the models in this step produces negligible differences in the results, so their graphs are omitted for brevity.
 
+Relaxing the requirement for the obtainment of exactly zero values of the frequencies other than the three normal modes, allows for the selection of less stringent values for $f_"max"$ and $delta$, depending on the desired accuracy.
+A summary of the results is detailed in @table:vibrations-range-of-values.
+
+#figure(
+  table(
+    columns: 5,
+    align: horizon,
+    table.header($f_"max"$, $10^(-1)$, $10^(-2)$, $10^(-3)$, $10^(-4)$),
+    [small], [$17.7i$ \ $delta = 10^(-3)$], [$2 ÷ 6$ \ $delta = 10^(-2)$], [$0.4i$ \ $delta = 10^(-3)$], [$0.4i$ \ $delta = 10^(-3)$],
+    [medium], [$1.4i ÷ 3.8$ \ $delta = 10^(-3)$], [$3.8 ÷ 5i$ \ $delta = 10^(-2)$], [$0.3 ÷ 1.1$ \ $delta = 10^(-3)$], [$0.2 ÷ 0.4$ \ $delta = 10^(-3)$],
+    [large], [$3.4 ÷ 11.1$ \ $delta = 10^(-2)$], [$2÷4$ \ $delta = 10^(-2)$], [$0.2 ÷ 1.8$ \ $delta = 10^(-2)$], [$0.4i ÷ 0.6$ \ $delta = 10^(-2)$]
+  ),
+  caption: [
+    Table showing the range of values obtained for the energies of vibrations outside the first three normal modes, expressed in $"meV"$, for each MACE-MP-0 model on the rows, and for each chosen $f_"max"$ on the columns, expressed in $"eV/"angstrom$.
+    Inside each cell, on the second row is also shown the corresponding least restrictive value of the displacement $delta$, expressed in $angstrom$, that guarantees convergence of results for each configuration.
+  ]
+) <table:vibrations-range-of-values>
+
 ==== MACE-ICE13-1
 
 The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
