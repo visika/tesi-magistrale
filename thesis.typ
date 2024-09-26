@@ -1833,14 +1833,14 @@ The initial geometry was set up so that the HOH atoms formed a right angle, and 
 By dealing with a force field, it was possible to set up a cell in vacuum without periodic boundary conditions.
 
 @ase offers a variety of different optimisers, from which we have chosen BFGS, a local optimisation algorithm of the quasi-Newton category, where the forces of consecutive steps are used to dynamically update a Hessian describing the curvature of the potential energy landscape.
-The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in $"eV" angstrom^(-1)$.
+The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in $"eV" dot angstrom^(-1)$.
 The convergence criterion is that the force on all individual atoms should be less than fmax:
 #footnote[https://wiki.fysik.dtu.dk/ase/ase/optimize.html]
 $
   max_a |arrow(F)_a| < f_"max"
 $
 
-For the present purposes, `fmax=1e-8` $"eV/"angstrom$ yielded satisfactory results for the different calculator models tested.
+For the present purposes, a value of $f_"max"$ between $10^(-4)$ and $10^(-8) "eV/"angstrom$ yielded satisfactory results for the different calculator models tested.
 
 The second parameter is the number of steps after which to stop the optimization procedure.
 If the steps employed to optimize the geometry, given the desired fmax, are larger than the steps parameter, the procedure is halted and the geometry is considered as not converged.
@@ -1972,9 +1972,25 @@ Frequencies are indexed in ascending order, and *imaginary frequencies*, represe
 Inclusion of dispersion contributions in calculators leads to minimal differences in the
 converged configurations.
 
+// logseq://graph/softseq?block-id=6651c91e-359a-4b31-9a4f-9dbb3ff5da83
 The stability of configurations is dependent in a discriminant way on the `delta` and `fmax` parameters.
-The analysis confirms that the value of `fmax=1e-4` yields unstable configurations, while `fmax=1e-8` is appropriate to obtain stable configurations.
-Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure convergence of calculations.
+The analysis confirms that the value of `fmax=1e-4` ($"eV/"angstrom$) yields unstable configurations, while `fmax=1e-8` ($"eV/"angstrom$) is appropriate to obtain stable configurations.
+Such a value of the force threshold could be considered extreme, especially compared to typical values of $f_"max" = 0.01 "eV/"angstrom$ commonly used in @dft calculations.
+When seeking the force threshold, we should ultimately be guided by the following considerations:
+
+- the force tolerance of the optimizer may need to be very tight;
+- even then, the finite difference scheme is unlikely to get the trans/rotational modes to be _exactly_ zero;
+  usually one aims for "small enough" values, which may be negative;
+- a "noisy" potential energy surface is more likely to have problems with consistency between a local minimum and finite-difference vibrations;
+  with #glspl("mlp") this can be an issue, especially if using single-precision GPU evaluation;
+- on the other hand, a well implemented @mlp can be regularized to a smooth surface and may behave "better" than the underlying @dft calculations under tighter thresholds.
+
+The MACE models produce smooth energy profiles @batatiaMACEHigherOrder2022[§5.3.2], which lends support to the hypothesis that smaller thresholds yield better results.
+
+Moreover, the displacement `delta` shall be smaller than $10^(-4) angstrom$ to ensure convergence of calculations of frequencies within precision of $10^(-2) " cm"^(-1)$,
+and smaller than $10^(-3) angstrom$ for a convergence of the frequencies within $10^(-1) " cm"^(-1)$, which is well within the acceptable range.
+Again, this is a extremely small value.
+The default $delta = 0.01 angstrom$ is a pretty conservative displacement by solid-state standards, and the tight value obtained here could be explained by the fact that the $ce("H -")$ stretch bonds encountered here are very strong and smaller values of delta are better for the present calculations.
 
 #large_figure(
   grid(
