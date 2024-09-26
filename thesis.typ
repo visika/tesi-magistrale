@@ -2613,22 +2613,17 @@ varying volumes of the cell were tested and did not change the result;
 another source of the issue could be a built-in deviation of the calculator.
 This issue has yet to be fully investigated at the time of writing.
 
-#large_box(
-  grid(
-  columns: 2,
-  // column-gutter: 1fr,
-  align: horizon,
-  [
-    Calculation of phonons dispersion along the band path was also performed using the PHON code @alfePHONProgramCalculate2009 for consistency of calculations.
-    The obtained results are in accordance with reference and previous calculations, maintaining the charachteristic over-estimation of the phonon frequencies we saw before.
+Calculation of phonons dispersion along the band path was also performed using the PHON code @alfePHONProgramCalculate2009 for consistency of calculations.
+The obtained results are in accordance with reference and previous calculations, maintaining the charachteristic over-estimation of the phonon frequencies we saw before.
+
+#figure(
+  image(
+    "simulazioni/02_water/04_crystal_phonons/phon/12.PHON_MACE-ICE13-1_S3/bandplot.svg",
+    width: 70%,
+  ),
+  caption: [
+    Phonons bandstructure of ice Ih, computed with PHON using MACE-ICE13-1.
   ],
-  figure(
-    image("simulazioni/02_water/04_crystal_phonons/phon/12.PHON_MACE-ICE13-1_S3/bandplot.svg"),
-    caption: [
-      Phonons bandstructure of ice Ih, computed with PHON using MACE-ICE13-1.
-    ]
-  )
-),
 )
 
 Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
