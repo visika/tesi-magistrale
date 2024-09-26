@@ -63,6 +63,21 @@ def __(immaginari_a_negativi, pd):
 
 
 @app.cell
+def __(pd):
+    def read_energies(filename):
+        with open(filename, "r") as _f:
+            df = pd.read_csv(
+                _f.name,
+                skiprows=[0, 2],
+                skipfooter=2,
+                engine="python",
+                delimiter="\ +",
+            )
+        return df
+    return (read_energies,)
+
+
+@app.cell
 def __(glob):
     def get_summaries(model, fmax, dispersion):
         if model in ["small", "medium", "large"]:
@@ -122,6 +137,25 @@ def __(mo):
         ylabel,
         ysize,
     )
+
+
+@app.cell
+def __(filenames, mo):
+    _a = []
+    for _f in filenames:
+        # Print the contents of the files
+        with open(_f, "r") as _file:
+            print(_f)
+            _a.append(_file.read())
+            print(_a[-1])
+    mo.hstack(_a)
+    return
+
+
+@app.cell
+def __(filenames, mo, read_energies):
+    mo.hstack([mo.vstack([_f, read_energies(_f)]) for _f in filenames])
+    return
 
 
 @app.cell
