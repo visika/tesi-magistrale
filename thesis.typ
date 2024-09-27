@@ -2657,50 +2657,45 @@ The comparison of the results with the different supercells is shown in @fig:pho
 
 ==== Timing
 
-#large_box(
-  grid(
-    columns: 2,
-    gutter: 5pt,
-    align: top,
-    figure(
-      tablem(
-        ignore-second-row: false,
-        [
-          |supercell|device|optimization time|forces time|
-          |1|cuda|45s|8s|
-          |2|cuda|44s|50s|
-          |3|cuda|44s|21s|
-          |4|cpu|5m 23s|1h 47m 7s|
-        ],
-      ),
-      caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
-    ),
+#figure(
+  tablem(
+    ignore-second-row: false,
     [
-      #figure(
-        tablem(
-          ignore-second-row: false,
-          [
-            |supercell|time|device|
-            |2|1m 30s|cuda|
-            |4|fail (out of memory)|cuda|
-            |4|7h 32m| cpu|
-          ],
-        ),
-        caption: [Execution times with Phonons by ASE.],
-      )
-
-      #figure(
-        table(
-          columns: 4,
-          [supercell], [forces time], [dispersions time], [device],
-          [3], [3m 22s], [22s], [cuda],
-        ),
-        caption: [
-          Execution times with PHON. @alfePHONProgramCalculate2009
-        ],
-      )
+      |supercell|device|optimization time|forces time|
+      |1|cuda|45s|8s|
+      |2|cuda|44s|50s|
+      |3|cuda|44s|21s|
+      |4|cpu|5m 23s|1h 47m 7s|
     ],
   ),
+  caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
+)
+
+#figure(
+  tablem(
+    ignore-second-row: false,
+    [
+      |supercell|time|device|
+      |2|1m 30s|cuda|
+      |4|fail (out of memory)|cuda|
+      |4|7h 32m| cpu|
+    ],
+  ),
+  caption: [
+    Execution times with Phonons by ASE.
+    This setup achieves the slowest of timings, as ASE does not take into account symmetries.
+  ],
+)
+
+#figure(
+  table(
+    columns: 4,
+    [supercell], [forces time], [dispersions time], [device],
+    [3], [3m 22s], [22s], [cuda],
+  ),
+  caption: [
+    Execution times with PHON. @alfePHONProgramCalculate2009
+  ],
 )
 
 === Phonons DOS
