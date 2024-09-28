@@ -2827,10 +2827,6 @@ While the MACE-ICE13-1 model performs well in reproducing structural properties,
 = Tools <sec:tools>
 == Hardware: Ibisco
 Simulations were performed on the @ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
-// #box(
-//   stroke: 2pt + red,
-//   inset: 1mm,
-//   [
 The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
 The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
 in the upper level the application level, which allows users to submit their tasks.
@@ -2848,8 +2844,6 @@ The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 G
 Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
 Each GPU is equipped with 32 GB RAM memory.
 The nodes are divided into 3 differently sized sub-clusters.
-//   ],
-// )
 
 == Framework: Atomic Simulation Environment
 
