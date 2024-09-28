@@ -2846,7 +2846,7 @@ To ensure access to resources and low-latency broadband communication between no
 === The Compute Node Architecture
 The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 GPUs, 2 Ethernet ports at 10Gb/s each, 2 InfiniBand ports at 100Gb/s each, 2 Intel Gen 2 Xeon Gold CPUs, and 2 SATA 480 GB SSDs.
 Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
-Each GPU is equipped with 34 GB RAM memory.
+Each GPU is equipped with 32 GB RAM memory.
 The nodes are divided into 3 differently sized sub-clusters.
 //   ],
 // )
