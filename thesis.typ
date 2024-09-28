@@ -2138,7 +2138,7 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
   ],
 )
 
-==== Zero-point vibrational energy
+==== Zero-point vibrational energy <sec:molecule-zpe>
 
 @eq:molecule-energy-above-vibrationless-equilibrium-state also yields an expression for the zero-point energy of vibration @eisenbergStructurePropertiesWater2005[Eq. 1.4]:
 $
@@ -2364,6 +2364,11 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
 ) <table:dimer-frequencies-sum-absolute-errors>
 
 === Zero Point Energy
+
+As it was done in @sec:molecule-zpe, we make use of @eq:zpe-harmonic to get the @zpe composed of the harmonic frequencies.
+@table:dimer-zpe shows the results obtained with our @mlp models and compares them with a reference value from the literature.
+The ranking of accuracy of the models sees as before MACE-ICE13-1 as closest to the ground truth, with MACE-MP-0 small following right after.
+
 #let dimer_zpe = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/zpe.csv")
 #figure(
   table(
@@ -2372,9 +2377,9 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
     ..dimer_zpe.slice(1).flatten()
   ),
   caption: [
-    ZPE of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012. Energies are in units of eV.
+    ZPE in units of eV of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012 (named Kalescky in the table).
   ],
-)
+) <table:dimer-zpe>
 
 === Binding energy
 
