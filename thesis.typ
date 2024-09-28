@@ -1864,7 +1864,7 @@ A value of `steps=1000` is largely above the actual number of steps required for
   )
 ]
 
-=== Molecular vibrations and assessment of the dynamical stability
+=== Molecular vibrations and assessment of the dynamical stability <sec:molecule-vibrations>
 
 The nuclei of molecules, far from occupying fixed positions with respect to each other, are in continual state of vibration.
 An important feature of these vibrations is that they can be described by a limited number of basic vibrations known as the normal modes.
@@ -2298,9 +2298,9 @@ and is allowed a relatively bigger range of motion.
 
 === Vibrations analysis <sec:dimer-vibrations>
 
-Similarly to the procedure adopted for the monomer,
+Analogously to the procedure adopted for the analysis of vibrations of the water monomer in @sec:molecule-vibrations,
 normal modes of the water dimer were analyzed to assess the dynamical stability of the optimized geometry.
-A displacement smaller than $10^(-4) angstrom$ is required for all the models to converge to stable configurations.
+A displacement of $10^(-2) angstrom$ or less is appropriate for the MACE-ICE13-1 and MACE-MP-0 large models to converge to stable configurations within a threshold tolerance in frequencies of about $1"cm"^(-1)$, while for MACE-MP-0 small and medium a displacement of $10^(-3) angstrom$ or less is required to respect the same threshold tolerance in frequencies.
 
 #large_figure(
   grid(
@@ -2312,8 +2312,8 @@ A displacement smaller than $10^(-4) angstrom$ is required for all the models to
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
   ),
   caption: [
-    Structure optimization of the water dimer and vibration analysis.
-    Negative values represent imaginary frequencies.
+    Values of the vibration frequencies of the water dimer after structure optimization, plotted against the displacement used for the vibrations analysis.
+    Negative values on the y-axis represent imaginary frequencies.
   ],
 )
 
@@ -2349,7 +2349,7 @@ Deviations from reference are also graphed in @fig:dimer-harmonic-frequencies-er
 ) <fig:dimer-harmonic-frequencies-errors>
 
 In @table:dimer-frequencies-sum-absolute-errors we make a summary of the predictive power of each model of the frequencies of the normal modes of the dimer, as compared to reference @kalesckyLocalVibrationalModes2012.
-MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies.
+MACE-ICE13-1 demonstrates the best overall adherence to the prediction of harmonic frequencies.
 
 #let dimer_harmonic_frequencies_mae = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/mae.csv")
 #figure(
