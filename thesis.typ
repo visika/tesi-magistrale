@@ -2765,8 +2765,15 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
 === Band structure and DOS of $#ce("D2O")$
 
 A further study was performed to analyze the performance of the calculator compared with reference data on deuterated water. @strasslePhononDispersionIce2004
-In this scenario, the fidelity is estimated to be worse than the previous case.
-The same considerations on the quality of the results hold as above.
+In this scenario we can find a similar behaviour to the one observed in the previous section, of overestimation of the energies with respect to the reference study, which can again be observed, through a comparison of the value of clearly identifiable nodes, e.g. at the edge of the respective graphs in @fig:phonons-d2o-mace-ice13-1 and @fig:phonons-d2o-reference.
+
+The nodes in k-point $A$ in the reference are close to the value of $1 "THz"$ from below, while MACE predicts a value above $1 "THz"$.
+Similarly, one can detect a conjunction of bands in the same k-point $A$ at a frequency just below $3 "THz"$, while the corresponding bands one can identify sit above $3 "THz"$ and are furthermore separated.
+
+One can confirm the overall slight reduction of the lower bands frequencies and a corresponding increase of upper bands, when applying higher pressure.
+The presence of a bigger number of bands in the simulation produces a DOS with a different shape, and makes the comparison with reference not straightforward.
+The identification of the peaks, however, shows again that the values of the frequencies is shifted upward.
+For a direct comparison with the axis of the reference in Kelvin, a second axis is put on the top border of the graph of our DOS.
 
 #large_box(
   grid(
@@ -2779,9 +2786,9 @@ The same considerations on the quality of the results hold as above.
           #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/total_dos.svg")
         ],
         caption: [
-          Band structure and DOS calculated with MACE-ICE13-1.
+          Band structure and DOS of $#ce("D2O")$ calculated with MACE-ICE13-1.
         ],
-      )
+      ) <fig:phonons-d2o-mace-ice13-1>
     ],
     [
       #figure(
@@ -2790,9 +2797,10 @@ The same considerations on the quality of the results hold as above.
           #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/dos_strassle.png")
         ],
         caption: [
-          Band structure and DOS from reference @strasslePhononDispersionIce2004.
+          Band structure and DOS of #ce("D2O") from reference @strasslePhononDispersionIce2004.
         ],
-      )],
+      ) <fig:phonons-d2o-reference>
+    ],
   ),
 )
 
