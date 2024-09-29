@@ -2668,6 +2668,16 @@ The comparison of the results with the different supercells is shown in @fig:pho
 
 ==== Timing
 
+The following tables exhibit a summary of the time needed to execute the task of phonon dispersions calculation.
+The integrated tool by ASE, the Phonons class, results in the longest times, as it does not take into account the symmetries of the system to reduce the number of displacements to make; this is a known issue, and one is advised to use other tools for this task.
+
+The two other phonon codes, Phonopy and PHON, were used as auxiliary tools to @ase.
+The reader interested in their implementation can find the specific details in @sec:tools-phonons.
+Both the tools worked as expected, and a remarkable reduction in the total computation time can be appreciated in @table:timing-phonopy and @table:timing-phon, with respect, e.g., to timings observed with typical @dft codes, like described in the paragraph below.
+
+The task was also run with the VASP @dft suite and the PHON code.
+Calculation of phonon dispersions for the primitive cell (supercell = 1) of ice Ih, with a k-points grid of $2 times 2 times 2$ (for the ice, a k-points grid of $4 times 4 times 4$ is appropriate) is not tabulated and required 1 hour and 26 minutes using the GPU node.
+
 #figure(
   tablem(
     ignore-second-row: false,
@@ -2680,7 +2690,7 @@ The comparison of the results with the different supercells is shown in @fig:pho
     ],
   ),
   caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
-)
+) <table:timing-phonopy>
 
 #figure(
   table(
@@ -2691,7 +2701,7 @@ The comparison of the results with the different supercells is shown in @fig:pho
   caption: [
     Execution times with PHON. @alfePHONProgramCalculate2009
   ],
-)
+) <table:timing-phon>
 
 #figure(
   tablem(
@@ -2707,7 +2717,7 @@ The comparison of the results with the different supercells is shown in @fig:pho
     Execution times with Phonons by ASE.
     This setup achieves the slowest of timings, as ASE does not take into account symmetries of the system.
   ],
-)
+) <table:timing-ase-phonons>
 
 === Phonons DOS
 
