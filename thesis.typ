@@ -2544,9 +2544,16 @@ For details on the tools used for phonons calculations, see @sec:tools-phonons.
 The first thing to do is to build a supercell.
 The Ih ice structure was analyzed;
 it is composed of 36 atoms, that is 12 water molecules.
-During the execution of this task, we encountered one of the hard limitations of MACE, that is multi-GPU single point calculations are not ready at the moment of writing.#footnote[See https://github.com/ACEsuit/mace/issues/309#issuecomment-2214910393] This implied a cap on the maximum number of atoms in the simulated system.
-The biggest supercell that the GPU cuda version of MACE can handle is the $3 times 3 times 3$.
-Using MACE on CPU allows us to employ also $4 times 4 times 4$ supercells, at the expense of a significantly increased computation time.
+During the execution of this task, we encountered one of the hard limitations of MACE, that is multi-GPU single point calculations are not ready at the moment of writing.#footnote[See https://github.com/ACEsuit/mace/issues/309#issuecomment-2214910393]
+This implied a cap on the maximum number of atoms in the simulated system.
+
+Given the hardware infrastructure (see @sec:tools), we know that the compute nodes with a GPU may not be able to handle more than 2000÷4000 atoms, based on MACE developers experience.#footnote[https://github.com/ACEsuit/mace/issues/322#issuecomment-1939405373]
+This phenomenon is indeed observed, as the $3 times 3 times 3$ supercell, with 972 atoms, is successfully run on GPU.
+Scaling up to a $4 times 4 times 4$ supercell, composed of 2304 atoms, fails from the start, as the memory allocation phase yields error due to exhaused memory on the GPU.
+The fix to this known issue is being worked on by MACE developers, but limited our experimentation at the present time.
+
+The workaround to simulate such a number of atoms, is to run MACE in parallel on CPUs only, enjoying the memory of the compute nodes, that is much larger.
+The downside one has to bear is the significantly increased computation time when choosing this configuration.
 
 === Band structure
 
