@@ -2683,29 +2683,29 @@ The comparison of the results with the different supercells is shown in @fig:pho
 )
 
 #figure(
-  tablem(
-    ignore-second-row: false,
-    [
-      |supercell|time|device|
-      |2|1m 30s|cuda|
-      |4|fail (out of memory)|cuda|
-      |4|7h 32m| cpu|
-    ],
+  table(
+    columns: 4,
+    [supercell], [device], [forces time], [dispersions time],
+    [3], [cuda], [3m 22s], [22s],
   ),
   caption: [
-    Execution times with Phonons by ASE.
-    This setup achieves the slowest of timings, as ASE does not take into account symmetries.
+    Execution times with PHON. @alfePHONProgramCalculate2009
   ],
 )
 
 #figure(
-  table(
-    columns: 4,
-    [supercell], [forces time], [dispersions time], [device],
-    [3], [3m 22s], [22s], [cuda],
+  tablem(
+    ignore-second-row: false,
+    [
+      |supercell|device|time|
+      |2|cuda|1m 30s|
+      |4|cuda|fail (out of memory)|
+      |4|cpu|7h 32m|
+    ],
   ),
   caption: [
-    Execution times with PHON. @alfePHONProgramCalculate2009
+    Execution times with Phonons by ASE.
+    This setup achieves the slowest of timings, as ASE does not take into account symmetries of the system.
   ],
 )
 
