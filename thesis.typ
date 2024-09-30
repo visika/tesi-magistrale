@@ -2677,6 +2677,7 @@ Both the tools worked as expected, and a remarkable reduction in the total compu
 
 The task was also run with the VASP @dft suite and the PHON code.
 Calculation of phonon dispersions for the primitive cell (supercell = 1) of ice Ih, with a k-points grid of $2 times 2 times 2$ (for the ice, a k-points grid of $4 times 4 times 4$ is appropriate) is not tabulated and required 1 hour and 26 minutes using the GPU node.
+A second calculation of the same type, with calculation limited to the $Gamma$ point, with supercell $2 times 2 times 2$, and k-points sampling $1 times 1 times 1$, required 5 hours and 54 minutes.
 
 #figure(
   tablem(
