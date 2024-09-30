@@ -2618,11 +2618,12 @@ The number of q-points in each path including end points is chosen as 101.
   ),
 )
 
-The bandstructure calculations result in a approximate reproduction of reference data, as can be observed comparing @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta.
-Frequencies are significantly higher than reference; the source of this discrepancy is not clear;
-varying volumes of the cell were tested and did not change the result;
-another source of the issue could be a built-in deviation of the calculator.
-This issue has yet to be fully investigated at the time of writing.
+The calculation of the band structure accurately reproduces the qualitative aspects of the diagram used as reference, particularly with regard to shape and intersections at critical points
+(compare @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta).
+
+From a quantitative perspective, however, there is a discernible tendency for the calculated band frequencies to be overestimated.
+This can be deduced by comparing the right-hand edge of @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom with the left-hand edge of @fig:phonons-bandstructure-ice-ih-gupta, specifically at the frequencies at the $Gamma$ point.
+To illustrate, the group of frequencies which is just above $10 "meV"$ in the reference, is found to be above $12.5 "meV"$ in the simulation with MACE.
 
 Calculation of phonons dispersion along the band path was also performed using the PHON code @alfePHONProgramCalculate2009 for consistency of calculations.
 The obtained results are in accordance with reference and previous calculations, maintaining the charachteristic over-estimation of the phonon frequencies we saw before.
