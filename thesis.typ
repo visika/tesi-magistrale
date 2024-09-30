@@ -2698,6 +2698,7 @@ A second calculation of the same type, with calculation limited to the $Gamma$ p
   table(
     columns: 4,
     [supercell], [device], [forces time], [dispersions time],
+    [2], [cuda], [47s], [13s],
     [3], [cuda], [3m 22s], [22s],
   ),
   caption: [
