@@ -2555,7 +2555,7 @@ The fix to this known issue is being worked on by MACE developers, but limited o
 The workaround to simulate such a number of atoms, is to run MACE in parallel on CPUs only, enjoying the memory of the compute nodes, that is much larger.
 The downside one has to bear is the significantly increased computation time when choosing this configuration.
 
-=== Band structure
+=== Band structure <sec:phonons-bandstructure>
 
 To build the band structure of ice Ih,
 we have to define the band path on which the frequencies are calculated.
@@ -2727,18 +2727,22 @@ A second calculation of the same type, with calculation limited to the $Gamma$ p
 #large_box(
   grid(
     columns: 2,
-    gutter: 5pt,
+    gutter: 10pt,
     figure(
-      image("thesis/imgs/holzapfel2021_fig21.png"),
+      image(
+        "simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/dos_mace-ice13-1_s3_mesh=32_zoom.svg",
+        height: 5cm,
+      ),
       caption: [
-        Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021.
-        Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
+        Phonons DOS, calculated using MACE-ICE13-1 and smearing width $sigma=0.05$.
+        On the second x-axis on top are the matching units for comparison with the reference.
       ],
     ),
     figure(
-      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/dos_mace-ice13-1_s3_mesh=32_zoom.svg"),
+      image("thesis/imgs/holzapfel2021_fig21.png", height: 5.3cm),
       caption: [
-        Calculated phonons DOS, using MACE-ICE13-1 and smearing width $sigma=0.05$.
+        Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021[Fig. 21].
+        Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
       ],
     ),
   ),
