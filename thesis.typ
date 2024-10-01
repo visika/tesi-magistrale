@@ -2590,62 +2590,86 @@ See @fig:bandpath-gupta for the graphical representation of the bandpath.
 The line segments are sampled defining a number of points along the path, named q-points.
 The number of q-points in each path including end points is chosen to be 101.
 
+#grid(
+  columns: 2,
+  align: bottom,
+  gutter: 10pt,
+  [#figure(
+      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg"),
+      caption: [
+        The bandstructure of ice Ih, computed using MACE-ICE13-1 and a $3 times 3 times 3$ supercell.
+      ],
+    )],
+  [#figure(
+      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
+      caption: [The bandpath chosen by @guptaPhononsAnomalousThermal2018.],
+    ) <fig:bandpath-gupta>],
+)
+
+A test of the performance of MACE-ICE13-1 for the generation of phonon band structures is performed, comparing the $2 times 2 times 2$ supercell results of the @mlp (@fig:phonons-bandstructure-ice-ih-mace-ice13-1-dellapia) with the results obtained with the @dft potential from which it is based upon, revPBE-D3 (@fig:phonons-bandstructure-ice-ih-revpbed3-dellapia).
+It is important to keep in mind that these computations are not converged, but allow us to verify the similarity of the two potentials.
+In particular, as it will be an important piece of information in the following paragraphs, the values of the frequencies at the critical point $Gamma$ (denoted with G in the graphs) correspond.
+
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 10pt,
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/FREQ1.svg"),
+        caption: [
+          The phonon band structure of ice Ih, computed using MACE-ICE13-1 and PHON with a $2 times 2 times 2$ supercell.
+        ],
+      ) <fig:phonons-bandstructure-ice-ih-mace-ice13-1-dellapia>],
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/FREQ1.svg"),
+        caption: [
+          The phonon band structure of ice Ih, computed using revPBE-D3 and PHON with a $2 times 2 times 2$ supercell.
+        ],
+      ) <fig:phonons-bandstructure-ice-ih-revpbed3-dellapia>],
+  ),
+)
+
+Our analysis further compares the converged results in the harmonic approximation, with reference data including anharmonic contributions, to assess the importance of the latter in the study of ice properties.
+The calculation of the band structure accurately reproduces the qualitative aspects of the diagram from the reference, particularly with regard to shape and intersections at critical points
+(compare @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta).
+
 #large_box(
   grid(
     columns: 2,
     align: horizon,
     gutter: 10pt,
     [#figure(
-        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg"),
-        caption: [
-          The bandstructure of ice Ih, computed using MACE-ICE13-1 and a $3 times 3 times 3$ supercell.
-        ],
-      )],
-    [#figure(
-        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
-        caption: [The bandpath chosen by @guptaPhononsAnomalousThermal2018.],
-      ) <fig:bandpath-gupta>],
-
-    [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
         caption: [
-          Phonon bandstructure of ice Ih, computed using MACE-ICE13-1.
+          Phonon bandstructure of ice Ih in the harmonic approximation, computed using MACE-ICE13-1 with a $3 times 3 times 3$ supercell.
         ],
       ) <fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom>],
     [#figure(
         image("thesis/imgs/gupta2018_fig4_H2O.png"),
-        caption: [Phonon bandpath dispersion reference, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
+        caption: [Phonon bandpath dispersion considering anharmonic contributions, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
       ) <fig:phonons-bandstructure-ice-ih-gupta>],
   ),
 )
 
-The calculation of the band structure accurately reproduces the qualitative aspects of the diagram used as reference, particularly with regard to shape and intersections at critical points
-(compare @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta).
-
 From a quantitative perspective, however, there is a discernible tendency for the calculated band frequencies to be overestimated.
 This can be deduced by comparing the right-hand edge of @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom with the left-hand edge of @fig:phonons-bandstructure-ice-ih-gupta, specifically at the frequencies at the $Gamma$ point.
-To illustrate, the group of frequencies which is just above $10 "meV"$ in the reference, is found to be above $12.5 "meV"$ in the simulation with MACE.
+To illustrate, the group of frequencies which is just above $10 "meV"$ in the reference, is found to be above $12.5 "meV"$ in the calculation in the harmonic approximation.
 
-Calculation of phonons dispersion along the band path was also performed using the PHON code @alfePHONProgramCalculate2009 for consistency of calculations.
-The obtained results are in accordance with reference and previous calculations, maintaining the charachteristic over-estimation of the phonon frequencies we saw before.
+The entity of anharmonic contributions is deemed relevant to the anomalous thermal expansion in the Ih phase of ice @guptaPhononsAnomalousThermal2018,
+and anharmonic corrections of the order of 2--3 kJ/mol = 21--31 meV are not negligible in pursuit of chemical accuracy (4.2 kJ/mol = 44 meV) @reillyUnderstandingRoleVibrations2013.
+The detailed study of this specifica topic and related simulations, however, are beyond the scope of this thesis.
 
-#figure(
-  image(
-    "simulazioni/02_water/04_crystal_phonons/phon/12.PHON_MACE-ICE13-1_S3/bandplot.svg",
-    width: 70%,
-  ),
-  caption: [
-    Phonons bandstructure of ice Ih, computed with PHON using MACE-ICE13-1.
-  ],
-)
+The calculations of phonons dispersions along the band path were performed using a variety of three tools for phonons analysis, to ensure the coherence of calculations.
+The details about the tools is available in @sec:tools-phonons.
+The specific timings for each configuration are briefly resumed in @sec:phonons-timing.
 
-Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
+Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit higher frequencies and are reputed as lower quality for the current analysis.
 A visual qualitative analysis of the band structure produced with MACE-MP-0 exposes several different behaviours, particularly at zone boundary points;
-most notably, see the disalignment of bands around point $M$, and at point $A$.
+most notably, see the disalignment of bands with respect to other graphs, around critial points $M$ and $A$.
 
-As reference @guptaPhononsAnomalousThermal2018 employed a $2 times 2 times 2$ supercell for its calculations, we tested the convergence of calculations with respect to a higher supercell.
-Limitation of resources allowed the calculation of the frequencies using at most $3 times 3 times 3$ supercell.
-The comparison of the results with the different supercells is shown in @fig:phonons-bandstructure-ice-ih-mace-ice13-1-compare-s2-s3.
+We tested the convergence of calculations with respect to higher supercells.
+The comparison of the results is shown in @fig:phonons-bandstructure-ice-ih-mace-ice13-1-compare-s2-s3.
+Limitation of resources, further detailed below, allowed the calculation of the frequencies using at most $3 times 3 times 3$ supercell.
 
 #large_box(
   grid(
@@ -2668,7 +2692,7 @@ The comparison of the results with the different supercells is shown in @fig:pho
   ),
 )
 
-==== Timing
+==== Timing <sec:phonons-timing>
 
 The following tables exhibit a summary of the time needed to execute the task of phonon dispersions calculation.
 The integrated tool by ASE, the Phonons class, results in the longest times, as it does not take into account the symmetries of the system to reduce the number of displacements to make; this is a known issue, and one is advised to use other tools for this task.
