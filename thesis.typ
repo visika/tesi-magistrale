@@ -2749,7 +2749,7 @@ A second calculation of the same type, with calculation limited to the $Gamma$ p
   ),
 )
 
-As anticipated in the analysis of the bandstructure,
+As anticipated in the analysis of the band structure in @sec:phonons-bandstructure,
 frequencies calculated with MACE-ICE13-1 are shifted toward higher values,
 compared to reference data.
 
