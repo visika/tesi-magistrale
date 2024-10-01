@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.6.24"
+__generated_with = "0.8.20"
 app = marimo.App(
     app_title="Studio delle vibrazioni della molecola d'acqua",
     layout_file="layouts/01.9_analysis_vibrations.grid.json",
@@ -40,7 +40,7 @@ def __():
             return -float(stringa.split("i")[0])
         else:
             return float(stringa)
-    return immaginari_a_negativi,
+    return (immaginari_a_negativi,)
 
 
 @app.cell
@@ -59,7 +59,22 @@ def __(immaginari_a_negativi, pd):
             )
         df["cm^-1"] = df["cm^-1"].apply(immaginari_a_negativi)
         return df
-    return read_frequencies,
+    return (read_frequencies,)
+
+
+@app.cell
+def __(pd):
+    def read_energies(filename):
+        with open(filename, "r") as _f:
+            df = pd.read_csv(
+                _f.name,
+                skiprows=[0, 2],
+                skipfooter=2,
+                engine="python",
+                delimiter="\ +",
+            )
+        return df
+    return (read_energies,)
 
 
 @app.cell
@@ -89,7 +104,7 @@ def __(glob):
                 filenames, key=lambda x: float(x.split("delta=")[1].split("_")[0])
             )
         return filenames
-    return get_summaries,
+    return (get_summaries,)
 
 
 @app.cell
@@ -122,6 +137,25 @@ def __(mo):
         ylabel,
         ysize,
     )
+
+
+@app.cell
+def __(filenames, mo):
+    _a = []
+    for _f in filenames:
+        # Print the contents of the files
+        with open(_f, "r") as _file:
+            print(_f)
+            _a.append(_file.read())
+            print(_a[-1])
+    mo.hstack(_a)
+    return
+
+
+@app.cell
+def __(filenames, mo, read_energies):
+    mo.hstack([mo.vstack([_f, read_energies(_f)]) for _f in filenames])
+    return
 
 
 @app.cell
@@ -252,6 +286,12 @@ def __(get_summaries, mo, pd, read_zero_point_energy):
     _zpes = []
     _models = ["small", "medium", "large", "MACE-ICE13-1"]
 
+    # Le ZPE calcolate sono riguardanti le sole vibrazioni armoniche
+    # Quindi bisogna usare come riferimento la ZPE della molecola di acqua in approssimazione armonica
+    # La ZPE_harmonic vale 0.585 eV, dalla reference Barone2004
+
+    zpe_harmonic_eV = 0.585
+
     for _model in _models:
         _summary_filename = get_summaries(_model, _fmax, _dispersion)[0]
         _zpes.append(float(read_zero_point_energy(_summary_filename)))
@@ -259,18 +299,18 @@ def __(get_summaries, mo, pd, read_zero_point_energy):
         [
             pd.DataFrame({"model": _models, "zpe": _zpes}),
             # @eisenbergWaterMolecule2005
-            pd.DataFrame({"model": "Reference", "zpe": 0.575}, index=[0]),
+            pd.DataFrame({"model": "Expt.", "zpe": zpe_harmonic_eV}, index=[0]),
         ]
     )
 
     # Compute the errors
-    _df["error"] = round(_df["zpe"] - 0.575, 3)
+    _df["error"] = round(_df["zpe"] - zpe_harmonic_eV, 3)
 
     # Export to CSV
-    _df.to_csv("zero_point_energies.csv", index=False)
+    _df.to_csv("zero_point_energies.csv", index=False, float_format="%.3f")
 
     mo.ui.table(_df)
-    return
+    return (zpe_harmonic_eV,)
 
 
 @app.cell

@@ -88,7 +88,7 @@
   In this work, we will use recently developed #glspl("mlp") to model the structure and dynamics of molecular crystals along with their thermodynamic stability, using water as a showcase system.
   Water is ubiquitous in nature and of fundamental relevance to physics, biology, geology, materials science and engineering.
   Its numerous anomalies, arising from the delicate interplay of hydrogen bonding and dispersion forces, make it a hard test for computational approaches.
-  
+
   Traditional approaches often grapple with the trade-off between computational
   expense and accuracy. The application of #glspl("mlp") captures
   complex intermolecular interactions with the accuracy of ab initio approaches but at a much cheaper computational cost.
@@ -176,7 +176,8 @@
     (key: "adaline", short: "Adaline", long: "ADAptive LInear Neuron"),
     (key: "nn", short: "NN", long: "Neural Network"),
     (key: "ks", short: "KS", long: "Kohn-Sham"),
-    (key: "lda", short: "LDA", long: "Local Density Approximation")
+    (key: "lda", short: "LDA", long: "Local Density Approximation"),
+    (key: "dos", short: "DOS", long: "Density of States"),
   ),
   show-all: true,
 )
@@ -263,6 +264,14 @@
 ]
 
 #show heading.where(level: 2): it => upper(it)
+#show heading.where(level: 3): it => [
+  #it
+  #v(4mm)
+]
+#show heading.where(level: 4): it => [
+  #it
+  #v(3mm)
+]
 
 #show outline.entry.where(level: 1): it => {
   // reverse the results of the label queries to find the last <empty-page> label for the targeted page
@@ -329,7 +338,7 @@ This trade-off has driven the exploration of alternative methods that combine th
 )
 
 Recently, #glspl("mlp") have emerged as a promising solution.
-These approaches leverage advanced neural network architectures to model the potential energy surfaces of molecular systems with a level of accuracy comparable to ab initio methods but at a fraction of the computational cost.
+These approaches leverage on advanced neural network architectures to model the potential energy surfaces of molecular systems with a level of accuracy comparable to ab initio methods but at a fraction of the computational cost.
 By training on existing quantum mechanical data, #glspl("mlp") can predict intermolecular interactions and dynamic behaviours with high fidelity, making them suitable for studying complex systems like molecular crystals.
 @batatiaFoundationModelAtomistic2023
 @schranMachineLearningPotentials2021
@@ -339,15 +348,15 @@ By training on existing quantum mechanical data, #glspl("mlp") can predict inter
 Since their introduction about 25 years ago, #glspl("mlp") have become an important tool in the ﬁeld of atomistic simulations.
 After the initial decade, in which neural networks were successfully used to construct potentials for rather small molecular systems, the development of #glspl("hdnnp") in 2007 opened the way for the application of ML potentials in simulations of large systems containing thousands of atoms.
 @behlerFourGenerationsHighDimensional2021
-It has been estimated that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely ab initio methods. @kapilCompleteDescriptionThermodynamic2022
+Depending on the specific task it has been estimated that mixed ab initio and @mlp calculations require between three and ten times less the core hours of purely ab initio methods @kapilCompleteDescriptionThermodynamic2022[p. 5], while state of the art #glspl("mpnn", long: true) achieve speedups of up to $10^5$ times less the compute time on the prediction of physical properties of molecules (see @fig:mpnn-speedup).
 
 #figure(
   image("thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
   caption: [
-  A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation.
-  Image taken from @gilmerNeuralMessagePassing2017.
+    A Message Passing Neural Network predicts quantum properties of an organic molecule by modeling a computationally expensive DFT calculation.
+    Image taken from @gilmerNeuralMessagePassing2017.
   ],
-)
+) <fig:mpnn-speedup>
 
 This thesis investigates the capabilities of #glspl("mlp"), with a specific focus on modeling the properties of water as a molecular crystal.
 Water is ubiquitous in nature and, as stated above, of fundamental relevance to physics, biology, geology, materials science, and engineering, that serves as an ideal test case due to its well-documented polymorphic behaviours and the wealth of literature available for benchmarking. @schranMachineLearningPotentials2021 @chengInitioThermodynamicsLiquid2019
@@ -396,6 +405,7 @@ The chapter is orgnanized into several key areas:
   We describe how #glspl("gnn") can be employed to capture atomic interactions in a computationally efficient manner.
 
 Each section provides the necessary theoretical foundation for understanding the subsequent results and discussions, with a focus on applying these methods to study the properties of molecular crystals and, specifically, ice polymorphs.
+The content found from @sec:3d-harmonic-solids to @sec:md, is significantly based upon the lecture notes on Statistical and Computational Physics, by D. Alfè, studied during my masters degree. @alfeNotesStatisticalComputational2023
 
 == #threed-harmonic-solids-title <sec:3d-harmonic-solids>
 The crystal can be described by a collection of independent harmonic oscillators with potential energy:
@@ -406,7 +416,7 @@ where $M$ is the mass of the particles, $q_i$ a set of _normal coordinates_, and
 This approximation is known as the _harmonic approximation_.
 The Newton's equations of motion for the normal coordinates are:
 $
-  M dv(q_i, t, 2) = - pdv(U, q_i) - M omega_i^2 q_i.
+  M dv(q_i, t, 2) = - pdv(U, q_i) = - M omega_i^2 q_i.
 $
 
 Consider a three dimensional system made of particles arranged on a _periodic lattice_, at equilibrium positions ${va(r^0)} := va(r_1^0), dots, va(r_N^0), dots$.
@@ -447,12 +457,16 @@ For small enough displacements ${va(u)}$ the potential energy can be expanded ar
 $
   U({va(r)})
   = U_0
-  + 1 / 2 sum_(i,j) va(u_i) dot Phi (va(r_i^0) - va(r_j^0)) dot va(u_j) + O(u^3),
+  + 1 / 2 sum_(i,j) va(u_i) dot Phi (
+    va(r_i^0) - va(r_j^0)
+  ) dot va(u_j) + cal(O)(u^3),
 $
 where $U_0 := U({va(r^0)})$, and the linear term is absent because we are expanding around the minimum of the potential.
 The _force constants matrix_ $Phi$ is defined as:
 $
-  Phi (va(r_i^0) - va(r_j^0)) := (pdv(U({va(r)}), va(r_i), va(r_j)))_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
+  Phi (va(r_i^0) - va(r_j^0)) := (
+    pdv(U({va(r)}), va(r_i), va(r_j))
+  )_(va(r_i) = va(r_i^0) \ va(r_j) = va(r_j^0))
   = mat(
     phi_(i j)^(x x), phi_(i j)^(x y), phi_(i j)^(x z);
     phi_(i j)^(y x), phi_(i j)^(y y), phi_(i j)^(y z);
@@ -461,7 +475,7 @@ $
   phi_(i j)^(alpha beta) = pdv(U({va(r)}), alpha_i, beta_i),
 $ <eq:force-constants-matrix>
 where $alpha_i$ and $beta_j$ run over the three cartesian components of $va(r_i^0)$ and $va(r_j^0)$.
-If the displacements are not too large and the $O(u^3)$ terms can be ignored, the force acting on particle at position $va(r_i^0)$ due to the displacements $va(u_j)$ of all particles in the system, including $va(u_i)$, is:
+If the displacements are not too large and the $cal(O)(u^3)$ terms can be ignored, the force acting on particle at position $va(r_i^0)$ due to the displacements $va(u_j)$ of all particles in the system, including $va(u_i)$, is:
 $
   va(f_i) = -sum_j Phi(va(r_i^0) - va(r_j^0)) dot va(u_j).
 $
@@ -488,7 +502,9 @@ The physical motion of the particles is obtained by taking the real part of @eq:
 Substituting @eq:termcomp-7.55 into @eq:termcomp-7.54 we obtain:
 $
   M omega^2 va(epsilon)
-  = sum_j e^(i va(q) dot (va(r_j^0) - va(r_i^0))) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
+  = sum_j e^(i va(q) dot (
+    va(r_j^0) - va(r_i^0)
+  )) Phi(va(r_i^0) - va(r_j^0)) dot va(epsilon).
 $ <eq:termcomp-7.56>
 The sum over $j$ runs over all lattice sites, and so it is independent on our choice of $va(r_i^0)$.
 We can therefore choose $va(r_i^0) = va(0)$ and replace the difference $va(r_j^0) - va(r_i^0)$ simply with $va(r_j^0)$.
@@ -530,19 +546,24 @@ These collective oscillations are called _phonons_.
 
 The potential energy can be written in the form in @eq:termcomp-7.1 and so the partition function has the form of either @eq:termcomp-7.7 or @eq:termcomp-7.10, depending on if the system is treated classically or quantum-mechanically:
 $
-  Z = e^(-beta U_0) product_(i=1)^(3N) (k_B T) / (planck.reduce omega_i)
+  Z = e^(-beta U_0) product_(i=1)^(3N) (k_B T) / (planck.reduce omega_i), quad "in the classical limit",
 $ <eq:termcomp-7.7>
+and
 $
-  Z = e^(-beta U_0) product_(i=1)^(3N) Z_i \
+  Z = e^(-beta U_0) product_(i=1)^(3N) Z_i, quad "in the quantum description",
+$ <eq:termcomp-7.10>
+
+with each term in the product having the form:
+$
   Z_i = sum_(n=0)^infinity e^(-E_n^i / (k_B T))
   = sum_(n=0)^infinity e^(- (n + 1 / 2) (planck.reduce omega_i) / (k_B T))
-  = (e^(-1 / 2 (planck.reduce omega_i) / (k_B T))) / (1 - e^(- (planck.reduce omega_i) / (k_B T)))
-$ <eq:termcomp-7.10>
+  = (e^(-1 / 2 (planck.reduce omega_i) / (k_B T))) / (1 - e^(- (planck.reduce omega_i) / (k_B T))).
+$
 
 === The Helmholtz energy
 // Da §4 relazione termodinamica computazionale
 
-The harmonic contribution of phonons to the Helmholtz energy is represented by the equation:
+The harmonic contribution of phonons to the Helmholtz energy per atom is represented by the equation:
 
 $
   &F_"harm" (V,T) = \
@@ -563,28 +584,34 @@ $
   1 / Omega integral dif q approx 1 / (N_(arrow(q))) sum_(arrow(q) in "BZ")
 $
 
+Using this approximation, the Helmholtz energy per atom becomes:
+
 $
   F (V,T)
   &= U_0(V) \
-  &+ sum_(s=1)^3 sum_(va(q)) [
+  &+ 1 / (N_va(q)) sum_(s=1)^3 sum_(va(q)) [
     (hbar omega_(va(q),s) (V)) / 2
     + k_B T ln(
       1 - exp(
         - (hbar omega_(va(q), s) (V)) / (k_B T)
       )
     )
-  ]
+  ],
 $ <eq:termcomp-7.63>
+with $U_0$ the energy per atom of the system in its ground state.
+In the classical limit, the expression becomes:
 
 $
-  F_"classical" (V,T) = U_0(V) + k_B T sum_(s=1)^3 sum_(arrow(q)) ln (
+  F_"classical" (V,T) = U_0(
+    V
+  ) + (k_B T) / (N_va(q)) sum_(s=1)^3 sum_(arrow(q)) ln (
   planck.reduce omega_(arrow(q),s)(V)) / ( k_B T
   )
 $ <eq:termcomp-7.64>
 
 The sum over $va(q)$ runs over all vectors in the Brillouin zone, which are infinite for a Bravais lattice that contains an infinite number of sites.
 Indeed, the Helmholtz energy of a crystal with an infinite number of particles would also be infinite.
-The physical quantity of interest is therefore the Helmholtz energy per particle; in practice, this is obtained by computing the sums @eq:termcomp-7.63 and @eq:termcomp-7.64 using a finite grid of $N_(va(q))$ points in the Brillouin zone and dividing the total Helmholtz energy by $N_(va(q))$.
+The physical quantity of interest is indeed the Helmholtz energy per particle; this is the reason why the sums in @eq:termcomp-7.63 and @eq:termcomp-7.64, using a finite grid of $N_(va(q))$ points in the Brillouin zone and dividing the total Helmholtz energy by $N_(va(q))$, yield finite values.
 Both the ground state energy and the frequencies explicitly depend on the volume $V$.
 The relationship linking the frequencies with volume and temperature is responsible for the different temperature dependence of the Helmholtz energy at different volumes; these terms cause the phenomenon of thermal expansion in solids.
 
@@ -652,7 +679,9 @@ which requires knowledge of every element of the force constants matrix.
 We can rewrite @eq:dynamical-matrix as:
 $
   D(arrow(q))
-  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (arrow(r)_j^0 + arrow(L))) Phi(arrow(r)_j^0 + arrow(L)) \
+  &= 1 / m sum_j sum_arrow(L) e^(i arrow(q) dot (
+    arrow(r)_j^0 + arrow(L)
+  )) Phi(arrow(r)_j^0 + arrow(L)) \
   &= 1 / m sum_j e^(i arrow(q) dot arrow(r)_j^0)
   sum_arrow(L) e^(i arrow(q) dot arrow(L))
   Phi(arrow(r)_j^0 + arrow(L))
@@ -682,7 +711,7 @@ Increasing the size of the supercell, the Brillouin zone is populated with more 
 inbetween those points we obtain a _Fourier interpolation_,
 which becomes more and more accurate as we increase the size of the supercell.
 Eventually, the supercell is so large that the force constants matrix is negligible at its edges;
-when this happens, the only term contributing in the sum in @eq:force-constants-matrix-supercell is that with $arrow(L) = arrow(0)$;
+when this happens, the only term contributing appreciably in the sum in @eq:force-constants-matrix-supercell is that with $arrow(L) = arrow(0)$;
 as we increase the size of the supercell, the supercell force constants matrix asymptotically approaches the force constants matrix,
 $Phi_"SC" (arrow(r)_i^0) tilde.eq Phi(arrow(r)_i^0)$.
 In this limit, the Fourier interpolation is accurate everywhere.
@@ -696,7 +725,7 @@ Here, we briefly describe the underlying theory of @dft.
 Given the wavefunction $Psi (va(r_1), dots, va(r_N))$ and the Hamiltonian $hat(H)$ of the time-independent many-body Schrödinger equation for a system of $N$ electrons, not including spin variables, $hat(H) Psi (va(r_1), dots, va(r_N)) = E Psi (va(r_1), dots, va(r_N))$, the Hamiltonian is given by the sum of the kinetic, external potential, and electron-electron operators, $hat(H) = hat(T) + hat(V)_"ext" + hat(V)_"ee"$, defined by:
 $
   hat(T) Psi (va(r_1), dots, va(r_N))
-  := - 1/2 sum_(i=1)^N laplacian_i Psi (va(r_1), dots, va(r_N)),
+  := - 1 / 2 sum_(i=1)^N laplacian_i Psi (va(r_1), dots, va(r_N)),
 $
 $
   hat(V)_"ext" Psi (va(r_1), dots, va(r_N))
@@ -705,7 +734,7 @@ $
 with $v(va(r_i))$ the value of the external potential felt by electron $i$ at position $va(r_i)$, and
 $
   hat(V)_"ee" Psi (va(r_1), dots, va(r_N))
-  := sum_(i,j=1 \ i<j) 1/(|va(r_i) - va(r_j)|) Psi (va(r_1), dots, va(r_N)).
+  := sum_(i,j=1 \ i<j) 1 / (|va(r_i) - va(r_j)|) Psi (va(r_1), dots, va(r_N)).
 $
 
 If the wavefunction $Psi$ is normalized over the volume of the system $V$,
@@ -717,7 +746,9 @@ $
 then the energy $E$ is obtained from:
 $
   E =
-  integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N)) hat(H) Psi (va(r_1), dots, va(r_N))
+  integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (
+    va(r_1), dots, va(r_N)
+  ) hat(H) Psi (va(r_1), dots, va(r_N))
 $
 
 Computing the electron density gives:
@@ -731,7 +762,9 @@ $
   integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N))
   sum_(i=1)^N v(va(r_i))
   Psi (va(r_1), dots, va(r_N)) \
-  &= sum_(i=1)^N integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (va(r_1), dots, va(r_N)) v(va(r_i)) Psi (va(r_1), dots, va(r_N)).
+  &= sum_(i=1)^N integral_V dif^3 va(r_1) dots dif^3 va(r_N) Psi^star (
+    va(r_1), dots, va(r_N)
+  ) v(va(r_i)) Psi (va(r_1), dots, va(r_N)).
 $
 
 Since the electrons are all identical, these integrals are also all identical, each one equal to:
@@ -794,14 +827,35 @@ The equations are coupled through the effective potential $v_"KS" [rho]$, as $rh
 Since the orbitals $psi_n$ are ortho-normal, the ground state electron density of the system is obtained from the solution of @eq:kohn-sham-equations[Equations] as:
 $
   // Eq. (3.41) Della Pia, (8.23) Alfè
+  // logseq://graph/softseq?block-id=66f33133-67b5-46ea-abe5-ee9003827258
   rho_0 (va(r)) = sum_(n=1)^N |psi_n (va(r))|^2.
 $ <eq:ground-state-density>
 
-The extremes of the functional are obtained for any ensemble of $N$ eigenstates of $hat(h)_"KS" [rho]$, and the ground state is obtained by finding the lowest $N$ eigenstates (or the lowest $N/2$ eigenstates, taking into account the spin degeneracy).
+// logseq://graph/softseq?block-id=66f33215-091e-46ec-bd3c-1ce9a47d0558
+It is useful to recast the variation of the density in terms of variations of the single particle wavefunctions $psi_n$.
+Such a variation has to be performed while keeping the wavefunctions ortho-normal, which gives a set of $M^2$ constraints:
+$ // Termcomp eq. 8.28
+  integral_V dif^3 va(r) psi_i^star (va(r)) psi_j (va(r)) = delta_(i j).
+$
+To do that, we define the functional:
+$ // Termcomp eq. 8.29
+  Omega [ { psi_n }, {epsilon_(i j)} ]
+  := E[rho]
+  - sum_(i,j=1)^(N/2) 2 epsilon_(i j)
+  ( integral_V dif^3 va(r) psi_i^star (va(r)) psi_j(va(r)) - delta_(i j) ),
+$
+where the terms $epsilon_(i j)$ are the Lagrange multipliers associated to the constraints, and we impose the condition:
+$ // Termcomp eq. 8.30
+  delta Omega [{psi_n}, {epsilon_(i j)}] = 0.
+$
+
+// logseq://graph/softseq?block-id=66f328eb-1dc2-4e46-85f3-68f32ad31ce7
+The @ks equations show that the extremes of the functional $Omega$ are obtained for any ensemble of $N/2$ eigenstates of $hat(h)_"KS" [rho]$ ($N$ eigenstates, if we ignore the spin degeneracy), and the ground state is obtained by ﬁnding its minimum of the total energy with respect to any choice of $N/2$ state.
+In practice, to approximate the interacting system one always takes the lowest $N/2$ @ks states, although this may not necessarily be the correct choice (see @sec:v-representability).
+
 One can introduce a set of $L$ basis functions, ${phi_m}_(m = 1, dots, L)$, to construct the matrix $epsilon_(i j) = braket(phi_i, hat(h)_"KS" [rho], phi_j)$, and diagonalize it.
 The eigenvectors are of the type:
-$
-  // Eq. (8.40) Alfè, (3.42) Della Pia
+$ // Eq. (8.40) Alfè, (3.42) Della Pia
   psi_n = sum_(i=1)^L c_i^n phi_i
 $
 If the basis set ${phi_m}$ is complete, the solution is exact.
@@ -811,6 +865,7 @@ By increasing the number of basis functions, one can drive the calculations to c
 The usual variational principle applies, and so, by including more and more elements in the basis set, the ground state energy decreases monotonically.
 The rate of decrease of the energy can be used to judge the level of convergence.
 
+// logseq://graph/softseq?block-id=66f33452-dd0c-4443-86c6-5e64dba07f2c
 Since the @ks potential depends on $rho$, @eq:kohn-sham-equations[Equations] have to be solved self-consistently.
 This is typically done by iteration, in which one starts with some initial guess for the electron density $rho_1$, constructs $v_"KS" [rho_1]$ and solves @eq:kohn-sham-equations[Equations].
 With those solutions construct $rho_2$ using @eq:ground-state-density or more advanced algorithms, and solve @eq:kohn-sham-equations[Equations] again, using the newly constructed $v_"KS" [rho_2]$.
@@ -822,7 +877,14 @@ $ // Eq. (8.41) Alfè
     arrow(r)'
   ) rho(arrow(r))) / (|arrow(r) - arrow(r)'|) dif^3 arrow(r)' dif^3 arrow(r)
   - integral_V (delta E_"xc") / (delta rho(arrow(r))) rho(arrow(r)) dif^3 arrow(r) + E_"xc" [rho].
-$
+$ <eq:termcomp-8.41>
+
+=== v-representability <sec:v-representability>
+// Da Lecture Notes di Alfè, p. 150
+The condition that guarantees that the first $N/2$ states give the minimum energy in @eq:termcomp-8.41 is known as _v-representability_, that is the ground state density of the interacting system is the same as the ground state density of _some_ non-interacting system.
+This also implies that the total energy, @eq:termcomp-8.41, would be exact if one had the exact form of the exchange-correlation functional, $E_"xc"$.
+It is possible, however, that the ground state density of a system is not _v-representable_, i.e. there is no non-interacting system whose ground state density is the same as that of the interacting system.
+In this case we need to go back to the variational principle, and the $N/2$ states in the non-interacting system that minimize the energy may not be the first $N/2$. @parrDensityFunctionalTheoryAtoms1994
 
 === The local density approximation
 
@@ -879,34 +941,42 @@ Let us consider the Taylor expansion of the position of particle $i$ at time $t$
 
 $
   arrow(r)_i (t + delta t)
-  = arrow(r)_i (t) + dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+  = arrow(r)_i (t) + dot(arrow(r))_i (
+    t
+  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
-  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4),
+  )^2 + 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + cal(O)((delta t)^4),
 $
 
 $
   arrow(r)_i (t - delta t)
-  = arrow(r)_i (t) - dot(arrow(r))_i (t) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
+  = arrow(r)_i (t) - dot(arrow(r))_i (
+    t
+  ) delta t + 1 / 2 dot.double(arrow(r))_i (t) (
     delta t
-  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + O((delta t)^4),
+  )^2 - 1 / (3!) dot.triple(arrow(r))_i (t) (delta t)^3 + cal(O)((delta t)^4),
 $
 
 where $delta t$ is a small time interval.
 Summing the two equations side by side, we obtain:
 $
   arrow(r)_i (t + delta t) + arrow(r)_i (t - delta t)
-  = 2 arrow(r)_i + dot.double(arrow(r))_i (t) (delta t)^2 + O((delta t)^4)
+  = 2 arrow(r)_i + dot.double(arrow(r))_i (t) (delta t)^2 + cal(O)((delta t)^4)
 $
 Consider the expression of $dot.double(arrow(r))_i$ in terms of $arrow(f)_i$ from @eq:verlet-newton, $dot.double(arrow(r))_i (t) = 1/M arrow(f)_i (t)$; substituting, we obtain:
 $
   arrow(r)_i (t + delta t)
-  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (delta t)^2 + O((delta t)^4)
+  = 2 arrow(r)_i (t) - arrow(r)_i (t - delta t) + 1 / M arrow(f)_i (t) (
+    delta t
+  )^2 + cal(O)((delta t)^4)
 $ <eq:verlet-algorithm>
 @eq:verlet-algorithm is known ad the Verlet algorithm.
 @verletComputerExperimentsClassical1967[Eq. (4)]
 We can re-express the equation in terms of the velocities:
 $
-  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (t - delta t)) / (2 delta t)
+  arrow(v)_i (t) = (arrow(r)_i (t + delta t) - arrow(r)_i (
+    t - delta t
+  )) / (2 delta t)
 $
 $
   - arrow(r)_i (t - delta t)
@@ -918,41 +988,41 @@ $
   = 2 arrow(r)_i (t)
   + 2 arrow(v)_i (t) delta t
   + 1 / M arrow(f)_i (t) (delta t)^2
-  + O((delta t)^4)
+  + cal(O)((delta t)^4)
 $
 $ // Eq. 7.95 Alfè
   arrow(r)_i (t + delta t)
   = arrow(r)_i (t)
   + arrow(v)_i (t) delta t
   + 1 / (2M) arrow(f)_i (t) (delta t)^2
-  + O((delta t)^4),
+  + cal(O)((delta t)^4),
 $
 which gives access to the positions at time $t + delta t$ with just the knowledge of positions, velocities, and forces at time $t$.
 This expression is particularly useful at the beginning of the simulation, where only the initial positions are available, and shows that to begin a simulation we also need to provide the initial velocities.
 
 Because of the equipartition theorem, the temperature of the system can be obtained from the ensemble average of the kinetic energy, given by:
 $
-  expval(E_k) = (3N)/2 k_B T,
+  expval(E_k) = (3N) / 2 k_B T,
 $
 where $expval(E_k)$ is the time average of the instantaneous kinetic energy, $E_k (t)$, given by:
 $
-  E_k (t) = sum_i 1/2 M v_i^2 (t).
+  E_k (t) = sum_i 1 / 2 M v_i^2 (t).
 $
 
 === Ensemble averages
 
 If the system is ergodic, ensemble averages of any physical quantity $A$ can be computed as time averages over a molecular dynamics simulation, and can be approximated as:
 $
-  expval(A) tilde.eq 1/M sum_(n=1)^M A(n delta t),
+  expval(A) tilde.eq 1 / M sum_(n=1)^M A(n delta t),
 $
 where $A(n delta t)$ is the value of $A$ evaluated with the particles at positions ${va(r)(n delta t)}$.
 The root mean square of the fluctuations of $A$ is:
 $
-  sigma(A) = [ expval(A^2) - expval(A)^2 ]^(1/2),
+  sigma(A) = [expval(A^2) - expval(A)^2]^(1 / 2),
 $
 with
 $
-  expval(A^2) = 1/M sum_(n=1)^M [A(n delta t)]^2.
+  expval(A^2) = 1 / M sum_(n=1)^M [A(n delta t)]^2.
 $
 
 If all $M$ samples of $A$ were statistically independent from each other, then the standard deviation of $expval(A)$ would be obtained as:
@@ -973,15 +1043,21 @@ $M_c$ is not known in advance, but it is fixed, and depends only on the system a
 The _reblocking_ procedure is a common approach to obtain $M_c$.
 Suppose we split our simulation into $N$ blocks of length $M/N$ and consider the averages:
 $
-  expval(A)_i^N = 1/(M/N) sum_(n = M/N i + 1)^(M/N (i+1)) A(n delta t), quad i = 0,1,dots,N-1.
+  expval(A)_i^N = 1 / (M / N) sum_(n = M / N i + 1)^(M / N (i+1)) A(
+    n delta t
+  ), quad i = 0,1,dots,N-1.
 $
 The average of $A$ over the whole simulation is obviously unaffected by this reblocking procedure:
 $
-  expval(A) = 1/M sum_(n=1)^M A(n delta t) = 1/N sum_(i=0)^(N-1) expval(A)_i^N.
+  expval(A) = 1 / M sum_(n=1)^M A(
+    n delta t
+  ) = 1 / N sum_(i=0)^(N-1) expval(A)_i^N.
 $
 Now consider the root mean square fluctuations of the averages $expval(A)_i^N$:
 $
-  sigma(expval(A)^N) = [1/N sum_(i=0)^(N-1) (expval(A)_i^N)^2 - expval(A)^2]^(1/2).
+  sigma(expval(A)^N) = [
+    1 / N sum_(i=0)^(N-1) (expval(A)_i^N)^2 - expval(A)^2
+  ]^(1 / 2).
 $
 If the evaluations of $A$ are all statistically independent from each other, then the standard deviation on the average can be obtained as:
 $
@@ -1011,7 +1087,7 @@ In such a situation time averages are biased, and do not provide good approximat
 One way to overcome this problem is to couple the simulated system with an external heat bath, provided that all degrees of freedom are interacting with the bath.
 Several techniques have been developed, but not all of them are capable of overcoming the ergodicity problem.
 One that does is the thermostat developed by Andersen, @andersenMolecularDynamicsSimulations1980 which is based on the concept of stochastic collisions.
-We know that is a perfect gas at some temperature $T$ the velocities are distributed according to the Maxwell distribution
+We know that in a perfect gas at some temperature $T$ the velocities are distributed according to the Maxwell distribution
 $
   f(v) dif v
   = (m / (2 pi k_B T))^(3 / 2) 4 pi v^2 exp(-(m v^2)/(2k_B T)) dif v.
@@ -1021,28 +1097,38 @@ This periodic velocity re-initialization procedure also redistributes energy bet
 It can be shown that the frequency of these velocity re-initializations does not affect the ability to sample the canonical ensemble; however, drawing the velocities too often will result in the system moving very slowly from one region of configuration space to another; drawing them too seldom results in slow transfer of energy between different modes, which would only overcome the ergodicity problem slowly.
 Finding the appropriate time interval between velocities randomizations is then a matter of finding the right compromise to maximize efficiency.
 
-In *Andersen dynamics*, constant temperature is imposed by stochastic collisions with a heath bath.
+// https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
+In *Langevin dynamics*#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin], a (small) friction term and a fluctuating force are added to Newton's second law, @eq:verlet-newton, which is then integrated numerically.
+The temperature of the heat bath and magnitude of the friction is specified by the experimenter, the amplitude of the fluctuating force is then calculated to give that temperature.
+This procedure has some physical justification: in a real metal the atoms are (weakly) coupled to the electron gas, and the electron gas therefore acts like a heat bath for the atoms.
+If heat is produced locally, the atoms locally get a temperature that is higher than the temperature of the electrons, heat is transferred to the electrons and then rapidly transported away by them.
+A Langevin equation is probably a reasonable model for this process.
+
+A disadvantage of using Langevin dynamics is that if significant heat is produced in the simulation, then the temperature will stabilize at a value higher than the specified temperature of the heat bath, since a temperature difference between the system and the heat bath is necessary to get a finite heat flow.
+Another disadvantage is that the fluctuating force is stochastic in nature, so repeating the simulation will not give exactly the same trajectory, if not using exactly the same starting configuration and random number generator.
+
+In *Andersen dynamics*#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen], constant temperature is imposed by stochastic collisions with a heat bath.
 With a (small) probability the collisions act occasionally on velocity components of randomly selected particles.
 Upon a collision the new velocity is drawn from the Maxwell-Boltzmann distribution at the corresponding temperature.
 The system is then integrated numerically at constant energy according to the Newtonian laws of motion.
 The collision probability is defined as the average number of collisions per atom and timestep.
 The algorithm generates a canonical distribution. @daanfrenkelUnderstandingMolecularSimulation2002[§6.1.1]
 However, due to the random decorrelation of velocities, the dynamics are unphysical and cannot represent dynamical properties like e.g. diffusion or viscosity.
-Another disadvantage is that the collisions are stochastic in nature, so repeating the simulation will not give exactly the same trajectory.
+Another disadvantage is that the collisions are stochastic in nature, so repeating the simulation will not give exactly the same trajectory, if not using exactly the same starting configuration and random number generator.
 Typical values for the collision probability are in the order of $10^(-4) ÷ 10^(-1)$.
 
 In *Nosé-Hoover dynamics*, an extra term is added to the Hamiltonian representing the coupling to the heat bath.
 From a pragmatic point of view one can regard Nosé-Hoover dynamics as adding a friction term to Newton's second law, but dynamically changing the friction coefficient to move the system towards the desired temperature.
 Typically the "friction coefficient" will fluctuate around zero.
 
-During simulations in the present work, the Langevin thermostat#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.andersen] was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
+During simulations in the present work, the Langevin thermostat was used for constant $(N,V,T)$ @md and combined Nose-Hoover and Parrinello-Rahman#footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.npt] dynamics for the $(N, P, T)$ ensemble.
 The Berendsen thermostat was considered, but later discarded#footnote[See the "Flying ice cube" effect.] in favour of the thermostats above.
 
 === Mean square displacement
 // §7.3.3 Alfè, §4.2.3 Della Pia
 In a molecular dynamics simulation, a convenient quantity that can be used to monitor the state of the system is the _mean square displacement_, defined as:
 $
-  m(t) := 1/N sum_(i=1)^N |va(r_i)(t + t_0) - va(r_i)(t_0)|^2,
+  m(t) := 1 / N sum_(i=1)^N |va(r_i)(t + t_0) - va(r_i)(t_0)|^2,
 $ <eq:mean-square-displacement>
 where $t_0$ is some initial reference time.
 In a system with no diffusing behaviour, such as a solid, $m(t)$ is expected to rise first, and then reach a constant, which is related to the maximum displacement of the particles from their equilibrium positions.
@@ -1071,7 +1157,9 @@ In systems with continuous displacements, this translates into a linear dependen
 Over a simulation of total length $T$, one clearly only has access to $m(t)$ with $0 <= t <= T$, and to improve on statistics it is useful to compute @eq:mean-square-displacement by averaging over time origins $t_0$:
 $
   m(t)
-  = 1 / (T - t) sum_(t_0=0)^(T-t) 1/N sum_(i=1)^N |va(r_i)(t+t_0) - va(r_i)(t_0)|^2.
+  = 1 / (T - t) sum_(t_0=0)^(T-t) 1 / N sum_(i=1)^N |va(r_i)(t+t_0) - va(r_i)(
+    t_0
+  )|^2.
 $
 We see that for $t=0$ it is possible to average on the whole length of the simulation, but, as $t$ increases, the available length over which one can average is reduced to $T-t$, and so the statistical error on $m(t)$ increases with $t$.
 For $t=T$ there is only one available configuration.
@@ -1099,22 +1187,33 @@ The evaluation of $Delta_"T&QN" (T)$ can be challenging, especially for large mo
 Since both $Delta_"sub" H(T)$ and $Delta_"T&QN" (T)$ are affected by errors, accurate theoretical evaluations of $E_"latt"$ are of help for comparison.
 
 In order to derive $Delta_"T&QN"$, we need to start from the definition of the sublimation enthalpy, $Delta_"sub" H(T)$, that is the difference between the enthalpy of the gas, $H^g (T)$, and of the crystal solid, $H^s (T)$, both at temperature $T$.
-By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions; noticing that in the crystal there are no trans-rotational contributions; considering as negligible the pressure times volume term, $p V$; we have that
+By separating the electronic ($"el"$), translational ($"trans"$), rotational ($"rot"$) and vibrational ($"vib"$) contributions, and noticing that in the crystal there are no trans-rotational contributions, we have that
 $
-  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (E_"el"^s + E_"vib"^s),
+  Delta_"sub" H = E_"el"^g + E_"trans"^g + E_"rot"^g + E_"vib"^g + p V - (
+    E_"el"^s + E_"vib"^s
+  ),
 $ <eq-zen_si_14>
 where the superscript stands either for gas ($g$) or solid ($s$), and the temperature dependance has been dropped for the seek of brevity.
+We will also consider as negligible the pressure times volume term, $p V$.
 By assuming that the rigid rotor and ideal gas approximations are reliable (that is typically the case in the analyzed molecular systems), we have that $E_"trans"^g = 3/2 R T$, $E_"rot"^g = 3/2 R T$ if the molecule is non-linear, $E_"rot"^g = R T$ otherwise, and $p V = R T$.
 Thus, @eq-zen_si_14 simplifies to
 $
-  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (T) + 7 / 2 R T quad & "for linear molecules",
+  & Delta_"sub" H(T) = Delta E_"el" + Delta E_"vib" (
+    T
+  ) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"sub" H(T) = Delta E_"el" + Delta_"vib" (
+    T
+  ) + 7 / 2 R T quad & "for linear molecules",
 $
 where the term $Delta E_"vib" (T)$ contains both the thermal and the quantum nuclear contributions.
 Notice from <eq-zen_2018_1> that $Delta E_"el" = E_"el"^g - E_"el"^s$ is precisely the opposite of the lattice energy $E_"latt"$; thus:
 $
-  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 4 R T quad & "for non-linear molecules", \
-  & Delta_"T&QN" (T) = Delta E_"vib" (T) + 7 / 2 R T quad & "for linear molecules".
+  & Delta_"T&QN" (T) = Delta E_"vib" (
+    T
+  ) + 4 R T quad & "for non-linear molecules", \
+  & Delta_"T&QN" (T) = Delta E_"vib" (
+    T
+  ) + 7 / 2 R T quad & "for linear molecules".
 $ <eq-zen_si_16>
 
 Vibrations in the solid molecular crystals can usually be separated into intra-molecular and inter-molecular vibrations, $E_"vib"^s = E_"vib"^(s,"intra") + E_"vib"^(s,"inter")$, and the stiffest intra-molecular modes are decoupled from the intermolecular modes.
@@ -1139,7 +1238,9 @@ where the first term in the right hand side accounts for the @zpe contribution a
 
 This yields
 $
-  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (T) = integral epsilon(omega, T) g(omega) dif omega,
+  E_"vib"^g (T) = sum_i epsilon(omega_i, T), quad E_"vib"^s (
+    T
+  ) = integral epsilon(omega, T) g(omega) dif omega,
 $ <eq-zen_si_19>
 where $omega_i$ are the frequencies of the isolated molecule,
 which are $3M-6$ ($M$ is the number of atoms in the molecule) for a non-linear molecule,
@@ -1152,16 +1253,20 @@ In particular, inaccuracies on the evaluation of high frequency modes mostly aff
 
 === Dispersion interactions
 
-For many systems it is important to take dispersion interactions into account for reliable prediction.
-Dispersion interactions are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
-The representation of dispersion interactions in @dft is not possible within local or semilocal functionals because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
+Dispersion interactions, sometimes called van der Waals interactions, are crucial for describing the weak, long-range interactions between electrons.
+For many systems it is important to take dispersion interactions into account for reliable prediction,
+as they are essential in a collection of active research fields in solid-state physics and chemistry, including molecular crystal packing, crystal structure prediction, surface adsorption and reactivity, and supramolecular chemistry.
+The representation of dispersion interactions is not possible within common approximations in @dft, like local or semi-local functionals such as PBE, because dispersion arises from non-local correlation effects involving distant fragments in the crystal. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012
 
+This motivates the use of additive non-local corrections.
 In @dft, this is typically done either by applying an a posteriori correction to a certain @dft functional prediction, $E_"DFT"$, or by including non-local terms in the exchange-correlation functional.
 In the first of the two cases, the final energy is computed as
 $ E = E_"DFT" + E_"disp", $ <eq-otero_2012_1>
 where $E_"disp"$ is a function of the electron-electron distance with parameters that are fitted for the specific functional the correction is applied to. (For instance, the D3 parameters for @pbe will be different from the D3 parameters of revPBE.)
+Inclusion of a dispersion correction to @dft is necessary to describe the dynamics of liquid water, the geometries and binding energies of layered solids, and stability of metal-organic frameworks, among many other examples. @batatiaFoundationModelAtomistic2023[§4]
 
 Several alternatives for the correction $E_"disp"$ are available (D2, D3, XDM, D4, TS, MBD, ...), but in principle we do not know which one yields the most reliable prediction for a specific system.
+Additive dispersion corrections typically employ a physical model for dispersion interactions with empirical parameters optimized to cut off the correction at interatomic distances where approximate @dft is reliable.
 As illustrative examples of methods to take dispersion into account, the XDM and D3 corrections are detailed below, as they are employed in the reference implementations cited for this thesis.
 
 ==== Exchange-hole Dipole Moment
@@ -1173,19 +1278,24 @@ $
   R^n_("vdw", i j) + R^n_(i j)
   ).
 $ <eq-otero_2012_2>
-The fundamental objects in this equation are the inter-atomic interaction coefficients $C_(n, i j)$ that in the @xdm model are calculated exclusively from first-principles quantities using second-order perturbation theory.
+The fundamental objects in this equation are the inter-atomic interaction coefficients $C_(n, i j)$ that in the @xdm model are calculated entirely from first-principles quantities using second-order perturbation theory. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012[Equations 3-5]
 
-All the objects above are parameter-free, except for the damping expression in <eq-otero_2012_2>.
-The interatomic van der Waals radii ($R_("vdw", i j)$) control the distance at which the pairwise dispersion interactions are switched off.
+All the objects above are parameter-free, except for the damping expression in @eq-otero_2012_2.
+The interatomic van der Waals radii ($R_("vdw", i j)$) are a set of parametric values that control the distance at which the pairwise dispersion interactions are switched off.
+The value of the parameters in $R_("vdw", i j)$ is obtained by fitting to a training set both in gas-phase and under periodic-boundary conditions. @otero-de-la-rozaBenchmarkNoncovalentInteractions2012[Equations 8, 9]
 
-Because the dispersion coefﬁcients are calculated rather than ﬁtted,
+Because the dispersion coefficients are calculated rather than ﬁtted,
 @eq-otero_2012_1 works under the assumption that the @dft functional presents a completely dispersionless behavior.
 This requirement is not met by most @gga functionals,
 which are sometimes too repulsive and sometimes spuriously binding,
 depending on the reduced-density-gradient tail behavior of the exchange enhancement factors.
 
 ==== DFT-D3
-// TODO DFT-D sempre da otero
+DFT-D3 is an interatomic potential which uses tabulated values of atomic polarizabilities to describe two-body and, optionally, three-body Axilrod-Teller dispersion interactions.
+As MACE-MP-0 is trained to @pbe energies, forces, and stresses, it inherits @pbe's lack of long-range dispersion interactions.
+An optional, additive DFT-D3 dispersion correction can be applied to MACE-MP-0.
+The same parameters used in PBE-D3(BJ), i.e., DFT-D3 with a Becke-Johnson damping function @grimmeEffectDampingFunction2011, are used in the D3 correction to MACE-MP-0. @batatiaFoundationModelAtomistic2023[§4]
+
 The total DFT-D3 energy is given by @grimmeConsistentAccurateInitio2010
 $
   E_"DFT-D3" = E_"KS-DFT" - E_"disp",
@@ -1196,7 +1306,11 @@ $
 $
 with the most important two-body term given by
 $
-  E^((2)) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (r_(A B)).
+  E^((
+    2
+  )) = sum_(A B) sum_(n = 6,8,10,dots) s_n (C_n^(A B)) / (r_(A B)^n) f_(d,n) (
+    r_(A B)
+  ).
 $
 
 Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes the averaged (isotropic) $n$th-order dispersion coefficient (orders $n=6,8,10,dots$) for atom pair $A B$, and $r_(A B)$ is their internuclear distance. $f_(d,n)$ are damping functions explicitly chosen by original authors to make the model numerically stable.
@@ -1240,23 +1354,21 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
 // )
 
 == #machine-learning-title <sec:machine-learning>
-#text(blue)[
-Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
-There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
-It is our interest to study the *supervised learning* type.
-The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
-Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
-Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
-Thus, we can also think of supervised learning as "label learning".
-A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
-]
+
+  Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
+  There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
+  It is our interest to study the *supervised learning* type.
+  The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
+  Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
+  Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
+  Thus, we can also think of supervised learning as "label learning".
+  A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
+
 In the detailed description of MACE in @sec:mace, we will see that the data inputs are atom positions, atomic number; while the label will be the energy, a continuous value learned through regression.
-#text(blue)[
+
   In regression analysis, we are given a number of predictor (*explanatory*) variables and a continuous response variable (*outcome*), and we try to find a relationship between those variables that allows us to predict an outcome.
   In the field of machine learning, the predictor variables are commonly called "features", and the response variables are usually referred to as "target variables".
-]
 
-#text(blue)[
   Artificial neurons represent the building blocks of the multilayer artificial #glspl("nn").
   The basic concept behind artificial #glspl("nn") was built upon hypotheses and models of how the human brain works to solve complex problem tasks.
   NNs are more popular today than ever thanks to the many breakthroughs that have been made in the previous decade, which resulted in what we now call deep learning algorithms and architectures—NNs that are composed of many layers.
@@ -1264,9 +1376,12 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   === Single layer neural network
   Before we dig deeper into a particular multilayer @nn architecture, let’s briefly reiterate some of the concepts of single-layer NNs, namely, the @adaline algorithm.
 
-  #figure(image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"), caption: [
-    The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
-  ])
+  #figure(
+    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"),
+    caption: [
+      The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
+    ],
+  )
 
   The Adaline algorithm performs binary classification, and uses the gradient descent optimization algorithm to learn the weight coefficients of the model.
   In every epoch (pass over the training dataset), we update the weight vector $va(w)$ and bias unit $b$ using the following update rule:
@@ -1282,7 +1397,9 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   In gradient descent optimization, we update all weights simultaneously after each epoch, and we define the partial derivative for each weight $w_j$ in the weight vector, $va(w)$, as follows:
   $
     pdv(L, w_j) =
-    pdv(, w_j) 1/n sum_i (y^((i)) - a^((i)))^2 = - 2/n sum_i (y^((i)) - a^((i))) x_j^((i)).
+    pdv(, w_j) 1 / n sum_i (y^((i)) - a^((i)))^2 = - 2 / n sum_i (
+      y^((i)) - a^((i))
+    ) x_j^((i)).
   $
   Here, $y^((i))$ is the target class label of a particular sample $x^((i))$, and $a^((i))$ is the activation of the neuron, which is a linear function in the special case of Adaline.
   Furthermore, one can define the activation function $sigma(dot)$ as follows:
@@ -1311,7 +1428,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 
   #figure(
     image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_02.png"),
-    caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.]
+    caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.],
   ) <fig:multi-layer-perceptron>
 
   Next to the data input, the MLP depicted in @fig:multi-layer-perceptron has one hidden layer and one output layer.
@@ -1341,13 +1458,15 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 
   Since each unit in the hidden layer is connected to all units in the input layer, we first calculate the activation unit of the hidden layer $a_1^((h))$ as follows:
   $
-    z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((h)) + dots + x_m^(("in"))w_(1,m)^((h)), \
+    z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((
+      h
+    )) + dots + x_m^(("in"))w_(1,m)^((h)), \
     a_1^((h)) &= sigma(z_1^((h))).
   $
   Here, $z_1^((h))$ is the net input and $sigma(dot)$ is the activation function, which has to be differentiable to learn the weights that connect the neurons using a gradient-based approach.
   To be able to solve complex problems, the MLP model needs nonlinear activation functions, for example, the sigmoid (logistic) activation function:
   $
-    sigma(z) = 1/(1 + e^(-z))
+    sigma(z) = 1 / (1 + e^(-z))
   $
 
   #figure(
@@ -1355,7 +1474,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
     caption: [
       The sigmoid activation function.
       Figure from @raschkaMachineLearningPyTorch2022.
-    ]
+    ],
   )
 
   The MLP is a typical example of a feedforward artificial NN.
@@ -1398,7 +1517,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   Thus, our MSE loss either has to sum or average over the $t$ activation units in our network in addition to averaging over the $n$ examples in the dataset or mini-batch:
   $
     L(W, va(b)) =
-    1/n sum_1^n 1/t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
+    1 / n sum_1^n 1 / t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
   $
 
   The goal is to minimize the loss function $L(W)$.
@@ -1406,7 +1525,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   $
     pdv(L, w_(j,l)^((i)))
   $
-  
+
   Note that $W$ consists of multiple matrices.
   In an MLP with one hidden layer, we have the weight matrix, $W^((h))$, which connects the input to the hidden layer, and $W^(("out"))$, which connects the hidden layer to the output layer.
 
@@ -1422,7 +1541,7 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
     dv(f,g) dv(g,h) dv(h,u) dv(u,v) dv(v,x).
   $
   In the context of computer algebra, a set of techniques, known as *automatic differentiation*, has been developed to solve such problems very efficiently.
-  
+
   Automatic differentiation comes with two modes, the forward and reverse modes; backpropagation is simply a special case of reverse-mode automatic differentiation.
   The key point is that applying the chain rule in forward mode could be quite expensive since we would have to multiply large matrices for each layer (Jacobians) that we would eventually multiply by a vector to obtain the output.
 
@@ -1436,12 +1555,11 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       Computing the partial derivatives of the loss with respect to the first hiddel layer weight.
       Averaging over the mini-batch is omitted.
       Figure from @raschkaMachineLearningPyTorch2022.
-    ]
+    ],
   )
-]
 
 == #gnn-title <sec:gnn>
-#text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
+Neural networks have been adapted to leverage the structure and properties of graphs.
 
 #figure(
   image("thesis/imgs/distill.pub.gnn-intro.fig1.png"),
@@ -1452,10 +1570,10 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   ],
 )
 
-#text(blue)[A set of objects, and the connections between them, are naturally expressed as a graph.]
-#text(blue)[#glspl("gnn") see practical applications in physics simulations @sanchez-gonzalezLearningSimulateComplex2020] and are the foundation of the main calculator employed in this work, MACE, as detailed in @sec:mace.
+A set of objects, and the connections between them, are naturally expressed as a graph.
+#glspl("gnn") see practical applications in physics simulations @sanchez-gonzalezLearningSimulateComplex2020 and are the foundation of the main calculator employed in this work, MACE, as detailed in @sec:mace.
 
-#text(blue)[A graph represents the relations (_edges_) between a collection of entities (_nodes_).]
+A graph represents the relations (_edges_) between a collection of entities (_nodes_).
 
 #large_figure(
   grid(
@@ -1465,19 +1583,19 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-V.png"),
       caption: [*V* -- Vertex (or node) attributes e.g., node identity, number of neighbors.],
       numbering: none,
-      outlined: false
+      outlined: false,
     ),
     figure(
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-E.png"),
       caption: [*E* -- Edge (or link) attributes and directions e.g., edge identity, edge weight.],
       numbering: none,
-      outlined: false
+      outlined: false,
     ),
     figure(
       image("thesis/imgs/distill.pub.gnn-intro.what-is-a-graph-U.png"),
       caption: [*U* -- Global (or master node) attributes e.g., number of nodes, longest path.],
       numbering: none,
-      outlined: false
+      outlined: false,
     ),
   ),
   caption: [
@@ -1486,18 +1604,16 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   ],
 )
 
-#text(blue)[
+
   To further describe each node, edge or the entire graph, we can store information in each of these pieces of the graph.
   We can additionally specialize graphs by associating directionality to edges (_directed_, _undirected_).
 
-  Graphs are very flexible data structures], and for this reason they were used by MACE to embed atomistic properties of physical systems.
-#text(blue)[
+  Graphs are very flexible data structures, and for this reason they were used by MACE to embed atomistic properties of physical systems.
   It’s a very convenient and common abstraction to describe this 3D object as a graph, e.g. where nodes are atoms and edges are covalent bonds.
-]
-#text(blue)[
+
+
   A way of visualizing the connectivity of a graph is through its adjacency matrix.
   One labels the nodes, in this case each of 14 non-H atoms in a caffeine molecule, and fill a matrix of $n_"nodes" times n_"nodes"$ with an entry if two nodes share an edge.
-]
 
 #figure(
   image("thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png"),
@@ -1508,11 +1624,8 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 )
 
 *Definition*:
-#text(blue)[
   A GNN is an optimizable transformation on all attributes of the graph (nodes, edges, global-context) that preserves graph symmetries (permutation invariances).
-]
 
-#text(blue)[
   In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
   #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
 
@@ -1617,14 +1730,13 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       Figure from @sanchez-lengelingGentleIntroductionGraph2021.
     ],
   )
-]
 
 The notions exposed above are a sufficient introduction to understand the basic functioning of the MACE calculator, described in detail in @sec:mace, that was used for the work in this thesis, the results of which are available in the next chapters, @sec:results-1 and @sec:results-2.
 
 = Results I: model assessment <sec:results-1>
 
 In this chapter we test the MACE calculators on small, known systems,
-about which literature is abundant and a direct comparison of results is possible.
+about which the literature is abundant and a direct comparison of results is possible.
 We analyze the geometrical and vibrational features of the water molecule and the water dimer after optimization with each calculator.
 The binding energy of the dimer is calculated and compared with reference @dft methods.
 In particular, we test three versions of the foundation model MACE-MP-0, namely _small_, _medium_ and _large_.
@@ -1633,12 +1745,12 @@ Moreover, a fine-tuned @mlp for ice polymorphs @kaurDataefficientFinetuningFound
 
 == The water molecule <sec-molecule>
 
-The first task is the optimization of the geometry and calculation of vibrational properties of the water molecule.
+The first task is the optimization of the geometry and the calculation of vibrational properties of the water molecule.
 We studied the relaxation of the geometry of a single water molecule, also referred to as the monomer, and compared the results with physical values of the gas phase molecule. The optimization is tackled with two concurring methods:
 static local *minimization of the potential energy* and *analysis of vibrational properties* to assess the dynamical stability.
 
 #figure(
-  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 70%),
+  image("simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png", width: 60%),
   caption: [
     Render of the geometry of the water molecule,
     optimized using MACE-ICE13-1.
@@ -1647,14 +1759,15 @@ static local *minimization of the potential energy* and *analysis of vibrational
 
 === Geometry optimization
 
-To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in literature.
+To rapidly put to the test the calculators, geometrical values of the relaxed configuration have been computed and compared with references in the literature.
+The bond lengths and the bond angle of the water molecule are known with remarkable accuracy from the vibration-rotation spectra of normal and isotopic water vapour. @eisenbergStructurePropertiesWater2005[§1.1 (c)]
 
 The first value concerns the characteristic $#ce("HOH")$ *bend angle* of the molecule;
 the accurate description of this physical value is a required test to ensure the validity of the models.
-As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020.
+As can be seen in @table:hoh-angle, the MACE-MP-0 large model most accurately describes the bend angle of the molecule, while the small model is the most distant from reference @eisenbergStructurePropertiesWater2005[Table 1.3, data from Benedict _et al._ (1956) and Herzberg (1950)] @PhysicalChemistryWater2020.
 
 The second value is the $#ce("OH")$ *bond length*.
-@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergStructurePropertiesWater2005 @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
+@table:oh-bond-length shows that MACE-ICE13-1 gives the most accurate description according to reference @eisenbergStructurePropertiesWater2005[Table 1.2, data from Benedict _et al._ (1956)] @PhysicalChemistryWater2020, and MACE-MP-0 small again is less accurate than the other models.
 
 #let monomer_angles_table = csv("simulazioni/02_water/01_molecule/angles.csv")
 #figure(
@@ -1672,7 +1785,7 @@ The second value is the $#ce("OH")$ *bond length*.
 #figure(
   image(
     "simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg",
-    width: 90%,
+    width: 70%,
   ),
   caption: [Convergence of the $#ce("HOH")$ angle with respect to the `fmax` parameter.],
 )
@@ -1712,14 +1825,14 @@ The initial geometry was set up so that the HOH atoms formed a right angle, and 
 By dealing with a force field, it was possible to set up a cell in vacuum without periodic boundary conditions.
 
 @ase offers a variety of different optimisers, from which we have chosen BFGS, a local optimisation algorithm of the quasi-Newton category, where the forces of consecutive steps are used to dynamically update a Hessian describing the curvature of the potential energy landscape.
-The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in $"eV" angstrom^(-1)$.
+The optimiser accepts two important input parameters. The first if _fmax_, the force threshold, defined in $"eV" dot angstrom^(-1)$.
 The convergence criterion is that the force on all individual atoms should be less than fmax:
 #footnote[https://wiki.fysik.dtu.dk/ase/ase/optimize.html]
 $
   max_a |arrow(F)_a| < f_"max"
 $
 
-For the present purposes, `fmax=1e-8` $"eV/"angstrom$ yielded satisfactory results for the different calculator models tested.
+For the present purposes, a value of $f_"max"$ between $10^(-4)$ and $10^(-8) "eV/"angstrom$ yielded satisfactory results for the different calculator models tested.
 
 The second parameter is the number of steps after which to stop the optimization procedure.
 If the steps employed to optimize the geometry, given the desired fmax, are larger than the steps parameter, the procedure is halted and the geometry is considered as not converged.
@@ -1743,7 +1856,7 @@ A value of `steps=1000` is largely above the actual number of steps required for
   )
 ]
 
-=== Molecular vibrations and assessment of the dynamical stability
+=== Molecular vibrations and assessment of the dynamical stability <sec:molecule-vibrations>
 
 The nuclei of molecules, far from occupying fixed positions with respect to each other, are in continual state of vibration.
 An important feature of these vibrations is that they can be described by a limited number of basic vibrations known as the normal modes.
@@ -1770,13 +1883,14 @@ $
   G(v_1, v_2, v_3)
   = sum_(i=1)^3 omega_i (v_i + 1 / 2)
   + sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2)
-$
+$ <eq:molecule-energy-above-vibrationless-equilibrium-state>
 where the sums are over normal modes.
 The $omega$s in this equation are often called the _harmonic frequencies_;
 they are the frequencies with which the molecule would vibrate if its vibrations were perfectly harmonic.
 The $x$s are the _anharmonic constants_ and describe the effect on the vibrational frequencies of the departure from purely harmonic form of the vibrations.
 @table:molecule-omega and @table:molecule-omega-errors
-contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data.
+contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data determined by Benedict _et al._ (1956) @eisenbergStructurePropertiesWater2005[Table 1.4].
+The value of the anharmonic frequencies is reported for completeness in @table:molecule-vibrational-constants-anharmonic.
 
 #large_box(
   grid(
@@ -1820,6 +1934,27 @@ contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model 
   ),
 )
 
+#figure(
+  table(
+    columns: 2,
+    table.header(
+      [Molecule],
+      $ce("H2O")$,
+    ),
+
+    $x_11$, $-42.576$,
+    $x_22$, $-16.813$,
+    $x_33$, $-47.566$,
+    $x_12$, $-15.933$,
+    $x_13$, $-165.824$,
+    $x_23$, $-20.332$,
+  ),
+  caption: [
+    Anharmonic vibrational constants of $ce("H2O")$ for @eq:molecule-energy-above-vibrationless-equilibrium-state, taken from @eisenbergStructurePropertiesWater2005[Table 1.4].
+    Units are in $"cm"^(-1)$.
+  ],
+) <table:molecule-vibrational-constants-anharmonic>
+
 Studying the vibrational properties of the geometry obtained at the end of the optimization procedure also allows us to assess if the final geometry is a stable or unstable configuration.
 The vibrational modes are calculated from a finite difference approximation of the Hessian matrix, displacing atoms according to a parameter named `delta`, measured in $angstrom$.
 #footnote[https://wiki.fysik.dtu.dk/ase/ase/vibrations/modes.html]
@@ -1829,9 +1964,64 @@ Frequencies are indexed in ascending order, and *imaginary frequencies*, represe
 Inclusion of dispersion contributions in calculators leads to minimal differences in the
 converged configurations.
 
+// logseq://graph/softseq?block-id=6651c91e-359a-4b31-9a4f-9dbb3ff5da83
 The stability of configurations is dependent in a discriminant way on the `delta` and `fmax` parameters.
-The analysis confirms that the value of `fmax=1e-4` yields unstable configurations, while `fmax=1e-8` is appropriate to obtain stable configurations.
-Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure convergence of calculations.
+In particular, we seek simulation parameters that bring the energies and the spatial frequencies of the vibrations other than the first three, as close to zero as possible.
+The analysis confirms that, to achieve the result with the best numerical accuracy possible, the value of $f_"max" = 10^(-8) "eV/"angstrom$ is the best.
+However, such a value of the force threshold could be considered extreme, especially compared to typical values of $f_"max" = 0.01 "eV/"angstrom$ commonly used in @dft calculations.
+
+With the same spirit, the displacement `delta` shall be smaller than $10^(-4) angstrom$ to ensure convergence of calculations of frequencies within precision of $10^(-2) " cm"^(-1)$,
+and smaller than $10^(-3) angstrom$ for a convergence of the frequencies within $10^(-1) " cm"^(-1)$, which is well within the acceptable range.
+Again, this is a extremely small value.
+The default $delta = 0.01 angstrom$ in @ase is a pretty conservative displacement by solid-state standards, and the tight value obtained here could be explained by the fact that the $ce("H -")$ stretch bonds encountered here are very strong and smaller values of delta are better for the system considered in our calculations.
+
+When seeking the force threshold, we should ultimately be guided by the following considerations:
+
+- the force tolerance of the optimizer may need to be very tight;
+- even then, the finite difference scheme is unlikely to get the trans/rotational modes to be _exactly_ zero;
+  usually one aims for "small enough" values, which may be negative;
+- a "noisy" potential energy surface is more likely to have problems with consistency between a local minimum and finite-difference vibrations;
+  with #glspl("mlp") this can be an issue, especially if using single-precision GPU evaluation;
+- on the other hand, a well implemented @mlp can be regularized to a smooth surface and may behave "better" than the underlying @dft calculations under tighter thresholds.
+
+
+The MACE models produce smooth energy profiles @batatiaMACEHigherOrder2022[§5.3.2], which lends support to the hypothesis that smaller thresholds yield better results.
+
+Relaxing the requirement for the obtainment of numerically exact zero values for the energies and frequencies of the vibrations other than the three normal modes, allows for the selection of less stringent values for $f_"max"$ and $delta$, depending on the desired accuracy.
+A summary of the results is detailed in @table:vibrations-range-of-values.
+In conclusion, a value of $f_"max" = 10^(-2) "eV/"angstrom$ guarantees a convergence of the energy of vibrations within $6 "meV"$, and a value of $f_"max" = 10^(-3) "eV/"angstrom$ a convergence within $1.8 "meV"$, and a value of $f_"max" = 10^(-4) "eV/"angstrom$ a convergence within $0.6 "meV"$.
+
+Below is also available a grid of plots comparing the convergence of frequencies using different models, force thresholds and displacements.
+Adding the dispersion correction to the models in this step produces negligible differences in the results, so their graphs are omitted for brevity.
+
+#figure(
+  table(
+    columns: 5,
+    align: horizon,
+    table.header($f_"max"$, $10^(-1)$, $10^(-2)$, $10^(-3)$, $10^(-4)$),
+    [small],
+    [$17.7i$ \ $delta = 10^(-3)$],
+    [$2 ÷ 6$ \ $delta = 10^(-2)$],
+    [$0.4i$ \ $delta = 10^(-3)$],
+    [$0.4i$ \ $delta = 10^(-3)$],
+
+    [medium],
+    [$1.4i ÷ 3.8$ \ $delta = 10^(-3)$],
+    [$3.8 ÷ 5i$ \ $delta = 10^(-2)$],
+    [$0.3 ÷ 1.1$ \ $delta = 10^(-3)$],
+    [$0.2 ÷ 0.4$ \ $delta = 10^(-3)$],
+
+    [large],
+    [$3.4 ÷ 11.1$ \ $delta = 10^(-2)$],
+    [$2÷4$ \ $delta = 10^(-2)$],
+    [$0.2 ÷ 1.8$ \ $delta = 10^(-2)$],
+    [$0.4i ÷ 0.6$ \ $delta = 10^(-2)$],
+  ),
+  caption: [
+    Table showing the range of values obtained for the energies of vibrations outside the first three normal modes, expressed in $"meV"$, for each MACE-MP-0 model on the rows, and for each chosen $f_"max"$ on the columns, expressed in $"eV/"angstrom$.
+    Inside each cell, on the second row is also shown the corresponding least restrictive value of the displacement $delta$, expressed in $angstrom$, that guarantees convergence of results for each configuration.
+  ],
+) <table:vibrations-range-of-values>
 
 #large_figure(
   grid(
@@ -1893,13 +2083,10 @@ Moreover, the displacement `delta` shall be smaller than `1e-4` to ensure conver
 //   caption: "Convergence of the large model with dispersion with respect to fmax",
 // )
 
-Adding the dispersion correction to the models in this step produces negligible differences in the results, so their graphs are omitted for brevity.
-
 ==== MACE-ICE13-1
 
 The MACE-ICE13-1 model is fine-tuned from the MACE-MP-0 medium model with
 dispersion.
-
 Convergence of results for the MACE-ICE13-1 model is achieved for displacements below $10^(-4) angstrom$.
 The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corresponds to negligible energy, as can be observed in the representative output in @code-monomer-vibrations-mace-ice13-1-output and therefore does not pose a issue.
 
@@ -1943,28 +2130,41 @@ The imaginary frequency observable in @fig-monomer-vibrations-mace-ice13-1 corre
   ],
 )
 
-==== Zero-point vibrational energy
+==== Zero-point vibrational energy <sec:molecule-zpe>
 
-The @zpe from the computation models is shown in @table:zpe.
-The MACE-ICE13-1 model shows the best agreement with reference data from literature @eisenbergStructurePropertiesWater2005, with a discrepancy of $0.01 "eV"$.
+@eq:molecule-energy-above-vibrationless-equilibrium-state also yields an expression for the zero-point energy of vibration @eisenbergStructurePropertiesWater2005[Eq. 1.4]:
+$
+  "ZPE" &:= G(0,0,0) \
+  &= 1 / 2 (omega_1 + omega_2 + omega_3) +
+  1 / 4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23).
+$ <eq:zpe>
+When the reference harmonic and anharmonic constants of @table:molecule-omega and @table:molecule-vibrational-constants-anharmonic are inserted in this equation, the zero-point energy of $ce("H2O")$ is found to be $4634.32 " cm"^(-1)$, or $0.575 "eV"$.
+It has already been pointed out that the @zpe cannot be expressed in terms of the $omega_i$ only, and this implies that different scaling factors must be used for obtaining improved #glspl("zpe") or fundamental vibrations from harmonic frequencies, by comparing to experimental values. @baroneVibrationalZeropointEnergies2004[§II] @grevConcerningZeropointVibrational1991
+Conscious of the fact that our calculations are done in the harmonic approximation#footnote[#gls("ase", long: false) Vibrations class computes ZPE using @eq:zpe-harmonic; see https://wiki.fysik.dtu.dk/ase/_modules/ase/vibrations/data.html#VibrationsData.get_zero_point_energy], we ought not compare our results with the full @zpe, but with the following harmonic component: @baroneVibrationalZeropointEnergies2004[Eq. 5]
+$
+  "ZPE"_H := 1 / 2 sum_i omega_i.
+$ <eq:zpe-harmonic>
+The experimental value for this quantity is $"ZPE"_H^"Expt." = 56.4 "kJ/mol" approx 0.585 "eV"$. @baroneVibrationalZeropointEnergies2004[Table 1]
+The harmonic @zpe computed using #glspl("mlp") is compared with this value in @table:zpe.
+The MACE-ICE13-1 model shows the best agreement, with a discrepancy of $0.02 "eV"$, with the MACE-MP-0 small model following righ after.
 
 #let zero_point_energies_table = csv("simulazioni/02_water/01_molecule/zero_point_energies.csv")
 #figure(
   table(
     columns: zero_point_energies_table.first().len(),
     // table.header(..zero_point_energies_table.first()),
-    table.header([Model], [@zpe ($"eV"$)], [Discrepancy (eV)]),
+    table.header([Model], [ $"ZPE"_H ("eV")$], [Discrepancy (eV)]),
     ..zero_point_energies_table.slice(1).flatten(),
   ),
   caption: [
-    Zero-point energies for the employed calculators and reference value @eisenbergStructurePropertiesWater2005.
-    The difference between calculated and reference value is also shown in the last column.
+    Zero-point energies in the harmonic approximation for the @mlp calculators and reference experimental value from @baroneVibrationalZeropointEnergies2004[Table 1].
+    The last column describes the difference between calculated and experimental value.
     small, medium and large models refer to MACE-MP-0.
   ],
 ) <table:zpe>
 
-The results so far indicate that the medium, large MACE-MP-0, and MACE-ICE13-1 approximate better the properties of the water molecule,
-while the small MACE-MP-0 model is the worst of them in this regard.
+The overall results so far indicate that the medium, large MACE-MP-0, and MACE-ICE13-1 approximate better the properties of the water molecule,
+while the small MACE-MP-0 model is the worst of them in this regard, except for the case of the @zpe calculation.
 
 == The water dimer
 
@@ -2090,9 +2290,9 @@ and is allowed a relatively bigger range of motion.
 
 === Vibrations analysis <sec:dimer-vibrations>
 
-Similarly to the procedure adopted for the monomer,
+Analogously to the procedure adopted for the analysis of vibrations of the water monomer in @sec:molecule-vibrations,
 normal modes of the water dimer were analyzed to assess the dynamical stability of the optimized geometry.
-A displacement smaller than $10^(-4) angstrom$ is required for all the models to converge to stable configurations.
+A displacement of $10^(-2) angstrom$ or less is appropriate for the MACE-ICE13-1 and MACE-MP-0 large models to converge to stable configurations within a threshold tolerance in frequencies of about $1"cm"^(-1)$, while for MACE-MP-0 small and medium a displacement of $10^(-3) angstrom$ or less is required to respect the same threshold tolerance in frequencies.
 
 #large_figure(
   grid(
@@ -2104,8 +2304,8 @@ A displacement smaller than $10^(-4) angstrom$ is required for all the models to
     image("simulazioni/02_water/02_dimer/01_optimize/Grafici/MACE-ICE13-1.png"),
   ),
   caption: [
-    Structure optimization of the water dimer and vibration analysis.
-    Negative values represent imaginary frequencies.
+    Values of the vibration frequencies of the water dimer after structure optimization, plotted against the displacement used for the vibrations analysis.
+    Negative values on the y-axis represent imaginary frequencies.
   ],
 )
 
@@ -2141,7 +2341,7 @@ Deviations from reference are also graphed in @fig:dimer-harmonic-frequencies-er
 ) <fig:dimer-harmonic-frequencies-errors>
 
 In @table:dimer-frequencies-sum-absolute-errors we make a summary of the predictive power of each model of the frequencies of the normal modes of the dimer, as compared to reference @kalesckyLocalVibrationalModes2012.
-MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies.
+MACE-ICE13-1 demonstrates the best overall adherence to the prediction of harmonic frequencies.
 
 #let dimer_harmonic_frequencies_mae = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/mae.csv")
 #figure(
@@ -2156,6 +2356,11 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
 ) <table:dimer-frequencies-sum-absolute-errors>
 
 === Zero Point Energy
+
+As it was done in @sec:molecule-zpe, we make use of @eq:zpe-harmonic to get the @zpe composed of the harmonic frequencies.
+@table:dimer-zpe shows the results obtained with our @mlp models and compares them with a reference value from the literature.
+The ranking of accuracy of the models sees as before MACE-ICE13-1 as closest to the ground truth, with MACE-MP-0 small following right after.
+
 #let dimer_zpe = csv("simulazioni/02_water/02_dimer/01_optimize/Analisi/zpe.csv")
 #figure(
   table(
@@ -2164,9 +2369,9 @@ MACE-ICE13-1 demonstrates the best overall adherence to the harmonic frequencies
     ..dimer_zpe.slice(1).flatten()
   ),
   caption: [
-    ZPE of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012. Energies are in units of eV.
+    ZPE in units of eV of the water dimer in the harmonic approximation and comparison with reference @kalesckyLocalVibrationalModes2012 (named Kalescky in the table).
   ],
-)
+) <table:dimer-zpe>
 
 === Binding energy
 
@@ -2326,17 +2531,23 @@ MACE-ICE13-1 shows a great adherence to its reference potential, revPBE-D3, posi
 
 Normal modes of vibration are calculated using the so-called *small displacement method*.
 This method is increasingly more accurate with bigger and bigger supercells.
-
 For details on the tools used for phonons calculations, see @sec:tools-phonons.
 
 The first thing to do is to build a supercell.
 The Ih ice structure was analyzed;
 it is composed of 36 atoms, that is 12 water molecules.
-// TODO Definisci struttura del ghiaccio Ih
-The biggest supercell that the GPU cuda version of MACE can handle is the $3 times 3 times 3$.
-Using MACE on CPU allows us to employ also $4 times 4 times 4$ supercells, at the expense of a significantly increased computation time.
+During the execution of this task, we encountered one of the hard limitations of MACE, that is multi-GPU single point calculations are not ready at the moment of writing.#footnote[See https://github.com/ACEsuit/mace/issues/309#issuecomment-2214910393]
+This implied a cap on the maximum number of atoms in the simulated system.
 
-=== Band structure
+Given the hardware infrastructure (see @sec:tools), we know that the compute nodes with a GPU may not be able to handle more than 2000÷4000 atoms, based on MACE developers experience.#footnote[https://github.com/ACEsuit/mace/issues/322#issuecomment-1939405373]
+This phenomenon is indeed observed, as the $3 times 3 times 3$ supercell, with 972 atoms, is successfully run on GPU.
+Scaling up to a $4 times 4 times 4$ supercell, composed of 2304 atoms, fails from the start, as the memory allocation phase yields error due to exhaused memory on the GPU.
+The fix to this known issue is being worked on by MACE developers, but limited our experimentation at the present time.
+
+The workaround to simulate such a number of atoms, is to run MACE in parallel on CPUs only, enjoying the memory of the compute nodes, that is much larger.
+The downside one has to bear is the significantly increased computation time when choosing this configuration.
+
+=== Band structure <sec:phonons-bandstructure>
 
 To build the band structure of ice Ih,
 we have to define the band path on which the frequencies are calculated.
@@ -2349,6 +2560,7 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 #grid(
   columns: 2,
   align: horizon,
+  gutter: 10pt,
   [
     - $Gamma$: center of the Brillouin zone
     - $A$: center of a hexagonal face
@@ -2367,8 +2579,51 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 
 The bandpath is chosen following the reference article @guptaPhononsAnomalousThermal2018, that is sampling the Brillouin zone passing through critical points $Gamma, A, K, H, M, L, Gamma$ by means of straight line segments.
 See @fig:bandpath-gupta for the graphical representation of the bandpath.
-The line segments are sampled with a number of points, named q-points.
-The number of q-points in each path including end points is chosen as 101.
+The line segments are sampled defining a number of points along the path, named q-points.
+The number of q-points in each path including end points is chosen to be 101.
+
+#grid(
+  columns: 2,
+  align: bottom,
+  gutter: 10pt,
+  [#figure(
+      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg"),
+      caption: [
+        The bandstructure of ice Ih, computed using MACE-ICE13-1 and a $3 times 3 times 3$ supercell.
+      ],
+    )],
+  [#figure(
+      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
+      caption: [The bandpath chosen by @guptaPhononsAnomalousThermal2018.],
+    ) <fig:bandpath-gupta>],
+)
+
+A test of the performance of MACE-ICE13-1 for the generation of phonon band structures is performed, comparing the $2 times 2 times 2$ supercell results of the @mlp (@fig:phonons-bandstructure-ice-ih-mace-ice13-1-dellapia) with the results obtained with the @dft potential from which it is based upon, revPBE-D3 (@fig:phonons-bandstructure-ice-ih-revpbed3-dellapia).
+It is important to keep in mind that these computations are not converged, but allow us to verify the similarity of the two potentials.
+In particular, as it will be an important piece of information in the following paragraphs, the values of the frequencies at the critical point $Gamma$ (denoted with G in the graphs) correspond.
+
+#large_box(
+  grid(
+    columns: 2,
+    gutter: 10pt,
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/FREQ1.svg"),
+        caption: [
+          The phonon band structure of ice Ih, computed using MACE-ICE13-1 and PHON with a $2 times 2 times 2$ supercell.
+        ],
+      ) <fig:phonons-bandstructure-ice-ih-mace-ice13-1-dellapia>],
+    [#figure(
+        image("simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/FREQ1.svg"),
+        caption: [
+          The phonon band structure of ice Ih, computed using revPBE-D3 and PHON with a $2 times 2 times 2$ supercell.
+        ],
+      ) <fig:phonons-bandstructure-ice-ih-revpbed3-dellapia>],
+  ),
+)
+
+Our analysis further compares the converged results in the harmonic approximation, with reference data including anharmonic contributions, to assess the importance of the latter in the study of ice properties.
+The calculation of the band structure accurately reproduces the qualitative aspects of the diagram from the reference, particularly with regard to shape and intersections at critical points
+(compare @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta).
 
 #large_box(
   grid(
@@ -2376,60 +2631,37 @@ The number of q-points in each path including end points is chosen as 101.
     align: horizon,
     gutter: 10pt,
     [#figure(
-        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta_full.svg"),
-        caption: [
-          The bandstructure of ice Ih, computed using MACE-ICE13-1 and a $3 times 3 times 3$ supercell.
-        ],
-      )],
-    [#figure(
-        image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg"),
-        caption: [The bandpath chosen by @guptaPhononsAnomalousThermal2018.],
-      ) <fig:bandpath-gupta>],
-
-    [#figure(
         image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg"),
         caption: [
-          Phonon bandstructure of ice Ih, computed using MACE-ICE13-1.
+          Phonon bandstructure of ice Ih in the harmonic approximation, computed using MACE-ICE13-1 with a $3 times 3 times 3$ supercell.
         ],
       ) <fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom>],
     [#figure(
         image("thesis/imgs/gupta2018_fig4_H2O.png"),
-        caption: [Phonon bandpath dispersion reference, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
+        caption: [Phonon bandpath dispersion considering anharmonic contributions, taken from @guptaPhononsAnomalousThermal2018[Fig. 4].],
       ) <fig:phonons-bandstructure-ice-ih-gupta>],
   ),
 )
 
-The bandstructure calculations result in a approximate reproduction of reference data, as can be observed comparing @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom and @fig:phonons-bandstructure-ice-ih-gupta.
-Frequencies are significantly higher than reference; the source of this discrepancy is not clear;
-varying volumes of the cell were tested and did not change the result;
-another source of the issue could be a built-in deviation of the calculator.
-This issue has yet to be fully investigated at the time of writing.
+From a quantitative perspective, however, there is a discernible tendency for the calculated band frequencies to be overestimated.
+This can be deduced by comparing the right-hand edge of @fig:phonons-bandstructure-ice-ih-mace-ice13-1-zoom with the left-hand edge of @fig:phonons-bandstructure-ice-ih-gupta, specifically at the frequencies at the $Gamma$ point.
+To illustrate, the group of frequencies which is just above $10 "meV"$ in the reference, is found to be above $12.5 "meV"$ in the calculation in the harmonic approximation.
 
-#large_box(
-grid(
-  columns: 2,
-  // column-gutter: 1fr,
-  align: horizon,
-  [
-    Calculation of phonons dispersion along the band path was also performed using the PHON code @alfePHONProgramCalculate2009 for consistency of calculations.
-    The obtained results are in accordance with reference and previous calculations, maintaining the charachteristic over-estimation of the phonon frequencies we saw before.
-  ],
-  figure(
-    image("simulazioni/02_water/04_crystal_phonons/phon/12.PHON_MACE-ICE13-1_S3/bandplot.svg"),
-    caption: [
-      Phonons bandstructure of ice Ih, computed with PHON using MACE-ICE13-1.
-    ]
-  )
-)
-)
+The entity of anharmonic contributions is deemed relevant to the anomalous thermal expansion in the Ih phase of ice @guptaPhononsAnomalousThermal2018,
+and anharmonic corrections of the order of 2--3 kJ/mol = 21--31 meV are not negligible in pursuit of chemical accuracy (4.2 kJ/mol = 44 meV) @reillyUnderstandingRoleVibrations2013.
+The detailed study of this specifica topic and related simulations, however, are beyond the scope of this thesis.
 
-Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit even higher frequencies and are reputed as lower quality for the current analysis.
+The calculations of phonons dispersions along the band path were performed using a variety of three tools for phonons analysis, to ensure the coherence of calculations.
+The details about the tools is available in @sec:tools-phonons.
+The specific timings for each configuration are briefly resumed in @sec:phonons-timing.
+
+Frequencies calculated with MACE-MP-0, shown in @fig:phonons-bandstructure-ice-ih-mace-mp-0-zoom, exhibit higher frequencies and are reputed as lower quality for the current analysis.
 A visual qualitative analysis of the band structure produced with MACE-MP-0 exposes several different behaviours, particularly at zone boundary points;
-most notably, see the disalignment of bands around point $M$, and at point $A$.
+most notably, see the disalignment of bands with respect to other graphs, around critial points $M$ and $A$.
 
-As reference @guptaPhononsAnomalousThermal2018 employed a $2 times 2 times 2$ supercell for its calculations, we tested the convergence of calculations with respect to a higher supercell.
-Limitation of resources allowed the calculation of the frequencies using at most $3 times 3 times 3$ supercell.
-The comparison of the results with the different supercells is shown in @fig:phonons-bandstructure-ice-ih-mace-ice13-1-compare-s2-s3.
+We tested the convergence of calculations with respect to higher supercells.
+The comparison of the results is shown in @fig:phonons-bandstructure-ice-ih-mace-ice13-1-compare-s2-s3.
+Limitation of resources, further detailed below, allowed the calculation of the frequencies using at most $3 times 3 times 3$ supercell.
 
 #large_box(
   grid(
@@ -2452,85 +2684,94 @@ The comparison of the results with the different supercells is shown in @fig:pho
   ),
 )
 
-==== Timing
+==== Timing <sec:phonons-timing>
 
-#large_box(
-  grid(
-    columns: 2,
-    gutter: 5pt,
-    align: top,
-    figure(
-      tablem(
-        ignore-second-row: false,
-        [
-          |supercell|device|optimization time|forces time|
-          |1|cuda|45s|8s|
-          |2|cuda|44s|50s|
-          |3|cuda|44s|21s|
-          |4|cpu|5m 23s|1h 47m 7s|
-        ],
-      ),
-      caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
-    ),
+The following tables exhibit a summary of the time needed to execute the task of phonon dispersions calculation.
+The integrated tool by ASE, the Phonons class, results in the longest times, as it does not take into account the symmetries of the system to reduce the number of displacements to make; this is a known issue, and one is advised to use other tools for this task.
+
+The two other phonon codes, Phonopy and PHON, were used as auxiliary tools to @ase.
+The reader interested in their implementation can find the specific details in @sec:tools-phonons.
+Both the tools worked as expected, and a remarkable reduction in the total computation time can be appreciated in @table:timing-phonopy and @table:timing-phon, with respect, e.g., to timings observed with typical @dft codes, like described in the paragraph below.
+
+The task was also run with the VASP @dft suite and the PHON code.
+Calculation of phonon dispersions for the primitive cell (supercell = 1) of ice Ih, with a k-points grid of $2 times 2 times 2$ (for the ice, a k-points grid of $4 times 4 times 4$ is appropriate) is not tabulated and required 1 hour and 26 minutes using the GPU node.
+A second calculation of the same type, with calculation limited to the $Gamma$ point, with supercell $2 times 2 times 2$, and k-points sampling $1 times 1 times 1$, required 5 hours and 54 minutes.
+
+#figure(
+  tablem(
+    ignore-second-row: false,
     [
-    #figure(
-      tablem(
-        ignore-second-row: false,
-        [
-          |supercell|time|device|
-          |2|1m 30s|cuda|
-          |4|fail (out of memory)|cuda|
-          |4|7h 32m| cpu|
-        ],
-      ),
-      caption: [Execution times with Phonons by ASE.],
-    )
-
-    #figure(
-      table(columns: 4,
-      [supercell], [forces time], [dispersions time], [device],
-      [3],         [3m 22s],      [22s],              [cuda]
-      ),
-      caption: [
-        Execution times with PHON. @alfePHONProgramCalculate2009
-      ]
-    )
+      |supercell|device|optimization time|forces time|
+      |1|cuda|45s|8s|
+      |2|cuda|44s|50s|
+      |3|cuda|44s|21s|
+      |4|cpu|5m 23s|1h 47m 7s|
     ],
   ),
-)
+  caption: [Execution times with phonopy. @togoFirstprinciplesPhononCalculations2023],
+) <table:timing-phonopy>
+
+#figure(
+  table(
+    columns: 4,
+    [supercell], [device], [forces time], [dispersions time],
+    [2], [cuda], [47s], [13s],
+    [3], [cuda], [3m 22s], [22s],
+  ),
+  caption: [
+    Execution times with PHON. @alfePHONProgramCalculate2009
+  ],
+) <table:timing-phon>
+
+#figure(
+  tablem(
+    ignore-second-row: false,
+    [
+      |supercell|device|time|
+      |2|cuda|1m 30s|
+      |4|cuda|fail (out of memory)|
+      |4|cpu|7h 32m|
+    ],
+  ),
+  caption: [
+    Execution times with Phonons by ASE.
+    This setup achieves the slowest of timings, as ASE does not take into account symmetries of the system.
+  ],
+) <table:timing-ase-phonons>
 
 === Phonons DOS
 
-#large_box(
-  grid(
-    columns: 2,
-    gutter: 5pt,
-    figure(
-      image("thesis/imgs/holzapfel2021_fig21.png"),
-      caption: [
-        Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021.
-        Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
-      ],
-    ),
-    figure(
-      image("simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/dos_mace-ice13-1_s3_mesh=32_zoom.svg"),
-      caption: [
-        Calculated phonons DOS, using MACE-ICE13-1 and smearing width $sigma=0.05$.
-      ],
-    ),
+The phonons @dos of the bandpath obtained from the MACE @mlp and from revPBE-D3 @dft potential are plotted below;
+compared side by side, the results obtained with MACE match closely the results from its reference @dft model.
+
+#grid(
+  columns: 2,
+  gutter: 10pt,
+  figure(
+    image("simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/DOS.svg"),
+    caption: [
+      Phonons DOS using MACE-ICE13-1.
+    ]
+  ),
+  figure(
+    image("simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/DOS.svg"),
+    caption: [
+      Phonons DOS using revPBE-D3.
+    ]
   ),
 )
 
-As anticipated in the analysis of the bandstructure,
-frequencies calculated with MACE-ICE13-1 are shifted toward higher values,
-compared to reference data.
-
-#image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg")
+#figure(
+  image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg"),
+  caption: [
+    The phonon DOS calculated using MACE-ICE13-1, including higher frequencies.
+  ]
+)
 
 === Heat capacity
 
-@flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
-@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; the analysis of heat capacity considering harmonic terms is reproduced along with reference data in @fig:heat-capacity-mace-holzapfel.
+Article @flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
+Article @holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; the analysis of heat capacity considering harmonic terms is reproduced along with reference data in @fig:heat-capacity-mace-holzapfel.
 
 In the quasi-harmonic approximation the lattice vibrations are assumed to be harmonic but with frequencies dependent upon the volume. @leadbetterThermodynamicVibrationalProperties1965
 
@@ -2538,15 +2779,22 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
   image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg"),
   caption: [
     Heat capacity of ice Ih.
-    Comparison of results from simulation with different calculators (S3 indicates supercell 3x3x3, otherwise supercell is 2x2x2) and reference data @holzapfelCoherentThermodynamicModel2021.
+    Comparison of results from simulation with different calculators (S3 indicates supercell $3 times 3 times 3$, otherwise supercell is $2 times 2 times 2$) and reference data @holzapfelCoherentThermodynamicModel2021.
   ],
 ) <fig:heat-capacity-mace-holzapfel>
 
 === Band structure and DOS of $#ce("D2O")$
 
 A further study was performed to analyze the performance of the calculator compared with reference data on deuterated water. @strasslePhononDispersionIce2004
-In this scenario, the fidelity is estimated to be worse than the previous case.
-The same considerations on the quality of the results hold as above.
+In this scenario we can find a similar behaviour to the one observed in the previous section, of overestimation of the energies with respect to the reference study, which can again be observed, through a comparison of the value of clearly identifiable nodes, e.g. at the edge of the respective graphs in @fig:phonons-d2o-mace-ice13-1 and @fig:phonons-d2o-reference.
+
+The nodes in k-point $A$ in the reference are close to the value of $1 "THz"$ from below, while in the harmonic approximation the simulation predicts a value above $1 "THz"$.
+Similarly, one can detect a conjunction of bands in the same k-point $A$ at a frequency just below $3 "THz"$, while the corresponding bands one can identify sit above $3 "THz"$ and are furthermore separated.
+
+One can confirm the overall slight reduction of the lower bands frequencies and a corresponding increase of upper bands, when applying higher pressure.
+The presence of a bigger number of bands in the simulation produces a DOS with a different shape, and makes the comparison with reference not straightforward.
+The identification of the peaks, however, shows again that the values of the frequencies is shifted upward.
+For a direct comparison with the axis of the reference in Kelvin, a second axis is put on the top border of the graph of our DOS.
 
 #large_box(
   grid(
@@ -2559,9 +2807,9 @@ The same considerations on the quality of the results hold as above.
           #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/total_dos.svg")
         ],
         caption: [
-          Band structure and DOS calculated with MACE-ICE13-1.
+          Band structure and DOS of $#ce("D2O")$ calculated in the harmonic approximation with MACE-ICE13-1.
         ],
-      )
+      ) <fig:phonons-d2o-mace-ice13-1>
     ],
     [
       #figure(
@@ -2570,16 +2818,19 @@ The same considerations on the quality of the results hold as above.
           #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/dos_strassle.png")
         ],
         caption: [
-          Band structure and DOS from reference @strasslePhononDispersionIce2004.
+          Band structure and DOS of #ce("D2O") from reference @strasslePhononDispersionIce2004.
         ],
-      )],
+      ) <fig:phonons-d2o-reference>
+    ],
   ),
 )
 
 == Molecular Dynamics
+
+The last task in this discussion concerns the behaviour of liquid water. 
 Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
 ] were performed under varying external conditions.
-The thermostat couples the system to an external heath bath at a fixed temperature.
+The thermostat couples the system to an external heat bath at a fixed temperature.
 
 === Radial Distribution Function
 
@@ -2617,35 +2868,29 @@ While the MACE-ICE13-1 model performs well in reproducing structural properties,
   image("simulazioni/02_water/05_md/Grafici/temperature_NVT.png", width: 80%),
   caption: [
     Example of temperature trend through a MD simulation of water with MACE-ICE13-1.
-  ]
+  ],
 )
 
 = Tools <sec:tools>
 == Hardware: Ibisco
 Simulations were performed on the @ibisco cluster provided by the Federico II University. @WikiArchit_ib_enIbisco
-// #box(
-//   stroke: 2pt + red,
-//   inset: 1mm,
-//   [
-    The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
-    The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
-    in the upper level the application level, which allows users to submit their tasks.
-    The intermediate level of the architecture consists of the set of CUDA and MPI libraries which are capable of making the two levels communicate with each other.
+The architecture of the hybrid cluster of the @ibisco Data Center can be represented as a set of multiple layers.
+The lowest layer of the architecture consists of the hardware, characterized by calculation and storage nodes;
+in the upper level the application level, which allows users to submit their tasks.
+The intermediate level of the architecture consists of the set of CUDA and MPI libraries which are capable of making the two levels communicate with each other.
 
-    === The hardware level
-    The cluster comprises 36 nodes and 2 switches, placed in 4 racks of the Data Center.
-    They perform two functions: calculation and storage.
-    To support the calculation there are 128 GPUs, distributed among 32 nodes (4 GPUs per node).
-    To support storage, 320 TB are available distributed among 4 nodes (80 TB per node).
-    To ensure access to resources and low-latency broadband communication between nodes, the InfiniBand technology is used to provide a high-performance network.
+=== The hardware level
+The cluster comprises 36 nodes and 2 switches, placed in 4 racks of the Data Center.
+They perform two functions: calculation and storage.
+To support the calculation there are 128 GPUs, distributed among 32 nodes (4 GPUs per node).
+To support storage, 320 TB are available distributed among 4 nodes (80 TB per node).
+To ensure access to resources and low-latency broadband communication between nodes, the InfiniBand technology is used to provide a high-performance network.
 
-    === The Compute Node Architecture
-    The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 GPUs, 2 Ethernet ports at 10Gb/s each, 2 InfiniBand ports at 100Gb/s each, 2 Intel Gen 2 Xeon Gold CPUs, and 2 SATA 480 GB SSDs.
-    Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
-    Each GPU is equipped with 34 GB RAM memory.
-    The nodes are divided into 3 differently sized sub-clusters.
-//   ],
-// )
+=== The Compute Node Architecture
+The cluster compute nodes are 32 Dell C4140s, each equipped with 4 NVIDIA V100 GPUs, 2 Ethernet ports at 10Gb/s each, 2 InfiniBand ports at 100Gb/s each, 2 Intel Gen 2 Xeon Gold CPUs, and 2 SATA 480 GB SSDs.
+Each node is also equipped with 22 64 GB RAM memory modules, overall 1.375 TiB.
+Each GPU is equipped with 32 GB RAM memory.
+The nodes are divided into 3 differently sized sub-clusters.
 
 == Framework: Atomic Simulation Environment
 
@@ -2701,7 +2946,9 @@ where $arrow(r)_i in RR^3$ is the position of atom $i$; $z_i$ is the chemical el
 A forward pass of the network consists of multiple _message construction, update_ and _readout_ steps.
 During message construction, a message $arrow(m)_i^((t))$ is created for each node by pooling over its neighbours:
 $
-  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (sigma_i^((t)), sigma_j^((t))),
+  arrow(m)_i^((t)) = plus.circle.big_(j in cal(N) (i)) M_t (
+    sigma_i^((t)), sigma_j^((t))
+  ),
 $
 where $M_t$ is a learnable message function and $plus.circle.big_(j in cal(N) (i))$ is a learnable, permutation invariant pooling operation over the neighbours of atom $i$ (e.g., a sum).
 In the update step, the message $arrow(m)_i^((t))$ is transformed into new features
@@ -2719,7 +2966,9 @@ In _equivariant_ #glspl("gnn"), internal features $arrow(h)_i^((t))$ transform i
 When modelling the potential energy of an atomic structure, the group of interest is $O(3)$, specifying rotations and reflections of the particles; translation invariance is trivially incorporated through the use of relative distances.
 A @gnn is called $O(3)$ equivariant if it has internal features that transform under the rotation $Q in O(3)$ as
 $
-  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((t)) (arrow(r)_1, dots, arrow(r)_N),
+  arrow(h)_i^((t)) (Q dot (arrow(r)_1, dots, arrow(r)_N)) = D(Q) arrow(h)_i^((
+    t
+  )) (arrow(r)_1, dots, arrow(r)_N),
 $
 where $D^L(Q) in RR^((2L + 1) times (2L + 1))$ is a Wigner D-matrix of order $L$.
 A feature labelled with $L=0$ describes an invariant scalar.
@@ -2735,9 +2984,13 @@ The messages $arrow(m)_i^((t))$ are expanded in a hierarchical body order expans
 $
   va(m_i^((t)))
   &= sum_j arrow(u)_1 (sigma_i^((t)); sigma_j^((t))) \
-  &+ sum_(j_1, j_2) arrow(u)_2 (sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t)))
+  &+ sum_(j_1, j_2) arrow(u)_2 (
+    sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
+  )
   + dots
-  + sum_(j_1, dots, j_nu) arrow(u)_nu (sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))),
+  + sum_(j_1, dots, j_nu) arrow(u)_nu (
+    sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
+  ),
 $ <eq:batatiaMACEHigherOrder2022-7>
 where the $arrow(u)$ functions are learnable, the sums run over the neighbours of $i$, and $nu$ is a hyper-parameter corresponding to the maximum correlation order, the body order minus 1, of the message function with respect to the states.
 
@@ -2747,7 +3000,9 @@ The $A_i^((t))$ features are obtained by pooling over the neighbours $cal(N)(i)$
 $
   A_(i, k l_3 m_3)^((t))
   = sum_(l_1 m_1, l_2 m_2) C_(l_1 m_1, l_2 m_2)^(l_3 m_3) dot \
-  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (hat(r)_(j i))
+  dot sum_(j in cal(N)(i)) R_(k l_1 l_2 l_3)^((t)) (r_(j i)) Y_(l_1)^(m_1) (
+    hat(r)_(j i)
+  )
   sum_(tilde(k)) W_(k tilde(k) l_2)^((t)) h_(j, tilde(k) l_2 m_2)^((t)),
 $ <eq:batatiaMACEHigherOrder2022-8>
 where $C_(l_1 m_1, l_2 m_2)^(l_3 m_3)$ are the standard Clebsh-Gordan coefficients ensuring that $A_(i, k l_3 m_3)^((t))$ maintain the correct equivariance; $r_(j i)$ is the (scalar) interatomic distance, and $hat(r)_(j i)$ is the corresponding unit vector.
@@ -2756,7 +3011,9 @@ In the first layer, the node features $h_j^((t))$ correspond to the (invariant) 
 Therefore, @eq:batatiaMACEHigherOrder2022-8 can be further simplified:
 $
   A_(i, k l_1 m_1)^((1))
-  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (hat(r)_(j i)) W_(k z_j)^((1)).
+  = sum_(j in cal(N)(i)) R_(k l_1)^((1)) (r_(j i)) Y_(l_1)^(m_1) (
+    hat(r)_(j i)
+  ) W_(k z_j)^((1)).
 $ <eq:batatiaMACEHigherOrder2022-9>
 This simplified operation is much cheaper, making the computational cost of the first layer low.
 
@@ -2765,7 +3022,9 @@ This is achieved by first forming tensor products of the features, and then symm
 $
   B_(i, eta_nu k L M)^((t))
   = sum_(arrow(l m)) cal(C)_(eta_nu, arrow(l m))^(L M)
-  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((t)) A_(i, tilde(k) l_xi m_xi)^((t)),
+  product_(xi=1)^nu sum_(tilde(k)) w_(k tilde(k) l_xi)^((
+    t
+  )) A_(i, tilde(k) l_xi m_xi)^((t)),
   quad arrow(l m) = (l_1 m_1, dots, l_nu m_nu)
 $ <eq:batatiaMACEHigherOrder2022-10>
 where the coupling coefficients $cal(C)_(eta_nu)^(L M)$ corresponding to the generalized Clebsh-Gordan coefficients ensuring that $B_(i, eta_nu k L M)^((t))$ are $L$-equivariant, the weights $w_(k tilde(k) l_xi)^((t))$ are mixing the channels $(k)$ of $A_i^((t))$, and $nu$ is a given correlation order.
@@ -2910,7 +3169,8 @@ For phonons dispersion calculations, three main tools were tested:
 In this thesis work we learned how to use and implement in our computations the MACE @mlp calculator.
 This allowed fast and accurate prototyping of different molecules configurations, phonon dispersions and ice polymorphs lattice energies, with orders of magnitude shorter execution times with respect to DFT methods.
 It is noteworthy that test simulations could be executed effortlessly on a high-end laptop CPU, for a tight feedback loop between script creation and debugging.
-The results obtained using MACE show a satisfiying agreement with the base models onto which it is trained, with the exception of the phonon dispersions, which show a slight over-estimation of the energies, while the shape of the graphs remain accurate.
+
+The results obtained using MACE show a satisfiying agreement with the base models onto which it is trained, allowing it to share its advantages and the drawbacks.
 Overall #glspl("mlp") demonstrate a convenient accuracy/cost ratio;
 the combination of this characteristic with the ability to fine-tune models to better reproduce the behaviour of particular structures of one's interest, makes this approach very versatile, and a precious addition in the toolbox of material scientists.
 
