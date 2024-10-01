@@ -177,6 +177,7 @@
     (key: "nn", short: "NN", long: "Neural Network"),
     (key: "ks", short: "KS", long: "Kohn-Sham"),
     (key: "lda", short: "LDA", long: "Local Density Approximation"),
+    (key: "dos", short: "DOS", long: "Density of States"),
   ),
   show-all: true,
 )
@@ -2749,40 +2750,37 @@ A second calculation of the same type, with calculation limited to the $Gamma$ p
 
 === Phonons DOS
 
-#large_box(
-  grid(
+The phonons @dos of the bandpath obtained from the MACE @mlp and from revPBE-D3 @dft potential are plotted below;
+compared side by side, the results obtained with MACE match closely the results from its reference @dft model.
+
+#grid(
     columns: 2,
     gutter: 10pt,
     figure(
-      image(
-        "simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/dos_mace-ice13-1_s3_mesh=32_zoom.svg",
-        height: 5cm,
-      ),
+    image("simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/DOS.svg"),
       caption: [
-        Phonons DOS, calculated using MACE-ICE13-1 and smearing width $sigma=0.05$.
-        On the second x-axis on top are the matching units for comparison with the reference.
-      ],
+      Phonons DOS using MACE-ICE13-1.
+    ]
     ),
     figure(
-      image("thesis/imgs/holzapfel2021_fig21.png", height: 5.3cm),
+    image("simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/DOS.svg"),
       caption: [
-        Reference phonons DOS, taken from @holzapfelCoherentThermodynamicModel2021[Fig. 21].
-        Comparison of the experimental phonons DOS (green curve) with the theoretical phonons DOS (blue curve) and the neutron scattering function (red curve with roughly adjusted scale).
-      ],
-    ),
+      Phonons DOS using revPBE-D3.
+    ]
   ),
 )
 
-As anticipated in the analysis of the band structure in @sec:phonons-bandstructure,
-frequencies calculated with MACE-ICE13-1 are shifted toward higher values,
-compared to reference data.
-
-#image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg")
+#figure(
+  image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg"),
+  caption: [
+    The phonon DOS calculated using MACE-ICE13-1, including higher frequencies.
+  ]
+)
 
 === Heat capacity
 
-@flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
-@holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; the analysis of heat capacity considering harmonic terms is reproduced along with reference data in @fig:heat-capacity-mace-holzapfel.
+Article @flubacherHeatCapacityIce1960 treats the heat capacity of ice at low temperatures.
+Article @holzapfelCoherentThermodynamicModel2021 provides an all-round thermodynamic model of ice Ih, detailing the analysis of heat capacity with 1 Debye and 7 Einstein terms; the analysis of heat capacity considering harmonic terms is reproduced along with reference data in @fig:heat-capacity-mace-holzapfel.
 
 In the quasi-harmonic approximation the lattice vibrations are assumed to be harmonic but with frequencies dependent upon the volume. @leadbetterThermodynamicVibrationalProperties1965
 
@@ -2790,7 +2788,7 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
   image("simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg"),
   caption: [
     Heat capacity of ice Ih.
-    Comparison of results from simulation with different calculators (S3 indicates supercell 3x3x3, otherwise supercell is 2x2x2) and reference data @holzapfelCoherentThermodynamicModel2021.
+    Comparison of results from simulation with different calculators (S3 indicates supercell $3 times 3 times 3$, otherwise supercell is $2 times 2 times 2$) and reference data @holzapfelCoherentThermodynamicModel2021.
   ],
 ) <fig:heat-capacity-mace-holzapfel>
 
@@ -2799,7 +2797,7 @@ In the quasi-harmonic approximation the lattice vibrations are assumed to be har
 A further study was performed to analyze the performance of the calculator compared with reference data on deuterated water. @strasslePhononDispersionIce2004
 In this scenario we can find a similar behaviour to the one observed in the previous section, of overestimation of the energies with respect to the reference study, which can again be observed, through a comparison of the value of clearly identifiable nodes, e.g. at the edge of the respective graphs in @fig:phonons-d2o-mace-ice13-1 and @fig:phonons-d2o-reference.
 
-The nodes in k-point $A$ in the reference are close to the value of $1 "THz"$ from below, while MACE predicts a value above $1 "THz"$.
+The nodes in k-point $A$ in the reference are close to the value of $1 "THz"$ from below, while in the harmonic approximation the simulation predicts a value above $1 "THz"$.
 Similarly, one can detect a conjunction of bands in the same k-point $A$ at a frequency just below $3 "THz"$, while the corresponding bands one can identify sit above $3 "THz"$ and are furthermore separated.
 
 One can confirm the overall slight reduction of the lower bands frequencies and a corresponding increase of upper bands, when applying higher pressure.
@@ -2818,7 +2816,7 @@ For a direct comparison with the axis of the reference in Kelvin, a second axis 
           #image("simulazioni/02_water/04_crystal_phonons/phonopy/MACE-ICE13-1/D2O-Ih/total_dos.svg")
         ],
         caption: [
-          Band structure and DOS of $#ce("D2O")$ calculated with MACE-ICE13-1.
+          Band structure and DOS of $#ce("D2O")$ calculated in the harmonic approximation with MACE-ICE13-1.
         ],
       ) <fig:phonons-d2o-mace-ice13-1>
     ],
