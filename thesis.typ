@@ -2587,8 +2587,8 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 
 The bandpath is chosen following the reference article @guptaPhononsAnomalousThermal2018, that is sampling the Brillouin zone passing through critical points $Gamma, A, K, H, M, L, Gamma$ by means of straight line segments.
 See @fig:bandpath-gupta for the graphical representation of the bandpath.
-The line segments are sampled with a number of points, named q-points.
-The number of q-points in each path including end points is chosen as 101.
+The line segments are sampled defining a number of points along the path, named q-points.
+The number of q-points in each path including end points is chosen to be 101.
 
 #large_box(
   grid(
