@@ -137,7 +137,7 @@ def __(dos):
     from scipy.ndimage import gaussian_filter1d
 
     # Apply a small Gaussian smearing to the second column (DOS values)
-    sigma = 1.0 # A small Gaussian sigma value
+    sigma = 1.0  # A small Gaussian sigma value
     smearedd_dos = gaussian_filter1d(dos.iloc[:, 0], sigma=sigma)
     return gaussian_filter1d, sigma, smearedd_dos
 
