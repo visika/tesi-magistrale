@@ -2835,6 +2835,8 @@ For a direct comparison with the axis of the reference in Kelvin, a second axis 
 )
 
 == Molecular Dynamics
+
+The last task in this discussion concerns the behaviour of liquid water. 
 Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
 ] were performed under varying external conditions.
 The thermostat couples the system to an external heat bath at a fixed temperature.
