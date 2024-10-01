@@ -1354,7 +1354,7 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
 // )
 
 == #machine-learning-title <sec:machine-learning>
-#text(blue)[
+
   Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
   There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
   It is our interest to study the *supervised learning* type.
@@ -1363,14 +1363,12 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
   Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
   Thus, we can also think of supervised learning as "label learning".
   A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
-]
+
 In the detailed description of MACE in @sec:mace, we will see that the data inputs are atom positions, atomic number; while the label will be the energy, a continuous value learned through regression.
-#text(blue)[
+
   In regression analysis, we are given a number of predictor (*explanatory*) variables and a continuous response variable (*outcome*), and we try to find a relationship between those variables that allows us to predict an outcome.
   In the field of machine learning, the predictor variables are commonly called "features", and the response variables are usually referred to as "target variables".
-]
 
-#text(blue)[
   Artificial neurons represent the building blocks of the multilayer artificial #glspl("nn").
   The basic concept behind artificial #glspl("nn") was built upon hypotheses and models of how the human brain works to solve complex problem tasks.
   NNs are more popular today than ever thanks to the many breakthroughs that have been made in the previous decade, which resulted in what we now call deep learning algorithms and architectures—NNs that are composed of many layers.
@@ -1559,10 +1557,9 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       Figure from @raschkaMachineLearningPyTorch2022.
     ],
   )
-]
 
 == #gnn-title <sec:gnn>
-#text(blue)[Neural networks have been adapted to leverage the structure and properties of graphs.]
+Neural networks have been adapted to leverage the structure and properties of graphs.
 
 #figure(
   image("thesis/imgs/distill.pub.gnn-intro.fig1.png"),
@@ -1573,10 +1570,10 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   ],
 )
 
-#text(blue)[A set of objects, and the connections between them, are naturally expressed as a graph.]
-#text(blue)[#glspl("gnn") see practical applications in physics simulations @sanchez-gonzalezLearningSimulateComplex2020] and are the foundation of the main calculator employed in this work, MACE, as detailed in @sec:mace.
+A set of objects, and the connections between them, are naturally expressed as a graph.
+#glspl("gnn") see practical applications in physics simulations @sanchez-gonzalezLearningSimulateComplex2020 and are the foundation of the main calculator employed in this work, MACE, as detailed in @sec:mace.
 
-#text(blue)[A graph represents the relations (_edges_) between a collection of entities (_nodes_).]
+A graph represents the relations (_edges_) between a collection of entities (_nodes_).
 
 #large_figure(
   grid(
@@ -1607,18 +1604,16 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
   ],
 )
 
-#text(blue)[
+
   To further describe each node, edge or the entire graph, we can store information in each of these pieces of the graph.
   We can additionally specialize graphs by associating directionality to edges (_directed_, _undirected_).
 
-  Graphs are very flexible data structures], and for this reason they were used by MACE to embed atomistic properties of physical systems.
-#text(blue)[
+  Graphs are very flexible data structures, and for this reason they were used by MACE to embed atomistic properties of physical systems.
   It’s a very convenient and common abstraction to describe this 3D object as a graph, e.g. where nodes are atoms and edges are covalent bonds.
-]
-#text(blue)[
+
+
   A way of visualizing the connectivity of a graph is through its adjacency matrix.
   One labels the nodes, in this case each of 14 non-H atoms in a caffeine molecule, and fill a matrix of $n_"nodes" times n_"nodes"$ with an entry if two nodes share an edge.
-]
 
 #figure(
   image("thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png"),
@@ -1629,11 +1624,8 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
 )
 
 *Definition*:
-#text(blue)[
   A GNN is an optimizable transformation on all attributes of the graph (nodes, edges, global-context) that preserves graph symmetries (permutation invariances).
-]
 
-#text(blue)[
   In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
   #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
 
@@ -1738,7 +1730,6 @@ In the detailed description of MACE in @sec:mace, we will see that the data inpu
       Figure from @sanchez-lengelingGentleIntroductionGraph2021.
     ],
   )
-]
 
 The notions exposed above are a sufficient introduction to understand the basic functioning of the MACE calculator, described in detail in @sec:mace, that was used for the work in this thesis, the results of which are available in the next chapters, @sec:results-1 and @sec:results-2.
 
@@ -2754,17 +2745,17 @@ The phonons @dos of the bandpath obtained from the MACE @mlp and from revPBE-D3 
 compared side by side, the results obtained with MACE match closely the results from its reference @dft model.
 
 #grid(
-    columns: 2,
-    gutter: 10pt,
-    figure(
+  columns: 2,
+  gutter: 10pt,
+  figure(
     image("simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/DOS.svg"),
-      caption: [
+    caption: [
       Phonons DOS using MACE-ICE13-1.
     ]
-    ),
-    figure(
+  ),
+  figure(
     image("simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/DOS.svg"),
-      caption: [
+    caption: [
       Phonons DOS using revPBE-D3.
     ]
   ),
