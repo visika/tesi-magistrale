@@ -2568,6 +2568,7 @@ Namely: #footnote[https://en.wikipedia.org/wiki/Brillouin_zone#Critical_points]
 #grid(
   columns: 2,
   align: horizon,
+  gutter: 10pt,
   [
     - $Gamma$: center of the Brillouin zone
     - $A$: center of a hexagonal face
