@@ -3157,6 +3157,28 @@ Fine-tuning a MACE model is composed of three steps, detailed as follows:
   ],
 ) <fig-finetune-epochs>
 
+=== Time and memory scaling
+
+Single point calculations of energies and forces in growing systems of water molecules were performed to assess the scaling of execution time and memory usage of MACE.
+The following figures show a roughly linear scaling law for both the analyzed quantities.
+The tractation is subdivided by the used device, CPU or GPU;
+as was exposed before, the number of molecules that can be loaded in a GPU environment displays a upper limit that is promptly reached in our simulations.
+
+#figure(
+  grid(
+    columns: 2,
+    image("simulazioni/03_mace_memory_usage/execution_time_cpu_gpu.png"),
+    image("simulazioni/03_mace_memory_usage/execution_time_gpu.png"),
+
+    image("simulazioni/03_mace_memory_usage/max_memory_usage_cpu_gpu.png"),
+    image("simulazioni/03_mace_memory_usage/max_memory_usage_gpu.png"),
+  ),
+  caption: [
+    Execution times, expressed in total userspace and kernel seconds summed, and maximum memory usage, expressed in GB, for single-point calculations of energy and forces on the atoms, in function of varying number of water molecules in the system.
+  ],
+)
+
+
 == Phonons calculations <sec:tools-phonons>
 
 For phonons dispersion calculations, three main tools were tested:
