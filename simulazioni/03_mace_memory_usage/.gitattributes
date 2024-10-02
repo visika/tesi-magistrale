@@ -1,0 +1,4 @@
+max_memory_usage_gpu.png filter=lfs diff=lfs merge=lfs -text
+execution_time_cpu_gpu.png filter=lfs diff=lfs merge=lfs -text
+execution_time_gpu.png filter=lfs diff=lfs merge=lfs -text
+max_memory_usage_cpu_gpu.png filter=lfs diff=lfs merge=lfs -text
