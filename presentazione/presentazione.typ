@@ -37,7 +37,8 @@
 = Introduzione
 
 == Importanza dei cristalli molecolari
-Importanti nei campi della farmaceutica, dell'elettronica, delle energie rinnovabili.
+I cristalli molecolari rappresentano un'area di studio significativa nella scienza dei materiali,
+per la loro importanza in campi come la farmaceutica, l'elettronica, le energie rinnovabili.
 
 == Uso dei MLP
 
