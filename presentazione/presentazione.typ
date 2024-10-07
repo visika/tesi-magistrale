@@ -113,14 +113,57 @@ Per le sue proprietà peculiari, che mettono a dura prova i calcolatori che prov
   image("../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png"),
 )
 
-== Strutture cristalline e liquido
-Energie di reticolo dei diversi polimorfi.
+== Polimorfi delle strutture cristalline
 
-#image("../simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg")
+#grid(
+  columns: 2,
+  [
+    La corretta stima delle energie di reticolo, assoluta e relativa, è di grande interesse per l'acqua e per i cristalli molecolari in generale.
 
-== Relative lattice energy
+    I metodi Diffusion Monte Carlo (DMC) restituiscono quantità più accurate per le energie.
 
-#image("../simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg")
+    Tra i funzionali DFT revPBE restituisce le proprietà di struttura e dinamiche più accurate del ghiaccio Ih.
+  ],
+  image("../thesis/imgs/dellapia2022_f1.jpeg", height: 80%),
+)
+
+
+// Energie di reticolo dei diversi polimorfi.
+== Energia di reticolo assoluta
+
+#grid(
+  columns: 2,
+  image(
+    "../simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg",
+    height: 70%,
+  ),
+  [
+    La quantità fisica solitamente considerata per stabilire la stabilità di un cristallo è la sua energia di reticolo assoluta:
+    $
+      E_"lattice" := E_"crystal" - E_"gas"
+    $
+    L'errore assoluto medio (MAE) tra MACE-ICE13-1 e DMC è $0.90 "kJ/mol"$.
+    I potenziali di scambio e correlazione sono ritenuti buoni se hanno un $"MAE" lt.tilde 4 "kJ/mol"$.
+  ],
+)
+
+== Energia di reticolo relativa
+
+#grid(
+  columns: 2,
+  image(
+    "../simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg",
+    height: 70%,
+  ),
+  [
+    C'è interesse a catturare la stabilità relativa dei polimorfi del ghiaccio, cioè rispetto a una data fase cristallina invece che rispetto alla fase gassosa.
+    Calcoliamo l'energia di reticolo relativa rispetto al ghiaccio esagonale Ih:
+    $
+      Delta E_"lattice"^x := E_"lattice"^x - E_"lattice"^"Ih"
+    $
+    che è indipendente dalla configurazione del monomero nella fase gassosa.
+  ],
+)
 
 == Dispersione dei fononi
 
