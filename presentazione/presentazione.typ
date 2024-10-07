@@ -149,6 +149,8 @@ Energie di reticolo dei diversi polimorfi.
 
 == Dinamica molecolare
 
+Infine ci si è occupati di simulare l'acqua nello stato liquido.
+
 #image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
 
 = Conclusioni
