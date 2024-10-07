@@ -1355,208 +1355,208 @@ Here, the first sum is over all atom pairs in the system, $C_n^(A B)$ denotes th
 
 == #machine-learning-title <sec:machine-learning>
 
-  Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
-  There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
-  It is our interest to study the *supervised learning* type.
-  The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
-  Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
-  Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
-  Thus, we can also think of supervised learning as "label learning".
-  A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
+Machine Learning can be described as _the application and science of algorithms that make sense of data_. @raschkaMachineLearningPyTorch2022[§1]
+There are three types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
+It is our interest to study the *supervised learning* type.
+The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
+Here, the term "supervised" refers to a set of training examples (data inputs) where the desired output signals (labels) are already known.
+Supervised learning is then the process of modeling the relationship between the data inputs and the labels.
+Thus, we can also think of supervised learning as "label learning".
+A supervised learning task with discrete class labels is also called a *classification task*. Another subcategory of supervised learning is *regression*, where the outcome signal is a continuous value.
 
 In the detailed description of MACE in @sec:mace, we will see that the data inputs are atom positions, atomic number; while the label will be the energy, a continuous value learned through regression.
 
-  In regression analysis, we are given a number of predictor (*explanatory*) variables and a continuous response variable (*outcome*), and we try to find a relationship between those variables that allows us to predict an outcome.
-  In the field of machine learning, the predictor variables are commonly called "features", and the response variables are usually referred to as "target variables".
+In regression analysis, we are given a number of predictor (*explanatory*) variables and a continuous response variable (*outcome*), and we try to find a relationship between those variables that allows us to predict an outcome.
+In the field of machine learning, the predictor variables are commonly called "features", and the response variables are usually referred to as "target variables".
 
-  Artificial neurons represent the building blocks of the multilayer artificial #glspl("nn").
-  The basic concept behind artificial #glspl("nn") was built upon hypotheses and models of how the human brain works to solve complex problem tasks.
-  NNs are more popular today than ever thanks to the many breakthroughs that have been made in the previous decade, which resulted in what we now call deep learning algorithms and architectures—NNs that are composed of many layers.
+Artificial neurons represent the building blocks of the multilayer artificial #glspl("nn").
+The basic concept behind artificial #glspl("nn") was built upon hypotheses and models of how the human brain works to solve complex problem tasks.
+NNs are more popular today than ever thanks to the many breakthroughs that have been made in the previous decade, which resulted in what we now call deep learning algorithms and architectures—NNs that are composed of many layers.
 
-  === Single layer neural network
-  Before we dig deeper into a particular multilayer @nn architecture, let’s briefly reiterate some of the concepts of single-layer NNs, namely, the @adaline algorithm.
+=== Single layer neural network
+Before we dig deeper into a particular multilayer @nn architecture, let’s briefly reiterate some of the concepts of single-layer NNs, namely, the @adaline algorithm.
 
-  #figure(
-    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"),
-    caption: [
-      The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
-    ],
-  )
+#figure(
+  image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_01.png"),
+  caption: [
+    The Adaline algorithm. Taken from @raschkaMachineLearningPyTorch2022[Fig. 11.1].
+  ],
+)
 
-  The Adaline algorithm performs binary classification, and uses the gradient descent optimization algorithm to learn the weight coefficients of the model.
-  In every epoch (pass over the training dataset), we update the weight vector $va(w)$ and bias unit $b$ using the following update rule:
-  $
-    va(w) :=
-    va(w) + Delta va(w), quad
-    b := b + Delta b,
-  $
-  where $Delta w_j = - eta pdv(L, w_j)$ for each weight $w_j$ in the weight vector $va(w)$ and $Delta b = - eta pdv(L, b)$ for the bias unit.
-  In other words, we computed the gradient based on the whole training dataset and updated the weights of the model by taking a step in the opposite direction of the loss gradient $grad L (va(w))$.
-  In order to find the optimal weights of the model, we optimize an objective function that we define as the mean of squared errors (MSE) loss function $L(va(w))$.
-  Furthermore, we multiply the gradient by a factor, the learning rate $eta$, which we have to choose carefully to balance the speed of learning against the risk of overshooting the global minimum of the loss function.
-  In gradient descent optimization, we update all weights simultaneously after each epoch, and we define the partial derivative for each weight $w_j$ in the weight vector, $va(w)$, as follows:
-  $
-    pdv(L, w_j) =
-    pdv(, w_j) 1 / n sum_i (y^((i)) - a^((i)))^2 = - 2 / n sum_i (
-      y^((i)) - a^((i))
-    ) x_j^((i)).
-  $
-  Here, $y^((i))$ is the target class label of a particular sample $x^((i))$, and $a^((i))$ is the activation of the neuron, which is a linear function in the special case of Adaline.
-  Furthermore, one can define the activation function $sigma(dot)$ as follows:
-  $
-    sigma(dot) = z = a.
-  $
-  Here, the net input, $z$, is a linear combination of the weights that are connecting the input layer to the output layer:
-  $
-    z =
-    sum_j w_j x_j + b = va(w)^TT va(x) + b.
-  $
-  While the activation $sigma(dot)$ is used to compute the gradient update, a threshold function is implemented to squash the continuous-valued output into binary class labels for prediction:
-  $
-    hat(y) = cases(
+The Adaline algorithm performs binary classification, and uses the gradient descent optimization algorithm to learn the weight coefficients of the model.
+In every epoch (pass over the training dataset), we update the weight vector $va(w)$ and bias unit $b$ using the following update rule:
+$
+  va(w) :=
+  va(w) + Delta va(w), quad
+  b := b + Delta b,
+$
+where $Delta w_j = - eta pdv(L, w_j)$ for each weight $w_j$ in the weight vector $va(w)$ and $Delta b = - eta pdv(L, b)$ for the bias unit.
+In other words, we computed the gradient based on the whole training dataset and updated the weights of the model by taking a step in the opposite direction of the loss gradient $grad L (va(w))$.
+In order to find the optimal weights of the model, we optimize an objective function that we define as the mean of squared errors (MSE) loss function $L(va(w))$.
+Furthermore, we multiply the gradient by a factor, the learning rate $eta$, which we have to choose carefully to balance the speed of learning against the risk of overshooting the global minimum of the loss function.
+In gradient descent optimization, we update all weights simultaneously after each epoch, and we define the partial derivative for each weight $w_j$ in the weight vector, $va(w)$, as follows:
+$
+  pdv(L, w_j) =
+  pdv(, w_j) 1 / n sum_i (y^((i)) - a^((i)))^2 = - 2 / n sum_i (
+    y^((i)) - a^((i))
+  ) x_j^((i)).
+$
+Here, $y^((i))$ is the target class label of a particular sample $x^((i))$, and $a^((i))$ is the activation of the neuron, which is a linear function in the special case of Adaline.
+Furthermore, one can define the activation function $sigma(dot)$ as follows:
+$
+  sigma(dot) = z = a.
+$
+Here, the net input, $z$, is a linear combination of the weights that are connecting the input layer to the output layer:
+$
+  z =
+  sum_j w_j x_j + b = va(w)^TT va(x) + b.
+$
+While the activation $sigma(dot)$ is used to compute the gradient update, a threshold function is implemented to squash the continuous-valued output into binary class labels for prediction:
+$
+  hat(y) = cases(
       1 & "if" z >= 0,
       0 & "otherwise"
     )
-  $
-  A frequent technique used to accelerate the model training is the so-called *stochastic gradient descent (SGD)* optimization.
-  SGD approximates the loss from a single training example (online learning) or a small subset of training examples (mini-batch learning).
-  Apart from faster learning---due to the more frequent weight updates compared to gradient descent---its noisy nature is also regarded as beneficial when training multilayer NNs with nonlinear activation functions, which do not have a convex loss function.
-  Here, the added noise can help to escape local loss minima.
+$
+A frequent technique used to accelerate the model training is the so-called *stochastic gradient descent (SGD)* optimization.
+SGD approximates the loss from a single training example (online learning) or a small subset of training examples (mini-batch learning).
+Apart from faster learning---due to the more frequent weight updates compared to gradient descent---its noisy nature is also regarded as beneficial when training multilayer NNs with nonlinear activation functions, which do not have a convex loss function.
+Here, the added noise can help to escape local loss minima.
 
-  === The multilayer neural network architecture
-  Here we will explain how to connect multiple single neurons to a multilayer feedforward @nn; this special type of _fully connected_ network is also called Multi-Layer Perceptron (MLP).
+=== The multilayer neural network architecture
+Here we will explain how to connect multiple single neurons to a multilayer feedforward @nn; this special type of _fully connected_ network is also called Multi-Layer Perceptron (MLP).
 
-  #figure(
-    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_02.png"),
-    caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.],
-  ) <fig:multi-layer-perceptron>
+#figure(
+  image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_02.png"),
+  caption: [A two-layer MLP. Figure from @raschkaMachineLearningPyTorch2022.],
+) <fig:multi-layer-perceptron>
 
-  Next to the data input, the MLP depicted in @fig:multi-layer-perceptron has one hidden layer and one output layer.
-  The units in the hidden layer are fully connected to the input features, and the output layer is fully connected to the hidden layer.
-  If such a network has more than one hidden layer, we alco call it a *deep NN*.
-  The number of layers and units in a NN can be tought of as additional hyper-parameters that we want to optimize for a given problem.
+Next to the data input, the MLP depicted in @fig:multi-layer-perceptron has one hidden layer and one output layer.
+The units in the hidden layer are fully connected to the input features, and the output layer is fully connected to the hidden layer.
+If such a network has more than one hidden layer, we alco call it a *deep NN*.
+The number of layers and units in a NN can be tought of as additional hyper-parameters that we want to optimize for a given problem.
 
-  We denote the $i$th activation unit in the $l$th layer as $a_i^((l))$.
-  We use the "in" superscript for the input features, the "h" superscript for the hidden layer, and the "out" superscript for the output layer.
-  The $va(b)$'s denote bias units; those are vectors with the number of elements being equal to the number of nodes in the layer they correspond to.
+We denote the $i$th activation unit in the $l$th layer as $a_i^((l))$.
+We use the "in" superscript for the input features, the "h" superscript for the hidden layer, and the "out" superscript for the output layer.
+The $va(b)$'s denote bias units; those are vectors with the number of elements being equal to the number of nodes in the layer they correspond to.
 
-  Each node in layer $l$ is connected to all nodes in layer $l + 1$ via a weight coefficient.
-  The connection between the $k$th unit in layer $l$ to the $j$th unit in layer $l + 1$ will be written as $w_(j,k)^((l))$.
-  We denote the weight matrix that connects the input to the hidden layer as $W^(("h"))$, and we write the matrix that connects the hidden layer to the output layer as $W^(("out"))$.
+Each node in layer $l$ is connected to all nodes in layer $l + 1$ via a weight coefficient.
+The connection between the $k$th unit in layer $l$ to the $j$th unit in layer $l + 1$ will be written as $w_(j,k)^((l))$.
+We denote the weight matrix that connects the input to the hidden layer as $W^(("h"))$, and we write the matrix that connects the hidden layer to the output layer as $W^(("out"))$.
 
-  The usage of multiple units in the output layer allow for native multi-class classification, via a generalization of the one-versus-all (OvA) technique.
-  This is similar to the one-hot representation of categorical variables.
+The usage of multiple units in the output layer allow for native multi-class classification, via a generalization of the one-versus-all (OvA) technique.
+This is similar to the one-hot representation of categorical variables.
 
-  To calculate the output of a MLP model, we employ the process of *forward propagation*.
-  The MLP learning procedure can be summarized in three steps:
+To calculate the output of a MLP model, we employ the process of *forward propagation*.
+The MLP learning procedure can be summarized in three steps:
 
-  + Starting at the input layer, forward propagate the patterns of the training data through the network to generate an output.
-  + Based on the network's output, calculate the loss that we want to minimize using a loss functions of choice.
-  + Backpropagate the loss, find its derivative with respect to each weight and bias unit in the network, and update the model.
++ Starting at the input layer, forward propagate the patterns of the training data through the network to generate an output.
++ Based on the network's output, calculate the loss that we want to minimize using a loss functions of choice.
++ Backpropagate the loss, find its derivative with respect to each weight and bias unit in the network, and update the model.
 
-  Finally, after we repeat these three steps for multiple epochs and learn the weight and bias parameters of the MLP, we use forward propagation to calculate the network output.
+Finally, after we repeat these three steps for multiple epochs and learn the weight and bias parameters of the MLP, we use forward propagation to calculate the network output.
 
-  Since each unit in the hidden layer is connected to all units in the input layer, we first calculate the activation unit of the hidden layer $a_1^((h))$ as follows:
-  $
-    z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((
-      h
-    )) + dots + x_m^(("in"))w_(1,m)^((h)), \
-    a_1^((h)) &= sigma(z_1^((h))).
-  $
-  Here, $z_1^((h))$ is the net input and $sigma(dot)$ is the activation function, which has to be differentiable to learn the weights that connect the neurons using a gradient-based approach.
-  To be able to solve complex problems, the MLP model needs nonlinear activation functions, for example, the sigmoid (logistic) activation function:
-  $
-    sigma(z) = 1 / (1 + e^(-z))
-  $
+Since each unit in the hidden layer is connected to all units in the input layer, we first calculate the activation unit of the hidden layer $a_1^((h))$ as follows:
+$
+  z_1^((h)) &= x_1^(("in")) w_(1,1)^((h)) + x_2^(("in")) w_(1,2)^((
+    h
+  )) + dots + x_m^(("in"))w_(1,m)^((h)), \
+  a_1^((h)) &= sigma(z_1^((h))).
+$
+Here, $z_1^((h))$ is the net input and $sigma(dot)$ is the activation function, which has to be differentiable to learn the weights that connect the neurons using a gradient-based approach.
+To be able to solve complex problems, the MLP model needs nonlinear activation functions, for example, the sigmoid (logistic) activation function:
+$
+  sigma(z) = 1 / (1 + e^(-z))
+$
 
-  #figure(
-    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_03.png"),
-    caption: [
-      The sigmoid activation function.
-      Figure from @raschkaMachineLearningPyTorch2022.
-    ],
-  )
+#figure(
+  image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_03.png"),
+  caption: [
+    The sigmoid activation function.
+    Figure from @raschkaMachineLearningPyTorch2022.
+  ],
+)
 
-  The MLP is a typical example of a feedforward artificial NN.
-  The term *feedforward* refers to the fact that each layer serves as the input to the next layer without loops, in contrast to recurrent NNs.
+The MLP is a typical example of a feedforward artificial NN.
+The term *feedforward* refers to the fact that each layer serves as the input to the next layer without loops, in contrast to recurrent NNs.
 
-  The activation is usually written in a more compact, vectorized form, using the concepts of linear algebra:
-  $
-    va(z)^((h)) &= va(x)^(("in")) W^((h)TT) + va(b)^((h)), \
-    va(a)^((h)) &= sigma(va(z)^((h))).
-  $
-  Here, $va(z)^((h))$ is a $1 times m$ dimensional feature vector;
-  $W^((h))$ is a $d times m$ dimensional weight matrix, where $d$ is the number of units in the hidden layer;
-  the bias vector $va(b)^((h))$ consists of $d$ bias units (one bias unit per node).
+The activation is usually written in a more compact, vectorized form, using the concepts of linear algebra:
+$
+  va(z)^((h)) &= va(x)^(("in")) W^((h)TT) + va(b)^((h)), \
+  va(a)^((h)) &= sigma(va(z)^((h))).
+$
+Here, $va(z)^((h))$ is a $1 times m$ dimensional feature vector;
+$W^((h))$ is a $d times m$ dimensional weight matrix, where $d$ is the number of units in the hidden layer;
+the bias vector $va(b)^((h))$ consists of $d$ bias units (one bias unit per node).
 
-  Generalizing the computation to all $n$ samples in the training dataset:
-  $
-    Z^((h)) = X^(("in")) W^((h)TT) + va(b)^((h))
-  $
-  Here, $X^(("in"))$ is a $n times m$ matrix, and the matrix multiplication will result in a $n times d$ dimensional net input matrix, $Z^((h))$.
-  Finally, we apply the activation function $sigma(dot)$ to each value in the net input matrix to get the $n times d$ dimensional activation matrix in the next layer:
-  $
-    A^((h)) = sigma(Z^((h)))
-  $
-  Similarly for the output layer we get:
-  $
-    Z^(("out")) = A^((h)) W^(("out") TT) + va(b)^(("out")), quad
-    A^(("out")) = sigma(Z^(("out"))).
-  $
+Generalizing the computation to all $n$ samples in the training dataset:
+$
+  Z^((h)) = X^(("in")) W^((h)TT) + va(b)^((h))
+$
+Here, $X^(("in"))$ is a $n times m$ matrix, and the matrix multiplication will result in a $n times d$ dimensional net input matrix, $Z^((h))$.
+Finally, we apply the activation function $sigma(dot)$ to each value in the net input matrix to get the $n times d$ dimensional activation matrix in the next layer:
+$
+  A^((h)) = sigma(Z^((h)))
+$
+Similarly for the output layer we get:
+$
+  Z^(("out")) = A^((h)) W^(("out") TT) + va(b)^(("out")), quad
+  A^(("out")) = sigma(Z^(("out"))).
+$
 
-  === Training an artificial neural network
+=== Training an artificial neural network
 
-  We use an MSE loss (as in Adaline) to train the multilayer NN as it makes the derivation of the gradients a bit easier to follow.
-  If we predict the class label of an input data with class label 2, using this MLP, the activation of the third layer and the target may look like this:
-  $
-    a^(("out")) =
-    vec(0.1, 0.9, dots.v, 0.3), quad
-    y = vec(0, 1, dots.v, 0).
-  $
+We use an MSE loss (as in Adaline) to train the multilayer NN as it makes the derivation of the gradients a bit easier to follow.
+If we predict the class label of an input data with class label 2, using this MLP, the activation of the third layer and the target may look like this:
+$
+  a^(("out")) =
+  vec(0.1, 0.9, dots.v, 0.3), quad
+  y = vec(0, 1, dots.v, 0).
+$
 
-  Thus, our MSE loss either has to sum or average over the $t$ activation units in our network in addition to averaging over the $n$ examples in the dataset or mini-batch:
-  $
-    L(W, va(b)) =
-    1 / n sum_1^n 1 / t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
-  $
+Thus, our MSE loss either has to sum or average over the $t$ activation units in our network in addition to averaging over the $n$ examples in the dataset or mini-batch:
+$
+  L(W, va(b)) =
+  1 / n sum_1^n 1 / t sum_(j=1)^t (y_j^((i)) - a_j^(("out")(i)))^2
+$
 
-  The goal is to minimize the loss function $L(W)$.
-  We need to calculate the partial derivative of the parameters $W$ with respect to each weight for every layer in the network:
-  $
-    pdv(L, w_(j,l)^((i)))
-  $
+The goal is to minimize the loss function $L(W)$.
+We need to calculate the partial derivative of the parameters $W$ with respect to each weight for every layer in the network:
+$
+  pdv(L, w_(j,l)^((i)))
+$
 
-  Note that $W$ consists of multiple matrices.
-  In an MLP with one hidden layer, we have the weight matrix, $W^((h))$, which connects the input to the hidden layer, and $W^(("out"))$, which connects the hidden layer to the output layer.
+Note that $W$ consists of multiple matrices.
+In an MLP with one hidden layer, we have the weight matrix, $W^((h))$, which connects the input to the hidden layer, and $W^(("out"))$, which connects the hidden layer to the output layer.
 
-  Backpropagation is a very efficient and one of the most widely used algorithms for training artificial NNs.
-  In essence, we can think of backpropagation as a very computationally efficient approach to compute the partial derivatives of a complex, non-convex loss function in multilayer NNs.
-  The goal is to use those derivatives to learn the weight coefficients for parameterizing such a multilayer artificial NN.
-  The error surface of an NN loss function is not convex or smooth with respect to the parameters.
-  There are many bumps in this high-dimensional loss surface (local minima) that we have to overcome in order to find the global minimum of the loss function.
-  Given the function $F(x) = f(g(h(u(v(x)))))$, we can use the chain rule to compute the derivative:
-  $
-    dv(F,x) =
-    dv(,x) f(g(h(u(v(x))))) =
-    dv(f,g) dv(g,h) dv(h,u) dv(u,v) dv(v,x).
-  $
-  In the context of computer algebra, a set of techniques, known as *automatic differentiation*, has been developed to solve such problems very efficiently.
+Backpropagation is a very efficient and one of the most widely used algorithms for training artificial NNs.
+In essence, we can think of backpropagation as a very computationally efficient approach to compute the partial derivatives of a complex, non-convex loss function in multilayer NNs.
+The goal is to use those derivatives to learn the weight coefficients for parameterizing such a multilayer artificial NN.
+The error surface of an NN loss function is not convex or smooth with respect to the parameters.
+There are many bumps in this high-dimensional loss surface (local minima) that we have to overcome in order to find the global minimum of the loss function.
+Given the function $F(x) = f(g(h(u(v(x)))))$, we can use the chain rule to compute the derivative:
+$
+  dv(F,x) =
+  dv(,x) f(g(h(u(v(x))))) =
+  dv(f,g) dv(g,h) dv(h,u) dv(u,v) dv(v,x).
+$
+In the context of computer algebra, a set of techniques, known as *automatic differentiation*, has been developed to solve such problems very efficiently.
 
-  Automatic differentiation comes with two modes, the forward and reverse modes; backpropagation is simply a special case of reverse-mode automatic differentiation.
-  The key point is that applying the chain rule in forward mode could be quite expensive since we would have to multiply large matrices for each layer (Jacobians) that we would eventually multiply by a vector to obtain the output.
+Automatic differentiation comes with two modes, the forward and reverse modes; backpropagation is simply a special case of reverse-mode automatic differentiation.
+The key point is that applying the chain rule in forward mode could be quite expensive since we would have to multiply large matrices for each layer (Jacobians) that we would eventually multiply by a vector to obtain the output.
 
-  The trick of reverse mode is that we traverse the chain rule from right to left.
-  We multiply a matrix by a vector, which yields another vector that is multiplied by the next matrix, and so on.
-  Matrix-vector multiplication is computationally much cheaper than matrix-matrix multiplication, which is why backpropagation is one of the most popular algorithms used in NN training.
+The trick of reverse mode is that we traverse the chain rule from right to left.
+We multiply a matrix by a vector, which yields another vector that is multiplied by the next matrix, and so on.
+Matrix-vector multiplication is computationally much cheaper than matrix-matrix multiplication, which is why backpropagation is one of the most popular algorithms used in NN training.
 
-  #figure(
-    image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_13.png"),
-    caption: [
-      Computing the partial derivatives of the loss with respect to the first hiddel layer weight.
-      Averaging over the mini-batch is omitted.
-      Figure from @raschkaMachineLearningPyTorch2022.
-    ],
-  )
+#figure(
+  image("thesis/imgs/raschkaMachineLearningPyTorch2022_11_13.png"),
+  caption: [
+    Computing the partial derivatives of the loss with respect to the first hiddel layer weight.
+    Averaging over the mini-batch is omitted.
+    Figure from @raschkaMachineLearningPyTorch2022.
+  ],
+)
 
 == #gnn-title <sec:gnn>
 Neural networks have been adapted to leverage the structure and properties of graphs.
@@ -1605,15 +1605,15 @@ A graph represents the relations (_edges_) between a collection of entities (_no
 )
 
 
-  To further describe each node, edge or the entire graph, we can store information in each of these pieces of the graph.
-  We can additionally specialize graphs by associating directionality to edges (_directed_, _undirected_).
+To further describe each node, edge or the entire graph, we can store information in each of these pieces of the graph.
+We can additionally specialize graphs by associating directionality to edges (_directed_, _undirected_).
 
-  Graphs are very flexible data structures, and for this reason they were used by MACE to embed atomistic properties of physical systems.
-  It’s a very convenient and common abstraction to describe this 3D object as a graph, e.g. where nodes are atoms and edges are covalent bonds.
+Graphs are very flexible data structures, and for this reason they were used by MACE to embed atomistic properties of physical systems.
+It’s a very convenient and common abstraction to describe this 3D object as a graph, e.g. where nodes are atoms and edges are covalent bonds.
 
 
-  A way of visualizing the connectivity of a graph is through its adjacency matrix.
-  One labels the nodes, in this case each of 14 non-H atoms in a caffeine molecule, and fill a matrix of $n_"nodes" times n_"nodes"$ with an entry if two nodes share an edge.
+A way of visualizing the connectivity of a graph is through its adjacency matrix.
+One labels the nodes, in this case each of 14 non-H atoms in a caffeine molecule, and fill a matrix of $n_"nodes" times n_"nodes"$ with an entry if two nodes share an edge.
 
 #figure(
   image("thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png"),
@@ -1624,112 +1624,112 @@ A graph represents the relations (_edges_) between a collection of entities (_no
 )
 
 *Definition*:
-  A GNN is an optimizable transformation on all attributes of the graph (nodes, edges, global-context) that preserves graph symmetries (permutation invariances).
+A GNN is an optimizable transformation on all attributes of the graph (nodes, edges, global-context) that preserves graph symmetries (permutation invariances).
 
-  In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
-  #glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
+In the following, we will describe the @mpnn framework proposed by @gilmerNeuralMessagePassing2017 using the Graph Nets architecture schematics introduced by @battagliaRelationalInductiveBiases2018.
+#glspl("gnn") adopt a “graph-in, graph-out” architecture meaning that these model types accept a graph as input, with information loaded into its nodes, edges and global-context, and progressively transform these embeddings, without changing the connectivity of the input graph.
 
-  The GNN uses a differentiable model of choice (e.g. a multilayer perceptron (MLP)) on each component of a graph; this is a GNN layer.
-  For each node vector, one applies the model and gets back a learned node-vector.
-  One does the same for each edge, learning a per-edge embedding, and also for the global-context vector, learning a single embedding for the entire graph.
+The GNN uses a differentiable model of choice (e.g. a multilayer perceptron (MLP)) on each component of a graph; this is a GNN layer.
+For each node vector, one applies the model and gets back a learned node-vector.
+One does the same for each edge, learning a per-edge embedding, and also for the global-context vector, learning a single embedding for the entire graph.
 
-  #figure(
-    image("thesis/imgs/distill.pub.gnn-intro.single-layer.png"),
-    caption: [
-      A single layer of a simple GNN. A graph is the input, and each component (V, E, U) gets updated by a MLP to produce a new graph.
-      Each function subscript indicates a separate function for a different graph attribute at the n-th layer of a GNN model.
-    ],
-  )
+#figure(
+  image("thesis/imgs/distill.pub.gnn-intro.single-layer.png"),
+  caption: [
+    A single layer of a simple GNN. A graph is the input, and each component (V, E, U) gets updated by a MLP to produce a new graph.
+    Each function subscript indicates a separate function for a different graph attribute at the n-th layer of a GNN model.
+  ],
+)
 
-  As is common with neural network modules or layers, one can stack these GNN layers together.
+As is common with neural network modules or layers, one can stack these GNN layers together.
 
-  Because a GNN does not update the connectivity of the input graph, one can describe the output graph of a GNN with the same adjacency list and the same number of feature vectors as the input graph.
-  But, the output graph has updated embeddings, since the GNN has updated each of the node, edge and global-context representations.
+Because a GNN does not update the connectivity of the input graph, one can describe the output graph of a GNN with the same adjacency list and the same number of feature vectors as the input graph.
+But, the output graph has updated embeddings, since the GNN has updated each of the node, edge and global-context representations.
 
-  === GNN Predictions by Pooling Information
-  How does a GNN make predictions in any of its tasks described above?
-  Prediction tasks can belong to binary classification, multi-class classification or regression cases.
-  In the following example, the binary classification will be considerer for brevity, but this framework extends to the other cases.
-  If the task is to make predictions on nodes, and the graphs already contains node information, the approach is straightforward---for each node embedding, apply a linear classifier.
+=== GNN Predictions by Pooling Information
+How does a GNN make predictions in any of its tasks described above?
+Prediction tasks can belong to binary classification, multi-class classification or regression cases.
+In the following example, the binary classification will be considerer for brevity, but this framework extends to the other cases.
+If the task is to make predictions on nodes, and the graphs already contains node information, the approach is straightforward---for each node embedding, apply a linear classifier.
 
-  #figure(image("thesis/imgs/distill.pub.gnn-intro.linear-classifier.png"))
+#figure(image("thesis/imgs/distill.pub.gnn-intro.linear-classifier.png"))
 
-  However, it is not always so simple.
-  For instance, one might have information in the graph stored in edges, and no information in nodes,but still need to make predictions on nodes.
-  One needs a way to collect information from edges and give them to nodes for prediction.
-  One can do this by _pooling_.
-  Pooling proceeds in two steps:
+However, it is not always so simple.
+For instance, one might have information in the graph stored in edges, and no information in nodes,but still need to make predictions on nodes.
+One needs a way to collect information from edges and give them to nodes for prediction.
+One can do this by _pooling_.
+Pooling proceeds in two steps:
 
-  + For each item to be pooled, _gather_ each of their embeddings and concatenate them into a matrix.
-  + The gathered embeddings are then _aggregated_, usually via a sum operation.
++ For each item to be pooled, _gather_ each of their embeddings and concatenate them into a matrix.
++ The gathered embeddings are then _aggregated_, usually via a sum operation.
 
-  @sanchez-lengelingGentleIntroductionGraph2021 represents the _pooling_ operation by the letter $rho$, and denotes that we are gathering information from edges to nodes as $p_(E_n arrow V_n)$.
+@sanchez-lengelingGentleIntroductionGraph2021 represents the _pooling_ operation by the letter $rho$, and denotes that we are gathering information from edges to nodes as $p_(E_n arrow V_n)$.
 
-  #figure(
-    image("thesis/imgs/distill.pub.gnn-intro.aggregate-information-from-adjacent-edges.png"),
-    caption: [The edges connected to the black node are gathered and aggregated to produce an embedding for that target node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
-  )
+#figure(
+  image("thesis/imgs/distill.pub.gnn-intro.aggregate-information-from-adjacent-edges.png"),
+  caption: [The edges connected to the black node are gathered and aggregated to produce an embedding for that target node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
+)
 
-  So if we only have edge-level features, and are trying to predict node information, we can use pooling to route (or pass) information to where it needs to go, the model looks like this:
-  #figure(
-    image("thesis/imgs/prediction_edges_nodes.e6796b8e.png"),
-    caption: [Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
-  )
-  The same reasoning goes for the prediction of edge-level information and global properties, gathering available node and/or edge information together and aggregating them to get the desired predictions.
-  This technique is similar to _Global Average Pooling_ layers in #glspl("cnn").
-  #figure(
-    image("thesis/imgs/prediction_nodes_edges_global.7a535eb8.png"),
-    caption: [
-      This is a common scenario for predictiong molecular properties.
-      Figure from @sanchez-lengelingGentleIntroductionGraph2021.
-    ],
-  )
-  The classification model $cal(C)$ can easily be replaced with any differentiable model, or adapted to multi-class classification using a generalized linear model.
-  #figure(
-    image("thesis/imgs/Overall.e3af58ab.png"),
-    caption: [
-      An end-to-end prediction task with a GNN model.
-      Figure from @sanchez-lengelingGentleIntroductionGraph2021.
-    ],
-  )
+So if we only have edge-level features, and are trying to predict node information, we can use pooling to route (or pass) information to where it needs to go, the model looks like this:
+#figure(
+  image("thesis/imgs/prediction_edges_nodes.e6796b8e.png"),
+  caption: [Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
+)
+The same reasoning goes for the prediction of edge-level information and global properties, gathering available node and/or edge information together and aggregating them to get the desired predictions.
+This technique is similar to _Global Average Pooling_ layers in #glspl("cnn").
+#figure(
+  image("thesis/imgs/prediction_nodes_edges_global.7a535eb8.png"),
+  caption: [
+    This is a common scenario for predictiong molecular properties.
+    Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+  ],
+)
+The classification model $cal(C)$ can easily be replaced with any differentiable model, or adapted to multi-class classification using a generalized linear model.
+#figure(
+  image("thesis/imgs/Overall.e3af58ab.png"),
+  caption: [
+    An end-to-end prediction task with a GNN model.
+    Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+  ],
+)
 
-  === Passing messages between parts of the graph
-  One could make more sophisticated predictions by using pooling within the @gnn layer, in order to make the learned embeddings aware of graph connectivity.
-  We can do this using _message passing_ @gilmerNeuralMessagePassing2017, where neighbouring nodes or edges exchange information and influence each other's update embeddings.
+=== Passing messages between parts of the graph
+One could make more sophisticated predictions by using pooling within the @gnn layer, in order to make the learned embeddings aware of graph connectivity.
+We can do this using _message passing_ @gilmerNeuralMessagePassing2017, where neighbouring nodes or edges exchange information and influence each other's update embeddings.
 
-  Message passing works in three steps:
+Message passing works in three steps:
 
-  + For each node in the graph, _gather_ all the neighbouring node embeddings (or messages).
-    // which is the $g$ function described above.
-    // <Non vedo nessuna funzione g nell'articolo>
-  + Aggregate all messages via an aggregate function (like sum).
-  + All pooled messages are passed through an _update function_, usually a learned neural network.
++ For each node in the graph, _gather_ all the neighbouring node embeddings (or messages).
+  // which is the $g$ function described above.
+  // <Non vedo nessuna funzione g nell'articolo>
++ Aggregate all messages via an aggregate function (like sum).
++ All pooled messages are passed through an _update function_, usually a learned neural network.
 
-  Just as pooling can be applied to either nodes or edges, message passing can occur between either nodes or edges.
+Just as pooling can be applied to either nodes or edges, message passing can occur between either nodes or edges.
 
-  These steps are key for leveraging the connectivity of graphs.
-  One can build more elaborate variants of message passing in @gnn layers that yield @gnn models of increasing expressiveness and power.
+These steps are key for leveraging the connectivity of graphs.
+One can build more elaborate variants of message passing in @gnn layers that yield @gnn models of increasing expressiveness and power.
 
-  #figure(
-    image("thesis/imgs/distill.pub.gnn-intro.message-passing-update.png"),
-    caption: [Pooling, update and storage of the adjacent embedding for the highlighted node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
-  )
+#figure(
+  image("thesis/imgs/distill.pub.gnn-intro.message-passing-update.png"),
+  caption: [Pooling, update and storage of the adjacent embedding for the highlighted node. Figure from @sanchez-lengelingGentleIntroductionGraph2021.],
+)
 
-  This sequence of operations, when applied once, is the simplest type of message-passing @gnn layer.
-  This is reminiscent of standard convolution: in essence, message passing and convolution are operations to aggregate and process the information of an element's neighbours in order to update the element's value.
-  In graphs, the element is a node, and in images, the element is a pixel.
-  However, the number of neighbouring nodes in a graph can be variable, unlike in an image where each pixel has a set number of neighbouring elements.
+This sequence of operations, when applied once, is the simplest type of message-passing @gnn layer.
+This is reminiscent of standard convolution: in essence, message passing and convolution are operations to aggregate and process the information of an element's neighbours in order to update the element's value.
+In graphs, the element is a node, and in images, the element is a pixel.
+However, the number of neighbouring nodes in a graph can be variable, unlike in an image where each pixel has a set number of neighbouring elements.
 
-  By stacking messge passing @gnn layers together, a node can eventually incorporate information from across the entire graph: after three layers, a node has information about the nodes three steps away from it.
+By stacking messge passing @gnn layers together, a node can eventually incorporate information from across the entire graph: after three layers, a node has information about the nodes three steps away from it.
 
-  The updated architecture diagram to include this new source of information for nodes is the following:
-  #figure(
-    image("thesis/imgs/arch_gcn.40871750.png"),
-    caption: [
-      Schematic for a GCN architecture, which updates node representations of a graph by pooling neighbouring nodes at a distance of one degree.
-      Figure from @sanchez-lengelingGentleIntroductionGraph2021.
-    ],
-  )
+The updated architecture diagram to include this new source of information for nodes is the following:
+#figure(
+  image("thesis/imgs/arch_gcn.40871750.png"),
+  caption: [
+    Schematic for a GCN architecture, which updates node representations of a graph by pooling neighbouring nodes at a distance of one degree.
+    Figure from @sanchez-lengelingGentleIntroductionGraph2021.
+  ],
+)
 
 The notions exposed above are a sufficient introduction to understand the basic functioning of the MACE calculator, described in detail in @sec:mace, that was used for the work in this thesis, the results of which are available in the next chapters, @sec:results-1 and @sec:results-2.
 
@@ -2756,13 +2756,13 @@ compared side by side, the results obtained with MACE match closely the results 
     image("simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/DOS.svg"),
     caption: [
       Phonons DOS using MACE-ICE13-1.
-    ]
+    ],
   ),
   figure(
     image("simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/DOS.svg"),
     caption: [
       Phonons DOS using revPBE-D3.
-    ]
+    ],
   ),
 )
 
@@ -2770,7 +2770,7 @@ compared side by side, the results obtained with MACE match closely the results 
   image("simulazioni/02_water/04_crystal_phonons/phonopy/mace_ice13_1_s3_dos.svg"),
   caption: [
     The phonon DOS calculated using MACE-ICE13-1, including higher frequencies.
-  ]
+  ],
 )
 
 === Heat capacity
@@ -2832,7 +2832,7 @@ For a direct comparison with the axis of the reference in Kelvin, a second axis 
 
 == Molecular Dynamics
 
-The last task in this discussion concerns the behaviour of liquid water. 
+The last task in this discussion concerns the behaviour of liquid water.
 Constant NVT @md simulations with Langevin thermostat #footnote[https://wiki.fysik.dtu.dk/ase/ase/md.html#module-ase.md.langevin
 ] were performed under varying external conditions.
 The thermostat couples the system to an external heat bath at a fixed temperature.
