@@ -163,8 +163,6 @@ Energie di reticolo dei diversi polimorfi.
 
 = Appendice
 
-== Costruzione e passaggio del messaggio nelle GNN <touying:hidden>
-
 == Atomic Simulation Environment (ASE) <touying:hidden>
 
 L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python per impostare, manipolare, eseguire, visualizzare e analizzare simulazioni atomistiche. Il codice è liberamente disponibile sotto licenza GNU LGPL.
@@ -197,3 +195,6 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
   # -31.492847800329216
   ```
 ]
+
+== Costruzione e passaggio del messaggio nelle GNN <touying:hidden>
+
