@@ -2688,8 +2688,9 @@ The reader interested in their implementation can find the specific details in @
 Both the tools worked as expected, and a remarkable reduction in the total computation time can be appreciated in @table:timing-phonopy and @table:timing-phon, with respect, e.g., to timings observed with typical @dft codes, like described in the paragraph below.
 
 The task was also run with the VASP @dft suite and the PHON code.
-Calculation of phonon dispersions for the primitive cell (supercell = 1) of ice Ih, with a k-points grid of $2 times 2 times 2$ (for the ice, a k-points grid of $4 times 4 times 4$ is appropriate) is not tabulated and required 1 hour and 26 minutes using the GPU node.
+Calculation of phonon dispersions for the primitive cell (supercell = 1) of ice Ih, with a k-points grid of $2 times 2 times 2$ (for the ice, a k-points grid of $4 times 4 times 4$ is appropriate) required 1 hour and 26 minutes using the GPU node.
 A second calculation of the same type, with calculation limited to the $Gamma$ point, with supercell $2 times 2 times 2$, and k-points sampling $1 times 1 times 1$, required 5 hours and 54 minutes.
+These results are summarized in @table:timing-vasp.
 
 #figure(
   tablem(
@@ -2732,6 +2733,16 @@ A second calculation of the same type, with calculation limited to the $Gamma$ p
     This setup achieves the slowest of timings, as ASE does not take into account symmetries of the system.
   ],
 ) <table:timing-ase-phonons>
+
+#figure(
+  table(
+    columns: 3,
+    table.header([Supercell size], [k-points sampling], [Time]),
+    [Primitive cell], $2 times 2 times 2$, [1h 26m],
+    [$2 times 2 times 2$], [Only in $Gamma$], [5h 54m],
+  ),
+  caption: [Execution times using revPBE-D3 with VASP and PHON.],
+) <table:timing-vasp>
 
 === Phonons DOS
 
