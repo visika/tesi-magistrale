@@ -2433,14 +2433,8 @@ See @fig:binding-energy-mukhopadhyay2018-fig5 for a representation of typical va
 )
 
 = Results II: crystal structures <sec:results-2>
-#box(
-  stroke: red + 2pt,
-  inset: 1mm,
-  [
-    This chapter presents the results of the study, focusing on the properties of molecular crystals modeled using machine learning potentials.
-    The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons calculations.
-  ],
-)
+This chapter presents the results of the study, focusing on the properties of molecular crystals modeled using machine learning potentials.
+The analyses include geometry optimization, vibrational analysis, lattice energy computations, and crystal phonons calculations.
 
 == Lattice energy
 
