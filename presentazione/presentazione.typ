@@ -132,7 +132,9 @@ Energie di reticolo dei diversi polimorfi.
 #grid(
   columns: (1fr, 1fr),
   align: center,
+  row-gutter: 10pt,
   [MACE-ICE13-1], [revPBE-D3],
+  [$approx 1÷4$ min], [$gt.tilde 5$h],
 )
 
 == Dinamica molecolare
