@@ -40,9 +40,18 @@
 I cristalli molecolari rappresentano un'area di studio significativa nella scienza dei materiali,
 per la loro importanza in campi come la farmaceutica, l'elettronica, le energie rinnovabili.
 
+In questo lavoro, abbiamo usato dei potenziali machine learning (MLP) per modellare struttura e dinamica dei cristalli molecolari, prendendo come caso studio l'acqua.
+
+L'acqua oltre a essere di rilievo per moltissime branche della scienza, presenta molte anomalie, dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare con approcci computazionali.
+
 == Uso dei MLP
 
+Bisogna affrontare il compromesso tra costo computazionale e accuratezza.
+
 La mia tesi si concentra sull'utilizzo di Machine Learning Potentials (MLP) per modellare i cristalli molecolari, usando l'acqua come esempio rappresentativo.
+L'applicazione di MLP cattura interazioni intermolecolari complesse con l'accuratezza degli approcci ab initio ma a un costo computazionale ridotto.
+
+In questo lavoro abbiamo testato differenti modelli MLP per la stima di alcune proprietà dell'acqua, tra le quali energie di reticolo, dispersione dei fononi, e dinamica a temperatura finita.
 
 == Problematica e obiettivo
 
