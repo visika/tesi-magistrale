@@ -113,16 +113,25 @@ Energie di reticolo dei diversi polimorfi.
 
 == Dispersione dei fononi
 
+#let phonons_height = 230pt
+
 #grid(
   columns: 2,
-  figure(
-    image("../simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/FREQ1.svg"),
-    caption: [MACE-ICE13-1],
+  gutter: 10pt,
+  image(
+    "../simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/combined.svg",
+    height: phonons_height,
   ),
-  figure(
-    image("../simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/FREQ1.svg"),
-    caption: [revPBE-D3],
+  image(
+    "../simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/combined.svg",
+    height: phonons_height,
   ),
+)
+
+#grid(
+  columns: (1fr, 1fr),
+  align: center,
+  [MACE-ICE13-1], [revPBE-D3],
 )
 
 == Dinamica molecolare
@@ -138,7 +147,8 @@ Energie di reticolo dei diversi polimorfi.
 == Riepilogo dei risultati
 
 == Limiti e sviluppi futuri
-- Necessario sempre avere grandi quantità di dati in partenza per addestrare nuovi modelli
+- È necessario avere grandi quantità di dati in partenza per addestrare nuovi modelli
+- Manca ancora il supporto alle simulazioni su GPU multiple
 
 == Potenziali applicazioni
 
@@ -151,3 +161,36 @@ Energie di reticolo dei diversi polimorfi.
 = Appendice
 
 == Costruzione e passaggio del messaggio nelle GNN <touying:hidden>
+
+== Atomic Simulation Environment (ASE) <touying:hidden>
+
+L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python per impostare, manipolare, eseguire, visualizzare e analizzare simulazioni atomistiche. Il codice è liberamente disponibile sotto licenza GNU LGPL.
+
+#slide[
+  ASE fornisce interfacce a diversi codici attraverso i Calculator, che vengono utilizzati insieme all'oggetto centrale Atoms e ai numerosi algoritmi disponibili in ASE.
+
+  #image("imgs/ase_calculators.png")
+]
+
+#slide()[
+  #set text(size: 18pt)
+  ```python
+  # Example: structure optimization of water molecule
+  from ase import Atoms
+  from ase.optimize import BFGS
+  from mace.calculators import mace_mp
+  from ase.io import write
+  h2o = Atoms("HOH", positions=[(0, 0, 0), (0, 1, 0), (0, 0, 1)])
+  h2o.calc = mace_mp(model="medium", dispersion=False, device="cuda")
+
+  opt = BFGS(h2o, trajectory="optimization.traj")
+  opt.run(fmax=0.02, steps=1000)
+  # BFGS:   0  19:10:49    -31.435229     2.2691
+  # BFGS:   1  19:10:50    -31.490773     0.3740
+  # BFGS:   2  19:10:50    -31.492791     0.0630
+  # BFGS:   3  19:10:51    -31.492848     0.0023
+  write('H2O.xyz', h2o)
+  h2o.get_potential_energy()
+  # -31.492847800329216
+  ```
+]
