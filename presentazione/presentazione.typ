@@ -244,7 +244,9 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   image("../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png"),
 )
 
-= Strutture cristalline
+= Strutture cristalline #place(top + center,
+  image("../strutture/ICE13/Ih/Ih.png")
+)
 == Polimorfi delle strutture cristalline
 
 #grid(
