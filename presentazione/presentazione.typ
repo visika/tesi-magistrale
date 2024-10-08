@@ -125,6 +125,11 @@ $
 
 == Frequenze di vibrazione armoniche
 
+= Dimero
+
+== Ottimizzazione della geometria
+
+== Frequenze di vibrazione armoniche
 #image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg")
 
 == Binding energy
