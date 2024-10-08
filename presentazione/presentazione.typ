@@ -202,7 +202,9 @@ $
   image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-8.svg"),
 )
 
-= Dimero
+= Dimero #place(top + center,
+  image("../simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png")
+)
 
 == Ottimizzazione della geometria
 
