@@ -417,6 +417,30 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
 
 == Fine tuning di MACE
 
+#place(
+  bottom + left,
+  dx: -50pt,
+  image(
+    "../tutorial-fine-tuning/1.generate-training/run_2024-06-08/Figure_1_i_T.png",
+    height: 55%,
+  ),
+)
+
+#place(
+  bottom + left,
+  dx: 270pt,
+  image("../tutorial-fine-tuning/analysis/loss_over_epochs.svg", height: 55%),
+)
+
+#place(
+  bottom + left,
+  dx: 470pt,
+  image(
+    "../tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg",
+    height: 55%,
+  ),
+)
+
 #figure([
   #let my-node(..args) = node(
     corner-radius: 5pt,
@@ -448,30 +472,6 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
     my-node((3, -0.5), [Errori]),
   )
 ])
-
-#place(
-  bottom + left,
-  dx: -50pt,
-  image(
-    "../tutorial-fine-tuning/1.generate-training/run_2024-06-08/Figure_1_i_T.png",
-    height: 50%,
-  ),
-)
-
-#place(
-  bottom + left,
-  dx: 250pt,
-  image("../tutorial-fine-tuning/analysis/loss_over_epochs.svg", height: 50%),
-)
-
-#place(
-  bottom + left,
-  dx: 450pt,
-  image(
-    "../tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg",
-    height: 50%,
-  ),
-)
 
 == Andamenti di tempi e memoria
 #grid(
