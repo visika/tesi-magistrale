@@ -312,3 +312,12 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
   ),
 )
 
+== Andamenti di tempi e memoria
+#grid(
+  columns: 2,
+  image("../simulazioni/03_mace_memory_usage/execution_time_cpu_gpu.png"),
+  image("../simulazioni/03_mace_memory_usage/execution_time_gpu.png"),
+
+  image("../simulazioni/03_mace_memory_usage/max_memory_usage_cpu_gpu.png"),
+  image("../simulazioni/03_mace_memory_usage/max_memory_usage_gpu.png"),
+)
