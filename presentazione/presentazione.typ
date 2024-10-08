@@ -206,7 +206,26 @@ $
   image("../simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png")
 )
 
-== Ottimizzazione della geometria
+Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio delle frequenze di vibrazione armoniche e ZPE per il dimero.
+
+#image("../thesis/imgs/klopper-fig1.gif")
+
+#let dimer_geometry_table = csv("../simulazioni/02_water/02_dimer/01_optimize/geometria.csv")
+#place(
+  bottom + right,
+  table(
+    columns: dimer_geometry_table.first().len(),
+    table.header(
+      [Model],
+      $alpha$,
+      $theta_a$,
+      $theta_d$,
+      $r_"OO" (angstrom)$,
+      $beta$,
+    ),
+    ..dimer_geometry_table.flatten(),
+  ),
+)
 
 == Frequenze di vibrazione armoniche
 #image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg")
