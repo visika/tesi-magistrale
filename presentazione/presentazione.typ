@@ -328,9 +328,35 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   image("../strutture/128_molecules/render.png")
 )
 
-Infine ci si è occupati di simulare l'acqua nello stato liquido.
+== Dinamica molecolare
+#slide[
+  #grid(
+    columns: (1fr, 1.2fr),
+    [#image("../simulazioni/02_water/05_md/Grafici/temperature_NVT.png")
+      Algoritmo di Verlet:],
+    [
+      La dinamica molecolare è un metodo che permette di campionare lo spazio delle fasi di un sistema isolato di $N$ particelle classiche interagenti, che obbediscono alle equazioni del moto di Newton:
+      $
+        va(f_i) = M dot.double(va(r))_i
+        = - pdv(U({va(r)}), va(r_i))
+      $
+    ],
+  )
+  $
+    arrow(r)_i (t + delta t)
+    = arrow(r)_i (t)
+    + arrow(v)_i (t) delta t
+    + 1 / (2M) arrow(f)_i (t) (delta t)^2
+    + cal(O)((delta t)^4)
+  $
+]
 
-#image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
+#slide[
+  #image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
+][
+  L'ultima task è lo studio del comportamento dell'acqua nello stato liquido.
+  Si sono effettuate simulazioni di dinamica molecolare a NVT costanti con un termostato di Langevin, studiando la Radial Distribution Function (RDF), trovando un buon accordo con la referenza.
+]
 
 = Conclusioni
 // Nelle conclusioni riassumere ciò che si è fatto;
