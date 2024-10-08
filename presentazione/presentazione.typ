@@ -173,14 +173,23 @@ $
   columns: (2fr, 1fr),
   row-gutter: 10pt,
   [
-    #let molecule_omega_table = csv("../simulazioni/02_water/01_molecule/Analysis/omega.csv")
+    // #let molecule_omega_table = csv("../simulazioni/02_water/01_molecule/Analysis/omega.csv")
+    // #table(
+    //   columns: molecule_omega_table.first().len(),
+    //   table.header(
+    //   // ..molecule_omega_table.first(),
+    //   [Model], $omega_1$, $omega_2$, $omega_3$
+    // ),
+    //   ..molecule_omega_table.slice(1).flatten()
+    // )
     #table(
-      columns: molecule_omega_table.first().len(),
-      table.header(
-      // ..molecule_omega_table.first(),
-      [Model], $omega_1$, $omega_2$, $omega_3$
-    ),
-      ..molecule_omega_table.slice(1).flatten()
+      columns: 5,
+      table.header([Modello], $omega_1$, $omega_2$, $omega_3$, $"ZPE" ("eV")$),
+      [Reference], [3832.17], [1648.47], [3942.53], [0.585],
+      [small], [3722.10], [1485.10], [3841.80], [0.561],
+      [medium], [3592.20], [1601.10], [3736.50], [0.554],
+      [large], [3695.60], [1497.30], [3814.80], [0.558],
+      [ICE13-1], [3702.30], [1607.80], [3807.50], [0.565],
     )
   ],
   image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg"),
