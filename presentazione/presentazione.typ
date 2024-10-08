@@ -2,6 +2,7 @@
 #import themes.university: *
 #import "@preview/fletcher:0.4.5" as fletcher: diagram, node, edge
 #import "@preview/pinit:0.2.0": *
+#import "@preview/physica:0.9.3": *
 
 // https://touying-typ.github.io/docs/themes/university
 
