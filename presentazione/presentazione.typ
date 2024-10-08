@@ -472,6 +472,18 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   [$approx 1÷4$ min], [$gt.tilde 5$h],
 )
 
+#slide[
+  #grid(
+    columns: 2,
+    image("../simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg"),
+    [
+      Lo studio delle frequenze armoniche ci permette di valutare alcune quantità fisiche di interesse, come ad esempio la capacità termica.
+
+      Risulta evidente come il fine-tuning sulle caratteristiche del ghiaccio fornisca modelli più accurati nella caratterizzazione del materiale.
+    ],
+  )
+]
+
 = Liquido #place(top + center, dx: 10pt, dy: 20pt,
   image("../strutture/128_molecules/render.png")
 )
