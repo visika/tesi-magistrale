@@ -1,6 +1,7 @@
 #import "@preview/touying:0.5.2": *
 #import themes.university: *
 #import "@preview/fletcher:0.4.5" as fletcher: diagram, node, edge
+#import "@preview/pinit:0.2.0": *
 
 // https://touying-typ.github.io/docs/themes/university
 
@@ -137,6 +138,51 @@ $
 )
 
 == Frequenze di vibrazione armoniche
+
+#slide[
+  $
+    G(v_1, v_2, v_3)
+    = sum_(i=1)^3 omega_i (v_i + 1 / 2)
+    + #pin(1) sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2) #pin(2)
+  $
+
+  #let crimson = rgb("#c00000")
+  #pause
+  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 1, 2)
+  #pause
+  $
+    "ZPE" &:= G(0,0,0) \
+    &= 1 / 2 (omega_1 + omega_2 + omega_3)
+    + #pin(3) 1 / 4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23) #pin(4)
+  $
+  #pause
+  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 3, 4)
+
+]
+
+#grid(
+  columns: (2fr, 1fr),
+  row-gutter: 10pt,
+  [
+    #let molecule_omega_table = csv("../simulazioni/02_water/01_molecule/Analysis/omega.csv")
+    #table(
+      columns: molecule_omega_table.first().len(),
+      table.header(
+      // ..molecule_omega_table.first(),
+      [Model], $omega_1$, $omega_2$, $omega_3$
+    ),
+      ..molecule_omega_table.slice(1).flatten()
+    )
+  ],
+  image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg"),
+
+  [
+    Si sono poi calcolate le frequenze di vibrazione armoniche per verificare il loro accordo con i dati tabulati in referenza.
+    Le frequenze sull'asse y negativo indicano instabilità della geometria.
+    Il _Displacement_ è lo spostamento degli atomi usato dalla tecnica di stima delle frequenze.
+  ],
+  image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-8.svg"),
+)
 
 = Dimero
 
