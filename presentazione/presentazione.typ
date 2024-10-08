@@ -228,7 +228,14 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 )
 
 == Frequenze di vibrazione armoniche
-#image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg")
+#grid(
+  columns: (1.5fr, 1fr),
+  gutter: 10pt,
+  image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
+  [
+    MACE-ICE13-1 risulta il modello che meglio stima in generale le frequenze armoniche del dimero d'acqua.
+  ]
+)
 
 == Binding energy
 #grid(
