@@ -1,5 +1,6 @@
 #import "@preview/touying:0.5.2": *
 #import themes.university: *
+#import "@preview/fletcher:0.4.5" as fletcher: diagram, node, edge
 
 // https://touying-typ.github.io/docs/themes/university
 
@@ -254,3 +255,60 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
 == Costruzione e passaggio del messaggio nelle GNN
 
 == Fine tuning di MACE
+
+#figure([
+  #let my-node(..args) = node(
+    corner-radius: 5pt,
+    ..args,
+  )
+
+  #diagram(
+    node-stroke: 1pt,
+    my-node((0, 0), [Genera campioni \ da NPT MD]),
+    edge(
+    "-|>",
+    [data_for_train.extxyz],
+    bend: 45deg,
+    // label-sep: 1em,
+  ),
+    my-node((1, 0), [Calcola riferimento \ da DFT]),
+    edge(
+      "-|>",
+      align(
+        center,
+        [training_set.xyz \ test_set.xyz],
+      ),
+      bend: 45deg,
+    ),
+    my-node((2, 0), [Fine tune \ di MACE]),
+    edge("-|>"),
+    my-node((3, 0.5), [Modello]),
+    edge((2, 0), (3, -0.5), "-|>"),
+    my-node((3, -0.5), [Errori]),
+  )
+])
+
+#place(
+  bottom + left,
+  dx: -50pt,
+  image(
+    "../tutorial-fine-tuning/1.generate-training/run_2024-06-08/Figure_1_i_T.png",
+    height: 50%,
+  ),
+)
+
+#place(
+  bottom + left,
+  dx: 250pt,
+  image("../tutorial-fine-tuning/analysis/loss_over_epochs.svg", height: 50%),
+)
+
+#place(
+  bottom + left,
+  dx: 450pt,
+  image(
+    "../tutorial-fine-tuning/analysis/mae_e_per_atom_over_epochs.svg",
+    height: 50%,
+  ),
+)
+
