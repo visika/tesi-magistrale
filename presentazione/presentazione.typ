@@ -125,7 +125,10 @@ $
 #meanwhile
 - il numero massimo di passaggi dell'ottimizzatore #uncover("6-")[(1000)]
 
-= Monomero
+= Monomero #place(top + center,
+  image("../simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png")
+)
+
 == Ottimizzazione della geometria
 #grid(
   columns: 2,
