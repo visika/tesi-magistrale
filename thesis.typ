@@ -534,7 +534,7 @@ $
 $
 and so the dynamical matrix has the same periodicity of the reciprocal lattice.
 
-The property $sum_j Phi(va(r_j^0)) = 0$ implies $D(va(q)) = va(0)$; therefore, the dispersion relation gives zero frequencies at zero wavevector.
+The property $sum_j Phi(va(r_j^0)) = 0$ implies $D(va(0)) = va(0)$; therefore, the dispersion relation gives zero frequencies at zero wavevector.
 This _sum rule_ is very useful as a practical sanity check of the consistency of the calculations.
 
 To solve @eq:dynamical-matrix-eigenvalue-problem we need to solve an eigenvalue problem.
