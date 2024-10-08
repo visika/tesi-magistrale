@@ -30,9 +30,9 @@
   ),
 )
 
-== Panoramica <touying:hidden>
+// == Panoramica <touying:hidden>
 
-#components.adaptive-columns(outline(title: none, indent: 1em))
+// #components.adaptive-columns(outline(title: none, indent: 1em))
 
 = Introduzione
 
@@ -218,7 +218,7 @@ Infine ci si è occupati di simulare l'acqua nello stato liquido.
 
 = Appendice
 
-== Atomic Simulation Environment (ASE) <touying:hidden>
+== Atomic Simulation Environment (ASE)
 
 L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python per impostare, manipolare, eseguire, visualizzare e analizzare simulazioni atomistiche. Il codice è liberamente disponibile sotto licenza GNU LGPL.
 
@@ -251,6 +251,6 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
   ```
 ]
 
-== Costruzione e passaggio del messaggio nelle GNN <touying:hidden>
+== Costruzione e passaggio del messaggio nelle GNN
 
 == Fine tuning di MACE
