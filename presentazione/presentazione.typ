@@ -300,6 +300,154 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 )
 
 == Dispersione dei fononi
+#let pinit-highlight-equation-from(
+  height: 2em,
+  pos: bottom,
+  fill: rgb(0, 180, 255),
+  highlight-pins,
+  point-pin,
+  body,
+) = {
+  pinit-highlight(
+    ..highlight-pins,
+    dy: -0.6em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+  pinit-point-from(
+    fill: fill,
+    pin-dx: 0em,
+    pin-dy: if pos == bottom {
+      0.8em
+    } else {
+      -0.6em
+    },
+    body-dx: 0pt,
+    body-dy: if pos == bottom {
+      -1.7em
+    } else {
+      -1.6em
+    },
+    offset-dx: 0em,
+    offset-dy: if pos == bottom {
+      0.8em + height
+    } else {
+      -0.6em - height
+    },
+    point-pin,
+    rect(
+      inset: 0.5em,
+      stroke: (bottom: 0.12em + fill),
+      {
+        set text(fill: fill)
+        body
+      },
+    ),
+  )
+}
+
+#slide[
+  #image("../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg")#pin("brillouin")
+][
+  Per il ghiaccio Ih è stata calcolata la dispersione dei modi normali del cristallo, che rappresentano oscillazioni collettive delle particelle nel sistema con frequenza $omega_(va(q),s)$, denominate _fononi_.
+
+  #v(0.7cm)
+
+  $
+    #pin(1)D(arrow(q))#pin(2) :=
+    1 / M sum_j e^(i#pin(5)arrow(q)#pin(6)dot arrow(r)_j^0)#pin(3)Phi(arrow(r)_j^0)#pin(4)
+  $
+
+  $
+    omega^2#pin(7)arrow(epsilon)#pin(8)= D(arrow(q)) dot arrow(epsilon)
+  $
+
+  #pause
+
+  #let fill = rgb(0, 180, 255)
+  #pinit-highlight(
+    1,
+    2,
+    dy: -0.65em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+
+  #pinit-point-from(
+    (1, 2),
+    pin-dy: 15pt,
+    body-dx: -150pt,
+    body-dy: 10pt,
+    offset-dx: 5pt,
+    offset-dy: 40pt,
+    fill: fill,
+    text(fill: fill)[Matrice dinamica],
+  )
+
+  #pause
+
+  #let fill = rgb(150, 90, 170)
+  #pinit-highlight(
+    3,
+    4,
+    dy: -0.7em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+
+  #pinit-point-from(
+    (3, 4),
+    pin-dy: 20pt,
+    offset-dx: 5pt,
+    offset-dy: 110pt,
+    body-dx: -200pt,
+    fill: fill,
+    text(
+      fill: rgb(150, 90, 170),
+      [Matrice delle costanti di forza],
+    ),
+  )
+
+  #pause
+
+  #pinit-highlight-equation-from(
+    (5, 6),
+    (5, 6),
+    pos: top,
+    height: 0.7em,
+    fill: rgb(0, 255, 127),
+    [Vettore d'onda],
+  )
+
+  #pause
+
+  #let fill = rgb(255, 170, 0)
+  #pinit-point-from(
+    (7, 8),
+    pin-dy: 10pt,
+    pin-dx: -5pt,
+    offset-dx: -100pt,
+    body-dx: -190pt,
+    fill: fill,
+    text(fill: fill)[Vettore polarizzazione],
+  )
+
+  #pinit-highlight(
+    7,
+    8,
+    dy: -0.65em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+
+  #pause
+
+  #pinit-point-from(
+    "brillouin",
+    pin-dy: -100pt,
+    pin-dx: 100pt,
+    offset-dy: -40pt,
+    offset-dx: 50pt,
+    body-dx: -50pt,
+    [Per fare tutto ciò,\ si campionano i punti della\ zona di Brillouin.],
+  )
+]
 
 #let phonons_height = 230pt
 
