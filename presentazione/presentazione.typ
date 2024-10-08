@@ -324,7 +324,9 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   [$approx 1÷4$ min], [$gt.tilde 5$h],
 )
 
-== Dinamica molecolare
+= Liquido #place(top + center, dx: 10pt, dy: 20pt,
+  image("../strutture/128_molecules/render.png")
+)
 
 Infine ci si è occupati di simulare l'acqua nello stato liquido.
 
