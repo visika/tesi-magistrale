@@ -102,6 +102,20 @@ Il nostro case study è l'acqua.
 Per le sue proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
 
 == Struttura dell'acqua e dimero
+La procedura per ottimizzare la geometria della molecola richiede la corretta impostazione di alcuni parametri, come:
+
+- il calcolatore e il tipo di dato numerico #uncover("2-")[(MACE-MP-0 medium, float64)]
+#meanwhile
+- la geometria iniziale e le proprietà della cella #uncover("3-")[($hat("HOH") = 90°$ nel vuoto)]
+#meanwhile
+- l'algoritmo di ottimizzazione #uncover("4-")[(BFGS)]
+#meanwhile
+- la soglia di convergenza delle forze residue su ciascun atomo $a$:
+$
+  max_a |arrow(F)_a| < f_"max" uncover("5-", = 10^(-4) "eV/"angstrom)
+$
+#meanwhile
+- il numero massimo di passaggi dell'ottimizzatore #uncover("6-")[(1000)]
 
 == Frequenze di vibrazione armoniche
 
