@@ -141,6 +141,10 @@ $
 == Frequenze di vibrazione armoniche
 
 #slide[
+  #place(
+    bottom + left,
+    image("../thesis/imgs/eisenberg2005_fig1.1.gif", height: 50%),
+  )
   $
     G(v_1, v_2, v_3)
     = sum_(i=1)^3 omega_i (v_i + 1 / 2)
