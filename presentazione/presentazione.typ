@@ -134,6 +134,7 @@ $
   image("../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png"),
 )
 
+= Strutture cristalline
 == Polimorfi delle strutture cristalline
 
 #grid(
