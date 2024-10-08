@@ -123,6 +123,19 @@ $
 #meanwhile
 - il numero massimo di passaggi dell'ottimizzatore #uncover("6-")[(1000)]
 
+= Monomero
+== Ottimizzazione della geometria
+#grid(
+  columns: 2,
+  image("../simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg"),
+  [
+    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH.
+    Si osserva ad esempio la soglia di convergenza nelle forze residue per il monomero, \
+    $f_"max" = 10^(-4) "eV/"angstrom$.
+
+  ],
+)
+
 == Frequenze di vibrazione armoniche
 
 = Dimero
