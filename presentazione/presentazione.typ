@@ -134,8 +134,9 @@ $
   columns: 2,
   image("../simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg"),
   [
-    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH.
-    Si osserva ad esempio la soglia di convergenza nelle forze residue per il monomero, \
+    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH, ottenendo valori coerenti con la letteratura, entro $0.5°$ e $0.01 angstrom$.
+
+    Si osserva ad esempio la soglia di convergenza nelle forze residue per il monomero,
     $f_"max" = 10^(-4) "eV/"angstrom$.
 
   ],
