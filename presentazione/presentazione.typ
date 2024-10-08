@@ -107,7 +107,7 @@ Applicazione di modelli MLP per predire proprietà dei cristalli molecolari.
 Il nostro case study è l'acqua.
 Per le sue proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
 
-== Struttura dell'acqua e dimero
+== Struttura del monomero e del dimero
 La procedura per ottimizzare la geometria della molecola richiede la corretta impostazione di alcuni parametri, come:
 
 - il calcolatore e il tipo di dato numerico #uncover("2-")[(MACE-MP-0 medium, float64)]
