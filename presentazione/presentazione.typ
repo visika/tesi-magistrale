@@ -94,6 +94,12 @@ Per come sono strutturate, le reti neurali a grafo (GNN) sono molto versatili pe
 
 == MACE
 È l'architettura specifica impiegata nel corso di questa tesi.
+Ci sono tre modelli base, che variano in base alla quantità di parametri che costituiscono il modello:
+- small
+- medium
+- large
+
+C'è un modello adattato alle proprietà del ghiaccio, tramite la procedura detta di fine-tuning, denominato MACE-ICE13-1.
 
 = Risultati
 Applicazione di modelli MLP per predire proprietà dei cristalli molecolari.
