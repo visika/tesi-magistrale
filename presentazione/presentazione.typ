@@ -42,19 +42,35 @@
 = Introduzione
 
 == Importanza dei cristalli molecolari
-I cristalli molecolari rappresentano un'area di studio significativa nella scienza dei materiali,
-per la loro importanza in campi come la farmaceutica, l'elettronica, le energie rinnovabili.
 
-In questo lavoro, abbiamo usato dei potenziali machine learning (MLP) per modellare struttura e dinamica dei cristalli molecolari, prendendo come caso studio l'acqua.
+#slide[
+  I cristalli molecolari rappresentano un'area di studio significativa nella scienza dei materiali,
+  per la loro importanza in campi come la farmaceutica, l'elettronica, le energie rinnovabili.
 
-L'acqua oltre a essere di rilievo per moltissime branche della scienza, presenta molte anomalie, dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare con approcci computazionali.
+  In questo lavoro, abbiamo usato dei potenziali machine learning (MLP) per modellare struttura e dinamica dei cristalli molecolari, prendendo come caso studio l'acqua.
+][
+  #align(
+    right,
+    image("../thesis/imgs/karki2009_graphical_abstact.jpg", height: 50%),
+  )
 
-== Uso dei MLP
+  L'acqua presenta molte anomalie, dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare.
+]
 
-Bisogna affrontare il compromesso tra costo computazionale e accuratezza.
+== Uso dei potenziali nelle simulazioni
 
-La mia tesi si concentra sull'utilizzo di Machine Learning Potentials (MLP) per modellare i cristalli molecolari, usando l'acqua come esempio rappresentativo.
-L'applicazione di MLP cattura interazioni intermolecolari complesse con l'accuratezza degli approcci ab initio ma a un costo computazionale ridotto.
+#grid(
+  columns: 2,
+  gutter: 10pt,
+  [
+    #image("../thesis/imgs/images_large_cr0c00868_0001.jpeg")
+  ],
+  [
+    - Compromesso tra costo computazionale e accuratezza.
+    - Uso dei Machine Learning Potential (MLP) per modellare cristalli molecolari
+    - Catturano interazioni intermolecolari complesse con l'accuratezza degli approcci ab initio ma a un costo computazionale ridotto.
+  ],
+)
 
 In questo lavoro abbiamo testato differenti modelli MLP per la stima di alcune proprietà dell'acqua, tra le quali energie di reticolo, dispersione dei fononi, e dinamica a temperatura finita.
 
