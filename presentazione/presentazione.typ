@@ -19,6 +19,8 @@
   ),
 )
 
+#show figure.caption: it => text(fill: gray.darken(40%), size: 18pt, it.body)
+
 #title-slide(
   title: text(36pt)[Properties of molecular crystals using machine learning potentials],
   author: (
@@ -231,7 +233,10 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 #grid(
   columns: (1.5fr, 1fr),
   gutter: 10pt,
-  image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
+  figure(
+    image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
+    caption: [Scarto delle frequenze rispetto alla referenza],
+  ),
   [
     MACE-ICE13-1 risulta il modello che meglio stima in generale le frequenze armoniche del dimero d'acqua.
   ],
