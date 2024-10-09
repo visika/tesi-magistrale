@@ -239,6 +239,23 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   ),
   [
     MACE-ICE13-1 risulta il modello che meglio stima in generale le frequenze armoniche del dimero d'acqua.
+
+    #align(right)[
+      #table(
+        columns: 3,
+        table.header(
+          [Model],
+          [ZPE (eV)],
+          [Error],
+        ),
+
+        [Reference], [1.264], [0.000],
+        [ICE13-1], [1.218], [-0.046],
+        [small], [1.213], [-0.051],
+        [medium], [1.210], [-0.054],
+        [large], [1.200], [-0.064],
+      )
+    ]
   ],
 )
 
