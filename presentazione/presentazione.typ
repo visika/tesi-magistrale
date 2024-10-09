@@ -21,6 +21,51 @@
 
 #show figure.caption: it => text(fill: gray.darken(40%), size: 18pt, it.body)
 
+#let pinit-highlight-equation-from(
+  height: 2em,
+  pos: bottom,
+  fill: rgb(0, 180, 255),
+  highlight-pins,
+  point-pin,
+  body,
+) = {
+  pinit-highlight(
+    ..highlight-pins,
+    dy: -0.6em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+  pinit-point-from(
+    fill: fill,
+    pin-dx: 0em,
+    pin-dy: if pos == bottom {
+      0.8em
+    } else {
+      -0.6em
+    },
+    body-dx: 0pt,
+    body-dy: if pos == bottom {
+      -1.7em
+    } else {
+      -1.6em
+    },
+    offset-dx: 0em,
+    offset-dy: if pos == bottom {
+      0.8em + height
+    } else {
+      -0.6em - height
+    },
+    point-pin,
+    rect(
+      inset: 0.5em,
+      stroke: (bottom: 0.12em + fill),
+      {
+        set text(fill: fill)
+        body
+      },
+    ),
+  )
+}
+
 #title-slide(
   title: text(36pt)[Properties of molecular crystals using machine learning potentials],
   author: (
@@ -104,22 +149,97 @@ La teoria del funzionale densità (DFT) è una formulazione del problema elettro
 
 #grid(
   columns: 2,
-  gutter: 20pt,
-  image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png"),
+  image("../thesis/imgs/distill.pub.gnn-intro.fig1.png"),
+  [
+    I potenziali machine learning sfruttano le reti neurali per modellare le superfici di energia potenziale con alta precisione.
+
+    Per come sono strutturate, le reti neurali a grafo (GNN) sono molto versatili per questo scopo.
+
+    Le GNN conservano informazioni nei nodi, negli archi e nel grafo intero.
+  ],
 )
 
-I potenziali machine learning sfruttano le reti neurali per modellare le superfici di energia potenziale con alta precisione.
+#slide[
+  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
 
-Per come sono strutturate, le reti neurali a grafo (GNN) sono molto versatili per questo scopo.
+  MACE è una rete neurale a grafo, dove ciascun layer codifica l'informazione a molti corpi della geometria atomica.
+
+  L'output finale è il contributo di energia di ciascun atomo all'energia potenziale.
+][
+  - Ciascun nodo rappresenta un atomo
+  - Gli archi connettono i nodi se i corrispondenti atomi sono entro una data distanza tra loro
+  - Lo stato di ciascun nodo $i$ nel layer $t$ è rappresentato da una tupla:
+  $
+    sigma_i^((t)) = (
+      #pin("r1")va(r_i)#pin("r2"),#pin("z1")z_i#pin("z2"),#pin("h1")va(h_i^((t)))#pin("h2")
+    ),
+  $
+
+  #pause
+
+  #pinit-highlight(
+    "r1",
+    "r2",
+    dy: -0.65em,
+  )
+
+  #pinit-point-from(
+    ("r1", "r2"),
+    pin-dy: 15pt,
+    pin-dx: 0pt,
+    offset-dx: -15pt,
+    body-dx: -200pt,
+    [Posizione dell'atomo $i$],
+  )
+
+  #pause
+
+  #pinit-highlight-equation-from(
+    ("z1", "z2"),
+    ("z1", "z2"),
+    [Specie chimica],
+  )
+
+  #pause
+
+  #let fill = rgb(150, 90, 170)
+  #pinit-highlight(
+    "h1",
+    "h2",
+    dy: -0.8em,
+    dx: -0.1em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+
+  #pinit-point-from(
+    ("h1", "h2"),
+    pin-dy: -20pt,
+    pin-dx: 0pt,
+    offset-dy: -60pt,
+    offset-dx: 10pt,
+    body-dx: 0pt,
+    body-dy: -20pt,
+    fill: fill,
+    text(fill)[Caratteristiche \ apprendibili]
+  )
+
+  // #pinit-highlight-equation-from(
+  //   ("h1", "h2"),
+  //   ("h1", "h2"),
+  //   pos: top,
+  //   [Caratteristiche \ apprendibili]
+  // )
+]
 
 == MACE
+
 È l'architettura specifica impiegata nel corso di questa tesi.
-Ci sono tre modelli base, che variano in base alla quantità di parametri che costituiscono il modello:
+Ci sono tre modelli base di MACE-MP-0, che variano in base alla quantità di parametri che costituiscono il modello:
 - small
 - medium
 - large
+- MACE-ICE13-1 \ (adattato in particolare al ghiaccio)
 
-C'è un modello adattato alle proprietà del ghiaccio, tramite la procedura detta di fine-tuning, denominato MACE-ICE13-1.
 
 = Risultati
 Applicazione di modelli MLP per predire proprietà dei cristalli molecolari.
@@ -127,8 +247,8 @@ Applicazione di modelli MLP per predire proprietà dei cristalli molecolari.
 Il nostro case study è l'acqua.
 Per le sue proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
 
-== Struttura del monomero e del dimero
-La procedura per ottimizzare la geometria della molecola richiede la corretta impostazione di alcuni parametri, come:
+== Ottimizzazione della geometria
+La procedura per ottimizzare la geometria degli atomi in un sistema richiede la corretta impostazione di alcuni parametri, come:
 
 - il calcolatore e il tipo di dato numerico #uncover("2-")[(MACE-MP-0 medium, float64)]
 #meanwhile
@@ -152,7 +272,7 @@ $
   columns: 2,
   image("../simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg"),
   [
-    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH, ottenendo valori coerenti con la letteratura, entro $0.5°$ e $0.01 angstrom$.
+    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH, ottenendo valori coerenti con la letteratura, entro $0.01 angstrom$ e $0.5°$, rispettivamente.
 
     Si osserva ad esempio la soglia di convergenza nelle forze residue per il monomero,
     $f_"max" = 10^(-4) "eV/"angstrom$.
@@ -223,6 +343,8 @@ $
 = Dimero #place(top + center,
   image("../simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png")
 )
+
+== Ottimizzazione della geometria
 
 Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio delle frequenze di vibrazione armoniche e ZPE per il dimero.
 
@@ -342,8 +464,7 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
     height: 70%,
   ),
   [
-    C'è interesse a catturare la stabilità relativa dei polimorfi del ghiaccio, cioè rispetto a una data fase cristallina invece che rispetto alla fase gassosa.
-    Calcoliamo l'energia di reticolo relativa rispetto al ghiaccio esagonale Ih:
+    C'è interesse a catturare la stabilità relativa dei polimorfi del ghiaccio, cioè rispetto a una data fase cristallina (ad es. ghiaccio Ih) invece che rispetto alla fase gassosa:
     $
       Delta E_"lattice"^x := E_"lattice"^x - E_"lattice"^"Ih"
     $
@@ -352,50 +473,7 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 )
 
 == Dispersione dei fononi
-#let pinit-highlight-equation-from(
-  height: 2em,
-  pos: bottom,
-  fill: rgb(0, 180, 255),
-  highlight-pins,
-  point-pin,
-  body,
-) = {
-  pinit-highlight(
-    ..highlight-pins,
-    dy: -0.6em,
-    fill: rgb(..fill.components().slice(0, -1), 40),
-  )
-  pinit-point-from(
-    fill: fill,
-    pin-dx: 0em,
-    pin-dy: if pos == bottom {
-      0.8em
-    } else {
-      -0.6em
-    },
-    body-dx: 0pt,
-    body-dy: if pos == bottom {
-      -1.7em
-    } else {
-      -1.6em
-    },
-    offset-dx: 0em,
-    offset-dy: if pos == bottom {
-      0.8em + height
-    } else {
-      -0.6em - height
-    },
-    point-pin,
-    rect(
-      inset: 0.5em,
-      stroke: (bottom: 0.12em + fill),
-      {
-        set text(fill: fill)
-        body
-      },
-    ),
-  )
-}
+
 
 #slide[
   #image("../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg")#pin("brillouin")
