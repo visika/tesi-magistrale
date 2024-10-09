@@ -98,6 +98,20 @@
   complex intermolecular interactions with the accuracy of ab initio approaches but at a much cheaper computational cost.
 
   In this work, we will test different @mlp models for the prediction of properties of molecular crystals, including lattice energy, phonons dispersion, and finite temperature dynamics.
+
+  #heading(outlined: false, [Sommario])
+
+  I cristalli molecolari svolgono un ruolo importante nel campo della scienza dei materiali,
+  in particolare nello sviluppo di farmaci, nell'elettronica e nelle energie rinnovabili.
+
+  In questo lavoro, utilizzeremo #gls("mlp", long: true) sviluppati di recente per modellare la struttura e la dinamica dei cristalli molecolari insieme alla loro stabilità termodinamica, utilizzando l'acqua come caso studio.
+  L'acqua è ubiquitaria in natura e di fondamentale importanza per la fisica, la biologia, la geologia, la scienza dei materiali e l'ingegneria.
+  Le sue numerose anomalie, derivanti dalla delicata interazione tra il legame a idrogeno e le forze di dispersione, la rendono un duro banco di prova per gli approcci computazionali.
+
+  Gli approcci tradizionali sono spesso alle prese con il compromesso tra costi computazionali e accuratezza.
+  L'applicazione di #glspl("mlp") cattura le interazioni intermolecolari complesse con l'accuratezza degli approcci ab initio, ma a un costo computazionale molto più basso.
+
+  In questo lavoro, testeremo diversi modelli @mlp per la previsione delle proprietà dei cristalli molecolari, tra cui l'energia reticolare, la dispersione dei fononi e la dinamica a temperatura finita.
 ]
 
 #pagebreak()
