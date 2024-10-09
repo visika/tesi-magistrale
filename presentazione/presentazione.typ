@@ -133,40 +133,39 @@ Ci sono difficoltà nei metodi tradizionali nel bilanciare l'accuratezza e il co
 )
 
 == DFT
-La teoria del funzionale densità (DFT) è una formulazione del problema elettronico a molti corpi della meccanica quantistica, in termini della densità di stato fondamentale al posto che rispetto alla funzione d'onda dello stato fondamentale.
 
-- revPBE-D3
-- DMC
+La teoria del funzionale densità (DFT) è una formulazione in principio esatta del problema elettronico a molti corpi della meccanica quantistica, in termini della densità dello stato fondamentale degli elettroni, invece che della funziona d'onda di stato fondamentale.
 
-== Potenziali Machine Learning
+Una delle sue numerose applicazioni è la determinazione di proprietà strutturali ed elettroniche dei materiali nella fisica dello stato solido.
 
-#grid(
-  columns: 2,
-  image("../thesis/imgs/distill.pub.gnn-intro.fig1.png"),
-  [
-    I potenziali machine learning sfruttano le reti neurali per modellare le superfici di energia potenziale con alta precisione.
+L'uso di questi metodi richiede l'individuazione del corretto funzionale di scambio e correlazione.
+È importante includere interazioni di van der Waals e di dispersione, allorquando non siano incluse nella teoria.
 
-    Per come sono strutturate, le reti neurali a grafo (GNN) sono molto versatili per questo scopo.
+#place(bottom + right)[
+  $
+    hat(h)_"KS" [rho] (va(r)) psi_n (va(r)) =
+    [-1 / 2 nabla^2 + v_"KS" [rho] (arrow(r))] psi_n (arrow(r))
+    = epsilon_n psi_n (va(r))
+  $
+]
 
-    Le GNN conservano informazioni nei nodi, negli archi e nel grafo intero.
-  ],
-)
+== Reti neurali a grafo
 
 #slide[
-  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
-
-  MACE è una rete neurale a grafo, dove ciascun layer codifica l'informazione a molti corpi della geometria atomica.
-
-  L'output finale è il contributo di energia di ciascun atomo all'energia potenziale.
-][
   - Ciascun nodo rappresenta un atomo
   - Gli archi connettono i nodi se i corrispondenti atomi sono entro una data distanza tra loro
   - Lo stato di ciascun nodo $i$ nel layer $t$ è rappresentato da una tupla:
+
+  #v(0.5cm)
+
   $
     sigma_i^((t)) = (
       #pin("r1")va(r_i)#pin("r2"),#pin("z1")z_i#pin("z2"),#pin("h1")va(h_i^((t)))#pin("h2")
-    ),
+    )
   $
+][
+  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
+  #image("../thesis/imgs/distill.pub.gnn-intro.fig1.png")
 
   #pause
 
@@ -209,30 +208,91 @@ La teoria del funzionale densità (DFT) è una formulazione del problema elettro
     pin-dy: -20pt,
     pin-dx: 0pt,
     offset-dy: -60pt,
-    offset-dx: 10pt,
-    body-dx: 0pt,
+    offset-dx: -10pt,
+    body-dx: -130pt,
     body-dy: -20pt,
     fill: fill,
-    text(fill)[Caratteristiche \ apprendibili]
+    text(fill)[Caratteristiche \ apprendibili],
+  )
+]
+
+#slide[
+  #grid(
+    columns: 2,
+    row-gutter: 40pt,
+    column-gutter: 20pt,
+    [
+      - Un passaggio tra layer consiste nella _costruzione_, _aggiornamento_ e _lettura_ di _messaggi_
+    ],
+    $
+      va(m_i^((t))) = plus.circle.big_(j in cal(N) (i)) M_t (
+        sigma_i^((t)), sigma_j^((t))
+      )
+    $,
+
+    [
+      - Nella fase di aggiornamento, il messaggio $va(m_i^((t)))$ è trasformato in nuove caratteristiche
+    ],
+    $
+      arrow(h)_i^((t+1)) = U_t (sigma_i^((t)), arrow(m)_i^((t)))
+    $,
+
+    [
+      - L'output finale è il contributo di energia di ciascun atomo all'energia potenziale
+    ],
+    $
+      E_i = sum_(t=1)^T cal(R)_t (sigma_i^((t)))
+    $,
   )
 
-  // #pinit-highlight-equation-from(
-  //   ("h1", "h2"),
-  //   ("h1", "h2"),
-  //   pos: top,
-  //   [Caratteristiche \ apprendibili]
-  // )
+  Tutti gli operatori sono apprendibili ($M_t$, $plus.circle.big_(j in cal(N) (i))$, $U_t$, $cal(R)_t$)
 ]
 
 == MACE
 
-È l'architettura specifica impiegata nel corso di questa tesi.
-Ci sono tre modelli base di MACE-MP-0, che variano in base alla quantità di parametri che costituiscono il modello:
-- small
-- medium
-- large
-- MACE-ICE13-1 \ (adattato in particolare al ghiaccio)
+#slide[
+  - È equivariante: le caratteristiche interne $va(h_i^((t)))$ si trasformano in modo preciso sotto l'azione di un gruppo, e.g. $O(3)$:
+  $
+    va(h_i^((t))) (Q dot (va(r_1), dots, va(r_N)))
+    = D(Q) va(h_i^((t))) (va(r_1), dots, va(r_N))
+  $
 
+  - È message-passing, e costruisce messaggi secondo uno schema originale:
+
+  $
+    va(m_i^((t)))
+    &= sum_j va(u_1) (sigma_i^((t)); sigma_j^((t))) \
+    &+ sum_(j_1, j_2) va(u_2) (
+      sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
+    )
+    + dots
+    + sum_(j_1, dots, j_nu)pin("u1")va(u_nu)pin("u2")(
+      sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
+    )
+  $
+
+  #pinit-highlight-equation-from(
+    ("u1", "u2"),
+    ("u1", "u2"),
+    pos: top,
+    [Apprendibili],
+  )
+]
+
+#slide[
+  Ci sono tre modelli base di MACE, che variano in base alla quantità di parametri che costituiscono il modello, e uno specializzato fornito dall'esterno per la mia tesi:
+
+  - MACE-MP-0 small
+  - MACE-MP-0 medium
+  - MACE-MP-0 large
+  - MACE-ICE13-1 (adattato con fine-tuning in particolare al ghiaccio)
+  #pause
+  #[
+    #set text(fill: rgb(0, 180, 255))
+    #set list(marker: text(rgb(0, 180, 255))[•])
+    - MACE-mmollo-0 (toy model basato su MACE-MP-0 small creato a fini formativi)
+  ]
+]
 
 = Risultati
 Applicazione di modelli MLP per predire proprietà dei cristalli molecolari.
