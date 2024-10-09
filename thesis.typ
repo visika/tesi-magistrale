@@ -7,7 +7,7 @@
 #show: make-glossary
 
 // For glossarium links
-#show link: set text(fill: blue.darken(60%))
+#show link: set text(fill: gray.darken(60%))
 
 #let title = "Properties of molecular crystals using machine learning potentials"
 #set document(title: title, author: "Mariano Mollo")
