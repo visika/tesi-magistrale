@@ -275,6 +275,8 @@ $
 
 == Frequenze di vibrazione armoniche
 
+#let crimson = rgb("#c00000")
+
 #slide[
   #place(
     bottom + left,
@@ -286,17 +288,25 @@ $
     + #pin(1) sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2) #pin(2)
   $
 
-  #let crimson = rgb("#c00000")
-  #pause
-  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 1, 2)
-  #pause
   $
     "ZPE" &:= G(0,0,0) \
     &= 1 / 2 (omega_1 + omega_2 + omega_3)
     + #pin(3) 1 / 4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23) #pin(4)
   $
+
   #pause
+
+  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 1, 2)
+
+  #pause
+
   #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 3, 4)
+
+  #pause
+
+  #place(bottom + right)[
+    I contributi anarmonici *non* sono trascurabili \ per lo studio delle proprietà dell'acqua cristallina.
+  ]
 
 ]
 
