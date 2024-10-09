@@ -70,6 +70,10 @@
 
   #pagebreak() ]
 
+#place(bottom)[
+  Mariano Mollo: #emph(title), analyzing water systems with MACE, #sym.copyright October 2024
+]
+
 #pagebreak()
 
 #set page(
