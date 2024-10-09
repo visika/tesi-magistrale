@@ -100,7 +100,7 @@ La teoria del funzionale densità (DFT) è una formulazione del problema elettro
 - revPBE-D3
 - DMC
 
-== MLP
+== Potenziali Machine Learning
 
 #grid(
   columns: 2,
