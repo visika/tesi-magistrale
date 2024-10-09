@@ -312,14 +312,14 @@
 #set math.equation(numbering: "(1)")
 
 #let large_figure(content, caption: none) = figure(
-  box(width: 125%, content),
+  box(width: 120%, content),
   caption: caption,
 )
 
 #let large_box(content) = align(
   center,
   box(
-    width: 125%,
+    width: 120%,
     content,
   ),
 )
