@@ -132,8 +132,6 @@ Ci sono difficoltà nei metodi tradizionali nel bilanciare l'accuratezza e il co
   ],
 )
 
-// = Teoria
-
 == DFT
 La teoria del funzionale densità (DFT) è una formulazione del problema elettronico a molti corpi della meccanica quantistica, in termini della densità di stato fondamentale al posto che rispetto alla funzione d'onda dello stato fondamentale.
 
