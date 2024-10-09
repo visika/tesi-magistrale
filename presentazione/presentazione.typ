@@ -129,11 +129,6 @@ Ci sono difficoltà nei metodi tradizionali nel bilanciare l'accuratezza e il co
   image("../thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
   [
     Vogliamo capire se è possibile migliorare la simulazione dei cristalli molecolari con accuratezza simile ai metodi ab initio ma a un costo computazionale molto più basso.
-
-    // I MLP ci permettono di eseguire simulazioni di fisica con grande risparmio di tempo.
-    // Ma a quale costo?
-
-    // Investighiamo la questione confrontando i MLP con i modelli ab-initio sulla quale si basano.
   ],
 )
 
