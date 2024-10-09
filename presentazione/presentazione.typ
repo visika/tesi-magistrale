@@ -577,10 +577,19 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 // Riassumere in una frase ciò che si è imparato durante questa esperienza
 
 == Riepilogo dei risultati
+- Valutate le prestazioni di MACE in termini di risorse computazionali
+- Buon accordo dei risultati con il modello DFT base
+- Potenziale con previsioni entro l'accuratezza chimica ($approx 4 "kJ/mol"$)
+- Seguita la procedura di fine-tuning per creare un toy model di MACE
+- Ho imparato a usare lo stato dell'arte degli strumenti per la simulazione dei materiali (ASE, VASP, LAMMPS, MACE)
+- Ho scritto script di integrazione tra i diversi strumenti, dove non esistevano (integrazione PHON-ASE)
 
 == Limiti e sviluppi futuri
 - È necessario avere grandi quantità di dati in partenza per addestrare nuovi modelli
+- Per l'addestramento è necessario una quantità di risorse computazionali ingente (per l'utilizzo dei modelli no)
 - Manca ancora il supporto alle simulazioni su GPU multiple
+- Estensione degli studi ad altri cristalli molecolari e sistemi di interesse
+- Democratizzazione dell'accesso alle simulazione accurata dei materiali
 
 == Potenziali applicazioni
 
