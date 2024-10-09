@@ -262,8 +262,22 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 == Binding energy
 #grid(
   columns: 2,
+  gutter: 10pt,
   image("../simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
-  image("../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png"),
+  [
+    La binding energy si calcola come
+
+    $ Delta E_2 := E_2 - 2 E_1 $
+
+    MACE-ICE13-1 rientra entro i valori tipici ottenuti con DFT:
+
+    #align(right)[
+      #image(
+        "../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png",
+        height: 50%,
+      )
+    ]
+  ],
 )
 
 = Strutture cristalline #place(top + center,
