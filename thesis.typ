@@ -3224,11 +3224,13 @@ I would like to express my gratitude to Flaviano Della Pia for his invaluable as
 
 This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-2020, for all three entities (INFN, UNINA and CNR).
 
+#pagebreak(to: "odd")
+
 #show heading.where(level: 1): it => [
   #[] <empty-page>
-  #pagebreak(to: "even", weak: true)
+  // #pagebreak(to: "even", weak: true)
   #[] <new-chapter>
-  #pagebreak(to: "odd", weak: true)
+  // #pagebreak(to: "odd", weak: true)
   #set text(font: "Neo Euler")
   // #grid(
   //   columns: 2,
@@ -3247,3 +3249,12 @@ This work has been funded by project code PIR01_00011 “IBISCo”, PON 2014-202
 
 #bibliography(("Tesi magistrale.bib", "bibliography.bib"))
 
+#pagebreak(to: "odd")
+#set page(header: [], footer: [])
+
+#place(bottom)[
+  #heading(level: 2, outlined: false, [Colophon], numbering: none)
+
+  This document was typeset using the _Typst_ typesetting system.
+  The style was inspired by the typographical look-and-feel _classicthesis_ developed by André Miede and Ivo Pletikosić, which was inspired by Robert Bringhurst's seminal book on typography _The Elements of Typographic Style_.
+]
