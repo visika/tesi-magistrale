@@ -27,11 +27,12 @@
   fill: rgb(0, 180, 255),
   highlight-pins,
   point-pin,
+  highlight-dy: -0.6em,
   body,
 ) = {
   pinit-highlight(
     ..highlight-pins,
-    dy: -0.6em,
+    dy: highlight-dy,
     fill: rgb(..fill.components().slice(0, -1), 40),
   )
   pinit-point-from(
@@ -86,219 +87,81 @@
 
 // = Introduzione
 
-== Importanza dei cristalli molecolari
-
-#slide[
-  I cristalli molecolari rappresentano un'area di studio significativa nella scienza dei materiali,
-  per la loro importanza in campi come la farmaceutica, l'elettronica, le energie rinnovabili.
-
-  In questo lavoro, abbiamo usato dei potenziali machine learning (MLP) per modellare struttura e dinamica dei cristalli molecolari, prendendo come caso studio l'acqua.
-][
-  #align(
-    right,
-    image("../thesis/imgs/karki2009_graphical_abstact.jpg", height: 50%),
-  )
-
-  L'acqua presenta molte anomalie, dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare.
-]
-
-== Uso dei potenziali nelle simulazioni
+== Il ghiaccio e i suoi polimorfi
 
 #grid(
   columns: 2,
-  gutter: 10pt,
+  align: horizon,
   [
-    #image("../thesis/imgs/images_large_cr0c00868_0001.jpeg")
+    - Classe dei cristalli molecolari
+    - Importanza di studiare le diverse fasi cristalline del ghiaccio
+    - Difficoltà: caratterizzare le componenti di interazione, Coulomb, van der Waals
+    - Spesso i polimorfi differiscono solo per piccole differenze di energia ($approx 1 "kJ/mol"$)
+    - Per caratterizzare il diagramma T-P, sono importanti le proprietà dinamiche.
   ],
   [
-    - Compromesso tra costo computazionale e accuratezza.
-    - Uso dei Machine Learning Potential (MLP) per modellare cristalli molecolari
-    - Catturano interazioni intermolecolari complesse con l'accuratezza degli approcci ab initio ma a un costo computazionale ridotto.
-  ],
-)
-
-In questo lavoro abbiamo testato differenti modelli MLP per la stima di alcune proprietà dell'acqua, tra le quali energie di reticolo, dispersione dei fononi, e dinamica a temperatura finita.
-
-== Problematica e obiettivo
-
-Ci sono difficoltà nei metodi tradizionali nel bilanciare l'accuratezza e il costo computazionale, come la Density Functional Theory (DFT), che pur essendo accurata, è costosa in termini di calcolo.
-
-#grid(
-  columns: 2,
-  gutter: 20pt,
-  image("../thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
-  [
-    Vogliamo capire se è possibile migliorare la simulazione dei cristalli molecolari con accuratezza simile ai metodi ab initio ma a un costo computazionale molto più basso.
+    #image("../thesis/imgs/dellapia2022_f1.jpeg", height: 80%)
   ],
 )
-
-== DFT
-
-La teoria del funzionale densità (DFT) è una formulazione in principio esatta del problema elettronico a molti corpi della meccanica quantistica, in termini della densità dello stato fondamentale degli elettroni, invece che della funziona d'onda di stato fondamentale.
-
-Una delle sue numerose applicazioni è la determinazione di proprietà strutturali ed elettroniche dei materiali nella fisica dello stato solido.
-
-L'uso di questi metodi richiede l'individuazione del corretto funzionale di scambio e correlazione.
-È importante includere interazioni di van der Waals e di dispersione, allorquando non siano incluse nella teoria.
 
 #place(bottom + right)[
-  $
-    hat(h)_"KS" [rho] (va(r)) psi_n (va(r)) =
-    [-1 / 2 nabla^2 + v_"KS" [rho] (arrow(r))] psi_n (arrow(r))
-    = epsilon_n psi_n (va(r))
-  $
+  Della Pia et al. 2022
 ]
 
-== Reti neurali a grafo
-
-#slide[
-  - Ciascun nodo rappresenta un atomo
-  - Gli archi connettono i nodi se i corrispondenti atomi sono entro una data distanza tra loro
-  - Lo stato di ciascun nodo $i$ nel layer $t$ è rappresentato da una tupla:
-
-  #v(0.5cm)
-
-  $
-    sigma_i^((t)) = (
-      #pin("r1")va(r_i)#pin("r2"),#pin("z1")z_i#pin("z2"),#pin("h1")va(h_i^((t)))#pin("h2")
-    )
-  $
-][
-  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
-  #image("../thesis/imgs/distill.pub.gnn-intro.fig1.png")
-
-  #pause
-
-  #pinit-highlight(
-    "r1",
-    "r2",
-    dy: -0.65em,
-  )
-
-  #pinit-point-from(
-    ("r1", "r2"),
-    pin-dy: 15pt,
-    pin-dx: 0pt,
-    offset-dx: -15pt,
-    body-dx: -200pt,
-    [Posizione dell'atomo $i$],
-  )
-
-  #pause
-
-  #pinit-highlight-equation-from(
-    ("z1", "z2"),
-    ("z1", "z2"),
-    [Specie chimica],
-  )
-
-  #pause
-
-  #let fill = rgb(150, 90, 170)
-  #pinit-highlight(
-    "h1",
-    "h2",
-    dy: -0.8em,
-    dx: -0.1em,
-    fill: rgb(..fill.components().slice(0, -1), 40),
-  )
-
-  #pinit-point-from(
-    ("h1", "h2"),
-    pin-dy: -20pt,
-    pin-dx: 0pt,
-    offset-dy: -60pt,
-    offset-dx: -10pt,
-    body-dx: -130pt,
-    body-dy: -20pt,
-    fill: fill,
-    text(fill)[Caratteristiche \ apprendibili],
-  )
-]
+== Potenziali tradizionali e machine learning
 
 #slide[
   #grid(
-    columns: 2,
-    row-gutter: 40pt,
-    column-gutter: 20pt,
+    columns: (1fr, 1fr),
     [
-      - Un passaggio tra layer consiste nella _costruzione_, _aggiornamento_ e _lettura_ di _messaggi_
+      - Compromesso tra costo e accuratezza (DMC, CC, DFT, FF)
+      - Esempio: trovare il cristallo più stabile tramite simulazioni di MD seguendo la PES, che ha a che fare con le posizioni degli ioni
+      - Uso dei potenziali ML per modellare la superficie di energia potenziale (PES) racchiudendo nell'addestramento il ruolo degli elettroni
     ],
-    $
-      va(m_i^((t))) = plus.circle.big_(j in cal(N) (i)) M_t (
-        sigma_i^((t)), sigma_j^((t))
-      )
-    $,
-
     [
-      - Nella fase di aggiornamento, il messaggio $va(m_i^((t)))$ è trasformato in nuove caratteristiche
+      #uncover("1")[
+        // #place(horizon)[
+        #image("imgs/Interpolation_Data.svg")
+        // ]
+      ]
+      #uncover("2")[
+        #place(horizon, image("imgs/Interpolation_example_polynomial.svg"))
+      ]
+      #uncover("3")[
+        #place(horizon, image("imgs/Potential_Energy_Surface_for_Water.png"))
+        #place(
+          bottom + right,
+          dy: 2.5cm,
+          text(17pt)[AimNature, CC BY-SA 3.0, via Wikimedia Commons],
+        )
+      ]
     ],
-    $
-      arrow(h)_i^((t+1)) = U_t (sigma_i^((t)), arrow(m)_i^((t)))
-    $,
-
-    [
-      - L'output finale è il contributo di energia di ciascun atomo all'energia potenziale
-    ],
-    $
-      E_i = sum_(t=1)^T cal(R)_t (sigma_i^((t)))
-    $,
   )
-
-  Tutti gli operatori sono apprendibili ($M_t$, $plus.circle.big_(j in cal(N) (i))$, $U_t$, $cal(R)_t$)
 ]
 
-== MACE
+== L'architettura di MACE: GNN
 
 #slide[
-  - È equivariante: le caratteristiche interne $va(h_i^((t)))$ si trasformano in modo preciso sotto l'azione di un gruppo, e.g. $O(3)$:
-  $
-    va(h_i^((t))) (Q dot (va(r_1), dots, va(r_N)))
-    = D(Q) va(h_i^((t))) (va(r_1), dots, va(r_N))
-  $
-
-  - È message-passing, e costruisce messaggi secondo uno schema originale:
-
-  $
-    va(m_i^((t)))
-    &= sum_j va(u_1) (sigma_i^((t)); sigma_j^((t))) \
-    &+ sum_(j_1, j_2) va(u_2) (
-      sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
-    )
-    + dots
-    + sum_(j_1, dots, j_nu)pin("u1")va(u_nu)pin("u2")(
-      sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
-    )
-  $
-
-  #pinit-highlight-equation-from(
-    ("u1", "u2"),
-    ("u1", "u2"),
-    pos: top,
-    [Apprendibili],
-  )
+  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
 ]
+
+== Modelli di MACE
 
 #slide[
   Ci sono tre modelli base di MACE, che variano in base alla quantità di parametri che costituiscono il modello, e uno specializzato fornito dall'esterno per la mia tesi:
 
-  - MACE-MP-0 small
-  - MACE-MP-0 medium
-  - MACE-MP-0 large
-  - MACE-ICE13-1 (adattato con fine-tuning in particolare al ghiaccio)
-  #pause
-  #[
-    #set text(fill: rgb(0, 180, 255))
-    #set list(marker: text(rgb(0, 180, 255))[•])
-    - MACE-mmollo-0 (toy model basato su MACE-MP-0 small creato a fini formativi)
-  ]
+  - MACE-MP-0#footnote[Batatia et al. 2023, A foundation model for atomistic materials chemistry] (small, medium, large)
+  - MACE-ICE13-1 (adattato con fine-tuning in particolare al ghiaccio, per gentile concessione di Flaviano Della Pia.)
+
+  #place(right, image("imgs/flaviano.jpg", height: 40%))
 ]
 
 = Risultati
-Applicazione di modelli MLP per predire proprietà dei cristalli molecolari.
+Per l'implementazione pratica dei modelli MLP, si è selezionata l'acqua come cristallo molecolare da studiare.
 
-Il nostro case study è l'acqua.
-Per le sue proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
+L'acqua ha diverse proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
+
+Le anomalie che presenta sono dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare.
 
 == Ottimizzazione della geometria
 La procedura per ottimizzare la geometria degli atomi in un sistema richiede la corretta impostazione di alcuni parametri, come:
@@ -718,11 +581,11 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 // Riassumere in una frase ciò che si è imparato durante questa esperienza
 
 == Riepilogo dei risultati
-- Valutate le prestazioni di MACE in termini di risorse computazionali
-- Buon accordo dei risultati con il modello DFT base
+
+- Ho imparato come usare e implementare il calcolatore MLP MACE in simulazioni dei materiali, insieme agli strumenti a corredo (ASE, VASP, LAMMPS)
+- Prototipazione veloce e accurata di diverse configurazioni molecolari, dispersione dei fononi, energie di reticolo di diversi polimorfi e dinamica molecolare, con tempi di esecuzione ordini di grandezza minori rispetto ai metodi DFT
 - Potenziale con previsioni entro l'accuratezza chimica ($approx 4 "kJ/mol"$)
-- Seguita la procedura di fine-tuning per creare un toy model di MACE
-- Ho imparato a usare lo stato dell'arte degli strumenti per la simulazione dei materiali (ASE, VASP, LAMMPS, MACE)
+- Ho seguito la procedura di fine-tuning per creare un toy model specializzato di MACE
 - Ho scritto script di integrazione tra i diversi strumenti, dove non esistevano (integrazione PHON-ASE)
 
 == Limiti e sviluppi futuri
@@ -731,6 +594,8 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 - Manca ancora il supporto alle simulazioni su GPU multiple
 - Estensione degli studi ad altri cristalli molecolari e sistemi di interesse
 - Democratizzazione dell'accesso alle simulazione accurata dei materiali
+
+MACE risulta un'ottima aggiunta alla cassetta degli attrezzi nella scienza dei materiali.
 
 == Potenziali applicazioni
 
@@ -741,6 +606,207 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 #show: appendix
 
 = Appendice
+
+== Importanza dei cristalli molecolari
+
+#slide[
+  I cristalli molecolari rappresentano un'area di studio significativa nella scienza dei materiali,
+  per la loro importanza in campi come la farmaceutica, l'elettronica, le energie rinnovabili.
+
+  È importante il ruolo delle vibrazioni e delle interazioni van der Waals a molti corpi nelle proprietà coesive dei cristalli molecolari.
+][
+  #align(
+    right,
+    image("../thesis/imgs/karki2009_graphical_abstact.jpg", height: 50%),
+  )
+]
+
+== Diversi potenziali per le simulazioni
+
+#grid(
+  columns: 2,
+  gutter: 10pt,
+  [
+    #image("../thesis/imgs/images_large_cr0c00868_0001.jpeg")
+  ],
+  [
+    - Compromesso tra costo computazionale e accuratezza.
+    - Uso dei Machine Learning Potential (MLP) per modellare cristalli molecolari
+    - Catturano interazioni intermolecolari complesse con l'accuratezza degli approcci ab initio ma a un costo computazionale ridotto.
+  ],
+)
+
+In questo lavoro abbiamo testato differenti modelli MLP per la stima di alcune proprietà dell'acqua, tra le quali energie di reticolo, dispersione dei fononi, e dinamica a temperatura finita.
+
+== Problematica e obiettivo
+
+Ci sono difficoltà nei metodi tradizionali nel bilanciare l'accuratezza e il costo computazionale, come la Density Functional Theory (DFT), che pur essendo accurata, è costosa in termini di calcolo.
+
+#grid(
+  columns: 2,
+  gutter: 20pt,
+  image("../thesis/imgs/gilmerNeuralMessagePassing2017_Figure1.png"),
+  [
+    Vogliamo capire se è possibile migliorare la simulazione dei cristalli molecolari con accuratezza simile ai metodi ab initio ma a un costo computazionale molto più basso.
+  ],
+)
+
+== DFT
+
+La teoria del funzionale densità (DFT) è una formulazione in principio esatta del problema elettronico a molti corpi della meccanica quantistica, in termini della densità dello stato fondamentale degli elettroni, invece che della funziona d'onda di stato fondamentale.
+
+Una delle sue numerose applicazioni è la determinazione di proprietà strutturali ed elettroniche dei materiali nella fisica dello stato solido.
+
+L'uso di questi metodi richiede l'individuazione del corretto funzionale di scambio e correlazione.
+È importante includere interazioni di van der Waals e di dispersione, allorquando non siano incluse nella teoria.
+
+#place(bottom + right)[
+  $
+    hat(h)_"KS" [rho] (va(r)) psi_n (va(r)) =
+    [-1 / 2 nabla^2 + v_"KS" [rho] (arrow(r))] psi_n (arrow(r))
+    = epsilon_n psi_n (va(r))
+  $
+]
+
+== Reti neurali a grafo
+
+#slide[
+  - Ciascun nodo rappresenta un atomo
+  - Gli archi connettono i nodi se i corrispondenti atomi sono entro una data distanza tra loro
+  - Lo stato di ciascun nodo $i$ nel layer $t$ è rappresentato da una tupla:
+
+  #v(0.5cm)
+
+  $
+    sigma_i^((t)) = (
+      #pin("r1")va(r_i)#pin("r2"),#pin("z1")z_i#pin("z2"),#pin("h1")va(h_i^((t)))#pin("h2")
+    )
+  $
+][
+  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
+  #image("../thesis/imgs/distill.pub.gnn-intro.fig1.png")
+
+  #pause
+
+  #pinit-highlight(
+    "r1",
+    "r2",
+    dy: -0.65em,
+  )
+
+  #pinit-point-from(
+    ("r1", "r2"),
+    pin-dy: 15pt,
+    pin-dx: 0pt,
+    offset-dx: -15pt,
+    body-dx: -200pt,
+    [Posizione dell'atomo $i$],
+  )
+
+  #pause
+
+  #pinit-highlight-equation-from(
+    ("z1", "z2"),
+    ("z1", "z2"),
+    [Specie chimica],
+  )
+
+  #pause
+
+  #let fill = rgb(150, 90, 170)
+  #pinit-highlight(
+    "h1",
+    "h2",
+    dy: -0.8em,
+    dx: -0.1em,
+    fill: rgb(..fill.components().slice(0, -1), 40),
+  )
+
+  #pinit-point-from(
+    ("h1", "h2"),
+    pin-dy: -20pt,
+    pin-dx: 0pt,
+    offset-dy: -60pt,
+    offset-dx: -10pt,
+    body-dx: -130pt,
+    body-dy: -20pt,
+    fill: fill,
+    text(fill)[Caratteristiche \ apprendibili],
+  )
+]
+
+#slide[
+  #grid(
+    columns: 2,
+    row-gutter: 40pt,
+    column-gutter: 20pt,
+    [
+      - Un passaggio tra layer consiste nella _costruzione_, _aggiornamento_ e _lettura_ di _messaggi_
+    ],
+    $
+      va(m_i^((t))) = plus.circle.big_(j in cal(N) (i)) M_t (
+        sigma_i^((t)), sigma_j^((t))
+      )
+    $,
+
+    [
+      - Nella fase di aggiornamento, il messaggio $va(m_i^((t)))$ è trasformato in nuove caratteristiche
+    ],
+    $
+      arrow(h)_i^((t+1)) = U_t (sigma_i^((t)), arrow(m)_i^((t)))
+    $,
+
+    [
+      - L'output finale è il contributo di energia di ciascun atomo all'energia potenziale
+    ],
+    $
+      E_i = sum_(t=1)^T cal(R)_t (sigma_i^((t)))
+    $,
+  )
+
+  Tutti gli operatori sono apprendibili ($M_t$, $plus.circle.big_(j in cal(N) (i))$, $U_t$, $cal(R)_t$)
+]
+
+== Proprietà di MACE
+
+#slide[
+  - È equivariante: le caratteristiche interne $va(h_i^((t)))$ si trasformano in modo preciso sotto l'azione di un gruppo, e.g. $O(3)$:
+  $
+    va(h_i^((t))) (Q dot (va(r_1), dots, va(r_N)))
+    =pin("d1")D(Q)pin("d2")va(h_i^((t))) (va(r_1), dots, va(r_N))
+  $
+
+  - È message-passing, e costruisce messaggi secondo uno schema originale:
+
+  $
+    va(m_i^((t)))
+    &= sum_j va(u_1) (sigma_i^((t)); sigma_j^((t))) \
+    &+ sum_(j_1, j_2) va(u_2) (
+      sigma_i^((t)); sigma_(j_1)^((t)); sigma_(j_2)^((t))
+    )
+    + dots
+    + sum_(j_1, dots, j_nu)pin("u1")va(u_nu)pin("u2")(
+      sigma_i^((t)); sigma_(j_1)^((t)); dots; sigma_(j_nu)^((t))
+    )
+  $
+
+  #pinit-highlight-equation-from(
+    ("u1", "u2"),
+    ("u1", "u2"),
+    pos: top,
+    [Apprendibili],
+  )
+
+  #pinit-highlight-equation-from(
+    ("d1", "d2"),
+    ("d1", "d2"),
+    pos: top,
+    height: 20pt,
+    highlight-dy: -0.7em,
+    fill: rgb(150, 90, 170),
+    [#h(3cm) Matrice D di Wigner],
+  )
+]
 
 == Atomic Simulation Environment (ASE)
 
