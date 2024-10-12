@@ -144,11 +144,40 @@
 ]
 
 = Risultati
-Per l'implementazione pratica dei modelli MLP, si è selezionata l'acqua come cristallo molecolare da studiare.
 
-L'acqua ha diverse proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
+== Test su sistemi semplici
+// Per l'implementazione pratica dei modelli MLP, si è selezionata l'acqua come cristallo molecolare da studiare.
 
-Le anomalie che presenta sono dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare.
+Si sono testate inizialmente le performance di MACE-MP-0 con le seguenti task su sistemi di piccola scala, il monomero e il dimero d'acqua:
+
+- Ottimizzazione della geometria dei sistemi atomici
+- Proprietà vibrazionali ed energia di punto zero armoniche
+- Binding energy del dimero
+
+// #v(-1.3cm)
+
+#place(bottom)[
+  #grid(
+    columns: (1fr,) * 2,
+    [
+      #image(
+        "../simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png",
+        height: 60%,
+      )
+    ],
+    [
+      #image(
+        "../simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png",
+        height: 60%,
+      )
+    ],
+  )
+]
+
+
+// L'acqua ha diverse proprietà peculiari, che mettono a dura prova i calcolatori che provino a simularne il comportamento.
+
+// Le anomalie che presenta sono dovute al bilanciamento tra legami a idrogeno e forze di dispersione, che la rendono difficile da modellizzare.
 
 == Ottimizzazione della geometria
 La procedura per ottimizzare la geometria degli atomi in un sistema richiede la corretta impostazione di alcuni parametri, come:
@@ -165,23 +194,6 @@ $
 $
 #meanwhile
 - il numero massimo di passaggi dell'ottimizzatore #uncover("6-")[(1000)]
-
-= Monomero #place(top + center,
-  image("../simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png")
-)
-
-== Ottimizzazione della geometria
-#grid(
-  columns: 2,
-  image("../simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg"),
-  [
-    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH, ottenendo valori coerenti con la letteratura, entro $0.01 angstrom$ e $0.5°$, rispettivamente.
-
-    Si osserva ad esempio la soglia di convergenza nelle forze residue per il monomero,
-    $f_"max" = 10^(-4) "eV/"angstrom$.
-
-  ],
-)
 
 == Frequenze di vibrazione armoniche
 
@@ -216,76 +228,16 @@ $
 
 ]
 
-#grid(
-  columns: (2fr, 1fr),
-  row-gutter: 10pt,
-  [
-    // #let molecule_omega_table = csv("../simulazioni/02_water/01_molecule/Analysis/omega.csv")
-    // #table(
-    //   columns: molecule_omega_table.first().len(),
-    //   table.header(
-    //   // ..molecule_omega_table.first(),
-    //   [Model], $omega_1$, $omega_2$, $omega_3$
-    // ),
-    //   ..molecule_omega_table.slice(1).flatten()
-    // )
-    #table(
-      columns: 5,
-      table.header([Modello], $omega_1$, $omega_2$, $omega_3$, $"ZPE" ("eV")$),
-      [Reference], [3832.17], [1648.47], [3942.53], [0.585],
-      [small], [3722.10], [1485.10], [3841.80], [0.561],
-      [medium], [3592.20], [1601.10], [3736.50], [0.554],
-      [large], [3695.60], [1497.30], [3814.80], [0.558],
-      [ICE13-1], [3702.30], [1607.80], [3807.50], [0.565],
-    )
-  ],
-  image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg"),
-
-  [
-    Si sono poi calcolate le frequenze di vibrazione armoniche per verificare il loro accordo con i dati tabulati in referenza.
-    Le frequenze sull'asse y negativo indicano instabilità della geometria.
-    Il _Displacement_ è lo spostamento degli atomi usato dalla tecnica di stima delle frequenze.
-  ],
-  image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-8.svg"),
-)
-
-= Dimero #place(top + center,
-  image("../simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png")
-)
-
-== Ottimizzazione della geometria
-
-Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio delle frequenze di vibrazione armoniche e ZPE per il dimero.
-
-#image("../thesis/imgs/klopper-fig1.gif")
-
-#let dimer_geometry_table = csv("../simulazioni/02_water/02_dimer/01_optimize/geometria.csv")
-#place(
-  bottom + right,
-  table(
-    columns: dimer_geometry_table.first().len(),
-    table.header(
-      [Model],
-      $alpha$,
-      $theta_a$,
-      $theta_d$,
-      $r_"OO" (angstrom)$,
-      $beta$,
-    ),
-    ..dimer_geometry_table.flatten(),
-  ),
-)
-
 == Frequenze di vibrazione armoniche
 #grid(
   columns: (1.5fr, 1fr),
   gutter: 10pt,
   figure(
     image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
-    caption: [Scarto delle frequenze rispetto alla referenza],
+    caption: [Scarto delle frequenze armoniche del dimero rispetto alla referenza],
   ),
   [
-    MACE-ICE13-1 risulta il modello che meglio stima in generale le frequenze armoniche del dimero d'acqua.
+    MACE-ICE13-1 meglio stima in generale le frequenze armoniche del dimero d'acqua.
 
     #align(right)[
       #table(
@@ -307,23 +259,29 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 )
 
 == Binding energy
+
 #grid(
-  columns: 2,
+  columns: (2fr, 1fr),
   gutter: 10pt,
+  // align: horizon,
   image("../simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
   [
-    La binding energy si calcola come
+    La binding energy si calcola come:
+
+    // MACE-ICE13-1 rientra entro i valori tipici ottenuti con DFT:
 
     $ Delta E_2 := E_2 - 2 E_1 $
 
-    MACE-ICE13-1 rientra entro i valori tipici ottenuti con DFT:
+    MACE-MP-0 non soddisfava le nostre necessità.
 
-    #align(right)[
-      #image(
-        "../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png",
-        height: 50%,
-      )
-    ]
+    Abbiamo sviluppato il modello fine-tuned MACE-ICE13-1.
+
+    // #align(right)[
+    //   #image(
+    //     "../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png",
+    //     height: 50%,
+    //   )
+    // ]
   ],
 )
 
@@ -334,12 +292,13 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 
 #grid(
   columns: 2,
+  align: (left, horizon),
   [
-    La corretta stima delle energie di reticolo, assoluta e relativa, è di grande interesse per l'acqua e per i cristalli molecolari in generale.
+    La corretta stima delle energie di reticolo è di grande interesse per la distinzione dei polimorfi.
 
-    I metodi Diffusion Monte Carlo (DMC) restituiscono quantità più accurate per le energie.
+    I metodi Diffusion Monte Carlo (DMC) restituiscono le quantità più accurate per le energie.
 
-    Tra i funzionali DFT revPBE restituisce le proprietà di struttura e dinamiche più accurate del ghiaccio Ih.
+    Tra i funzionali DFT, revPBE-D3 restituisce le proprietà di struttura e dinamiche più accurate del ghiaccio Ih. Su questo è stato addestrato MACE-ICE13-1.
   ],
   image("../thesis/imgs/dellapia2022_f1.jpeg", height: 80%),
 )
@@ -545,7 +504,7 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
     [
       Lo studio delle frequenze armoniche ci permette di valutare alcune quantità fisiche di interesse, come ad esempio la capacità termica.
 
-      Risulta evidente come il fine-tuning sulle caratteristiche del ghiaccio fornisca modelli più accurati nella caratterizzazione del materiale.
+      Il fine-tuning sulle caratteristiche del ghiaccio fornisce modelli più accurati nella caratterizzazione del materiale.
     ],
   )
 ]
@@ -554,34 +513,23 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   image("../strutture/128_molecules/render.png")
 )
 
-== Dinamica molecolare
 #slide[
   #grid(
-    columns: (1fr, 1.2fr),
-    [#image("../simulazioni/02_water/05_md/Grafici/temperature_NVT.png")
-      Algoritmo di Verlet:],
+    columns: (1fr, 0.8fr),
     [
-      La dinamica molecolare è un metodo che permette di campionare lo spazio delle fasi di un sistema isolato di $N$ particelle classiche interagenti, che obbediscono alle equazioni del moto di Newton:
-      $
-        va(f_i) = M dot.double(va(r))_i
-        = - pdv(U({va(r)}), va(r_i))
-      $
+      #image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
+    ],
+    [
+      Si è infine esplorato la generalizzabilità del potenziale ML anche ad altri tipi di task, studiando la dinamica molecolare NVT del liquido.
+
+      $delta t = 0.5 "fs"$
+
+      \#timestep: 200000 \
+      \#molecole: 128
+
+      Tempo di esecuzione: 18h:48m
     ],
   )
-  $
-    arrow(r)_i (t + delta t)
-    = arrow(r)_i (t)
-    + arrow(v)_i (t) delta t
-    + 1 / (2M) arrow(f)_i (t) (delta t)^2
-    + cal(O)((delta t)^4)
-  $
-]
-
-#slide[
-  #image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
-][
-  L'ultima task è lo studio del comportamento dell'acqua nello stato liquido.
-  Si sono effettuate simulazioni di dinamica molecolare a NVT costanti con un termostato di Langevin, studiando la Radial Distribution Function (RDF), trovando un buon accordo con la referenza.
 ]
 
 = Conclusioni
@@ -590,24 +538,57 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 // non si capisce cosa si è fatto noi e cosa si è fatto gli altri.
 // Riassumere in una frase ciò che si è imparato durante questa esperienza
 
-== Riepilogo dei risultati
+== Riepilogo dei risultati e sviluppi futuri
 
-- Ho imparato come usare e implementare il calcolatore MLP MACE in simulazioni dei materiali, insieme agli strumenti a corredo (ASE, VASP, LAMMPS)
-- Prototipazione veloce e accurata di diverse configurazioni molecolari, dispersione dei fononi, energie di reticolo di diversi polimorfi e dinamica molecolare, con tempi di esecuzione ordini di grandezza minori rispetto ai metodi DFT
-- Potenziale con previsioni entro l'accuratezza chimica ($approx 4 "kJ/mol"$)
-- Ho seguito la procedura di fine-tuning per creare un toy model specializzato di MACE
-- Ho scritto script di integrazione tra i diversi strumenti, dove non esistevano (integrazione PHON-ASE)
+#let riep-width = 100pt
 
-== Limiti e sviluppi futuri
-- È necessario avere grandi quantità di dati in partenza per addestrare nuovi modelli
-- Per l'addestramento è necessario una quantità di risorse computazionali ingente (per l'utilizzo dei modelli no)
-- Manca ancora il supporto alle simulazioni su GPU multiple
+#grid(
+  columns: (80%, 20%),
+  align: horizon,
+  column-gutter: 20pt,
+  row-gutter: 8pt,
+  [
+    - Training di un modello di MLP personlizzato
+  ],
+  image("imgs/Potential_Energy_Surface_for_Water.png", width: riep-width),
+
+  [
+    - Studio della lattice energy di diversi polimorfi
+  ],
+  image("../thesis/imgs/dellapia2022_f1.jpeg", width: riep-width),
+
+  [
+    - Dispersione armonica dei fononi nel ghiaccio Ih
+  ],
+  image(
+    "../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg",
+    width: riep-width,
+  ),
+
+  [
+    - Proprietà di dinamica molecolare dell'acqua liquida
+  ],
+  image(
+    "../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg",
+    width: riep-width,
+  ),
+)
 - Estensione degli studi ad altri cristalli molecolari e sistemi di interesse
-- Democratizzazione dell'accesso alle simulazione accurata dei materiali
+- Effettuare analisi oltre l'approssimazione armonica
 
-MACE risulta un'ottima aggiunta alla cassetta degli attrezzi nella scienza dei materiali.
+// - Ho imparato come usare e implementare il calcolatore MLP MACE in simulazioni dei materiali, insieme agli strumenti a corredo (ASE, VASP, LAMMPS)
+// - Prototipazione veloce e accurata di diverse configurazioni molecolari, dispersione dei fononi, energie di reticolo di diversi polimorfi e dinamica molecolare, con tempi di esecuzione ordini di grandezza minori rispetto ai metodi DFT
+// - Potenziale con previsioni entro l'accuratezza chimica ($approx 4 "kJ/mol"$)
+// - Ho seguito la procedura di fine-tuning per creare un toy model specializzato di MACE
+// - Ho scritto script di integrazione tra i diversi strumenti, dove non esistevano (integrazione PHON-ASE)
 
-== Potenziali applicazioni
+// == Sviluppi futuri
+// - È necessario avere grandi quantità di dati in partenza per addestrare nuovi modelli
+// - Per l'addestramento è necessario una quantità di risorse computazionali ingente (per l'utilizzo dei modelli no)
+// - Manca ancora il supporto alle simulazioni su GPU multiple
+// - Democratizzazione dell'accesso alle simulazione accurata dei materiali
+
+// == Potenziali applicazioni
 
 #focus-slide[
   Grazie per l'attenzione!
@@ -816,6 +797,142 @@ L'uso di questi metodi richiede l'individuazione del corretto funzionale di scam
     fill: rgb(150, 90, 170),
     [#h(3cm) Matrice D di Wigner],
   )
+]
+
+= Monomero #place(top + center,
+  image("../simulazioni/02_water/01_molecule/MACE-ICE13-1/final.png")
+)
+
+== Ottimizzazione della geometria
+#grid(
+  columns: 2,
+  image("../simulazioni/02_water/01_molecule/Grafici/angle_convergence_mace_mp_0_large.svg"),
+  [
+    Si sono ottimizzati la distanza del legame OH e l'angolo formato dalla molecola HOH, ottenendo valori coerenti con la letteratura, entro $0.01 angstrom$ e $0.5°$, rispettivamente.
+
+    Si osserva ad esempio la soglia di convergenza nelle forze residue per il monomero,
+    $f_"max" = 10^(-4) "eV/"angstrom$.
+
+  ],
+)
+
+#slide[
+  #grid(
+    columns: (2fr, 1fr),
+    row-gutter: 10pt,
+    [
+      // #let molecule_omega_table = csv("../simulazioni/02_water/01_molecule/Analysis/omega.csv")
+      // #table(
+      //   columns: molecule_omega_table.first().len(),
+      //   table.header(
+      //   // ..molecule_omega_table.first(),
+      //   [Model], $omega_1$, $omega_2$, $omega_3$
+      // ),
+      //   ..molecule_omega_table.slice(1).flatten()
+      // )
+      #table(
+        columns: 5,
+        table.header(
+          [Modello],
+          $omega_1$,
+          $omega_2$,
+          $omega_3$,
+          $"ZPE" ("eV")$,
+        ),
+
+        [Reference], [3832.17], [1648.47], [3942.53], [0.585],
+        [small], [3722.10], [1485.10], [3841.80], [0.561],
+        [medium], [3592.20], [1601.10], [3736.50], [0.554],
+        [large], [3695.60], [1497.30], [3814.80], [0.558],
+        [ICE13-1], [3702.30], [1607.80], [3807.50], [0.565],
+      )
+    ],
+    image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-1.svg"),
+
+    [
+      Si sono poi calcolate le frequenze di vibrazione armoniche per verificare il loro accordo con i dati tabulati in referenza.
+      Le frequenze sull'asse y negativo indicano instabilità della geometria.
+      Il _Displacement_ è lo spostamento degli atomi usato dalla tecnica di stima delle frequenze.
+    ],
+    image("../simulazioni/02_water/01_molecule/Grafici/MACE-MP-0 medium fmax=1e-8.svg"),
+  )
+]
+
+= Dimero #place(top + center,
+  image("../simulazioni/02_water/02_dimer/01_optimize/MACE-ICE13-1/final.png")
+)
+
+== Ottimizzazione della geometria
+
+Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio delle frequenze di vibrazione armoniche e ZPE per il dimero.
+
+#image("../thesis/imgs/klopper-fig1.gif")
+
+#let dimer_geometry_table = csv("../simulazioni/02_water/02_dimer/01_optimize/geometria.csv")
+#place(
+  bottom + right,
+  table(
+    columns: dimer_geometry_table.first().len(),
+    table.header(
+      [Model],
+      $alpha$,
+      $theta_a$,
+      $theta_d$,
+      $r_"OO" (angstrom)$,
+      $beta$,
+    ),
+    ..dimer_geometry_table.flatten(),
+  ),
+)
+
+== Binding energy in DFT
+
+#grid(
+  columns: (2fr, 1fr),
+  gutter: 10pt,
+  // align: horizon,
+  image("../simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
+  [
+    La binding energy si calcola come:
+
+    // MACE-ICE13-1 rientra entro i valori tipici ottenuti con DFT:
+
+    $ Delta E_2 := E_2 - 2 E_1 $
+
+    // MACE-MP-0 non soddisfava le nostre necessità.
+
+    // Abbiamo sviluppato il modello fine-tuned MACE-ICE13-1.
+
+    #align(right)[
+      #image(
+        "../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png",
+        height: 50%,
+      )
+    ]
+  ],
+)
+
+== Dinamica molecolare
+#slide[
+  #grid(
+    columns: (1fr, 1.2fr),
+    [#image("../simulazioni/02_water/05_md/Grafici/temperature_NVT.png")
+      Algoritmo di Verlet:],
+    [
+      La dinamica molecolare è un metodo che permette di campionare lo spazio delle fasi di un sistema isolato di $N$ particelle classiche interagenti, che obbediscono alle equazioni del moto di Newton:
+      $
+        va(f_i) = M dot.double(va(r))_i
+        = - pdv(U({va(r)}), va(r_i))
+      $
+    ],
+  )
+  $
+    arrow(r)_i (t + delta t)
+    = arrow(r)_i (t)
+    + arrow(v)_i (t) delta t
+    + 1 / (2M) arrow(f)_i (t) (delta t)^2
+    + cal(O)((delta t)^4)
+  $
 ]
 
 == Atomic Simulation Environment (ASE)
