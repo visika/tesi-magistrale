@@ -369,17 +369,18 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 == Energia di reticolo relativa
 
 #grid(
-  columns: 2,
+  columns: (2fr, 1fr),
+  align: horizon,
   image(
     "../simulazioni/02_water/03_ICE13_lattice_energies/relative_lattice_energy.svg",
-    height: 70%,
+    height: 90%,
   ),
   [
-    C'è interesse a catturare la stabilità relativa dei polimorfi del ghiaccio, cioè rispetto a una data fase cristallina (ad es. ghiaccio Ih) invece che rispetto alla fase gassosa:
+    // C'è interesse a catturare la stabilità relativa dei polimorfi del ghiaccio, cioè rispetto a una data fase cristallina (ad es. ghiaccio Ih) invece che rispetto alla fase gassosa:
     $
       Delta E_"lattice"^x := E_"lattice"^x - E_"lattice"^"Ih"
     $
-    che è indipendente dalla configurazione del monomero nella fase gassosa.
+    // che è indipendente dalla configurazione del monomero nella fase gassosa.
   ],
 )
 
