@@ -92,9 +92,7 @@
     - Spesso i polimorfi differiscono solo per piccole differenze di energia ($approx 1 "kJ/mol"$)
     - Per caratterizzare il diagramma T-P, sono importanti le proprietà dinamiche.
   ],
-  [
-    #image("../thesis/imgs/dellapia2022_f1.jpeg", height: 80%)
-  ],
+  image("../thesis/imgs/dellapia2022_f1.jpeg", height: 80%),
 )
 
 #place(bottom + right)[
