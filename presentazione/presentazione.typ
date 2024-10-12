@@ -137,10 +137,10 @@
 #slide[
   Ci sono tre modelli base di MACE, che variano in base alla quantità di parametri che costituiscono il modello, e uno specializzato fornito dall'esterno per la mia tesi:
 
-  - MACE-MP-0#footnote[Batatia et al. 2023, A foundation model for atomistic materials chemistry] (small, medium, large)
-  - MACE-ICE13-1 (adattato con fine-tuning in particolare al ghiaccio, per gentile concessione di Flaviano Della Pia.)
+  - MACE-MP-0#footnote[Batatia et al. 2023, A foundation model for atomistic materials chemistry] (pre-addestrato su alcuni materiali, nelle varianti small, medium, large)
+  - MACE-ICE13-1 (adattato in particolare al ghiaccio, per gentile concessione di Flaviano Della Pia)
 
-  #place(right, image("imgs/flaviano.jpg", height: 40%))
+  #place(bottom + right, dy: -25pt, image("imgs/flaviano.jpg", height: 40%))
 ]
 
 = Risultati
