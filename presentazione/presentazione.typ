@@ -128,6 +128,8 @@
 
 #slide[
   #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
+
+  MACE è un potenziale ML che si basa su una rete neurale a grafo, equivariante e message-passing.
 ]
 
 == Modelli di MACE
