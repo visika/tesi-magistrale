@@ -349,18 +349,20 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
 == Energia di reticolo assoluta
 
 #grid(
-  columns: 2,
+  columns: (2fr, 1fr),
+  align: horizon,
   image(
     "../simulazioni/02_water/03_ICE13_lattice_energies/absolute_lattice_energy.svg",
-    height: 70%,
+    height: 90%,
   ),
   [
-    La quantità fisica solitamente considerata per stabilire la stabilità di un cristallo è la sua energia di reticolo assoluta:
+    // La quantità fisica solitamente considerata per stabilire la stabilità di un cristallo è la sua energia di reticolo assoluta:
     $
       E_"lattice" := E_"crystal" - E_"gas"
     $
-    L'errore assoluto medio (MAE) tra MACE-ICE13-1 e DMC è $0.90 "kJ/mol"$.
-    I potenziali di scambio e correlazione sono ritenuti buoni se hanno un $"MAE" lt.tilde 4 "kJ/mol"$.
+    $
+      "MAE" = 0.90 "kJ/mol"
+    $
   ],
 )
 
