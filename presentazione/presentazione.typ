@@ -208,11 +208,7 @@ $
 
   #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 1, 2)
 
-  #pause
-
   #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 3, 4)
-
-  #pause
 
   #place(bottom + right)[
     I contributi anarmonici *non* sono trascurabili \ per lo studio delle proprietà dell'acqua cristallina.
