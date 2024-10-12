@@ -101,34 +101,28 @@
 
 == Potenziali tradizionali e machine learning
 
-#slide[
-  #grid(
-    columns: (1fr, 1fr),
-    [
-      - Compromesso tra costo e accuratezza (DMC, CC, DFT, FF)
-      - Esempio: trovare il cristallo più stabile tramite simulazioni di MD seguendo la PES, che ha a che fare con le posizioni degli ioni
-      - Uso dei potenziali ML per modellare la superficie di energia potenziale (PES) racchiudendo nell'addestramento il ruolo degli elettroni
-    ],
-    [
-      #uncover("1")[
-        // #place(horizon)[
-        #image("imgs/Interpolation_Data.svg")
-        // ]
-      ]
-      #uncover("2")[
-        #place(horizon, image("imgs/Interpolation_example_polynomial.svg"))
-      ]
-      #uncover("3")[
-        #place(horizon, image("imgs/Potential_Energy_Surface_for_Water.png"))
-        #place(
-          bottom + right,
-          dy: 2.5cm,
-          text(17pt)[AimNature, CC BY-SA 3.0, via Wikimedia Commons],
-        )
-      ]
-    ],
-  )
-]
+#grid(
+  columns: (1fr, 1fr),
+  align: horizon,
+  [
+    - Compromesso tra costo e accuratezza (DMC, CC, DFT, FF)
+    - Esempio: trovare il cristallo più stabile tramite simulazioni di MD seguendo la PES, che ha a che fare con le posizioni degli ioni
+    - Uso dei metodi ML per modellare la superficie di energia potenziale (PES) racchiudendo nell'addestramento il ruolo degli elettroni
+  ],
+  [
+    #uncover("2", place(horizon, image("imgs/Interpolation_punti.png")))
+    #uncover("3", place(horizon, image("imgs/Interpolation_linea.png")))
+    #uncover("4", image("imgs/Potential_Energy_Surface_for_Water.png"))
+  ],
+)
+
+#uncover(
+  "4",
+  place(
+    bottom + right,
+    text(18pt)[AimNature, CC BY-SA 3.0, via Wikimedia Commons],
+  ),
+)
 
 == L'architettura di MACE: GNN
 

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="600"
+   height="480"
+   viewBox="0 0 600 480"
+   version="1.1"
+   id="svg23"
+   sodipodi:docname="Interpolation_project.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:export-filename="Interpolation_linea.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:export-batch-path="/home/mariano/Progetti/tesi-magistrale/presentazione/imgs"
+   inkscape:export-batch-name="out_"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview23"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.5156106"
+     inkscape:cx="350.02395"
+     inkscape:cy="229.28053"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <desc
+     id="desc1">Produced by GNUPLOT 4.2 patchlevel 0 </desc>
+  <defs
+     id="defs1">
+    <circle
+       id="gpDot"
+       r="1" />
+    <path
+       id="gpPt0"
+       style="stroke-width:0.107"
+       d="M-1,0 h2 M0,-1 v2" />
+    <path
+       id="gpPt1"
+       style="stroke-width:0.107"
+       d="M-1,-1 L1,1 M1,-1 L-1,1" />
+    <path
+       id="gpPt2"
+       style="stroke-width:0.107"
+       d="M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,1 M-1,1 L1,-1" />
+    <rect
+       id="gpPt3"
+       style="stroke-width:0.107"
+       x="-1"
+       y="-1"
+       width="2"
+       height="2" />
+    <use
+       xlink:href="#gpPt3"
+       id="gpPt4"
+       style="fill:currentColor; stroke:none" />
+    <circle
+       id="gpPt5"
+       style="stroke-width:0.107"
+       cx="0"
+       cy="0"
+       r="1" />
+    <use
+       xlink:href="#gpPt5"
+       id="gpPt6"
+       style="fill:currentColor; stroke:none" />
+    <path
+       id="gpPt7"
+       style="stroke-width:0.107"
+       d="M0,-1.33 L-1.33,0.67 L1.33,0.67 z" />
+    <use
+       xlink:href="#gpPt7"
+       id="gpPt8"
+       style="fill:currentColor; stroke:none" />
+    <use
+       xlink:href="#gpPt7"
+       id="gpPt9"
+       transform="rotate(180)" />
+    <use
+       xlink:href="#gpPt9"
+       id="gpPt10"
+       style="fill:currentColor; stroke:none" />
+    <use
+       xlink:href="#gpPt3"
+       id="gpPt11"
+       transform="rotate(45)" />
+    <use
+       xlink:href="#gpPt11"
+       id="gpPt12"
+       style="fill:currentColor; stroke:none" />
+    <marker
+       style="overflow:visible"
+       id="Triangle-1"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="2"
+       markerHeight="2"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135-1" />
+    </marker>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Linea blu"
+     style="display:inline"
+     inkscape:highlight-color="#3e53fc">
+    <path
+       d="m 88.3,240 1.5,-3.4 1.6,-3.4 1.5,-3.5 1.5,-3.5 1.6,-3.5 1.5,-3.5 1.5,-3.5 1.6,-3.6 1.5,-3.5 1.5,-3.6 1.6,-3.6 1.5,-3.6 1.5,-3.5 1.6,-3.6 1.5,-3.6 1.5,-3.5 1.6,-3.5 1.5,-3.6 1.5,-3.5 1.5,-3.5 1.6,-3.4 1.5,-3.5 1.5,-3.4 1.6,-3.4 1.5,-3.4 1.5,-3.3 1.6,-3.3 1.5,-3.3 1.5,-3.2 1.6,-3.2 1.5,-3.2 1.5,-3.1 1.6,-3.1 1.5,-3 1.5,-3 1.6,-2.9 1.5,-2.9 1.5,-2.8 1.6,-2.8 1.5,-2.7 1.5,-2.7 1.6,-2.6 1.5,-2.5 1.5,-2.5 1.6,-2.4 1.5,-2.4 1.5,-2.3 1.6,-2.2 1.5,-2.2 1.5,-2.1 1.6,-2.1 1.5,-2 1.5,-1.9 1.6,-1.8 1.5,-1.8 1.5,-1.7 1.5,-1.6 1.6,-1.6 1.5,-1.4 1.5,-1.4 1.6,-1.4 1.5,-1.2 1.5,-1.2 1.6,-1.2 1.5,-1 1.5,-1 1.6,-0.8 1.5,-0.9 1.5,-0.7 1.6,-0.6 1.5,-0.6 1.5,-0.5 1.6,-0.5 1.5,-0.3 1.5,-0.3 1.6,-0.2 1.5,-0.1 h 1.5 1.6 l 1.5,0.1 1.5,0.2 1.6,0.3 1.5,0.3 1.5,0.4 1.6,0.5 1.5,0.6 1.5,0.6 1.6,0.7 1.5,0.8 1.5,0.9 1.6,0.9 1.5,1 1.5,1.1 1.5,1.2 1.6,1.2 1.5,1.3 1.5,1.4 1.6,1.4 1.5,1.5 1.5,1.6 1.6,1.6 1.5,1.7 1.5,1.8 1.6,1.8 1.5,1.9 1.5,2 1.6,2 1.5,2.1 1.5,2.2 1.6,2.2 1.5,2.3 1.5,2.3 1.6,2.4 1.5,2.4 1.5,2.5 1.6,2.6 1.5,2.6 1.5,2.6 1.6,2.8 1.5,2.7 1.5,2.8 1.6,2.9 1.5,2.9 1.5,2.9 1.6,3 1.5,3.1 1.5,3 1.6,3.2 1.5,3.1 1.5,3.2 1.5,3.2 1.6,3.3 1.5,3.3 1.5,3.4 1.6,3.3 1.5,3.4 1.5,3.4 1.6,3.5 1.5,3.5 1.5,3.5 1.6,3.5 1.5,3.6 1.5,3.5 1.6,3.6 1.5,3.7 1.5,3.6 1.6,3.6 1.5,3.7 1.5,3.7 1.6,3.6 1.5,3.7 1.5,3.7 1.6,3.7 1.5,3.8 1.5,3.7 1.6,3.7 1.5,3.7 1.5,3.7 1.6,3.8 1.5,3.7 1.5,3.7 1.6,3.7 1.5,3.7 1.5,3.7 1.6,3.7 1.5,3.6 1.5,3.7 1.6,3.6 1.5,3.7 1.5,3.6 1.5,3.5 1.6,3.6 1.5,3.6 1.5,3.5 1.6,3.5 1.5,3.5 1.5,3.4 1.6,3.4 1.5,3.4 1.5,3.4 1.6,3.3 1.5,3.3 1.5,3.2 1.6,3.3 1.5,3.1 1.5,3.2 1.6,3.1 1.5,3 1.5,3.1 1.6,2.9 1.5,3 1.5,2.8 1.6,2.9 1.5,2.8 1.5,2.7 1.6,2.7 1.5,2.6 1.5,2.6 1.6,2.5 1.5,2.5 1.5,2.4 1.6,2.3 1.5,2.3 1.5,2.2 1.6,2.2 1.5,2.1 1.5,2.1 1.5,1.9 1.6,2 1.5,1.8 1.5,1.8 1.6,1.7 1.5,1.7 1.5,1.5 1.6,1.6 1.5,1.4 1.5,1.4 1.6,1.3 1.5,1.2 1.5,1.1 1.6,1.1 1.5,1 1.5,1 1.6,0.8 1.5,0.8 1.5,0.7 1.6,0.6 1.5,0.6 1.5,0.4 1.6,0.4 1.5,0.4 1.5,0.2 1.6,0.2 h 1.5 l 1.5,0.1 1.6,-0.1 1.5,-0.2 1.5,-0.2 1.6,-0.3 1.5,-0.4 1.5,-0.5 1.6,-0.5 1.5,-0.6 1.5,-0.7 1.5,-0.8 1.6,-0.9 1.5,-0.9 1.5,-1 1.6,-1.1 1.5,-1.1 1.5,-1.3 1.6,-1.3 1.5,-1.4 1.5,-1.4 1.6,-1.6 1.5,-1.6 1.5,-1.6 1.6,-1.8 1.5,-1.8 1.5,-1.9 1.6,-1.9 1.5,-2 1.5,-2.1 1.6,-2.1 1.5,-2.3 1.5,-2.2 1.6,-2.3 1.5,-2.4 1.5,-2.5 1.6,-2.5 1.5,-2.5 1.5,-2.6 1.6,-2.7 1.5,-2.7 1.5,-2.8 1.6,-2.8 1.5,-2.8 1.5,-2.9 1.6,-2.9 1.5,-3 1.5,-3 1.5,-3 1.6,-3.1 1.5,-3.1 1.5,-3.1 1.6,-3.1 1.5,-3.2 1.5,-3.2 1.6,-3.2 1.5,-3.2 1.5,-3.2 1.6,-3.2 1.5,-3.3 1.5,-3.2 1.6,-3.3 1.5,-3.2 1.5,-3.2 1.6,-3.2 1.5,-3.2"
+       id="path14"
+       style="color:#0000ff;display:inline;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter"
+       inkscape:label="Linea blu" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Triangle-1)"
+       d="M 356.4816,100.61951 290.9794,124.6173"
+       id="path35"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:label="Freccia ML" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#000000"
+       x="360.66187"
+       y="108.04263"
+       id="text23-8"
+       inkscape:label="Potenziale ML"><tspan
+         sodipodi:role="line"
+         id="tspan25-0"
+         x="360.66187"
+         y="108.04263">Potenziale ML</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Punti rossi"
+     style="display:inline"
+     inkscape:highlight-color="#cf7272">
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,88.3,240)"
+       id="use16"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,164.7,83)"
+       id="use17"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,241,70.4)"
+       id="use18"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,317.4,213.7)"
+       id="use19"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,393.8,381.2)"
+       id="use20"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,470.1,418.9)"
+       id="use21"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <use
+       xlink:href="#gpPt6"
+       transform="matrix(6.54,0,0,6.54,546.5,292.1)"
+       id="use22"
+       style="color:#ff0000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#000000"
+       x="176.19653"
+       y="396.99783"
+       id="text23-8-1"
+       inkscape:label="Riferimento"><tspan
+         sodipodi:role="line"
+         id="tspan36"
+         x="176.19653"
+         y="396.99783">Riferimento</tspan></text>
+    <path
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Triangle-1)"
+       d="m 308.12664,390.7666 69.44396,-6.68047"
+       id="path35-0"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:label="Freccia riferimento" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Struttura grafico">
+    <g
+       style="display:inline;color:#000000;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter"
+       id="g13"
+       inkscape:label="Barra verticale">
+      <path
+         d="m 88.3,34.8 v 410.4 m 458.2,0 m 0,-410.4 m -458.2,0"
+         id="path12" />
+    </g>
+    <g
+       id="g26"
+       inkscape:label="Ticks asse y"
+       style="display:inline;color:#000000;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter">
+      <path
+         d="M 88.3,426.5 H 107"
+         id="path1" />
+      <path
+         d="M 88.3,240 H 107"
+         id="path2" />
+      <path
+         d="M 88.3,53.5 H 107"
+         id="path3" />
+    </g>
+    <path
+       d="M 88.3,240 H 546.5"
+       id="path11"
+       style="display:inline;color:#808080;fill:#000000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter"
+       inkscape:label="Barra orizzontale" />
+    <g
+       id="g25"
+       inkscape:label="Ticks asse x"
+       style="display:inline;color:#000000;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter"
+       transform="translate(0,-185.99996)">
+      <path
+         d="m 164.7,426 v 18.7 m 0,-18.7 v -18.7"
+         id="path4" />
+      <path
+         d="m 241,426 v 18.7 m 0,-18.7 v -18.7"
+         id="path5" />
+      <path
+         d="m 317.4,426 v 18.7 m 0,-18.7 v -18.7"
+         id="path6" />
+      <path
+         d="m 393.8,426 v 18.7 m 0,-18.7 v -18.7"
+         id="path7" />
+      <path
+         d="m 470.1,426 v 18.7 m 0,-18.7 v -18.7"
+         id="path8" />
+      <path
+         d="m 546.5,426 v 18.7 m 0,-18.7 v -18.7"
+         id="path9" />
+    </g>
+    <g
+       style="display:inline;color:#808080;fill:#000000;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter"
+       id="g12"
+       inkscape:label="Asse x">
+      <path
+         d="M 88.3,240 H 546.5"
+         id="path27"
+         style="fill:#000000;stroke:#000000"
+         inkscape:label="Barra orizzontale" />
+      <g
+         id="g33"
+         inkscape:label="Ticks asse x"
+         style="color:#000000;display:inline;fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter"
+         transform="translate(0,-185.99996)">
+        <path
+           d="m 164.7,426 v 18.7 m 0,-18.7 v -18.7"
+           id="path28" />
+        <path
+           d="m 241,426 v 18.7 m 0,-18.7 v -18.7"
+           id="path29" />
+        <path
+           d="m 317.4,426 v 18.7 m 0,-18.7 v -18.7"
+           id="path30" />
+        <path
+           d="m 393.8,426 v 18.7 m 0,-18.7 v -18.7"
+           id="path31" />
+        <path
+           d="m 470.1,426 v 18.7 m 0,-18.7 v -18.7"
+           id="path32" />
+        <path
+           d="m 546.5,426 v 18.7 m 0,-18.7 v -18.7"
+           id="path33" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="display:inline;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000"
+       x="206.3699"
+       y="468.34402"
+       id="text23"
+       inkscape:label="Coordinate"><tspan
+         sodipodi:role="line"
+         id="tspan25"
+         x="206.3699"
+         y="468.34402">Coordinate atomiche</tspan></text>
+    <text
+       xml:space="preserve"
+       style="display:inline;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;line-height:normal;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif, Normal';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       x="-281.41931"
+       y="61.435192"
+       id="text24"
+       transform="rotate(-90)"
+       inkscape:label="Energia"><tspan
+         sodipodi:role="line"
+         id="tspan24"
+         x="-281.41931"
+         y="61.435192">Energia</tspan></text>
+  </g>
+</svg>
