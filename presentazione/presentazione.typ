@@ -511,8 +511,32 @@ Si è ripetuta la stessa procedura di ottimizzazione della geometria e studio de
   align: center,
   row-gutter: 10pt,
   [MACE-ICE13-1], [revPBE-D3],
-  [$approx 1÷4$ min], [$gt.tilde 5$h],
+  [Supercella $2 times 2 times 2$],
+  [Supercella $2 times 2 times 2$ \ k-points $2 times 2 times 2$],
+
+  [$approx 2 "min"$], [$gt.tilde 5 "h "$],
 )
+
+#slide[
+  #grid(
+    columns: (1fr,) * 2,
+    gutter: 10pt,
+    align: center,
+    image(
+      "../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg",
+      height: 230pt,
+    ),
+    image("../thesis/imgs/gupta2018_fig4_H2O.png", height: 249pt),
+    [
+      MACE-ICE13-1
+    ],
+    [
+      Reference DFT#footnote[M. K. Gupta et al. 2018]
+    ],
+    [Supercella $3 times 3 times 3$ \ $approx 5 "min"$], [Supercella $2 times 2 times 2$ \ k-points $4 times 4 times 4$],
+
+  )
+]
 
 #slide[
   #grid(
