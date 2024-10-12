@@ -81,12 +81,6 @@
   ),
 )
 
-// == Panoramica <touying:hidden>
-
-// #components.adaptive-columns(outline(title: none, indent: 1em))
-
-// = Introduzione
-
 == Il ghiaccio e i suoi polimorfi
 
 #grid(
