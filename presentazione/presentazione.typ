@@ -85,7 +85,6 @@
 
 #grid(
   columns: 2,
-  align: horizon,
   [
     - Classe dei cristalli molecolari
     - Importanza di studiare le diverse fasi cristalline del ghiaccio
