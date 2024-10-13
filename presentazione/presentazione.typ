@@ -125,13 +125,13 @@
   ),
 )
 
-== L'architettura di MACE: GNN
+== L'architettura di MACE
 
-#slide[
-  #image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
+#image("../thesis/imgs/distill.pub.gnn-intro-caffeine-adiacency-graph.png")
 
-  MACE è un potenziale ML che si basa su una rete neurale a grafo, equivariante e message-passing.
-]
+#pin("caffe") MACE è una rete neurale a grafo di recente sviluppo, che codifica le informazioni a molti corpi della geometria atomica.
+
+#pinit-place("caffe", dy: -2.5em, dx: 1.8em, text(gray.darken(40%))[Caffeina])
 
 == Modelli di MACE
 
