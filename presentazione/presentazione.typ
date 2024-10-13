@@ -153,7 +153,7 @@ Si sono testate inizialmente le performance di MACE-MP-0 con le seguenti task su
 
 - Ottimizzazione della geometria dei sistemi atomici
 - Proprietà vibrazionali ed energia di punto zero armoniche
-- Binding energy del dimero
+- Energia di interazione del dimero
 
 // #v(-1.3cm)
 
@@ -256,7 +256,7 @@ $
   // align: horizon,
   image("../simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
   [
-    La binding energy si calcola come:
+    L'energia di interazione si calcola come:
 
     $ Delta E_2 := E_2 - 2 E_1 $
 
