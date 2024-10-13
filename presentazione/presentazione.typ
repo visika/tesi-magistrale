@@ -326,136 +326,115 @@ $
 
 == Dispersione dei fononi
 
-
 #slide[
-  #image("../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg")#pin("brillouin")
-][
-  Per il ghiaccio Ih è stata calcolata la dispersione dei modi normali del cristallo, che rappresentano oscillazioni collettive delle particelle nel sistema con frequenza $omega_(va(q),s)$, denominate _fononi_.
+  #grid(
+    columns: (1fr, 1.5fr),
+    [
+      #image("../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandpath_gupta.svg")#pin("brillouin")
+    ],
+    [
+      Per il ghiaccio Ih, il polimorfo a condizioni ambiente, è stata calcolata la dispersione dei modi normali del cristallo, che rappresentano oscillazioni collettive delle particelle nel sistema con frequenza $omega_(va(q),s)$, denominate _fononi_.
 
-  #v(0.7cm)
+      #v(0.7cm)
 
-  $
-    #pin(1)D(arrow(q))#pin(2) :=
-    1 / M sum_j e^(i#pin(5)arrow(q)#pin(6)dot arrow(r)_j^0)#pin(3)Phi(arrow(r)_j^0)#pin(4)
-  $
+      $
+        #pin(1)D(arrow(q))#pin(2) :=
+        1 / M sum_j e^(i#pin(5)arrow(q)#pin(6)dot arrow(r)_j^0)#pin(3)Phi(arrow(r)_j^0)#pin(4)
+      $
 
-  $
-    omega^2#pin(7)arrow(epsilon)#pin(8)= D(arrow(q)) dot arrow(epsilon)
-  $
+      $
+        omega^2#pin(7)arrow(epsilon)#pin(8)= D(arrow(q)) dot arrow(epsilon)
+      $
 
-  #pause
+      #pause
 
-  #let fill = rgb(0, 180, 255)
-  #pinit-highlight(
-    1,
-    2,
-    dy: -0.65em,
-    fill: rgb(..fill.components().slice(0, -1), 40),
-  )
+      #let fill = rgb(0, 180, 255)
+      #pinit-highlight(
+        1,
+        2,
+        dy: -0.65em,
+        fill: rgb(..fill.components().slice(0, -1), 40),
+      )
 
-  #pinit-point-from(
-    (1, 2),
-    pin-dy: 15pt,
-    body-dx: -150pt,
-    body-dy: 10pt,
-    offset-dx: 5pt,
-    offset-dy: 40pt,
-    fill: fill,
-    text(fill: fill)[Matrice dinamica],
-  )
+      #pinit-point-from(
+        (1, 2),
+        pin-dy: 15pt,
+        body-dx: -150pt,
+        body-dy: 10pt,
+        offset-dx: 5pt,
+        offset-dy: 40pt,
+        fill: fill,
+        text(fill: fill)[Matrice dinamica],
+      )
 
-  #pause
+      #pause
 
-  #let fill = rgb(150, 90, 170)
-  #pinit-highlight(
-    3,
-    4,
-    dy: -0.7em,
-    fill: rgb(..fill.components().slice(0, -1), 40),
-  )
+      #let fill = rgb(150, 90, 170)
+      #pinit-highlight(
+        3,
+        4,
+        dy: -0.7em,
+        fill: rgb(..fill.components().slice(0, -1), 40),
+      )
 
-  #pinit-point-from(
-    (3, 4),
-    pin-dy: 20pt,
-    offset-dx: 5pt,
-    offset-dy: 110pt,
-    body-dx: -200pt,
-    fill: fill,
-    text(
-      fill: rgb(150, 90, 170),
-      [Matrice delle costanti di forza],
-    ),
-  )
+      #pinit-point-from(
+        (3, 4),
+        pin-dy: 20pt,
+        offset-dx: 5pt,
+        offset-dy: 110pt,
+        body-dx: -200pt,
+        fill: fill,
+        text(
+          fill: rgb(150, 90, 170),
+          [Matrice delle costanti di forza],
+        ),
+      )
 
-  #pause
+      #pause
 
-  #pinit-highlight-equation-from(
-    (5, 6),
-    (5, 6),
-    pos: top,
-    height: 0.7em,
-    fill: rgb(0, 255, 127),
-    [Vettore d'onda],
-  )
+      #pinit-highlight-equation-from(
+        (5, 6),
+        (5, 6),
+        pos: top,
+        height: 0.7em,
+        fill: rgb(0, 255, 127),
+        [Vettore d'onda],
+      )
 
-  #pause
+      #pause
 
-  #let fill = rgb(255, 170, 0)
-  #pinit-point-from(
-    (7, 8),
-    pin-dy: 10pt,
-    pin-dx: -5pt,
-    offset-dx: -100pt,
-    body-dx: -190pt,
-    fill: fill,
-    text(fill: fill)[Vettore polarizzazione],
-  )
+      #let fill = rgb(255, 170, 0)
+      #pinit-point-from(
+        (7, 8),
+        pin-dy: 10pt,
+        pin-dx: -5pt,
+        offset-dx: -100pt,
+        body-dx: -190pt,
+        fill: fill,
+        text(fill: fill)[Vettore polarizzazione],
+      )
 
-  #pinit-highlight(
-    7,
-    8,
-    dy: -0.65em,
-    fill: rgb(..fill.components().slice(0, -1), 40),
-  )
+      #pinit-highlight(
+        7,
+        8,
+        dy: -0.65em,
+        fill: rgb(..fill.components().slice(0, -1), 40),
+      )
 
-  #pause
+      #pause
 
-  #pinit-point-from(
-    "brillouin",
-    pin-dy: -100pt,
-    pin-dx: 100pt,
-    offset-dy: -40pt,
-    offset-dx: 50pt,
-    body-dx: -50pt,
-    [Per fare tutto ciò,\ si campionano i punti della\ zona di Brillouin.],
+      #pinit-point-from(
+        "brillouin",
+        pin-dy: -85pt,
+        pin-dx: 85pt,
+        offset-dy: -40pt,
+        offset-dx: 50pt,
+        body-dx: -80pt,
+        [Per fare tutto ciò,\ si campionano i punti della\ zona di Brillouin.],
+      )
+    ],
   )
 ]
-
-#let phonons_height = 230pt
-
-#grid(
-  columns: 2,
-  gutter: 10pt,
-  image(
-    "../simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/combined.svg",
-    height: phonons_height,
-  ),
-  image(
-    "../simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/combined.svg",
-    height: phonons_height,
-  ),
-)
-
-#grid(
-  columns: (1fr, 1fr),
-  align: center,
-  row-gutter: 10pt,
-  [MACE-ICE13-1], [revPBE-D3],
-  [Supercella $2 times 2 times 2$],
-  [Supercella $2 times 2 times 2$ \ k-points $2 times 2 times 2$],
-
-  [$approx 2 "min"$], [$gt.tilde 5 "h "$],
-)
 
 #slide[
   #grid(
@@ -463,24 +442,54 @@ $
     gutter: 10pt,
     align: center,
     image(
-      "../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s3_gupta.svg",
+      "../simulazioni/02_water/04_crystal_phonons/phonopy/Grafici/bandstructure_mace-ice13-1_s2-s3_gupta_zoom.svg",
       height: 230pt,
     ),
     image("../thesis/imgs/gupta2018_fig4_H2O.png", height: 249pt),
-    [
-      MACE-ICE13-1
-    ],
-    [
-      Reference DFT#footnote[M. K. Gupta et al. 2018]
-    ],
-    [Supercella $3 times 3 times 3$ \ $approx 5 "min"$], [Supercella $2 times 2 times 2$ \ k-points $4 times 4 times 4$],
 
+    [MACE-ICE13-1],
+    [Reference DFT#footnote[M. K. Gupta et al. 2018 (con contributi anarmonici)]],
+
+    [Supercella $3 times 3 times 3$],
+    [Supercella $2 times 2 times 2$],
+    [$approx 5 "min"$], [k-points $4 times 4 times 4$]
   )
 ]
 
 #slide[
+  #let phonons_height = 230pt
+
   #grid(
     columns: 2,
+    gutter: 10pt,
+    image(
+      "../simulazioni/02_water/04_crystal_phonons/phon/16.MACE_geometrie_Flaviano/combined.svg",
+      height: phonons_height,
+    ),
+    image(
+      "../simulazioni/02_water/04_crystal_phonons/phon/15.revPBED3/combined.svg",
+      height: phonons_height,
+    ),
+  )
+
+  #grid(
+    columns: (1fr, 1fr),
+    align: center,
+    row-gutter: 10pt,
+    [MACE-ICE13-1], [revPBE-D3],
+    [Supercella $2 times 2 times 2$], [Supercella $2 times 2 times 2$],
+    [$approx 2 "min"$], [k-points $2 times 2 times 2$],
+    [], [$approx 5 "h "$],
+  )
+
+  #place(bottom + left)[
+    k-points $4 times 4 times 4$ impiegherebbe $approx 40 "h "$, MACE $10^3$ volte più rapido
+  ]
+]
+
+#slide[
+  #grid(
+    columns: (1.5fr, 1fr),
     image("../simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg"),
     [
       Lo studio delle frequenze armoniche ci permette di valutare alcune quantità fisiche di interesse, come ad esempio la capacità termica.
