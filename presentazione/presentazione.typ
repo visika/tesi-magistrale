@@ -107,7 +107,8 @@
   [
     - Compromesso tra costo e accuratezza (DMC, CC, DFT, FF)
     - Esempio: trovare il cristallo più stabile tramite simulazioni di MD seguendo la PES, che ha a che fare con le posizioni degli ioni
-    - Uso dei metodi ML per modellare la superficie di energia potenziale (PES) racchiudendo nell'addestramento il ruolo degli elettroni
+    - Metodi ML per modellare la PES racchiudendo nell'addestramento il ruolo degli elettroni
+      (necessario grande numero di campioni)
   ],
   [
     #uncover("2", place(horizon, image("imgs/Interpolation_punti.png")))
