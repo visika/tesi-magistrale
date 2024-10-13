@@ -969,8 +969,6 @@ L'Atomic Simulation Environment (ASE) è un insieme di strumenti e moduli Python
   ```
 ]
 
-== Costruzione e passaggio del messaggio nelle GNN
-
 == Fine tuning di MACE
 
 #place(
