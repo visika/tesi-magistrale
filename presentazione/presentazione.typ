@@ -198,68 +198,57 @@ $
 
 == Frequenze di vibrazione armoniche
 
-#let crimson = rgb("#c00000")
-
 #slide[
-  #place(
-    bottom + left,
-    image("../thesis/imgs/eisenberg2005_fig1.1.gif", height: 50%),
+  #grid(
+    columns: 2,
+    gutter: 20pt,
+    align: horizon,
+    [
+      $
+        G(v_1, v_2, v_3)
+        = sum_(i=1)^3 omega_i (v_i + 1 / 2)
+      $
+
+      $
+        "ZPE" &:= G(0,0,0) = 1 / 2 (omega_1 + omega_2 + omega_3)
+      $
+    ],
+    image("../thesis/imgs/eisenberg2005_fig1.1.gif"),
   )
-  $
-    G(v_1, v_2, v_3)
-    = sum_(i=1)^3 omega_i (v_i + 1 / 2)
-    + #pin(1) sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2) #pin(2)
-  $
-
-  $
-    "ZPE" &:= G(0,0,0) \
-    &= 1 / 2 (omega_1 + omega_2 + omega_3)
-    + #pin(3) 1 / 4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23) #pin(4)
-  $
-
-  #pause
-
-  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 1, 2)
-
-  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 3, 4)
-
-  #place(bottom + right)[
-    I contributi anarmonici *non* sono trascurabili \ per lo studio delle proprietà dell'acqua cristallina.
-  ]
-
 ]
 
-== Frequenze di vibrazione armoniche
-#grid(
-  columns: (1.5fr, 1fr),
-  gutter: 10pt,
-  figure(
-    image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
-    caption: [Scarto delle frequenze armoniche del dimero rispetto alla referenza],
-  ),
-  [
-    MACE-ICE13-1 meglio stima in generale le frequenze armoniche del dimero d'acqua.
+#slide[
+  #grid(
+    columns: (1.5fr, 1fr),
+    gutter: 10pt,
+    figure(
+      image("../simulazioni/02_water/02_dimer/01_optimize/Grafici/harmonic_frequencies_errors_barchart.svg"),
+      caption: [Scarto delle frequenze armoniche del dimero rispetto alla referenza],
+    ),
+    [
+      MACE-ICE13-1 meglio stima in generale le frequenze armoniche del dimero d'acqua.
 
-    #align(right)[
-      #table(
-        columns: 3,
-        table.header(
-          [Model],
-          [ZPE (eV)],
-          [Error],
-        ),
+      #align(right)[
+        #table(
+          columns: 3,
+          table.header(
+            [Model],
+            [ZPE (eV)],
+            [Error],
+          ),
 
-        [Reference], [1.264], [0.000],
-        [ICE13-1], [1.218], [-0.046],
-        [small], [1.213], [-0.051],
-        [medium], [1.210], [-0.054],
-        [large], [1.200], [-0.064],
-      )
-    ]
-  ],
-)
+          [Reference], [1.264], [0.000],
+          [ICE13-1], [1.218], [-0.046],
+          [small], [1.213], [-0.051],
+          [medium], [1.210], [-0.054],
+          [large], [1.200], [-0.064],
+        )
+      ]
+    ],
+  )
+]
 
-== Binding energy
+== Energia di interazione
 
 #grid(
   columns: (2fr, 1fr),
@@ -269,20 +258,11 @@ $
   [
     La binding energy si calcola come:
 
-    // MACE-ICE13-1 rientra entro i valori tipici ottenuti con DFT:
-
     $ Delta E_2 := E_2 - 2 E_1 $
 
-    MACE-MP-0 non soddisfava le nostre necessità.
+    MACE-MP-0 non ha soddisfatto le nostre necessità.
 
     Abbiamo sviluppato il modello fine-tuned MACE-ICE13-1.
-
-    // #align(right)[
-    //   #image(
-    //     "../thesis/imgs/mukhopadhyayWaterDimerII2018_fig5.png",
-    //     height: 50%,
-    //   )
-    // ]
   ],
 )
 
@@ -816,6 +796,41 @@ L'uso di questi metodi richiede l'individuazione del corretto funzionale di scam
 
   ],
 )
+
+== Frequenze di vibrazione (an)armoniche
+
+#let crimson = rgb("#c00000")
+
+#slide[
+  #place(
+    bottom + left,
+    image("../thesis/imgs/eisenberg2005_fig1.1.gif", height: 50%),
+  )
+  $
+    G(v_1, v_2, v_3)
+    = sum_(i=1)^3 omega_i (v_i + 1 / 2)
+    + #pin(1) sum_(i=1)^3 sum_(k >= i)^3 x_(i k) (v_i + 1 / 2) (v_k + 1 / 2) #pin(2)
+  $
+
+  $
+    "ZPE" &:= G(0,0,0) \
+    &= 1 / 2 (omega_1 + omega_2 + omega_3)
+    + #pin(3) 1 / 4 (x_11 + x_22 + x_33 + x_12 + x_13 + x_23) #pin(4)
+  $
+
+  #pause
+
+  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 1, 2)
+
+  #pinit-line(stroke: 3pt + crimson, start-dy: 30pt, end-dy: -30pt, 3, 4)
+
+  #place(bottom + right)[
+    I contributi anarmonici *non* sono trascurabili \ per lo studio delle proprietà dell'acqua cristallina.
+  ]
+
+]
+
+== Frequenze di vibrazione armoniche
 
 #slide[
   #grid(
