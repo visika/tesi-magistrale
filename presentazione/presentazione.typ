@@ -448,7 +448,7 @@ $
     image("../thesis/imgs/gupta2018_fig4_H2O.png", height: 249pt),
 
     [MACE-ICE13-1],
-    [Reference DFT#footnote[M. K. Gupta et al. 2018 (con contributi anarmonici)]],
+    [Reference DFT#footnote[M. K. Gupta et al. 2018]],
 
     [Supercella $3 times 3 times 3$],
     [Supercella $2 times 2 times 2$],
@@ -492,7 +492,7 @@ $
     columns: (1.5fr, 1fr),
     image("../simulazioni/02_water/04_crystal_phonons/phonopy/heat_capacity_all_temps.svg"),
     [
-      Lo studio delle frequenze armoniche ci permette di valutare alcune quantità fisiche di interesse, come ad esempio la capacità termica.
+      Lo studio delle frequenze armoniche ci permette di valutare alcune quantità fisiche di interesse, come ad esempio la capacità termica.#footnote[Holzapfel e Klotz 2021]
 
       Il fine-tuning sulle caratteristiche del ghiaccio fornisce modelli più accurati nella caratterizzazione del materiale.
     ],
@@ -506,14 +506,11 @@ $
 #slide[
   #grid(
     columns: (1fr, 0.8fr),
+    image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg"),
     [
-      #image("../simulazioni/02_water/05_md/Grafici/rdf_oo_mace-ice13-1_100ps_nbins=40.svg")
-    ],
-    [
-      Si è infine esplorato la generalizzabilità del potenziale ML anche ad altri tipi di task, studiando la dinamica molecolare NVT del liquido.
+      Si è infine esplorato la generalizzabilità del potenziale ML anche ad altri tipi di task, studiando la dinamica molecolare NVT del liquido e la RDF.#footnote[Skinner et al. 2013 X-Ray data]
 
-      $delta t = 0.5 "fs"$
-
+      $delta t = 0.5 "fs"$ \
       \#timestep: 200000 \
       \#molecole: 128
 
