@@ -187,14 +187,14 @@ La procedura per ottimizzare la geometria degli atomi in un sistema richiede la 
 #meanwhile
 - la geometria iniziale e le proprietà della cella #uncover("3-")[($hat("HOH") = 90°$ nel vuoto)]
 #meanwhile
-- l'algoritmo di ottimizzazione #uncover("4-")[(BFGS)]
+- l'algoritmo di ottimizzazione per trovare il minimo della PES #uncover("4-")[(BFGS)]
 #meanwhile
-- la soglia di convergenza delle forze residue su ciascun atomo $a$:
+- la soglia di tolleranza delle forze residue su ciascun atomo $a$ per terminare l'ottimizzazione:
 $
   max_a |arrow(F)_a| < f_"max" uncover("5-", = 10^(-4) "eV/"angstrom)
 $
-#meanwhile
-- il numero massimo di passaggi dell'ottimizzatore #uncover("6-")[(1000)]
+// #meanwhile
+// - il numero massimo di passaggi dell'ottimizzatore #uncover("6-")[(1000)]
 
 == Frequenze di vibrazione armoniche
 
