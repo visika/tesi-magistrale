@@ -254,7 +254,7 @@ $
   columns: (2fr, 1fr),
   gutter: 10pt,
   // align: horizon,
-  image("../simulazioni/02_water/02_dimer/02_binding_energy/binding_energy.svg"),
+  image("../simulazioni/02_water/02_dimer/02_binding_energy/binding_energy_revPBE.svg"),
   [
     L'energia di interazione si calcola come:
 

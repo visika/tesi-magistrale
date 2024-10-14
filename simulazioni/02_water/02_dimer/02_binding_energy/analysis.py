@@ -1,10 +1,10 @@
 import marimo
 
-__generated_with = "0.6.23"
-app = marimo.App()
+__generated_with = "0.9.9"
+app = marimo.App(width="columns", app_title="Binding energy")
 
 
-@app.cell(hide_code=True)
+@app.cell(column=0, hide_code=True)
 def __(mo):
     mo.md(
         """
@@ -23,7 +23,7 @@ def __(mo):
 @app.cell
 def __():
     import pandas as pd
-    return pd,
+    return (pd,)
 
 
 @app.cell(hide_code=True)
@@ -39,7 +39,7 @@ def __():
         dove \( E_2 \) è l'energia del dimero ed \( E_1 \) è l'energia della singola molecola.
         """
     )
-    return mo,
+    return (mo,)
 
 
 @app.cell
@@ -54,7 +54,7 @@ def __(pd):
         df["binding_energy"] = df["energy"] - 2 * molecule_energy
         df["binding_energy_kjmol"] = df["binding_energy"] * 96.4916
         return df
-    return df_binding_energy,
+    return (df_binding_energy,)
 
 
 @app.cell
@@ -187,6 +187,66 @@ def __():
     atoms = [read(f) for f in filenames]
     view(atoms)
     return atoms, filenames, glob, read, view
+
+
+@app.cell(column=1)
+def __(mo):
+    mo.md(r"""## Confronto con DFT per la presentazione con le slide""")
+    return
+
+
+@app.cell
+def __():
+    # Valori calcolati a r_oo = 3.0 Å
+    revPBE_dimer = -28.6759816
+    revPBE_monomer = -14.25742076
+    return revPBE_dimer, revPBE_monomer
+
+
+@app.cell
+def __(revPBE_dimer, revPBE_monomer):
+    revPBE_binding_energy = revPBE_dimer - 2 * revPBE_monomer
+    return (revPBE_binding_energy,)
+
+
+@app.cell
+def __(df, df_mace_ice13_1, mo, plt, revPBE_binding_energy):
+    _fig, _ax = plt.subplots(layout="constrained")
+
+    _ax.plot(
+        df_mace_ice13_1["distance"],
+        df_mace_ice13_1["binding_energy"],
+        label="MACE-ICE13-1",
+        marker="s",
+        markersize=5,
+    )
+
+    _ax.plot(
+        df["distance"],
+        df["binding_energy"],
+        label="MACE-MP-0 medium",
+        marker="o",
+        markersize=5,
+    )
+
+    _ax.plot(3.0, revPBE_binding_energy, marker="x", markersize=10, label="revPBE")
+
+    _ax.set_xlabel("$r_{OO}$ (Å)")
+    _ax.set_ylabel("Energia (eV)")
+
+    _ax.set_ylim(-0.35, 0)
+
+    _ax.legend()
+    plt.title("Energia di interazione del dimero")
+
+    # remove the left and right spines
+    _ax.spines["left"].set_visible(False)
+    _ax.spines["right"].set_visible(False)
+    _ax.spines["bottom"].set_visible(False)
+
+    # _fig.savefig("binding_energy_revPBE.svg")
+    mo.mpl.interactive(plt.gcf())
+    return
 
 
 if __name__ == "__main__":
