@@ -210,8 +210,24 @@ def __(revPBE_dimer, revPBE_monomer):
 
 
 @app.cell
-def __(df, df_mace_ice13_1, mo, plt, revPBE_binding_energy):
+def __(df_binding_energy, revPBE_monomer):
+    revPBE_binding_energies = df_binding_energy("VASP/varia_r", revPBE_monomer)
+    revPBE_binding_energies
+    return (revPBE_binding_energies,)
+
+
+@app.cell
+def __(df, df_mace_ice13_1, mo, plt, revPBE_binding_energies):
     _fig, _ax = plt.subplots(layout="constrained")
+
+    _ax.plot(
+        revPBE_binding_energies["distance"],
+        revPBE_binding_energies["binding_energy"],
+        label="revPBE",
+        marker="^",
+        markersize=7,
+        color="green",
+    )
 
     _ax.plot(
         df_mace_ice13_1["distance"],
@@ -219,6 +235,7 @@ def __(df, df_mace_ice13_1, mo, plt, revPBE_binding_energy):
         label="MACE-ICE13-1",
         marker="s",
         markersize=5,
+        color="blue",
     )
 
     _ax.plot(
@@ -227,9 +244,10 @@ def __(df, df_mace_ice13_1, mo, plt, revPBE_binding_energy):
         label="MACE-MP-0 medium",
         marker="o",
         markersize=5,
+        color="orange",
     )
 
-    _ax.plot(3.0, revPBE_binding_energy, marker="x", markersize=10, label="revPBE")
+    # _ax.plot(3.0, revPBE_binding_energy, marker="^", markersize=10, label="revPBE")
 
     _ax.set_xlabel("$r_{OO}$ (Å)")
     _ax.set_ylabel("Energia (eV)")
@@ -246,6 +264,11 @@ def __(df, df_mace_ice13_1, mo, plt, revPBE_binding_energy):
 
     # _fig.savefig("binding_energy_revPBE.svg")
     mo.mpl.interactive(plt.gcf())
+    return
+
+
+@app.cell
+def __():
     return
 
 
