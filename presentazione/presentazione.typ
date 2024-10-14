@@ -284,6 +284,7 @@ $
   image("../thesis/imgs/dellapia2022_f1.jpeg", height: 80%),
 )
 
+#place(bottom + right)[Della Pia et al. 2022]
 
 // Energie di reticolo dei diversi polimorfi.
 == Energia di reticolo assoluta
