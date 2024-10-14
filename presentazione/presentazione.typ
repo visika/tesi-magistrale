@@ -535,7 +535,7 @@ $
   column-gutter: 20pt,
   row-gutter: 8pt,
   [
-    - Training di un modello di MLP personlizzato
+    - Training di un modello di MLP personalizzato
   ],
   image("imgs/Potential_Energy_Surface_for_Water.png", width: riep-width),
 
