@@ -84,7 +84,8 @@
 == Il ghiaccio e i suoi polimorfi
 
 #grid(
-  columns: 2,
+  columns: (1fr, 1fr),
+  gutter: 10pt,
   [
     - Classe dei cristalli molecolari
     - Importanza di studiare le diverse fasi cristalline del ghiaccio
