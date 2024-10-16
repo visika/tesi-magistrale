@@ -275,7 +275,7 @@ $
   columns: 2,
   align: (left, horizon),
   [
-    La corretta stima delle energie di reticolo è di grande interesse per la distinzione dei polimorfi.
+    Si stimano le energie di reticolo a $T=0$, quantità di interesse per la distinzione dei polimorfi.
 
     I metodi Diffusion Monte Carlo (DMC) restituiscono le quantità più accurate per le energie.
 
