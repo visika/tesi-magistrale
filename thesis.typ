@@ -7,7 +7,7 @@
 #show: make-glossary
 
 // For glossarium links
-#show link: set text(fill: blue.darken(60%))
+#show link: set text(fill: gray.darken(60%))
 
 #let title = "Properties of molecular crystals using machine learning potentials"
 #set document(title: title, author: "Mariano Mollo")
@@ -312,14 +312,14 @@
 #set math.equation(numbering: "(1)")
 
 #let large_figure(content, caption: none) = figure(
-  box(width: 125%, content),
+  box(width: 120%, content),
   caption: caption,
 )
 
 #let large_box(content) = align(
   center,
   box(
-    width: 125%,
+    width: 120%,
     content,
   ),
 )
@@ -1910,47 +1910,38 @@ The $x$s are the _anharmonic constants_ and describe the effect on the vibration
 contain the harmonic frequencies for $#ce("H2O")$ and the errors for each model compared with reference data determined by Benedict _et al._ (1956) @eisenbergStructurePropertiesWater2005[Table 1.4].
 The value of the anharmonic frequencies is reported for completeness in @table:molecule-vibrational-constants-anharmonic.
 
-#large_box(
-  grid(
-    columns: 2,
-    gutter: 10pt,
-    [
-      #let molecule_omega_table = csv("simulazioni/02_water/01_molecule/Analysis/omega.csv")
-      #figure(
-        table(
-          columns: molecule_omega_table.first().len(),
-          table.header(
+#let molecule_omega_table = csv("simulazioni/02_water/01_molecule/Analysis/omega.csv")
+#figure(
+  table(
+    columns: molecule_omega_table.first().len(),
+    table.header(
       // ..molecule_omega_table.first(),
       [Model], $omega_1$, $omega_2$, $omega_3$
     ),
-          ..molecule_omega_table.slice(1).flatten()
-        ),
-        caption: [
-          The harmonic frequencies of the normal modes of the water molecule,
-          expressed in $"cm"^(-1)$.
-          Reference data from @eisenbergStructurePropertiesWater2005[Table 1.4].
-        ],
-      ) <table:molecule-omega>
-    ],
-    [
-      #let molecule_omega_errors_table = csv("simulazioni/02_water/01_molecule/Analysis/omega_errors.csv")
-      #figure(
-        table(
-          columns: molecule_omega_errors_table.first().len(),
-          table.header(
-      // ..molecule_omega_table.first(),
-      [Model], $omega_1$, $omega_2$, $omega_3$
-    ),
-          ..molecule_omega_errors_table.slice(1).flatten()
-        ),
-        caption: [
-          Errors on the harmonic frequencies of the normal modes of the water molecule,
-          expressed in $"cm"^(-1)$.
-        ],
-      ) <table:molecule-omega-errors>
-    ],
+    ..molecule_omega_table.slice(1).flatten()
   ),
-)
+  caption: [
+    The harmonic frequencies of the normal modes of the water molecule,
+    expressed in $"cm"^(-1)$.
+    Reference data from @eisenbergStructurePropertiesWater2005[Table 1.4].
+  ],
+) <table:molecule-omega>
+
+#let molecule_omega_errors_table = csv("simulazioni/02_water/01_molecule/Analysis/omega_errors.csv")
+#figure(
+  table(
+    columns: molecule_omega_errors_table.first().len(),
+    table.header(
+      // ..molecule_omega_table.first(),
+      [Errors], $omega_1$, $omega_2$, $omega_3$
+    ),
+    ..molecule_omega_errors_table.slice(1).flatten()
+  ),
+  caption: [
+    Errors on the harmonic frequencies of the normal modes of the water molecule,
+    expressed in $"cm"^(-1)$.
+  ],
+) <table:molecule-omega-errors>
 
 #figure(
   table(
