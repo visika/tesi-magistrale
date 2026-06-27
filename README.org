@@ -1,6 +1,13 @@
 #+title: Tesi magistrale
 * Inizializzazione del progetto
 #+begin_src shell
+git clone <repository-url>
+git lfs fetch --all
+git lfs install
+git lfs checkout
+#+end_src
+
+#+begin_src shell
 pyenv install
 poetry install
 #+end_src
